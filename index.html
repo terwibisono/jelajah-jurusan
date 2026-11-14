@@ -312,6 +312,8 @@ details.mini summary{font-size:16px}
 .share{display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start;background:#fff7dc;border:2px dashed var(--sun);border-radius:14px;padding:12px 14px;cursor:pointer;font-size:14px;line-height:1.45}
 .share input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--ink)}
 .share small{display:block;color:var(--muted);font-size:12.5px;margin-top:2px}
+/* kotak pemberitahuan kiriman tidak punya kotak centang lagi, jadi satu kolom penuh */
+#shareBox{grid-template-columns:1fr;cursor:default}
 @keyframes pop{from{transform:scale(.9);opacity:.4}to{transform:none;opacity:1}}
 @keyframes rise{from{transform:translateY(16px);opacity:0}to{transform:none;opacity:1}}
 @keyframes rise2{from{transform:translateY(16px);opacity:0}to{transform:none;opacity:1}}
