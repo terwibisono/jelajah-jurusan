@@ -1,140 +1,206 @@
-# Rencana: Sehari Kuliah, Sehari Kerja
+# Rencana: Jelajah Kampus
 
-Tanggal: 14 November 2026
-Status: **menunggu persetujuan**. Belum ada kode yang ditulis.
-Branch kerja: `sehari-kuliah-kerja` (dari `main`).
+*Lanjutan Jelajah Jurusan: jalani jurusanmu dari daftar kuliah sampai hari pertama kerja.*
 
-Mode baru di Jelajah Jurusan: pemain menjalani **satu hari sebagai mahasiswa** jurusan itu, lalu **satu hari kerja** dari lulusannya. Tujuannya menangkap dua jenis salah pilih:
-- suka bidangnya tapi kaget dengan kuliahnya (Psikologi ternyata ada statistik, Teknik Biomedis ternyata banyak fisika dan rangkaian listrik), dan
-- betah kuliahnya tapi tidak membayangkan kerjanya.
-
-Sekarang dua hal ini hanya muncul sebagai tulisan di kotak "Kuliahnya ngapain" dan "Sehari-hari kerja". Mode ini membuatnya dialami.
+Tanggal: 14 November 2026 (revisi 2, menggantikan rencana "Sehari Kuliah, Sehari Kerja")
+Status: **menunggu persetujuan**. Mockup 4 layar sudah ada (Psikologi, semester 3), belum ada kode di aplikasi.
+Branch kerja: `sehari-kuliah-kerja`.
+Nama kerja: **Jelajah Kampus**. Bisa diganti.
 
 ---
 
-## 1. Alur satu jurusan (sekitar 6 sampai 8 menit)
+## Intinya dalam 4 kalimat
 
-### Babak A: Sehari kuliah (semester 3)
-Lima adegan dengan jam di pojok layar:
+1. Pemain membawa jurusan dari hasil Jelajah Jurusan, lalu menjalaninya selama "4 tahun" dalam sekitar 15 menit.
+2. Hampir semua aksinya **geser kartu**: tiap pilihan menggerakkan 4 meteran, dan tidak ada pilihan yang benar, hanya tarik-ulur.
+3. Tiap jurusan punya **satu mini-game khas** yang membuat pemain merasakan jenis berpikir di jurusan itu.
+4. Di akhir ada **ending** sesuai jalan yang dipilih, **kartu momen** untuk dikoleksi, dan **rapor betah** per tahap kuliah.
 
-| Jam | Adegan | Isi |
-|---|---|---|
-| 07.30 | Kuliah pagi | Mata kuliah khas yang paling sering bikin kaget |
-| 10.00 | Praktikum, studio, atau lapangan | Kerja tangan khas jurusan itu |
-| 13.00 | Tugas kelompok | Gaya kerja sama yang biasa di jurusan itu |
-| 16.00 | Di luar kelas | Asistensi, organisasi, magang kecil, atau kunjungan |
-| 21.00 | Malam | Deadline laporan, hafalan ujian, revisi, atau koding |
+---
 
-### Babak B: Sehari kerja
-Pemain memilih satu pekerjaan dari daftar yang sudah ada (3 sampai 5 per jurusan), lalu empat adegan:
+## 1. Aturan tulisan (wajib, supaya tidak jadi bacaan)
 
-| Adegan | Isi |
+| Bagian | Batas |
 |---|---|
-| Pagi | Rutinitas yang dikerjakan hampir tiap hari |
-| Masalah datang | Gangguan khas pekerjaan itu |
-| Keputusan | Pilihan yang ada tarik-ulurnya |
-| Akhir hari | Apa yang dibawa pulang: capek, puas, atau lembur |
+| Situasi di kartu | paling banyak **15 kata** |
+| Pilihan kiri atau kanan | paling banyak **5 kata** |
+| Fakta "Ternyata…" | paling banyak **15 kata**, paling banyak 1 per bab |
+| Akibat pilihan | tidak ditulis; **ditunjukkan** lewat meteran yang bergerak dan wajah karakter |
 
-### Isi tiap adegan
-1. Situasi pendek, 2 sampai 3 kalimat.
-2. Dua atau tiga pilihan tindakan. **Tidak ada pilihan yang salah.** Tiap pilihan punya akibat yang realistis.
-3. Kartu "Ternyata…" di adegan yang membawa fakta kejutan (memakai data `fk` yang sudah ada, ditambah yang baru).
-4. Satu pertanyaan rasa: **"Kalau ini tiap hari?"** Betah / Biasa / Ogah.
-
-Supaya terasa game, ada tiga meteran yang bergerak sesuai pilihan: **Energi, Paham, Teman**. Meteran ini hanya suasana dan tidak dinilai.
+Sisanya dibawa gambar: latar adegan, ekspresi karakter, jam, dan meteran. Tanpa emoji; semua gambar SVG dengan gaya yang sama seperti peta pulau.
 
 ---
 
-## 2. Hasil
+## 2. Mekanik inti: geser kartu dan 4 meteran
 
-- **Grafik dua sumbu:** betah kuliah (mendatar) dan betah kerja (tegak), menghasilkan empat kemungkinan:
-  - **Kuliah dan kerjanya cocok**
-  - **Suka kuliahnya, kerjanya belum**: saran pekerjaan lain dari jurusan yang sama
-  - **Kuliahnya berat, kerjanya kamu mau**: saran cara bertahan di mata kuliah yang berat
-  - **Dua-duanya belum**: saran jurusan alternatif
-- Adegan yang paling betah dan paling ogah, beserta alasannya.
-- **Bandingkan:** kalau pemain mencoba lebih dari satu jurusan, hasilnya berdampingan (misalnya Teknik Biomedis dan Psikologi).
-- Poster untuk dibagikan, dengan gaya yang sama seperti poster hasil.
+```
+┌──────────────────────────────────────────┐
+│ Semester 3 · Selasa 07.30                │
+│ [Energi ▮▮▮▮▯] [Nilai ▮▮▮▯▯]             │
+│ [Teman  ▮▮▯▯▯] [Hati  ▮▮▮▮▯]             │
+│                                          │
+│   ┌────────────────────────────────┐     │
+│   │  (latar: ruang kuliah)         │     │
+│   │  [wajah dosen]                 │     │
+│   │  "Kuis statistik dadakan.      │     │
+│   │   Laptop kamu mati."           │     │
+│   └────────────────────────────────┘     │
+│  ← Pinjam laptop teman   Kerjakan manual →│
+└──────────────────────────────────────────┘
+```
 
----
+- **Empat meteran:** Energi, Nilai, Teman, Hati.
+- **Saat kartu digeser**, meteran yang akan berubah **menyala** (tanpa angka). Pemain menebak akibatnya sebelum melepas kartu. Inilah yang bikin tiap kartu terasa menegangkan.
+- **Terlalu rendah dan terlalu tinggi sama-sama memicu kejadian**, supaya pemain belajar menyeimbangkan, bukan memaksimalkan:
 
-## 3. Masuk dari mana
+| Meteran | Kalau habis | Kalau penuh |
+|---|---|---|
+| Energi | Tumbang, satu hari hilang | Terlalu santai, tugas menumpuk |
+| Nilai | Surat peringatan akademik | Dianggap kutu buku, jarang diajak |
+| Teman | Tugas kelompok sendirian | Kebanyakan organisasi, nilai turun |
+| Hati | Butuh jeda: adegan tenang dan ajakan bicara ke orang terdekat | Terlalu nyaman, lupa target |
 
-- Tombol **"Coba sehari"** di tiap jurusan pada halaman "Kenalan dengan jurusanmu".
-- Dari halaman awal: **"Sudah punya incaran? Coba sehari di jurusannya"**, langsung pilih jurusan tanpa main dari awal.
+Tidak ada game over. Tiap kejadian hanya membelokkan cerita.
 
-**Tidak mengubah nilai minat 28 jurusan.** Penyeimbang dan uji keadilan yang ada tetap berlaku. Hasilnya tampil sebagai catatan di kotak jurusan dan ikut dikirim untuk penelitian. Kalau datanya nanti terbukti berguna, baru dipertimbangkan ikut menghitung.
-
----
-
-## 4. Isi dan ketepatan
-
-28 jurusan × 9 adegan = **sekitar 250 adegan**. Ini bagian paling berat dan paling berisiko salah.
-
-- **Sumber kuliah:** daftar mata kuliah resmi dari situs prodi, minimal dua kampus per jurusan (negeri dan swasta). Adegan hanya memakai mata kuliah yang muncul di keduanya.
-- **Sumber kerja:** data pekerjaan yang sudah ada, dicocokkan dengan daftar tugas O*NET untuk pekerjaan yang sama.
-- **Penanda "belum dicek":** tiap jurusan menampilkan penanda ini sampai dibaca mahasiswa atau alumni sungguhan.
-- **Tombol "Ada yang tidak sesuai?"** di akhir, terkirim ke Google Sheets.
-- **Tidak ada kutipan atau testimoni karangan** dari "mahasiswa" atau "alumni".
-
-### Tahapan
-- **Tahap 1, 6 jurusan:** Teknik Biomedis, Psikologi, Kedokteran, Informatika, Hukum, Manajemen. Ini jurusan yang paling banyak peminatnya, ditambah dua jurusan yang sedang ditimbang iparmu. Diuji dulu ke mahasiswa sungguhan.
-- **Tahap 2:** 22 jurusan sisanya, setelah bentuk adegannya terbukti jalan.
-
----
-
-## 5. Tampilan
-
-- **Delapan latar adegan** digambar dalam SVG dan dipakai ulang di semua jurusan: ruang kuliah, lab, studio, lapangan, rumah sakit, kantor, kamar kos malam, dan ruang rapat. Tanpa emoji.
-- Karakter pemain tampil di adegan, jam di pojok berputar, dan meteran ada di atas.
-- Pergantian adegan memakai animasi pendek yang sudah ada, dan semuanya mati kalau HP disetel "kurangi gerakan".
+- **Tokoh yang muncul berulang:** teman sekelas, senior, dosen pembimbing, dan kakak tingkat. Wajahnya SVG dengan 3 ekspresi. Hubungan dengan mereka berubah sesuai pilihan dan muncul lagi di bab berikutnya.
+- **Kejadian acak** dari kumpulan bersama (laptop rusak, beasiswa dibuka, dosen pengganti, lomba, kos bocor) supaya tiap main berbeda.
+- **Bisa diketuk:** kartu juga bisa dijawab dengan dua tombol, untuk yang tidak suka menggeser.
 
 ---
 
-## 6. Teknis
+## 3. Peta perjalanan: 7 bab, masing-masing sekitar 2 menit
 
-- **Ukuran file:** `index.html` sudah sekitar 390 KB, dan 250 adegan menambah kira-kira 150 sampai 200 KB teks. Usulan: isi adegan disimpan sebagai file terpisah `sehari/<id-jurusan>.json` dan baru diunduh saat jurusan itu dibuka. Vercel menyajikannya sebagai file statis, jadi tidak perlu server tambahan.
-- **Google Sheets:** tab baru `sehari` berisi id permainan, jurusan, pekerjaan, rasa per adegan, pilihan per adegan, dan laporan "tidak sesuai". Ini butuh perubahan di `receiver/apps-script.gs`, lalu **kamu perlu deploy ulang Apps Script**.
-- **Versi kiriman:** `ver` baru supaya baris lama dan baru bisa dipisah.
+Bab-bab tampil sebagai jalur kapal antar-pulau kecil, melanjutkan tema Jelajah Jurusan. Tiap bab selesai tersimpan, jadi bisa lanjut besok.
 
----
+| Bab | Isi | Yang khas |
+|---|---|---|
+| 0. Daftar kuliah | **Papan strategi:** seret 4 kartu prodi ke slot pilihan. Tiap kartu punya bar keketatan dari data kursi dan peminat. Muncul cap "Nekat", "Seimbang", atau "Aman". | Selalu ada adegan pendek **"kalau tidak lolos"** yang memaksa pemain memilih rencana B. Bukan ramalan lolos atau tidak; setelahnya cerita lanjut di jurusan pilihan. |
+| 1. Semester 1 | Kaget mata kuliah dasar, ospek, cari teman, hidup kos | Fakta kejutan jurusan (data `fk`) |
+| 2. Semester 3 | Sehari penuh 07.30 sampai 21.00 | **Mini-game jurusan** di jam praktikum |
+| 3. Semester 5 | **Pilih peminatan**: kartu-kartu peminatan, dengan saran dari hasil Jelajah Jurusan diberi tanda | Pilihan ini mengubah bab 4 dan ending |
+| 4. Semester 7 | Magang: ditolak dulu, lalu diterima, sesuai peminatan | Tokoh senior membantu kalau hubungan baik |
+| 5. Semester 8 | Skripsi: revisi, dosen pembimbing, sidang | Mini-game versi lebih sulit |
+| 6. Hari pertama kerja | Pilih satu dari 3 pekerjaan sesuai peminatan, lalu satu hari kerja | Keseharian dari data `KERJA` |
 
-## 7. Contoh adegan (untuk merasakan bentuknya, belum final)
-
-**Psikologi, 07.30, kuliah Statistik.**
-Dosen membagikan data skor kecemasan 60 mahasiswa sebelum dan sesudah ujian, lalu meminta kalian menguji apakah bedanya "bermakna". Laptop tetanggamu sudah membuka SPSS.
-- Ikut langkah dosen pelan-pelan dan catat rumusnya
-- Langsung coba di SPSS, nanti tanya kalau macet
-- Tanya ke teman, "ini sebenarnya buat apa sih?"
-
-*Ternyata:* hampir semua skripsi Psikologi memakai statistik, jadi mata kuliah ini terus terpakai sampai lulus.
-
-**Teknik Biomedis, 10.00, praktikum instrumentasi.**
-Tugas hari ini: merakit penguat sinyal jantung (EKG) di papan rangkaian, lalu melihat gelombangnya di osiloskop. Sudah 40 menit, yang muncul hanya garis bergetar.
-- Cek ulang sambungan satu per satu dari skema
-- Ganti komponen yang paling dicurigai
-- Panggil asisten lab
-
-*Ternyata:* di tahun-tahun awal, Teknik Biomedis lebih banyak kalkulus, fisika, dan elektronika daripada biologi.
+Di akhir tiap bab: satu ketukan **"Betah di sini?"** dengan 3 wajah karakter (senang, biasa, cemberut). Ini satu-satunya "pertanyaan" di game, dan inilah data utamanya.
 
 ---
 
-## 8. Cara menguji sebelum dianggap selesai
+## 3b. Isi kartu: rasa jurusannya, dan hidup sebagai mahasiswa
 
-1. `node alat/uji-alur.js` memberi angka yang sama (nilai minat tidak disentuh).
-2. Keenam jurusan tahap 1 dimainkan penuh lewat tombol di 360×640 dan 390×844, kuliah lalu kerja, sampai poster, tanpa error.
-3. Mode bandingkan dicoba dengan dua jurusan.
-4. Kiriman ke tab `sehari` dicek dengan Apps Script versi uji.
-5. Dengan setelan "kurangi gerakan", tidak ada animasi.
-6. Tangkapan layar tiap latar dan hasil dikirim ke kamu.
+Tiap bab dicampur supaya terasa **jadi mahasiswa**, bukan cuma belajar:
 
-Yang tidak bisa diuji dari sini: ketepatan isi menurut mahasiswa sungguhan. Itu tugas tahap uji dengan orang nyata.
+| Jenis kartu | Porsi | Contoh di Psikologi |
+|---|---|---|
+| **Khas jurusan** (kuliah, praktikum, tugas yang hanya ada di jurusan itu) | sekitar 60% | Kuis uji-t pakai SPSS, praktikum observasi anak TK, laporan observasi |
+| **Kehidupan kampus** (himpunan, UKM, kepanitiaan, kantin, perpustakaan, dosen wali) | sekitar 25% | Diajak jadi panitia seminar himpunan, ajakan UKM paduan suara |
+| **Di luar kampus** (kos, kerja sampingan, keluarga, teman lama) | sekitar 15% | Jaga stan kopi dibayar per jam, teman curhat jam 22.30 |
+
+- Kartu kehidupan kampus pun diberi warna jurusannya. Contoh: temanmu curhat karena kamu "anak Psikologi", atau anak Teknik diajak ikut lomba robot.
+- **Kampus dan tempat tinggal dari Bab 0 mengubah latar.** Kampus negeri besar di kota lain berarti kos dan pulang kampung saat libur. Kampus dekat rumah berarti tinggal bersama keluarga, dengan kartu yang berbeda. Nama kampus sungguhan tidak dipakai di adegan.
+
+## 4. Mini-game per jurusan (30 sampai 45 detik)
+
+Tujuannya **merasakan jenis berpikirnya**, bukan menguji pintar atau tidak. Tidak ada gagal total; nilai rendah hanya mengurangi meteran Nilai sedikit. Setelahnya: "Seru?" dengan 3 wajah.
+
+| Jurusan | Mini-game | Rasanya |
+|---|---|---|
+| **Teknik Biomedis** | Rangkai sinyal: sambungkan komponen di papan sampai gelombang EKG muncul di layar osiloskop | Teliti, rangkaian, coba-ulang |
+| **Psikologi** | Amati: video pendek animasi kelas, ketuk tiap perilaku yang muncul, lalu pilih grafik yang cocok dengan datanya | Observasi lalu data |
+| Kedokteran | Triase: seret pasien ke urutan penanganan sebelum waktu habis | Cepat, prioritas, tekanan |
+| Informatika | Cari bug: ketuk baris kode yang membuat robot jalan ke arah salah | Logika langkah demi langkah |
+| Hukum | Cari celah: dua kesaksian, ketuk kalimat yang bertentangan | Teliti membaca, argumen |
+| Manajemen | Warung: atur harga dan stok 5 hari, lihat pembeli datang atau pergi | Angka dan keputusan bisnis |
+
+---
+
+## 5. Yang bikin main lagi
+
+- **Ending ganda:** sekitar 6 per jurusan, dari kombinasi meteran, peminatan, dan pilihan kunci. Contoh untuk Psikologi: *Peneliti muda*, *Aktivis kampus*, *Lulus tepat waktu*, *Banting setir ke HRD*, *Lanjut profesi psikolog*, dan **Pindah jurusan**. Ending terakhir muncul kalau betah terus rendah, dan ditampilkan sebagai pilihan yang sah, bukan kegagalan.
+- **Album kartu momen:** 12 per jurusan ditambah 10 umum. Contohnya *Begadang pertama*, *Jadi asisten lab*, *Ditolak magang 3 kali*, *Sidang lancar*. Yang belum didapat tampil sebagai siluet.
+- **Coba jurusan lain:** tiap jurusan baru membuka peta, ending, dan kartu momen yang berbeda. Inilah alasan utama untuk main lagi, dan sekaligus tujuan alat ini: membandingkan jurusan.
+- **Pamer yang sehat:** poster ending dan album untuk dibagikan.
+
+### Yang sengaja tidak dibuat
+Pengguna utamanya anak sekolah, jadi "nagih" yang dipakai hanya yang sehat:
+- tidak ada hitungan hari beruntun atau hukuman kalau tidak main,
+- tidak ada notifikasi atau pengingat,
+- tidak ada papan peringkat IPK,
+- tidak ada hadiah acak berbayar atau "terbatas waktu".
+
+---
+
+## 6. Hasil: rapor perjalanan
+
+- **Grafik garis betah per bab**, dari semester 1 sampai kerja. Contoh bacaannya: "Kamu kurang betah di semester awal, tapi naik tajam setelah memilih peminatan."
+- Kartu **ending** beserta 3 momen yang paling menentukan.
+- Hasil **mini-game** ("Seru?") dibandingkan dengan nilainya.
+- **Bandingkan dua jurusan** berdampingan kalau sudah main dua.
+- Kembali ke Jelajah Jurusan: kotak jurusan itu mendapat catatan "Sudah dijalani: betah di kuliah, ragu di kerja".
+- **Nilai minat 28 jurusan tidak berubah.**
+
+---
+
+## 7. Isi dan ketepatan
+
+| Per jurusan | Jumlah |
+|---|---|
+| Kartu cerita | sekitar 45 (7 bab × 6 sampai 7) |
+| Mini-game | 1, dengan 2 tingkat |
+| Ending | sekitar 6 |
+| Kartu momen | 12 |
+| Kejadian acak (dipakai semua jurusan) | sekitar 30 |
+
+- **Sumber kuliah:** daftar mata kuliah resmi minimal dua kampus per jurusan. Hanya mata kuliah yang muncul di keduanya yang dipakai.
+- **Sumber kerja:** data `KERJA` yang sudah ada, dicocokkan dengan daftar tugas O*NET.
+- **Penanda "belum dicek mahasiswa"** di tiap jurusan, sampai ada mahasiswa atau alumni sungguhan yang membaca.
+- **Tombol kecil "Ada yang tidak sesuai?"** di tiap bab.
+- Tidak ada testimoni atau kutipan karangan.
+
+---
+
+## 8. Tahapan
+
+| Tahap | Isi | Tujuan |
+|---|---|---|
+| **1** | Mesin game, peta 7 bab, dan **2 jurusan lengkap: Teknik Biomedis dan Psikologi** | Membuktikan gamenya seru dan isinya tepat, sebelum menulis isi untuk 26 jurusan lain |
+| 2 | Kedokteran, Informatika, Hukum, Manajemen | Jurusan dengan peminat terbanyak |
+| 3 | 22 jurusan sisanya | Mini-game sebagian dipakai bersama antar-jurusan yang mirip |
+
+Uji tahap 1 dengan **paling sedikit 5 anak SMA dan 2 mahasiswa** dari tiap jurusan. Ukurannya:
+- berapa yang main sampai ending tanpa disuruh,
+- berapa yang mencoba jurusan kedua,
+- apakah mahasiswanya bilang "iya, memang begini".
+
+---
+
+## 9. Teknis
+
+- **File terpisah `kampus.html`** di situs yang sama, jadi bisa membaca hasil Jelajah Jurusan dari penyimpanan HP. `index.html` tidak makin berat.
+- **Isi per jurusan** di `kampus/<id>.json` dan kejadian bersama di `kampus/umum.json`, diunduh saat dipakai.
+- Satu mesin untuk semua jurusan. Menambah jurusan cukup dengan menambah file JSON; mini-game baru butuh kode.
+- **Masuk dari:** tombol "Jalani jurusan ini" di halaman "Kenalan dengan jurusanmu", dan dari halaman awal untuk yang sudah punya incaran.
+- **Data ke Google Sheets:** tab baru `kampus` berisi betah per bab, ending, peminatan, rasa mini-game, dan laporan "tidak sesuai". Butuh perubahan Apps Script dan deploy ulang dari kamu. Usulan: tahap 1 menyimpan di HP dulu, dan pengiriman menyusul setelah gamenya terbukti.
+- **Pencatat kunjungan:** kejadian per bab, supaya terlihat di bab mana orang berhenti.
+- **Aksesibilitas:** "kurangi gerakan" mematikan animasi, tiap kartu bisa diketuk, dan huruf minimal 13 px.
+
+---
+
+## 10. Cara menguji sebelum tahap 1 dianggap selesai
+
+1. Dua jurusan dimainkan penuh lewat tombol di 360×640 dan 390×844, semua bab, tanpa error.
+2. Simulasi 5.000 pemain acak per jurusan: semua ending bisa dicapai, dan tidak ada ending yang lebih dari 40% atau kurang dari 3%.
+3. Tiap meteran pernah habis dan pernah penuh di simulasi, dan kejadiannya muncul.
+4. Lanjut dari bab tersimpan setelah halaman ditutup.
+5. Dengan "kurangi gerakan", tidak ada animasi.
+6. `node alat/uji-alur.js` di Jelajah Jurusan tetap sama.
+7. Tangkapan layar tiap bab dan mini-game dikirim ke kamu.
 
 ---
 
 ## Yang perlu kamu jawab
 
-1. **Tahap 1:** setuju enam jurusan itu, atau ada yang mau diganti?
-2. **Nilai minat:** setuju mode ini tidak ikut menghitung nilai jurusan?
-3. **Sehari kerja:** pemain memilih pekerjaannya sendiri, atau kita tentukan pekerjaan yang paling umum saja?
-4. **Google Sheets:** siap deploy ulang Apps Script untuk tab `sehari`? Kalau belum, hasilnya hanya tersimpan di HP pemain dulu.
+1. **Nama:** "Jelajah Kampus", atau ada ide lain?
+2. **Tahap 1:** setuju mulai dengan 2 jurusan (Teknik Biomedis dan Psikologi) saja?
+3. **Meteran "Hati":** setuju ada meteran perasaan? Kalau habis, adegannya tenang dan mengajak bicara ke orang terdekat, bukan hukuman.
+4. **Data:** setuju tahap 1 simpan di HP dulu, pengiriman ke Google Sheets menyusul?
