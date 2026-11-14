@@ -72,9 +72,10 @@ Tiap bab punya 2 sampai 3 **benang** yang menyambung kartu-kartunya, dan sebagia
 - **Di dalam satu bab.** Kartu punya versi yang muncul tergantung pilihan sebelumnya. Contoh di mockup Psikologi semester 3:
   - tidur lagi jam 06.45 membuat kamu telat kuis Statistik,
   - pinjam laptop Dimas membuat Dimas menagih balasan di kantin ("temani aku daftar paduan suara"),
-  - ikut paduan suara membuat Kak Raka bertanya "masih sanggup jadi panitia?", dengan energi yang terkuras lebih banyak,
-  - anggota kelompok yang menghilang jam 14.00 adalah Alya, dan jam 22.30 Alya cerita kenapa. Isinya berbeda tergantung kamu tadi meneleponnya atau mengerjakan bagiannya.
-- **Antar-bab.** Di akhir bab muncul daftar **"Berlanjut ke bab berikutnya"**. Contoh: Alya jadi rekan skripsimu di semester 8, konser paduan suara bentrok dengan seminar di semester 5, Kak Raka mengenalkanmu ke tempat magang di semester 7.
+  - kuis yang dihitung manual dengan rapi membuat Bu Ratna mengajakmu jadi asisten Statistik,
+  - catatan observasi yang lengkap terpakai saat diskusi di kuliah Psikologi Perkembangan,
+  - anggota kelompok yang menghilang jam 15.00 adalah Alya, dan jam 22.30 Alya cerita kenapa. Isinya berbeda tergantung kamu tadi meneleponnya atau mengerjakan bagiannya.
+- **Antar-bab.** Di akhir bab muncul daftar **"Berlanjut ke bab berikutnya"**. Contoh: seleksi asisten Statistik di semester 5 (bentrok dengan latihan paduan suara kalau kamu ikut UKM), Pak Hendra menawarimu ikut penelitiannya di semester 7, dan Alya jadi rekan skripsimu di semester 8.
 - **Penanda sebab.** Kartu yang muncul karena pilihan sebelumnya diberi label kecil berikon rantai, misalnya "Karena tadi pinjam laptop Dimas". Pemain jadi sadar pilihannya berakibat.
 - **Tokoh ingat.** Hubungan dengan tiap tokoh tersimpan sepanjang perjalanan dan menentukan siapa yang muncul membantu atau menjauh di bab akhir.
 - **Batasnya:** satu kartu paling banyak punya 3 versi, dan satu benang paling panjang 3 bab. Dengan begitu isinya tetap bisa dicek dan diuji, tidak meledak jadi ratusan cabang.
@@ -100,18 +101,22 @@ Di akhir tiap bab: satu ketukan **"Betah di sini?"** dengan 3 wajah karakter (se
 
 ---
 
-## 3b. Isi kartu: rasa jurusannya, dan hidup sebagai mahasiswa
+## 3b. Isi kartu: kuliah jadi menu utama
 
-Tiap bab dicampur supaya terasa **jadi mahasiswa**, bukan cuma belajar:
+Ini game tentang kuliah, jadi sebagian besar kartu adalah **urusan kuliah di jurusan itu**. Kehidupan kampus dan di luar kampus hanya bumbu supaya terasa jadi mahasiswa.
 
 | Jenis kartu | Porsi | Contoh di Psikologi |
 |---|---|---|
-| **Khas jurusan** (kuliah, praktikum, tugas yang hanya ada di jurusan itu) | sekitar 60% | Kuis uji-t pakai SPSS, praktikum observasi anak TK, laporan observasi |
-| **Kehidupan kampus** (himpunan, UKM, kepanitiaan, kantin, perpustakaan, dosen wali) | sekitar 25% | Diajak jadi panitia seminar himpunan, ajakan UKM paduan suara |
-| **Di luar kampus** (kos, kerja sampingan, keluarga, teman lama) | sekitar 15% | Jaga stan kopi dibayar per jam, teman curhat jam 22.30 |
+| **Kuliah khas jurusan**: mata kuliah, kuis dan ujian, praktikum, laporan, tugas kelompok, diskusi kelas, dosen dan asisten, dosen wali, asisten dosen, penelitian | sekitar **75%** | Kuis uji-t pakai SPSS, praktikum observasi anak TK, diskusi Psikologi Perkembangan, laporan kelompok, seleksi asisten Statistik |
+| **Kehidupan kampus**: himpunan, UKM, kepanitiaan, kantin, teman sekelas | sekitar 15% | Ajakan UKM paduan suara di kantin |
+| **Di luar kampus**: kos, keluarga, kerja sampingan | sekitar 10% | Alya curhat jam 22.30, dan itu tetap terhubung dengan tugas kelompok |
 
-- Kartu kehidupan kampus pun diberi warna jurusannya. Contoh: temanmu curhat karena kamu "anak Psikologi", atau anak Teknik diajak ikut lomba robot.
-- **Kampus dan tempat tinggal dari Bab 0 mengubah latar.** Kampus negeri besar di kota lain berarti kos dan pulang kampung saat libur. Kampus dekat rumah berarti tinggal bersama keluarga, dengan kartu yang berbeda. Nama kampus sungguhan tidak dipakai di adegan.
+Aturan tambahan:
+- **Mata kuliah disebut namanya** (Statistik, Psikologi Perkembangan, Psikodiagnostik, dan seterusnya), sesuai daftar mata kuliah resmi di semester itu. Tiap bab memuat 2 sampai 3 mata kuliah yang memang diajarkan di semester tersebut.
+- **Bentuk tugas khas jurusan** jadi pusat adegan: laporan observasi untuk Psikologi, rangkaian dan osiloskop untuk Teknik Biomedis, kasus dan pasal untuk Hukum.
+- **Jalur akademik punya benangnya sendiri**: asisten dosen, ikut penelitian dosen, lomba ilmiah, dan pertukaran mahasiswa. Benang ini mengarah ke ending seperti *Peneliti Muda*.
+- Kartu kehidupan kampus dan luar kampus tetap **disambungkan ke kuliah**. Contohnya: latihan UKM yang bentrok dengan jadwal asisten, atau teman yang menghilang dari tugas kelompok.
+- **Kampus dan tempat tinggal dari Bab 0 mengubah latar.** Kampus jauh berarti kos dan pulang kampung saat libur; kampus dekat berarti tinggal bersama keluarga. Nama kampus sungguhan tidak dipakai di adegan.
 
 ## 4. Mini-game per jurusan (30 sampai 45 detik)
 
