@@ -1,3 +1,27 @@
+# Catatan Perubahan — 14 Nov 2026 (alur diringkas)
+
+Babak setelah kartu turun dari sekitar 58 langkah menjadi sekitar 25 layar (37 ketukan pada uji otomatis). Babak di kepala layar sekarang 5, bukan 7.
+
+## Yang jadi pilihan (dibuka dari halaman hasil, lalu kembali ke sana)
+- **Cek keyakinan** (dulu Babak 6): tombol "Ukur seberapa mantap" di kartu "Seberapa mantap pilihanmu". Sebelum diisi, kartu dan lembar hasil menulis "belum diukur" (`confMeasured`), dan "Intinya" tidak memakai nilai yakin.
+- **Rencana kuliah** (dulu Babak 7): tombol "Atur kota, biaya, dan jenis kampus" di kotak Kampus tiap jurusan.
+- **Kelebihan dan kebiasaan** (dulu 2 layar di Babak 4): tombol "Isi kelebihan dan kebiasaanku" di kartu "Kelebihan dan kebiasaanmu".
+- Permainan selesai (`finishGame`) begitu pemain memilih satu jurusan di akhir babak Final; hasil langsung disimpan dan dikirim.
+
+## Yang dipendekkan
+- Babak 4 "Kenali dirimu": 11 layar jadi 6. Tiga pertanyaan gaya kerja digabung satu layar; "Pelajaran yang nilainya biasanya bagus" dihapus.
+- Babak 3 Misi: 3 jurusan jadi 2. Babak 2 Adu pilihan: 7 pasang jadi 5.
+- Babak 5 Final: keseharian 3 kegiatan per jurusan (dulu 4); sisi berat hanya untuk 3 teratas (jurusan incaran di luar 3 besar tidak lagi ditanya).
+- Kartu bonus bidang luar: 4 jadi 2.
+
+## Uji
+- `node alat/uji-alur.js` (disesuaikan dengan alur baru): top1 2,9–5,0%, top3 9,4–14,2%; pemain ideal 28 dari 28 di semua uji salah geser. Setara dengan sebelum diringkas.
+- Dimainkan penuh lewat tombol di layar 390×844 (dua pemain acak): sampai halaman hasil tanpa error; tiga layar pilihan dibuka, diisi, dan kembali ke halaman yang benar.
+
+## Data
+- `ver` jadi `2026-11-14-ringkas`. Hasil dikirim saat permainan selesai, jadi isian cek keyakinan, rencana kuliah, serta kelebihan dan kebiasaan **tidak ikut terkirim** kalau diisi belakangan. Kolom `kemantapan` terisi angka yang belum diukur; abaikan untuk versi ini.
+- Kejadian `hasil` di tab kunjungan sekarang dicatat saat pilihan terakhir di babak Final.
+
 # Catatan Perubahan — 14 Nov 2026 (28 jurusan)
 
 ## 6 jurusan baru (22 → 28)

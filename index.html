@@ -634,19 +634,19 @@ summary{min-height:48px}
 <!-- BABAK 4 -->
 <section class="screen" id="b4" hidden>
   <div class="card">
-    <p class="tiny muted" style="font-weight:800;letter-spacing:.08em">BABAK 6 · CEK KEYAKINAN</p>
+    <p class="tiny muted" style="font-weight:800;letter-spacing:.08em">TAMBAHAN · CEK KEYAKINAN</p>
     <h2>Seberapa mantap pilihanmu?</h2>
     <p class="small muted">Jujur saja, tidak ada yang menilai.</p>
     <div id="cek" class="paged"></div>
     <p class="warn" id="w4" hidden>Masih ada yang belum dijawab.</p>
-    <button class="btn sun" type="button" id="toB5">Lanjut ke Babak 7</button>
+    <button class="btn sun" type="button" id="toB5">Simpan dan kembali ke hasil</button>
   </div>
 </section>
 
 <!-- BABAK 5 -->
 <section class="screen" id="b5" hidden>
   <div class="card">
-    <p class="tiny muted" style="font-weight:800;letter-spacing:.08em">BABAK 7 · RENCANA KULIAH</p>
+    <p class="tiny muted" style="font-weight:800;letter-spacing:.08em">TAMBAHAN · RENCANA KULIAH</p>
     <h2>Rencana kuliahmu</h2>
     <div id="pref" class="paged" style="display:flex;flex-direction:column;gap:16px">
     <div class="q"><p class="qt">Mau kuliah di kota mana?</p><p class="hintp">☑️ Boleh pilih lebih dari satu</p><div class="chips big" id="kota" data-multi></div></div>
@@ -724,11 +724,13 @@ summary{min-height:48px}
     <p class="small muted">Kemantapan dihitung dari tiga hal ini:</p>
     <div class="parts" id="confParts"></div>
     <div id="confNotes"></div>
+    <button type="button" class="btn sun toCek" id="cekBtn">Ukur seberapa mantap</button>
   </div>
 
   <div class="card">
     <h3>Kelebihan dan kebiasaanmu</h3>
     <div id="selfBox"></div>
+    <button type="button" class="btn sun toDiri">Isi kelebihan dan kebiasaanku</button>
   </div>
 
   <h2>Kenalan dengan jurusanmu</h2>
@@ -1398,7 +1400,7 @@ const TLAIN = [
  ["x16","Olahraga dan melatih orang supaya sehat dan kuat",{olahraga:1,nakes2:.3}]
 ];
 /* Kartu bonus bersifat adaptif: hanya sedikit bidang yang gaya umumnya paling dekat dengan pemain yang ditanyakan. Bidang lain dinilai netral untuk bagian topik. */
-const BONUS_K = 4;
+const BONUS_K = 2;
 function bonusCards(u,k){ return [...LAIN].sort((a,b)=>dimFit(b,u)-dimFit(a,u)).slice(0,k||BONUS_K).map(m=>TLAIN.find(t=>t[2][m.id]===1)[0]); }
 let SDL=false;
 function initSDL(){ if(SDL) return; if(!SDREF) initSD(); const v=1/6;
@@ -1914,6 +1916,7 @@ function consistency(S){
   const sorted=[...t].sort((a,b)=>a-b), med=sorted.length?sorted[Math.floor(sorted.length/2)]:9999;
   return {cons, flat, fast:med<650};
 }
+function confMeasured(S){ return Object.keys(S.know||{}).length>0||Object.keys(S.ready||{}).length>0; }
 function confidence(S){
   const c=consistency(S);
   const ready=READY.reduce((a,r)=>a+(S.ready[r[0]]??0),0)/READY.length;
@@ -2015,11 +2018,11 @@ $("#shBody").addEventListener("scroll",askMore,{passive:true});
 $("#shMore").addEventListener("click",()=>$("#shBody").scrollBy({top:Math.round($("#shBody").clientHeight*.7),behavior:"smooth"}));
 
 /* navigasi */
-const STG={b1:1,peta:1,b2:2,b3:3,b4k:4,bf:5,b4:6,b5:7};
+const STG={b1:1,peta:1,b2:2,b3:3,b4k:4,bf:5};
 function show(id){
   document.querySelectorAll(".screen").forEach(s=>s.hidden=s.id!==id); curScr=id; if(STG[id]) save();
   const st=STG[id]; $("#hud").hidden=!st;
-  if(st){ $("#stages").innerHTML=[1,2,3,4,5,6,7].map(i=>`<i class="${i<st?"done":i===st?"on":""}"></i>`).join(""); $("#stages").setAttribute("aria-label",`Babak ${st} dari 7`); $("#hudName").textContent=S.name||"Penjelajah"; $("#hudAva").innerHTML=avaSvg(S.ava); $("#pts").textContent=S.pts+" poin"; }
+  if(st){ $("#stages").innerHTML=[1,2,3,4,5].map(i=>`<i class="${i<st?"done":i===st?"on":""}"></i>`).join(""); $("#stages").setAttribute("aria-label",`Babak ${st} dari 5`); $("#hudName").textContent=S.name||"Penjelajah"; $("#hudAva").innerHTML=avaSvg(S.ava); $("#pts").textContent=S.pts+" poin"; }
   window.scrollTo(0,0);
 }
 function addPts(n){ S.pts+=n; $("#pts").textContent=S.pts+" poin"; }
@@ -2177,7 +2180,7 @@ function openMap(){
 $("#toB2").addEventListener("click",()=>{ startDuel(); show("b2"); });
 
 /* babak 2 */
-const PAIRS=[[0,1],[2,3],[4,5],[0,2],[1,4],[3,5],[0,5]]; let di=0, dh=[];
+const PAIRS=[[0,1],[2,3],[4,5],[0,2],[1,3]]; let di=0, dh=[];
 function startDuel(){ di=0; dh=[]; S.duel={}; cand.forEach(id=>S.duel[id]={w:0,n:0}); drawDuel(); }
 function drawDuel(){
   const [a,b]=PAIRS[di].map(i=>byId(cand[i]));
@@ -2197,7 +2200,7 @@ document.querySelectorAll("[data-duel]").forEach(b=>b.addEventListener("click",(
 
 /* babak 3: misi dua langkah */
 let mlist=[], mi=0, ms=0;
-function startMisi(){ const inc=S.incar.slice(0,2); mlist=[...inc,...scoreAll(S).filter(x=>cand.includes(x.id)&&!inc.includes(x.id)).map(x=>x.id)].slice(0,3); mi=0; ms=0; drawMisi(); show("b3"); }
+function startMisi(){ const inc=S.incar.slice(0,2); mlist=[...inc,...scoreAll(S).filter(x=>cand.includes(x.id)&&!inc.includes(x.id)).map(x=>x.id)].slice(0,2); mi=0; ms=0; drawMisi(); show("b3"); }
 function drawMisi(){
   const m=byId(mlist[mi]), I=ISL[m.isl];
   let h=`<p class="tiny muted" style="font-weight:800;letter-spacing:.08em">BABAK 3 · MISI ${mi+1} DARI ${mlist.length} · LANGKAH ${ms+1} DARI 3</p>
@@ -2211,45 +2214,48 @@ $("#misiCard").addEventListener("click",e=>{
   const o=e.target.closest("[data-o]"), g=e.target.closest("[data-g]"), f=e.target.closest("[data-f]"), id=mlist[mi];
   if(o){ S.mopt[id]=+o.dataset.o; ms=1; addPts(10); save(); drawMisi(); }
   else if(g){ S.grit[id]=GRIT[+g.dataset.g][0]; ms=2; addPts(10); save(); drawMisi(); }
-  else if(f){ S.feel[id]=.6*(+f.dataset.f)+.4*(S.grit[id]??.7); addPts(20); mi++; ms=0; save(); if(mi>=mlist.length){ ki=0; drawK(); show("b4k"); } else drawMisi(); }
+  else if(f){ S.feel[id]=.6*(+f.dataset.f)+.4*(S.grit[id]??.7); addPts(20); mi++; ms=0; save(); if(mi>=mlist.length){ ki=0; kMode="main"; KSTEP=KMAIN; drawK(); show("b4k"); } else drawMisi(); }
 });
 
 /* babak 4: kenali dirimu (5 bagian pendek) */
 let ki=0;
 function multi(ico,list,key,max,cls){ return `<div class="chips big ${cls||""}" data-key="${key}" data-max="${max||0}">${list.map(x=>`<button type="button" class="chip" data-v="${x[0]}" aria-pressed="${S[key].includes(x[0])}">${em(ico[x[0]])}<span>${esc(x[1])}</span></button>`).join("")}</div>`; }
-const KSTEP=[
+const KMAIN=[
  ["Di waktu luang, kamu paling sering ngapain?","Yang benar-benar kamu lakukan sebulan terakhir, bukan yang kamu harap. Pilih paling banyak 3.",()=>multi(Object.fromEntries(HOBI.map(x=>[x[0],x[2]])),HOBI,"hobi",3)],
  ["Kalau nonton atau baca, paling sering soal apa?","Lihat riwayat tontonanmu kalau perlu. Pilih paling banyak 3.",()=>multi(Object.fromEntries(TONTON.map(x=>[x[0],x[2]])),TONTON,"tonton",3)],
  ["Pelajaran yang kamu nikmati","Bukan yang nilainya bagus, tapi yang bikin kamu betah. Boleh pilih banyak.",()=>multi(ICO.subj,SUBJ,"enjoy")],
- ["Pelajaran yang nilainya biasanya bagus","Sering berbeda dari yang dinikmati. Dua-duanya berguna untuk diketahui.",()=>multi(ICO.subj,SUBJ,"good")],
  ["Yang kamu cari dari pekerjaan","Pilih paling banyak 3 yang paling penting buatmu.",()=>multi(ICO.vals,VALS,"vals",3)],
- ...STYLE.map(x=>[x[1],"Gaya kerja yang kamu bayangkan. Pilih yang lebih dekat.",()=>`<div class="chips pick2" data-style="${x[0]}"><button type="button" class="chip" data-v="a" aria-pressed="${S.style[x[0]]==="a"}">${esc(x[2])}</button><button type="button" class="chip" data-v="b" aria-pressed="${S.style[x[0]]==="b"}">${esc(x[3])}</button><button type="button" class="chip x" data-v="x" aria-pressed="${S.style[x[0]]==="x"}">Dua-duanya oke</button></div>`]),
- ["Yang tidak bisa kamu toleransi","Pilih hal yang benar-benar tidak sanggup kamu jalani bertahun-tahun. Kalau tidak ada, lewati saja.",()=>multi(ICO.db,DB,"db")],
+ ["Gaya kerja yang kamu bayangkan","Pilih yang lebih dekat denganmu di tiap baris.",()=>STYLE.map(x=>`<p style="font-weight:700;margin:6px 0 -4px">${esc(x[1])}</p><div class="chips pick2" data-style="${x[0]}"><button type="button" class="chip" data-v="a" aria-pressed="${S.style[x[0]]==="a"}">${esc(x[2])}</button><button type="button" class="chip" data-v="b" aria-pressed="${S.style[x[0]]==="b"}">${esc(x[3])}</button><button type="button" class="chip x" data-v="x" aria-pressed="${S.style[x[0]]==="x"}">Dua-duanya oke</button></div>`).join("")],
+ ["Yang tidak bisa kamu toleransi","Pilih hal yang benar-benar tidak sanggup kamu jalani bertahun-tahun. Kalau tidak ada, lewati saja.",()=>multi(ICO.db,DB,"db")]
+];
+/* Kelebihan dan kebiasaan tidak mengubah nilai jurusan, jadi diisi dari halaman hasil (tombol di kartu "Kelebihan dan kebiasaanmu") */
+const KDIRI=[
  ["Yang kamu rasa jadi kelebihanmu","Boleh pilih banyak. Bagian ini tidak mengubah nilai jurusan mana pun, gunanya untuk saran persiapan.",()=>multi(ICO.strong,STRONG,"strong")],
  ["Kebiasaan yang masih ingin kamu benahi","Semua orang punya. Jujur saja, gunanya supaya tidak kaget saat kuliah.",()=>multi(ICO.weak,WEAK,"weak")]
 ];
+let KSTEP=KMAIN, kMode="main";
 let kTm=0, kWarn={};
 function kHint(){ const g=$("#kBody .chips"), h=$("#kHint"); if(!g){ h.hidden=true; return; } h.hidden=false;
-  if(g.dataset.style){ h.innerHTML="👆 Pilih satu"; return; }
+  if(g.dataset.style){ h.innerHTML="👆 Pilih satu di tiap baris"; return; }
   const max=+g.dataset.max, n=g.querySelectorAll('[aria-pressed="true"]').length;
   h.innerHTML=`☑️ ${max?"Pilih paling banyak "+max:"Boleh pilih lebih dari satu"} <b>${n} dipilih</b>`; }
-function drawK(){ ki=Math.max(0,Math.min(ki,KSTEP.length-1)); const k=KSTEP[ki]; $("#kStep").textContent=`BABAK 4 · KENALI DIRIMU · ${ki+1} DARI ${KSTEP.length}`; $("#kBar").style.width=Math.round((ki+1)/KSTEP.length*100)+"%"; $("#kT").textContent=k[0]; $("#kD").textContent=k[1]; $("#kBody").innerHTML=k[2](); $("#kPrev").disabled=ki===0; kHint(); window.scrollTo(0,0); }
+function drawK(){ ki=Math.max(0,Math.min(ki,KSTEP.length-1)); const k=KSTEP[ki]; $("#kStep").textContent=`${kMode==="diri"?"TAMBAHAN · KELEBIHAN DAN KEBIASAAN":"BABAK 4 · KENALI DIRIMU"} · ${ki+1} DARI ${KSTEP.length}`; $("#kBar").style.width=Math.round((ki+1)/KSTEP.length*100)+"%"; $("#kT").textContent=k[0]; $("#kD").textContent=k[1]; $("#kBody").innerHTML=k[2](); $("#kPrev").disabled=ki===0; kHint(); window.scrollTo(0,0); }
 $("#kBody").addEventListener("click",e=>{ const c=e.target.closest(".chip"); if(!c) return; const g=c.parentElement;
-  if(g.dataset.style){ S.style[g.dataset.style]=c.dataset.v; g.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x===c)); clearTimeout(kTm); kTm=setTimeout(()=>$("#kNext").click(),300); }
+  if(g.dataset.style){ S.style[g.dataset.style]=c.dataset.v; g.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x===c)); clearTimeout(kTm); if([...$("#kBody").querySelectorAll("[data-style]")].every(q=>q.querySelector('[aria-pressed="true"]'))) kTm=setTimeout(()=>$("#kNext").click(),450); }
   else { const key=g.dataset.key, max=+g.dataset.max, i=S[key].indexOf(c.dataset.v); if(i>=0) S[key].splice(i,1); else if(!max||S[key].length<max) S[key].push(c.dataset.v); else toast(`Paling banyak ${max}. Lepas satu dulu kalau mau ganti.`); c.setAttribute("aria-pressed",S[key].includes(c.dataset.v)); }
   kHint(); save(); });
 $("#kPrev").addEventListener("click",()=>{ clearTimeout(kTm); if(ki>0){ ki--; save(); drawK(); } });
 $("#kNext").addEventListener("click",()=>{ clearTimeout(kTm);
   { const g=$("#kBody .chips"), n=g?g.querySelectorAll('[aria-pressed="true"]').length:1;
-    if(g&&g.dataset.style&&!n){ toast("Pilih satu dulu. Kalau dua-duanya tidak masalah, pilih \"Dua-duanya oke\"."); return; }
+    if(g&&g.dataset.style&&![...$("#kBody").querySelectorAll("[data-style]")].every(q=>q.querySelector('[aria-pressed="true"]'))){ toast("Masih ada baris yang belum dipilih. Kalau dua-duanya tidak masalah, pilih \"Dua-duanya oke\"."); return; }
     if(g&&!g.dataset.style&&kWarn[ki]!==n){ if(n===0){ kWarn[ki]=n; toast("Kamu belum memilih apa pun. Kalau memang tidak ada, ketuk Lanjut sekali lagi."); return; }
       if(n===1&&+g.dataset.max!==1){ kWarn[ki]=n; toast("Baru 1 yang dipilih. Di sini boleh lebih dari satu. Ketuk Lanjut lagi kalau sudah cukup."); return; } } }
-  addPts(5); if(ki<KSTEP.length-1){ ki++; save(); drawK(); } else startFinal(); });
+  addPts(5); if(ki<KSTEP.length-1){ ki++; save(); drawK(); } else if(kMode==="diri"){ kMode="main"; KSTEP=KMAIN; backToRes("diri"); } else startFinal(); });
 
 /* babak 5: final, sisi berat tiap jurusan */
 let flist=[], fi=0, fs=0;
 /* Keseharian kerja: untuk 2 jurusan teratas, pemain menilai kegiatan harian sungguhan dari pekerjaannya. Ini membedakan nomor 1 dan 2 lewat isi kerjanya, bukan lewat satu kartu. */
-const dayActs=id=>KERJA[id][0][2].slice(0,4);
+const dayActs=id=>KERJA[id][0][2].slice(0,3);
 function drawDaily(){ const m=byId(flist[fi]), I=ISL[m.isl], acts=dayActs(m.id), cur=(S.dailyA||{})[m.id]||[];
   $("#finCard").innerHTML=`<p class="tiny muted" style="font-weight:800;letter-spacing:.08em">BABAK 5 · FINAL · ${fi+1} DARI ${flist.length} · KESEHARIAN</p>
    <span class="pill" style="background:${I.c};align-self:flex-start">${esc(I.n)}</span>
@@ -2259,7 +2265,7 @@ function drawDaily(){ const m=byId(flist[fi]), I=ISL[m.isl], acts=dayActs(m.id),
    ${acts.map((a,i)=>`<div class="sub"><p style="font-weight:700">${esc(a)}</p><div class="chips big three" data-dy="${i}">${[["1","Mau","😀"],["0.5","Biasa","😐"],["0","Ogah","😖"]].map(o=>`<button type="button" class="chip" data-v="${o[0]}" aria-pressed="${cur[i]===+o[0]}">${em(o[2])}<span>${o[1]}</span></button>`).join("")}</div></div>`).join("")}
    <div class="row stick"><button class="btn sun" type="button" id="dyNext">Lanjut</button></div>`;
   window.scrollTo(0,0); }
-function startFinal(){ const sc=scoreAll(S); flist=[...sc.slice(0,3).map(x=>x.id),...S.incar.filter(id=>!sc.slice(0,3).some(x=>x.id===id))].slice(0,4); fi=0; fs=0; S.sang={}; S.pick=null; S.daily={}; S.dailyA={}; drawFinal(); show("bf"); }
+function startFinal(){ const sc=scoreAll(S); flist=sc.slice(0,3).map(x=>x.id); fi=0; fs=0; S.sang={}; S.pick=null; S.daily={}; S.dailyA={}; drawFinal(); show("bf"); }
 function drawFinal(){
   if(fi<flist.length&&fi<2&&fs===0) return drawDaily();
   if(fi<flist.length){ const m=byId(flist[fi]), I=ISL[m.isl], hit=MDB[m.id].filter(x=>S.db.includes(x));
@@ -2284,7 +2290,7 @@ $("#finCard").addEventListener("click",e=>{ const sb=e.target.closest("[data-s]"
   if(dn){ const id=flist[fi], a=(S.dailyA||{})[id]||[], n=dayActs(id).length; if(a.filter(x=>x!=null).length<n){ toast("Masih ada kegiatan yang belum kamu nilai."); return; }
     S.daily[id]=a.slice(0,n).reduce((x,y)=>x+y,0)/n; fs=1; addPts(15); save(); drawFinal(); return; }
   if(sb){ S.sang[flist[fi]]=+sb.dataset.s; addPts(20); fi++; fs=0; save(); drawFinal(); }
-  if(p){ S.pick=p.dataset.p||null; addPts(20); save(); drawCek(); show("b4"); } });
+  if(p){ S.pick=p.dataset.p||null; addPts(20); save(); finishGame(); } });
 
 /* babak 5: cek keyakinan */
 function drawCek(){
@@ -2302,7 +2308,7 @@ $("#cek").addEventListener("click",e=>{
 });
 $("#toB5").addEventListener("click",()=>{
   const ok=S.reasons.length&&Object.keys(S.know).length>=+$("#cek").dataset.need&&READY.every(r=>S.ready[r[0]]!=null);
-  $("#w4").hidden=ok; if(!ok) return; addPts(40); drawPref(); show("b5");
+  $("#w4").hidden=ok; if(!ok) return; addPts(40); backToRes("mantap");
 });
 
 /* babak 5 */
@@ -2387,7 +2393,7 @@ $("#shareBox").hidden=true;
 const newSid=()=>"JJ-"+Array.from(crypto.getRandomValues(new Uint8Array(8)),b=>b.toString(16).padStart(2,"0")).join("").toUpperCase();
 function payload(){ SWREF=S.sw; const sc=scoreAll(S), cf=confidence(S);
   const {ava,pts,done,todo,at,seen,uji,sent,share,runId,resultAt,...ans}=S;
-  return {app:"jelajah-jurusan",ver:"2026-11-14-28jurusan",sid:S.sid,nama:String(S.name||"").slice(0,20),t:new Date(S.resultAt||Date.now()).toISOString(),ans,rank:sc.map(x=>[x.id,x.pc]),conf:cf.pc,unread:unread(S,sc),
+  return {app:"jelajah-jurusan",ver:"2026-11-14-ringkas",sid:S.sid,nama:String(S.name||"").slice(0,20),t:new Date(S.resultAt||Date.now()).toISOString(),ans,rank:sc.map(x=>[x.id,x.pc]),conf:cf.pc,unread:unread(S,sc),
     uji:{kuliah:S.real||"",peminatan:S.realPem&&S.realPem!=="-"?S.realPem:"",industri:S.realInd||"",kerja:S.realJob||[],betah:S.realHappy||"",catatan:S.realNote||""},
     stab:(()=>{ if(unread(S,sc)) return null; const x=stability(S); return {level:x.level,top1:+x.top1.toFixed(2),in3:+x.in3.toFixed(2),top3:+x.top3.toFixed(2),gap:+x.gap.toFixed(3)}; })(),
     out:(()=>{ const o=outside(S); return {level:o.level,bonus:o.bonus,top:o.L.slice(0,3).map(x=>[x.id,x.pc])}; })(),
@@ -2410,13 +2416,21 @@ async function sendResult(){
   finally{ sending=false; }
 }
 $("#sendBtn").addEventListener("click",sendResult);
-$("#toRes").addEventListener("click",()=>{
+/* Permainan selesai setelah babak Final. Cek keyakinan dan rencana kuliah tidak wajib: dibuka dari halaman hasil lalu kembali ke sana. */
+function finishGame(){
   if(!S.done){ S.done=true; S.resultAt=Date.now(); if(!S.runId)S.runId=newRunId(); addPts(50); }
   if(receiverOn()&&!S.sid) S.sid=newSid();
   save(); archiveCurrent();
   try{ SWREF=S.sw; const sc=scoreAll(S), h=hist(); h.unshift({t:Date.now(),top:sc.slice(0,3).map(x=>[x.id,x.pc]),ok:!unread(S,sc)}); localStorage.setItem(HKEY,JSON.stringify(h.slice(0,12))); }catch(e){}
   openPosterFirst(); if(receiverOn()&&!S.sent)sendResult();
-});
+}
+function backToRes(nm){ save(); archiveCurrent(); renderRes(); show("res"); const i=PG.findIndex(p=>p[0]===nm); showPg(i<0?0:i); toast("Tersimpan. Hasilmu sudah diperbarui."); }
+function openCek(){ drawCek(); $("#toB5").textContent="Simpan dan kembali ke hasil"; show("b4"); }
+function openPref(){ drawPref(); $("#toRes").textContent="Simpan dan kembali ke hasil"; pager($("#pref"),$("#toRes"),false); show("b5"); }
+let prefBack="jur";
+$("#toRes").addEventListener("click",()=>{ if(S.done) backToRes(prefBack); else finishGame(); });
+document.addEventListener("click",e=>{ if(e.target.closest(".toCek")) openCek(); else if(e.target.closest(".toPref")){ prefBack=(PG[pgi]||["jur"])[0]; closeSec(); openPref(); } else if(e.target.closest(".toDiri")){ kMode="diri"; KSTEP=KDIRI; ki=0; drawK(); show("b4k"); } });
+
 async function checkReceiver(){
   if(location.protocol==="file:")return;
   try{
@@ -2521,7 +2535,7 @@ function majorCard(m,pc,open){
    ["💪","Kamu di jurusan ini",sf.use.length?`${sf.use.length} kelebihanmu kepakai`:"Cek tuntutannya","man",me],
    ["🧭","Peminatan",best.n.replace(/\s*\(.*\)/,""),"kre",pm],
    ["🚪","Peluang masuk",statT,"tnk",stat],
-   ["🏫","Kampus",kpT,"ink",kp]
+   ["🏫","Kampus",kpT,"ink",`<div class="say" style="display:flex;flex-direction:column;gap:10px"><span>Daftar ini bisa disaring sesuai kota, biaya, dan jenis kampus yang kamu mau.</span><button type="button" class="btn sm ghost toPref">Atur kota, biaya, dan jenis kampus</button></div>`+kp]
   ];
   if(S.bea==="ya") T.push(["🎓","Beasiswa",S.biaya==="minim"?"Mulai dari KIP Kuliah":`${beaList.length} pilihan`,"sun",`${S.biaya==="minim"?`<p class="say"><b>Untuk kondisimu, mulai dari KIP Kuliah.</b> Daftarnya bersamaan dengan pendaftaran kampus negeri, jadi siapkan berkasnya dari sekarang. Ajukan juga golongan biaya terendah di kampus negeri (Rp500 ribu per semester).</p>`:""}${beaList.map(b=>`<div class="kp pm"><span>${esc(b[0])}</span><span>${esc(b[1])}</span></div>`).join("")}<p class="src">Beasiswa besar di Indonesia umumnya berlaku untuk semua jurusan. Urutannya disesuaikan dengan jawabanmu soal biaya dan jenis kampus. Jadwal resmi seleksi masuk 2027 belum diumumkan saat data ini disusun, jadi pantau snpmb.id dan akun resmi tiap beasiswa.</p>`]);
   T.push(
@@ -2817,7 +2831,7 @@ async function drawLembar(P,noAva){
     const tx=X+192, tw=pw-192-22; { let nm=""; for(const w of (P.name||"Penjelajah").trim().split(/\s+/)){ if((nm+" "+w).trim().length>20) break; nm=(nm+" "+w).trim(); } if(!nm) nm=(P.name||"").trim().slice(0,20); g.fillStyle=INK; fit(nm,tw,44,800,D,20); g.fillText(nm,tx,ya+58); }
     g.fillStyle=MUT; fit(P.juluk,tw,20,800,B,14); g.fillText(P.juluk,tx,ya+92); g.fillStyle=INK; fit(P.t1,tw,32,800,D,22); g.fillText(P.t1,tx,ya+126); g.fillStyle="#c2452a"; fit(P.t2,tw,32,800,D,22); g.fillText(P.t2,tx,ya+162);
     g.fillStyle="#2c4a66"; put(fitLines(P.desc,pw-48,3,20,600,B,15).ls,X+24,ya+212,26);
-    g.fillStyle=MUT; F(700,19,B); const k=`Seberapa yakin: ${P.conf}%  |  Hasil ini: ${(PSTAB[P.stab]||"belum dicek").toLowerCase()}`; fit(k,pw-48,19,700,B,13); g.fillText(k,X+24,ya+ha-16); }
+    g.fillStyle=MUT; F(700,19,B); const k=`Seberapa yakin: ${P.confOk?P.conf+"%":"belum diukur"}  |  Hasil ini: ${(PSTAB[P.stab]||"belum dicek").toLowerCase()}`; fit(k,pw-48,19,700,B,13); g.fillText(k,X+24,ya+ha-16); }
   { const x=X+pw+20, w=IW-pw-20, t=P.top[0], c1=mix(t.c,INK,.2); stiker(x,ya,w,ha,26,"#fff6d8",6);
     g.fillStyle=SUN; rr(x+22,ya+18,300,44,22); g.fill(); g.strokeStyle=OL; g.lineWidth=4; g.stroke(); g.fillStyle=INK; F(800,26,D); g.fillText("Paling nyambung",x+70,ya+49); bintang(x+48,ya+40,15,-Math.PI/2); g.fillStyle=INK; g.fill();
     const bw=w-44-470; g.fillStyle=c1; rr(x+22,ya+78,bw,ha-100,22); g.fill(); g.strokeStyle=OL; g.lineWidth=4; g.stroke();
@@ -2982,8 +2996,10 @@ function renderRes(){
   $("#islLegend").innerHTML=Object.values(ISL).map(I=>`<span><i style="background:${I.c}"></i>${I.n.replace("Pulau ","")}</span>`).join("");
   // keyakinan
   $("#gNeedle").style.left=Math.max(3,Math.min(97,cf.pc))+"%";
-  $("#confText").textContent=cf.pc>=70?"Cukup mantap. Pilihanmu sudah punya dasar yang jelas.":cf.pc>=40?"Mulai kebentuk. Arahnya sudah ada, tinggal dipastikan.":"Masih menjelajah. Itu wajar, kamu masih punya waktu untuk mencari tahu.";
+  const cfOk=confMeasured(S);
+  $("#confText").textContent=!cfOk?"Belum diukur. Jawab 9 pertanyaan singkat untuk tahu seberapa mantap pilihanmu.":cf.pc>=70?"Cukup mantap. Pilihanmu sudah punya dasar yang jelas.":cf.pc>=40?"Mulai kebentuk. Arahnya sudah ada, tinggal dipastikan.":"Masih menjelajah. Itu wajar, kamu masih punya waktu untuk mencari tahu.";
   $("#confParts").innerHTML=[["Jawabanmu konsisten",cf.cons],["Sudah cari tahu dan siap",cf.ready],["Kenal isi kuliahnya",cf.know]].map(p=>`<span>${p[0]}</span><div class="tr"><i style="width:${Math.round(Math.max(0,Math.min(1,p[1]||0))*100)}%"></i></div><span class="v">${Math.round(Math.max(0,Math.min(1,p[1]||0))*100)}%</span>`).join("");
+  $("#cekBtn").textContent=cfOk?"Ulangi cek kemantapan":"Ukur seberapa mantap"; $("#gNeedle").parentElement.style.opacity=cfOk?"":".35";
   const nt=[];
   if(cf.flat||cf.fast) nt.push("Jawabanmu di babak kartu terlihat sangat cepat atau hampir sama semua. Hasil ini mungkin belum menggambarkan kamu. Coba main lagi saat sedang santai.");
   else if(cf.cons<.6) nt.push("Beberapa jawabanmu tentang hal yang mirip saling berbeda. Artinya minatmu di bagian itu masih bisa berubah, jadi anggap hasil ini sebagai arah awal.");
@@ -3041,7 +3057,7 @@ function renderRes(){
       if(gp<3) return {h:"Dua jurusan bersaing ketat",s:`${a} dan ${b} hampir seri. Lihat isi kuliah dan kerjaan keduanya sebelum memilih.`};
       if(stLv==="goyah") return {h:"Arahnya masih bisa berubah",s:`${a} teratas untuk sekarang. Main lagi minggu depan untuk memastikan.`};
       const inc=dalam.length?(dalam[0].r===1?" Jurusan incaran ada di nomor 1.":` ${dalam[0].s} yang diincar juga masuk 3 besar.`):"";
-      if(cf.pc<40) return {h:"Minatnya jelas, yakinnya belum",s:`${a} paling nyambung, tapi tingkat yakinnya masih rendah. Cari tahu dulu isi kuliah dan kerjanya.`+inc};
+      if(confMeasured(S)&&cf.pc<40) return {h:"Minatnya jelas, yakinnya belum",s:`${a} paling nyambung, tapi tingkat yakinnya masih rendah. Cari tahu dulu isi kuliah dan kerjanya.`+inc};
       return {h:"Arahnya sudah jelas",s:`${a} unggul ${gp} poin dari nomor 2 dan hasilnya stabil.`+inc}; })();
     const sf1=selfFit(m1.id,S.weak,S.strong);
     POSTER={name:S.name||"",ava:S.ava,theme:posterGaya(),type:UNREAD?"Minat belum terbaca":`${DIM[od[0]].n} + ${DIM[od[1]].n}`,t1:UNREAD?"Minat belum":DIM[od[0]].n,t2:UNREAD?"terbaca":"+ "+DIM[od[1]].n,
@@ -3050,7 +3066,7 @@ function renderRes(){
       juluk:UNREAD?"Penjelajah Bebas":JULUK[od[0]+od[1]], ciri:UNREAD?[]:[CIRI[od[0]][0],CIRI[od[0]][1],CIRI[od[1]][0]],
       pas:sd1.length?"Pas buat yang "+pasBuat(sd1):"Nilainya paling tinggi dari 28 jurusan",
       jadi:(()=>{ const out=[], seen=new Set(); [[0,0],[1,0],[2,0],[0,1],[1,1],[0,2]].forEach(([k,j])=>{ const id=top[k]&&top[k].id, t=id&&PJOBS[id]&&PJOBS[id][j]; if(t&&!seen.has(t)){ seen.add(t); out.push({t,c:ISL[byId(id).isl].c}); } }); return out; })(),
-      jauh:pShort(sc[sc.length-1].id), jauhC:ISL[byId(sc[sc.length-1].id).isl].c,conf:cf.pc,stab:stLv?({kuat:"Kuat",cukup:"Cukup kuat",goyah:"Masih goyah"})[stLv]:"",
+      jauh:pShort(sc[sc.length-1].id), jauhC:ISL[byId(sc[sc.length-1].id).isl].c,conf:cf.pc,confOk:confMeasured(S),stab:stLv?({kuat:"Kuat",cukup:"Cukup kuat",goyah:"Masih goyah"})[stLv]:"",
       one:m1.one,jobs:PJOBS[m1.id]||[],islName:ISL[m1.isl].n,
       simpulFull:inti.h+". "+inti.s,
       incarList:incarL, rank6:sc.slice(0,6).map(x=>({s:pShort(x.id),pc:x.pc,c:ISL[byId(x.id).isl].c,inc:S.incar.includes(x.id)})),
@@ -3116,7 +3132,7 @@ $("#reset").addEventListener("click",e=>{
     function send(ev,extra){
       var key=ev+(extra&&extra.b!=null?":"+extra.b:"");
       if(sent[key])return; sent[key]=1;
-      var body={app:"jelajah-jurusan",v:vid,e:ev,ver:"2026-11-14-28jurusan",r:(document.referrer||"").slice(0,140)};
+      var body={app:"jelajah-jurusan",v:vid,e:ev,ver:"2026-11-14-ringkas",r:(document.referrer||"").slice(0,140)};
       if(extra)for(var k in extra)body[k]=extra[k];
       saveLog();
       try{ fetch("/api/hit",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body),keepalive:true}).catch(function(){}); }catch(e){}
@@ -3132,7 +3148,7 @@ $("#reset").addEventListener("click",e=>{
     }
     if(lbl) new MutationObserver(readPage).observe(lbl,{childList:true,subtree:true,characterData:true});
     document.addEventListener("click",function(e){
-      if(e.target.closest("#toRes")) send("hasil");
+      if(e.target.closest("#finCard [data-p]")) send("hasil");
     },true);
     // Konfirmasi kirim: fetch ke /api/results yang balasannya OK.
     var of=window.fetch;
