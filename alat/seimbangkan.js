@@ -9,6 +9,6 @@ for(let it=0;it<80;it++){const [t,t3]=share(P);const eta=it<20?.02:.008;M.forEac
  if(it%16===15){const v=Object.values(t).map(x=>x/P.length*100),w=Object.values(t3).map(x=>x/P.length*100);console.log('  top3',Math.min(...w).toFixed(1),Math.max(...w).toFixed(1));console.log(it,Math.min(...v).toFixed(2),Math.max(...v).toFixed(2));}}
 M.forEach(m=>{OFF[m.id]=Math.round(OFF[m.id]*1e4)/1e4;GN[m.id]=Math.round(GN[m.id]*1e3)/1e3});
 const Q=gen(777,30000);const [t,t3]=share(Q);const f=(o,k)=>{const v=Object.entries(o).sort((x,y)=>y[1]-x[1]);return v[0][0]+' '+(v[0][1]/Q.length*100).toFixed(1)+' ... '+v[v.length-1][0]+' '+(v[v.length-1][1]/Q.length*100).toFixed(1)};
-console.log('data baru top1 (4.5):',f(t),'| top3 (13.6):',f(t3));
+console.log('data baru top1 (3.57):',f(t),'| top3 (10.7):',f(t3));
 const miss=[];M.forEach(m=>{const sw={};for(;;){const id=a.deckFor(sw).find(x=>sw[x]==null);if(!id)break;const c=CARDS.find(x=>x[0]===id);if(c){const w=m.p[c[1]]||0;sw[id]=w>=.6?1:w>=.3?.5:0}else{const w=TOPIC.find(x=>x[0]===id)[2][m.id];sw[id]=w>=.9?1:w?.5:0}}const sc=a.scoreAll(mk(sw));if(sc[0].id!==m.id)miss.push(m.id+'->'+sc[0].id)});console.log('ideal miss',miss);
 console.log('OFF='+JSON.stringify(OFF));console.log('GN='+JSON.stringify(GN));

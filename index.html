@@ -541,7 +541,7 @@ summary{min-height:48px}
     <p>Bingung mau kuliah apa? Yuk berlayar ke 6 pulau jurusan dan cari yang paling nyambung denganmu.</p>
     <div class="how"><div style="--t:#fff1c2"><span aria-hidden="true">🃏</span><b>Geser kartu</b><small>Suka atau bukan aku</small></div><div style="--t:#dcebfb"><span aria-hidden="true">⚔️</span><b>Coba misi</b><small>Rasakan sehari di jurusannya</small></div><div style="--t:#d8f1e8"><span aria-hidden="true">🗺️</span><b>Dapat peta</b><small>3 jurusan paling nyambung</small></div></div>
     <svg class="map" id="introMap" viewBox="0 0 340 220" role="img" aria-label="Peta enam pulau jurusan"></svg>
-    <p class="note">Tidak ada jawaban benar atau salah. Hasilnya saran untuk dipertimbangkan, bukan keputusan. Yang memutuskan tetap kamu.<br><br><b>Perlu tahu:</b> alat ini baru memuat 22 kelompok jurusan, bukan semua jurusan di Indonesia. Kalau minatmu ternyata di luar itu, hasilnya akan memberi tanda.</p>
+    <p class="note">Tidak ada jawaban benar atau salah. Hasilnya saran untuk dipertimbangkan, bukan keputusan. Yang memutuskan tetap kamu.<br><br><b>Perlu tahu:</b> alat ini baru memuat 28 kelompok jurusan, bukan semua jurusan di Indonesia. Kalau minatmu ternyata di luar itu, hasilnya akan memberi tanda.</p>
   </div>
   <div class="card">
     <h3>Siapa yang berlayar?</h3>
@@ -669,7 +669,7 @@ summary{min-height:48px}
     <p class="lbl" id="top3Lbl">3 jurusan yang paling nyambung</p>
     <div class="top3" id="top3"></div>
     <div id="stabBox" class="stab" hidden></div>
-    <p class="tiny" style="color:#a9c4dc">Ini saran dari jawabanmu hari ini. Minat bisa berubah setelah kamu mencoba hal baru. Pilihannya hanya dari 22 kelompok jurusan di alat ini, bukan semua jurusan.</p>
+    <p class="tiny" style="color:#a9c4dc">Ini saran dari jawabanmu hari ini. Minat bisa berubah setelah kamu mencoba hal baru. Pilihannya hanya dari 28 kelompok jurusan di alat ini, bukan semua jurusan.</p>
   </div>
 
   <div class="card" id="ujiCard" hidden></div>
@@ -701,14 +701,14 @@ summary{min-height:48px}
   </div>
 
   <div class="card">
-    <h3>22 kelompok jurusan, dari yang paling nyambung</h3>
+    <h3>28 kelompok jurusan, dari yang paling nyambung</h3>
     <p class="small muted">Ini bukan semua jurusan. Halaman berikutnya mengecek bidang di luar daftar ini.</p>
     <div class="bars" id="bars"></div>
     <div class="legend" id="islLegend"></div>
   </div>
 
   <div class="card" id="outCard">
-    <h3>Di luar 22 jurusan</h3>
+    <h3>Di luar 28 jurusan</h3>
     <div id="outBox" style="display:flex;flex-direction:column;gap:14px"></div>
     <div class="q"><h3>Hasil ini terasa pas?</h3>
       <div class="chips big three" id="fitChips"></div>
@@ -780,7 +780,7 @@ summary{min-height:48px}
       <li><b>Saran peminatan</b> dicocokkan dari minat, kelebihan, dan kebiasaan yang kamu pilih. Kelebihan dan kebiasaan tidak mengubah nilai minat jurusan mana pun. Keduanya hanya dipakai untuk saran persiapan dan urutan peminatan.</li>
       <li><b>Cek keyakinan</b> mengikuti riset Itamar Gati tentang kesulitan memilih karier dan konsep kesiapan karier dari Mark Savickas.</li>
       <li><b>Misi</b> terdiri dari tiga langkah: pilihan pertamamu dipakai untuk saran peminatan, lalu cara kamu menghadapi rintangan dan rasa setelahnya ikut dihitung.</li>
-      <li><b>Bidang di luar 22 jurusan</b> dinilai dari kartu gaya umum dan kartu bonus saja, jadi lebih kasar. Alat ini tidak memuat semua jurusan, dan daftar bidang tambahannya juga belum lengkap.</li>
+      <li><b>Bidang di luar 28 jurusan</b> dinilai dari kartu gaya umum dan kartu bonus saja, jadi lebih kasar. Alat ini tidak memuat semua jurusan, dan daftar bidang tambahannya juga belum lengkap.</li>
       <li><b>Keadilan hitungan</b> diuji dengan puluhan ribu pemain acak supaya tidak ada jurusan yang lebih mudah muncul di atas.</li>
       <li><b>Angka kursi dan peminat</b> berasal dari laman resmi seleksi masuk kampus negeri (SNPMB) tahun 2025 dan 2026, lewat rangkuman Ruangguru, Brain Academy, dan Gebrak.id.</li>
       <li><b>Info AI dan dunia kerja</b> merangkum laporan ILO, World Economic Forum, dan pemberitaan 2026.</li>
@@ -1365,13 +1365,13 @@ function initSD(){ const v=1/6; const arr=M.map(m=>{ let sp=0,q=0; for(const d i
     let sw=0,t=0; TOPIC.forEach(x=>{ if(x[2][m.id]) sw+=x[2][m.id]; }); TOPIC.forEach(x=>{ if(x[2][m.id]) t+=Math.pow(x[2][m.id]/sw,2)*v; });
     return SD[m.id]=Math.sqrt(.25*q+.25*t); }).sort((a,b)=>a-b); SDREF=arr[Math.floor(arr.length/2)]; }
 /* Penyeimbang: angka kecil per jurusan supaya pada pemain acak tiap jurusan punya peluang yang sama jadi nomor 1. Dicari lewat simulasi (lihat README, "Uji keadilan"). Ubah isi kartu atau profil jurusan = hitung ulang. */
-const OFF={kedokteran:-0.009,keperawatan:-0.001,farmasi:0.0019,kesmas:0.0061,psikologi:0.0002,hukum:0.0002,ilkom:-0.0072,pendidikan:0.005,informatika:-0.0062,sidata:-0.0027,biomedis:0.0066,industri:0.0081,sipil:0.005,manajemen:-0.0091,akuntansi:-0.009,dkv:-0.0063,elektro:0.0078,arsitektur:0.004,agro:0.0131,sospol:-0.0017,sastra:-0.0068,wisata:0.001};
+const OFF={kedokteran:0.0047,keperawatan:-0.0042,farmasi:0.0105,kesmas:0.0086,psikologi:-0.0013,hukum:0.0068,ilkom:-0.0002,pendidikan:-0.0026,informatika:-0.0068,sidata:-0.0047,biomedis:0.0044,industri:-0.004,sipil:-0.0053,manajemen:-0.0062,akuntansi:-0.0006,dkv:-0.0105,elektro:-0.0034,arsitektur:-0.0013,agro:0.0073,sospol:0.0101,sastra:-0.0072,wisata:0.0078,keuangan:-0.005,bisdig:0.0024,ekonomi:0.0049,mipa:-0.0061,nakes2:-0.0023,sosant:0.0043};
 /* Pengatur sebaran per jurusan (dibatasi 0,75 sampai 1,35), dicari bersama OFF supaya peluang masuk 3 teratas juga rata */
-const GN={kedokteran:1.189,keperawatan:1.024,farmasi:1.014,kesmas:0.997,psikologi:0.981,hukum:1.028,ilkom:1.051,pendidikan:0.999,informatika:1.035,sidata:1.062,biomedis:1.047,industri:1.003,sipil:1.03,manajemen:1.065,akuntansi:1.003,dkv:0.92,elektro:1.005,arsitektur:0.891,agro:0.893,sospol:1.04,sastra:0.953,wisata:0.874};
+const GN={kedokteran:1.083,keperawatan:1.061,farmasi:0.945,kesmas:0.964,psikologi:1.007,hukum:0.946,ilkom:0.974,pendidikan:1.037,informatika:1.074,sidata:1.128,biomedis:1.05,industri:1.063,sipil:1.059,manajemen:1.103,akuntansi:1.042,dkv:0.97,elektro:1.042,arsitektur:0.944,agro:0.917,sospol:0.936,sastra:0.928,wisata:0.903,keuangan:1.06,bisdig:0.952,ekonomi:0.979,mipa:0.998,nakes2:1.007,sosant:0.943};
 function base(m,u){ if(!SDREF) initSD(); const raw=.5*dimFit(m,u)+.5*topicFit(m.id,SWREF); return Math.max(0,Math.min(1,.5+(raw-.5)/SD[m.id]*SDREF*(GN[m.id]||1)+(OFF[m.id]||0))); }
-/* ===== Bidang di luar 22 jurusan =====
-   Alat ini hanya memuat 22 kelompok jurusan. Bagian ini mengecek apakah minat pemain mungkin lebih dekat ke bidang lain.
-   Dinilai hanya dari kartu gaya umum dan 12 kartu bonus (tanpa adu pilihan dan misi), jadi lebih kasar dari 22 jurusan utama.
+/* ===== Bidang di luar 28 jurusan =====
+   Alat ini hanya memuat 28 kelompok jurusan. Bagian ini mengecek apakah minat pemain mungkin lebih dekat ke bidang lain.
+   Dinilai hanya dari kartu gaya umum dan 12 kartu bonus (tanpa adu pilihan dan misi), jadi lebih kasar dari 28 jurusan utama.
    Profil minat, bobot kartu, dan contoh jurusan adalah penilaian pembuat. */
 const LAIN = [
  {id:"transport",isl:"lain",n:"Penerbangan, Maritim & Transportasi",p:{R:1,C:.6,E:.3},one:"Mengoperasikan dan merawat pesawat, kapal, dan sistem angkutan barang atau orang.",prodi:"Teknik Penerbangan, Teknik Perkapalan, Transportasi, Logistik, Pelayaran"},
@@ -1407,7 +1407,7 @@ function initSDL(){ if(SDL) return; if(!SDREF) initSD(); const v=1/6;
     SD[m.id]=Math.sqrt(.25*q+.25*t); }); SDL=true; }
 function baseL(m,u,sw){ initSDL(); let a=0,b=0; TLAIN.forEach(t=>{ const w=t[2][m.id]; if(w){ a+=w*(sw[t[0]]??.5); b+=w; } });
   const raw=.5*dimFit(m,u)+.5*(b?a/b:.5); return Math.max(0,Math.min(1,.5+(raw-.5)/SD[m.id]*SDREF)); }
-/* Batas selisih nilai dasar (bidang lain dikurangi 22 jurusan) untuk dua tingkat tanda */
+/* Batas selisih nilai dasar (bidang lain dikurangi 28 jurusan) untuk dua tingkat tanda */
 /* Dipilih lewat simulasi 20.000 pemain acak dengan 5 kartu bonus adaptif: tanda kuat muncul sekitar 1,5% dan mungkin sekitar 14%. Pemain ideal tiap bidang lain: 16 dari 22 jadi nomor 1 dan ditandai kuat. */
 const OUT_T=[.15,.05];
 function outside(S){ const sw=S.sw||{}; SWREF=sw; const u=dims(sw);
@@ -1500,7 +1500,7 @@ dkv:[
  ["Desainer atau animator 3D","Blender, Maya, ZBrush, Unreal Engine, komputer dengan kartu grafis kuat",["Membentuk model 3D: karakter, produk, atau bangunan","Memberi tekstur, cahaya, dan gerakan","Menunggu proses render yang bisa berjam-jam","Memperbaiki detail kecil yang hanya terlihat 2 detik di layar"],"Kamu telaten dengan detail dan suka gim, film, atau visual produk."],
  ["Ilustrator, editor video, atau pekerja lepas","Tablet gambar, Procreate, Premiere, After Effects",["Mengerjakan pesanan gambar atau video dari beberapa klien","Mencari klien dan menawar harga sendiri","Mengatur waktu sendiri, penghasilan naik turun"],"Kamu punya gaya sendiri dan bisa disiplin tanpa atasan."]]
 };
-/* Sekilas kerja sehari-hari untuk bidang di luar 22 jurusan */
+/* Sekilas kerja sehari-hari untuk bidang di luar 28 jurusan */
 const HARIL={
 arsitektur:"Menggambar denah dan model 3D bangunan di AutoCAD atau SketchUp, bertemu klien, mengecek ke lokasi proyek, dan banyak revisi.",
 tmesin:"Merancang, memasang, dan merawat mesin, listrik, atau jaringan telekomunikasi. Sebagian di depan komputer, sebagian di pabrik, gardu, atau menara.",
@@ -1598,11 +1598,182 @@ TOPIC.push(
  ["t22","Mengurus tamu, perjalanan, masakan, atau acara supaya orang senang",{wisata:1,manajemen:.3}]
 );
 [["t5","sospol",.5],["t9","sastra",.3],["t1","elektro",.4],["t8","elektro",.5],["t8","arsitektur",.3],["t7","wisata",.3],["t11","agro",.3]].forEach(([t,id,w])=>{ TOPIC.find(x=>x[0]===t)[2][id]=w; });
+/* ===== Jurusan tambahan (14 Nov 2026): 3 jurusan bisnis baru + 3 bidang yang naik dari daftar "di luar". Total 28 jurusan.
+   Isi disusun dari pengetahuan umum pembuat, belum dicek satu per satu ke sumber resmi. ===== */
+M.find(m=>m.id==="akuntansi").n="Akuntansi & Perpajakan";
+M.push(
+{id:"keuangan",n:"Keuangan & Perbankan",isl:"bis",p:{C:1,E:.7,I:.5},
+ one:"Belajar cara uang dikelola, dipinjamkan, dan diinvestasikan oleh bank, perusahaan, dan perorangan.",
+ duel:"Mengelola uang, pinjaman, dan investasi",
+ mis:{s:"Tantemu punya tabungan Rp20 juta dan bingung: ditabung saja, beli emas, atau ikut reksa dana.",o:["Tanya dulu uangnya mau dipakai kapan dan untuk apa","Bandingkan untung dan risikonya satu per satu","Sarankan dibagi ke beberapa tempat supaya aman"],f:"Orang keuangan tidak menebak. Mereka menimbang risiko dan tujuan, baru memutuskan."},
+ fk:["Banyak hitungan dan aturan, tapi lebih ke logika dan ketelitian daripada rumus sulit","Kerja di bank sering ada target, misalnya jumlah nasabah atau pinjaman"],
+ learn:"Cara kerja bank dan pasar modal, analisis laporan keuangan, investasi, manajemen risiko, perbankan syariah, keuangan digital.",
+ jobs:"Analis kredit, staf bank, perencana keuangan, analis investasi, staf keuangan perusahaan, staf asuransi, staf fintech.",
+ ai:[3,"Layanan nasabah dan hitungan rutin makin banyak dikerjakan aplikasi. Yang makin dicari: orang yang bisa menilai risiko dan dipercaya nasabah."],
+ tips:["Sertifikat seperti WPPE atau perencana keuangan menambah nilai","Biasakan mengikuti berita ekonomi dan pasar"],
+ prep:["Kuatkan Matematika dasar dan Ekonomi","Belajar spreadsheet sampai lancar","Coba catat dan atur uang jajanmu sendiri"],
+ coba:"Pilih dua cara menabung (misalnya tabungan biasa dan emas), bandingkan untung dan risikonya untuk satu tahun.",alt:["akuntansi","ekonomi","manajemen"]},
+{id:"bisdig",n:"Bisnis Digital & Kewirausahaan",isl:"bis",p:{E:1,A:.5,I:.4,C:.3},
+ one:"Belajar membangun dan membesarkan usaha, terutama yang berjualan lewat internet.",
+ duel:"Membangun usaha sendiri dan berjualan online",
+ mis:{s:"Kamu mau jualan camilan lewat Instagram dengan modal Rp300 ribu.",o:["Cari tahu dulu siapa pembelinya dan mereka suka apa","Hitung modal, harga jual, dan untung per bungkus","Coba jual sedikit dulu, lihat responsnya, baru tambah"],f:"Pebisnis yang awet biasanya mulai kecil, mengukur hasilnya, lalu memperbaiki."},
+ fk:["Tidak ada jaminan gaji kalau memilih usaha sendiri, dan gagal di awal itu biasa","Kuliahnya banyak proyek dan praktik jualan, bukan hanya teori"],
+ learn:"Membuat rencana usaha, pemasaran digital, toko online, analisis data penjualan, keuangan usaha, mencari modal.",
+ jobs:"Pemilik usaha, pemasar digital, pengelola toko online, pengembang produk, staf pengembangan bisnis, pengelola media sosial merek.",
+ ai:[2,"AI membantu membuat iklan, konten, dan analisis penjualan. Menemukan peluang dan berani mengambil keputusan tetap kerjaan orangnya."],
+ tips:["Mulai usaha kecil dari sekarang, pengalaman itu yang paling dilihat","Belajar membaca angka penjualan, bukan hanya membuat konten"],
+ prep:["Coba jualan apa saja dan catat hasilnya","Belajar dasar pemasaran di media sosial","Kuatkan Ekonomi dan hitungan untung rugi"],
+ coba:"Jual satu barang atau jasa ke 5 orang di luar keluargamu minggu ini. Catat apa yang bikin mereka mau beli.",alt:["manajemen","ilkom","sidata"]},
+{id:"ekonomi",n:"Ilmu Ekonomi & Ekonomi Syariah",isl:"bis",p:{I:1,C:.6,E:.5},
+ one:"Belajar kenapa harga naik, kenapa ada pengangguran, dan bagaimana kebijakan memengaruhi hidup banyak orang.",
+ duel:"Menganalisis ekonomi negara dan kebijakannya",
+ mis:{s:"Harga cabai di pasar naik dua kali lipat dalam sebulan. Semua orang mengeluh.",o:["Cari tahu dulu: panennya gagal, atau permintaannya naik?","Lihat data harga beberapa tahun terakhir, apakah ini musiman","Pikirkan kebijakan apa yang bisa meredam tanpa merugikan petani"],f:"Ekonom mencari sebab di balik angka, karena kebijakan yang salah sasaran bisa memperburuk keadaan."},
+ fk:["Lebih banyak teori, grafik, dan statistik daripada praktik bisnis","Bukan jurusan untuk belajar jualan. Fokusnya memahami ekonomi secara luas"],
+ learn:"Ekonomi mikro dan makro, statistik dan ekonometrika, ekonomi pembangunan, kebijakan publik, keuangan negara, ekonomi syariah.",
+ jobs:"Analis ekonomi, peneliti, staf bank sentral atau kementerian, analis kebijakan, analis di bank dan perusahaan, konsultan.",
+ ai:[2,"Pengolahan data makin cepat dengan AI. Menafsirkan hasilnya dan menimbang dampak kebijakan tetap butuh ekonom."],
+ tips:["Kuatkan statistik dan pengolahan data, itu yang paling terpakai saat kerja","Banyak lulusan masuk lewat seleksi CPNS, bank, atau lembaga riset"],
+ prep:["Kuatkan Matematika dan Ekonomi","Biasakan membaca berita ekonomi","Belajar membaca grafik dan tabel data"],
+ coba:"Pilih satu berita ekonomi minggu ini, lalu jelaskan sebab dan akibatnya ke temanmu dengan bahasamu sendiri.",alt:["keuangan","sospol","sidata"]},
+{id:"mipa",n:"Matematika, Statistika & Sains (MIPA)",isl:"tek",p:{I:1,C:.5,R:.3},
+ one:"Belajar ilmu dasar sampai ke akarnya: angka, pola, dan hukum alam.",
+ duel:"Mengulik rumus, data, dan percobaan sains",
+ mis:{s:"Sekolahmu mengklaim \"90% siswa puas dengan kantin\". Kamu ragu dengan angka itu.",o:["Cek dulu siapa saja yang ditanya dan berapa orang","Buat survei ulang dengan pertanyaan yang netral","Hitung hasilnya dan bandingkan dengan klaim tadi"],f:"Ilmuwan dan ahli statistik dilatih untuk tidak langsung percaya angka sebelum tahu cara mendapatkannya."},
+ fk:["Materinya abstrak dan menumpuk. Ketinggalan satu bab, bab berikutnya ikut sulit","Sering ditanya \"nanti kerja apa?\", padahal lulusannya banyak dicari untuk pekerjaan data"],
+ learn:"Kalkulus, aljabar, peluang dan statistik, pemrograman dasar, percobaan di laboratorium (Fisika, Kimia, Biologi), cara meneliti.",
+ jobs:"Analis data, aktuaris, peneliti, analis laboratorium, pengajar, staf pengendali mutu, ahli statistik di lembaga survei.",
+ ai:[2,"Hitungan rutin dikerjakan komputer. Orang yang paham dasar matematika dan statistik justru dibutuhkan untuk membuat dan mengecek AI."],
+ tips:["Tambah kemampuan pemrograman, misalnya Python atau R","Statistika dan aktuaria termasuk yang paling cepat terserap kerja"],
+ prep:["Kuatkan Matematika, jangan hanya menghafal rumus","Latihan soal yang butuh penalaran","Coba belajar dasar pemrograman"],
+ coba:"Ambil satu soal olimpiade tingkat sekolah dan kerjakan tanpa melihat jawaban selama 30 menit. Kamu menikmati prosesnya?",alt:["sidata","informatika","pendidikan"]},
+{id:"nakes2",n:"Kebidanan, Fisioterapi & Analis Kesehatan",isl:"kes",p:{S:1,R:.6,I:.5,C:.3},
+ one:"Belajar menolong ibu hamil, memulihkan gerak tubuh, atau memeriksa sampel di lab.",
+ duel:"Menolong persalinan, memulihkan cedera, atau memeriksa di lab kesehatan",
+ mis:{s:"Pamanmu baru sembuh dari patah kaki dan takut mulai berjalan lagi.",o:["Tenangkan dulu dan dengarkan apa yang dia takutkan","Ajari latihan gerak ringan sedikit demi sedikit","Catat kemajuannya tiap hari supaya dia semangat"],f:"Tenaga kesehatan seperti fisioterapis bekerja dengan sabar. Kemajuan pasien sering kecil-kecil tapi nyata."},
+ fk:["Banyak praktik langsung dengan pasien, termasuk melihat darah dan kerja bergiliran","Tiap bidang punya jalur dan izin praktik sendiri, tidak bisa saling pindah begitu saja"],
+ learn:"Anatomi dan cara kerja tubuh, tindakan dasar ke pasien, kehamilan dan persalinan, latihan pemulihan gerak, pemeriksaan laboratorium, etika.",
+ jobs:"Bidan, fisioterapis, analis laboratorium medis, radiografer, terapis wicara, tenaga kesehatan di klinik dan rumah sakit.",
+ ai:[1,"Pekerjaan yang menyentuh pasien langsung sulit digantikan. AI lebih banyak membantu membaca hasil lab dan rontgen."],
+ tips:["Pilih bidangnya dari awal, karena kuliah dan izin praktiknya berbeda","Cek akreditasi kampus, itu syarat ikut uji kompetensi"],
+ prep:["Kuatkan Biologi dan Kimia dasar","Ikut PMR atau kegiatan kesehatan","Latih ketelitian dan kesabaran menghadapi orang"],
+ coba:"Temani kerabat ke posyandu, klinik, atau tempat fisioterapi dan perhatikan apa yang dikerjakan petugasnya selama satu jam.",alt:["keperawatan","kesmas","farmasi"]},
+{id:"sosant",n:"Sosiologi & Kesejahteraan Sosial",isl:"man",p:{S:1,I:.7,A:.3},
+ one:"Belajar memahami masyarakat dan mencari jalan keluar untuk masalah sosial.",
+ duel:"Meneliti masyarakat dan membantu menyelesaikan masalah sosial",
+ mis:{s:"Di kampungmu banyak anak putus sekolah setelah SMP. Orang-orang hanya bilang \"sudah biasa\".",o:["Ngobrol dengan beberapa keluarga untuk tahu alasan sebenarnya","Kumpulkan data: berapa anak, sejak kapan, apa sebabnya","Usulkan program yang cocok dengan keadaan di sana"],f:"Sosiolog dan pekerja sosial turun langsung ke lapangan, karena sebab masalah sosial jarang sesederhana kelihatannya."},
+ fk:["Banyak membaca, menulis, dan turun ke lapangan untuk wawancara","Pekerjaannya tidak sejelas jurusan profesi, jadi perlu aktif membangun keahlian riset atau pendampingan"],
+ learn:"Teori masyarakat, cara meneliti (wawancara dan survei), masalah sosial, pemberdayaan masyarakat, kebijakan sosial, kependudukan.",
+ jobs:"Peneliti sosial, pekerja sosial, pendamping masyarakat, staf LSM, staf CSR perusahaan, analis kebijakan, staf lembaga survei.",
+ ai:[2,"AI membantu merangkum data dan wawancara. Membangun kepercayaan dengan warga dan memahami keadaan di lapangan tetap kerjaan manusia."],
+ tips:["Ikut kegiatan relawan atau organisasi, itu jadi bekal utama","Tambah kemampuan mengolah data survei"],
+ prep:["Biasakan membaca dan menulis panjang","Kuatkan Sosiologi dan Bahasa Indonesia","Ikut kegiatan sosial di sekitar rumah"],
+ coba:"Wawancarai tiga orang dari latar berbeda tentang satu masalah di lingkunganmu, lalu tulis apa yang sama dan beda dari jawaban mereka.",alt:["psikologi","sospol","kesmas"]}
+);
+/* empat bidang naik dari daftar "di luar": kartunya pindah ke kartu topik biasa dengan kode yang sama */
+["mipa","nakes2","ekonomi","sosant"].forEach(id=>{ const i=LAIN.findIndex(x=>x.id===id); if(i>=0) LAIN.splice(i,1); });
+["x4","x8","x10","x12"].forEach(k=>{ const i=TLAIN.findIndex(x=>x[0]===k); if(i>=0) TLAIN.splice(i,1); });
+TLAIN.forEach(t=>{ for(const k in t[2]) if(!LAIN.some(x=>x.id===k)) delete t[2][k]; });
+TOPIC.push(
+ ["x4","Mengulik rumus dan soal sulit demi kepuasan menemukan jawabannya",{mipa:1}],
+ ["x8","Membantu ibu hamil, pemulihan cedera, atau memeriksa sampel di laboratorium kesehatan",{nakes2:1}],
+ ["x10","Mengikuti harga naik-turun, inflasi, dan ekonomi negara",{ekonomi:1,keuangan:.3}],
+ ["x12","Mengamati masyarakat: tradisi, kesenjangan, dan masalah sosial",{sosant:1}],
+ ["t23","Penasaran cara kerja bank, saham, pinjaman, dan asuransi",{keuangan:1,akuntansi:.4,ekonomi:.4}],
+ ["t24","Kepikiran buka toko online, bikin merek sendiri, atau jualan lewat konten",{bisdig:1,manajemen:.4}],
+ ["k_keuangan","Menghitung risiko dan bunga pinjaman, lalu menjelaskannya ke nasabah yang ragu",{keuangan:1}],
+ ["k_bisdig","Mengecek angka penjualan dan iklan tiap hari, lalu mengubah cara jualan kalau sepi",{bisdig:1}],
+ ["k_ekonomi","Mengolah data harga dan pengangguran bertahun-tahun, lalu menulis analisisnya",{ekonomi:1}],
+ ["k_mipa","Mengerjakan satu pembuktian atau percobaan berhari-hari sampai hasilnya benar",{mipa:1}],
+ ["k_nakes2","Menangani pasien satu per satu dengan tindakan yang harus teliti, sering sambil berdiri lama",{nakes2:1}],
+ ["k_sosant","Mendatangi warga dari rumah ke rumah untuk wawancara, lalu menuliskan temuannya",{sosant:1}]
+);
+[["t6","keuangan",.5],["t6","ekonomi",.3],["t7","bisdig",.5],["t14","mipa",.5],["t13","nakes2",.5],["t4","sosant",.4]].forEach(([t,id,w])=>{ TOPIC.find(x=>x[0]===t)[2][id]=w; });
+[["h5",["keuangan","bisdig"]],["h6",["sosant","ekonomi"]],["h10",["nakes2","sosant"]]].forEach(([h,a])=>HOBI.find(x=>x[0]===h)[3].push(...a));
+[["w4",["keuangan","bisdig","ekonomi"]],["w2",["nakes2"]],["w5",["sosant","ekonomi"]],["w7",["mipa"]]].forEach(([h,a])=>TONTON.find(x=>x[0]===h)[3].push(...a));
+Object.assign(HARIL,{keuangan:"Menganalisis laporan keuangan dan data nasabah di komputer, bertemu nasabah, lalu memutuskan pinjaman atau investasi sesuai aturan.",
+ bisdig:"Memantau penjualan dan iklan, membuat konten dan promosi, mengurus pesanan dan pemasok, lalu mencoba ide baru kalau angkanya turun."});
+Object.assign(MDIM,{keuangan:"CEI",bisdig:"EAI",ekonomi:"ICE",mipa:"ICR",nakes2:"SRI",sosant:"SIA"});
+Object.assign(RINT,{
+ keuangan:"Nasabah yang kamu setujui pinjamannya ternyata menunggak. Kamu harus menjelaskan ke atasan dan menagihnya baik-baik.",
+ bisdig:"Iklan yang kamu bayar mahal tidak menghasilkan satu pun pembeli. Kamu harus mencari tahu salahnya di mana dan mencoba lagi.",
+ ekonomi:"Hasil olah datamu berlawanan dengan dugaan awal. Kamu harus mengecek ulang datanya dari awal sebelum menulis kesimpulan.",
+ mipa:"Sudah tiga hari, pembuktian atau percobaanmu tetap salah di satu langkah. Kamu harus menelusurinya baris demi baris.",
+ nakes2:"Pasien kesakitan dan menolak ditangani. Kamu harus tetap tenang, membujuk, dan bekerja dengan teliti.",
+ sosant:"Warga yang mau kamu wawancarai curiga dan menolak bicara. Kamu harus datang lagi berkali-kali sampai mereka percaya."});
+Object.assign(NEED,{keuangan:["mat","teliti","bicara"],bisdig:["bicara","waktu","tekun"],ekonomi:["mat","baca","nulis"],mipa:["mat","tekun","fis"],nakes2:["fisik","hafal","teliti"],sosant:["baca","nulis","bicara"]});
+Object.assign(PLUS,{keuangan:["gaul","inggris"],bisdig:["kreatif","gaul"],ekonomi:["sukabaca","inggris"],mipa:["inggris","sukabaca"],nakes2:["sabar","tangan","gaul"],sosant:["gaul","sabar","sukabaca"]});
+Object.assign(PEM,{
+ keuangan:[["Perbankan","Simpanan, pinjaman, dan layanan nasabah di bank","CE",["bicara"],["gaul","teliti"]],["Investasi dan pasar modal","Saham, obligasi, dan reksa dana","IC",["mat"],["hitung","inggris"]],["Keuangan perusahaan","Mengatur arus kas, modal, dan anggaran","CI",["teliti"],["teliti","hitung"]],["Perbankan dan keuangan syariah","Produk keuangan dengan prinsip syariah","CS",["hafal"],["sukabaca","gaul"]]],
+ bisdig:[["Kewirausahaan","Merintis dan menjalankan usaha sendiri","E",["waktu"],["gaul","kreatif"]],["Pemasaran digital","Iklan online, media sosial, dan konten","AE",[],["kreatif","gaul"]],["Perdagangan elektronik","Mengelola toko online dan penjualannya","EC",["teliti"],["teliti","disiplin"]],["Analisis bisnis digital","Membaca data pelanggan dan penjualan","IC",["mat"],["hitung","tekun"]]],
+ ekonomi:[["Ekonomi pembangunan","Kemiskinan, lapangan kerja, dan pembangunan daerah","IS",["baca"],["sukabaca","gaul"]],["Ekonomi moneter dan keuangan","Inflasi, suku bunga, dan bank sentral","IC",["mat"],["hitung","tekun"]],["Ekonomi syariah","Ekonomi dan keuangan dengan prinsip syariah","IS",["hafal"],["sukabaca"]],["Kebijakan publik","Menilai dampak aturan dan anggaran pemerintah","IE",["nulis"],["sukabaca","bicara"]]],
+ mipa:[["Matematika","Pembuktian, pemodelan, dan matematika terapan","I",["mat"],["hitung","tekun"]],["Statistika dan aktuaria","Mengolah data, survei, dan menghitung risiko","IC",["mat"],["hitung","teliti"]],["Fisika dan Kimia","Percobaan dan teori tentang benda dan zat","IR",["fis"],["tekun","tangan"]],["Biologi","Makhluk hidup, dari sel sampai lingkungan","IR",["hafal"],["tekun","sukabaca"]]],
+ nakes2:[["Kebidanan","Kehamilan, persalinan, dan kesehatan ibu dan bayi","SR",["fisik"],["sabar","tangan"]],["Fisioterapi","Memulihkan gerak setelah cedera atau sakit","SR",["fisik"],["sabar","gaul"]],["Teknologi laboratorium medis","Memeriksa darah dan sampel lain di lab","CI",["teliti"],["teliti","tekun"]],["Radiologi","Mengoperasikan rontgen, CT scan, dan alat pencitraan","RC",["fis"],["tangan","teliti"]]],
+ sosant:[["Sosiologi","Meneliti kelompok, kesenjangan, dan perubahan masyarakat","IS",["baca"],["sukabaca","tekun"]],["Kesejahteraan sosial","Mendampingi orang dan keluarga yang butuh bantuan","S",["bicara"],["sabar","gaul"]],["Antropologi","Mempelajari budaya dan cara hidup berbagai kelompok","IA",["nulis"],["sukabaca","gaul"]],["Pembangunan masyarakat","Merancang program pemberdayaan di desa dan kota","SE",["bicara"],["gaul","bicara"]]]});
+Object.assign(PEMDB,{nakes2:{0:["darah","malam"],2:["darah"]},keuangan:{0:["bicara"]},sosant:{1:["jauh"],3:["jauh"]}});
+Object.assign(MSUBJ,{keuangan:["eko","mat"],bisdig:["eko","tik","seni"],ekonomi:["eko","mat","sos"],mipa:["mat","fis","kim"],nakes2:["bio","kim"],sosant:["sos","ind","pkn"]});
+Object.assign(MVAL,{keuangan:["gaji","stabil"],bisdig:["pimpin","bebas","gaji"],ekonomi:["belajar","stabil","bantu"],mipa:["belajar","stabil"],nakes2:["bantu","stabil"],sosant:["bantu","belajar"]});
+Object.assign(MSTYLE,{keuangan:"aaa",bisdig:"xxb",ekonomi:"baa",mipa:"bax",nakes2:"aab",sosant:"abb"});
+Object.assign(MDB,{keuangan:["bicara","lembur"],bisdig:["lembur"],ekonomi:["duduk","hitung"],mipa:["hitung","duduk"],nakes2:["darah","malam"],sosant:["jauh","bicara"]});
+Object.assign(BERAT,{
+ keuangan:["Sering ada target yang harus dikejar tiap bulan","Salah hitung atau salah menilai nasabah bisa merugikan banyak uang","Aturannya ketat dan terus berubah, harus rajin mengikuti"],
+ bisdig:["Penghasilan tidak pasti, terutama di tahun-tahun awal usaha","Harus siap gagal, rugi, dan mencoba lagi","Persaingan ketat dan tren berubah cepat"],
+ ekonomi:["Banyak grafik, statistik, dan teori yang abstrak","Bacaan dan tugas menulis analisisnya panjang","Pekerjaannya tidak sejelas jurusan profesi, perlu keahlian data tambahan"],
+ mipa:["Materinya abstrak dan menumpuk dari semester ke semester","Praktikum dan laporannya banyak di bidang sains","Sering dianggap hanya bisa jadi guru, padahal jalurnya luas kalau menambah keahlian"],
+ nakes2:["Kerja bergiliran, termasuk malam dan hari libur","Berhadapan dengan darah, rasa sakit, dan keluarga pasien yang panik","Gaji awal sering belum besar, terutama di daerah"],
+ sosant:["Bacaan dan tulisan panjang hampir tiap minggu","Turun ke lapangan bisa jauh dan melelahkan","Perubahan yang diusahakan berjalan lambat dan sering tidak langsung terlihat"]});
+Object.assign(BKEL,{keuangan:"sosial",bisdig:"sosial",ekonomi:"sosial",sosant:"sosial",mipa:"teknik"});
+Object.assign(EXTRA,{nakes2:"Bidan perlu pendidikan profesi setelah sarjana. Tiap bidang wajib lulus uji kompetensi untuk dapat izin praktik."});
+Object.assign(KERJA,{
+keuangan:[
+ ["Analis kredit di bank","Laporan keuangan nasabah, Excel, sistem bank, kunjungan lapangan",["Memeriksa berkas dan laporan keuangan calon peminjam","Mengunjungi tempat usaha nasabah","Menghitung kemampuan bayar dan risikonya","Menulis usulan: disetujui, dikurangi, atau ditolak"],"Kamu teliti dan berani bilang tidak."],
+ ["Staf layanan atau pemasaran bank","Sistem bank, brosur produk, telepon, target bulanan",["Melayani nasabah yang membuka rekening atau bertanya","Menawarkan tabungan, pinjaman, atau asuransi","Mengejar target jumlah nasabah tiap bulan"],"Kamu ramah dan tahan dikejar target."],
+ ["Perencana keuangan","Excel, aplikasi investasi, data keuangan klien",["Mendengarkan tujuan dan kondisi keuangan klien","Menyusun rencana tabungan, asuransi, dan investasi","Meninjau ulang rencana tiap beberapa bulan"],"Kamu suka menjelaskan hal rumit dengan sederhana."],
+ ["Analis investasi","Laporan perusahaan, grafik harga, Excel, berita ekonomi",["Membaca laporan keuangan dan berita perusahaan","Menghitung nilai wajar saham atau obligasi","Menulis rekomendasi beli, tahan, atau jual"],"Kamu betah membaca angka dan mengikuti berita."],
+ ["Staf keuangan perusahaan","Excel, aplikasi akuntansi, internet banking",["Mengatur pembayaran dan penagihan","Memantau arus kas supaya uang perusahaan cukup","Menyusun anggaran dan laporan untuk atasan"],"Kamu rapi dan suka pekerjaan yang teratur."]],
+bisdig:[
+ ["Pemilik usaha online","HP, toko online, media sosial, catatan keuangan",["Mencari dan menyiapkan barang jualan","Membuat foto, konten, dan promosi","Membalas pembeli dan mengurus pengiriman","Menghitung untung rugi dan memutar modal"],"Kamu berani mulai dan tahan saat sepi."],
+ ["Pemasar digital","Meta Ads, Google Ads, Canva, lembar data penjualan",["Merancang iklan dan menentukan sasarannya","Memantau hasil iklan tiap hari","Mengubah gambar, teks, atau anggaran yang tidak berhasil"],"Kamu suka mencoba-coba dan membaca angka."],
+ ["Pengelola toko online merek","Dasbor Shopee atau Tokopedia, Excel, obrolan pelanggan",["Mengunggah produk dan mengatur harga serta promo","Mengecek stok dan pesanan","Menjawab keluhan pembeli","Melaporkan penjualan mingguan"],"Kamu teliti dan cepat merespons."],
+ ["Staf pengembangan bisnis","Presentasi, Excel, telepon, rapat dengan mitra",["Mencari peluang kerja sama dan pelanggan baru","Menyusun penawaran dan bernegosiasi","Menghitung apakah peluangnya menguntungkan"],"Kamu suka bertemu orang dan meyakinkan mereka."],
+ ["Pengelola media sosial merek","Kalender konten, Canva, CapCut, data jangkauan",["Menyusun jadwal dan ide konten","Membuat atau mengarahkan pembuatan konten","Membalas komentar dan pesan","Membaca data: konten mana yang berhasil"],"Kamu kreatif dan mengikuti tren."]],
+ekonomi:[
+ ["Analis ekonomi di bank atau lembaga riset","Excel, Stata atau R, data BPS dan Bank Indonesia",["Mengumpulkan data harga, pekerjaan, dan perdagangan","Mengolahnya untuk melihat tren","Menulis laporan dan perkiraan ekonomi"],"Kamu suka data dan menulis analisis."],
+ ["Staf kementerian atau pemerintah daerah","Dokumen anggaran, Excel, rapat, laporan",["Menyusun dan mengevaluasi program serta anggaran","Menyiapkan bahan rapat dan kajian","Berkoordinasi dengan banyak instansi"],"Kamu sabar dengan proses yang panjang."],
+ ["Peneliti atau asisten peneliti","Jurnal, survei lapangan, aplikasi statistik",["Membaca penelitian terdahulu","Merancang survei dan turun ke lapangan","Mengolah data dan menulis hasilnya"],"Kamu penasaran dan tekun."],
+ ["Analis di perusahaan","Excel, dasbor data, presentasi",["Menganalisis pasar dan pesaing","Memperkirakan permintaan dan harga","Menyampaikan saran ke manajemen"],"Kamu suka menghubungkan angka dengan keputusan."],
+ ["Staf bank atau lembaga keuangan syariah","Sistem bank, akad dan aturan syariah, Excel",["Melayani pembiayaan sesuai prinsip syariah","Menilai kelayakan nasabah","Menyusun laporan"],"Kamu teliti dan paham aturannya."]],
+mipa:[
+ ["Analis data","Excel, SQL, Python atau R, dasbor",["Merapikan dan menggabungkan data","Mencari pola dan menghitung statistiknya","Membuat grafik dan menjelaskan artinya"],"Kamu suka angka dan teka-teki."],
+ ["Aktuaris atau analis risiko di asuransi","Excel, aplikasi statistik, tabel risiko",["Menghitung peluang kejadian seperti sakit atau kecelakaan","Menentukan besar premi yang wajar","Mengikuti ujian profesi bertahap sambil bekerja"],"Kamu kuat di hitungan dan sabar belajar lama."],
+ ["Analis laboratorium atau pengendali mutu","Alat ukur lab, bahan kimia, lembar catatan, jas lab",["Menguji contoh bahan atau produk","Mencatat hasil dengan teliti","Melaporkan kalau ada yang tidak sesuai standar"],"Kamu teliti dan betah di lab."],
+ ["Guru atau pengajar bimbel","Buku, papan tulis, soal latihan, laptop",["Menyiapkan materi dan soal","Menjelaskan konsep dengan berbagai cara","Memeriksa tugas dan membimbing siswa"],"Kamu suka menjelaskan sampai orang paham."],
+ ["Peneliti","Jurnal ilmiah, alat lab atau komputer, catatan percobaan",["Membaca penelitian terbaru","Merancang dan menjalankan percobaan atau perhitungan","Menulis dan mempresentasikan hasilnya"],"Kamu penasaran dan tahan gagal berkali-kali."]],
+nakes2:[
+ ["Bidan","Alat periksa kehamilan, buku KIA, alat persalinan",["Memeriksa ibu hamil dan memberi penyuluhan","Menolong persalinan, sering di malam hari","Memantau ibu dan bayi setelah lahir","Mencatat semua tindakan"],"Kamu sabar dan tenang di saat genting."],
+ ["Fisioterapis","Matras, alat latihan, alat terapi panas dan listrik",["Memeriksa gerak dan keluhan pasien","Melatih gerakan pemulihan satu per satu","Mengajari latihan untuk di rumah","Mencatat kemajuan tiap kunjungan"],"Kamu sabar dan suka menyemangati orang."],
+ ["Analis laboratorium medis","Mikroskop, alat periksa darah, tabung sampel, komputer lab",["Mengambil darah atau menerima sampel","Memeriksanya dengan alat dan mikroskop","Memastikan hasilnya benar sebelum dikirim ke dokter"],"Kamu teliti dan tidak jijik."],
+ ["Radiografer","Mesin rontgen, CT scan, alat pelindung radiasi",["Menyiapkan dan mengatur posisi pasien","Mengoperasikan alat pencitraan","Memastikan gambarnya jelas untuk dibaca dokter"],"Kamu suka alat dan teliti soal keselamatan."],
+ ["Terapis wicara atau okupasi","Kartu gambar, alat bantu latihan, catatan perkembangan",["Menilai kemampuan bicara atau gerak anak dan orang dewasa","Melatih dengan permainan dan latihan berulang","Memberi arahan ke keluarga"],"Kamu telaten dan suka anak-anak."]],
+sosant:[
+ ["Peneliti sosial atau staf lembaga survei","Kuesioner, perekam, Excel atau SPSS, laporan",["Menyusun pertanyaan survei atau wawancara","Turun ke lapangan menemui warga","Mengolah jawaban dan menulis laporan"],"Kamu suka ngobrol dan menulis."],
+ ["Pekerja sosial","Catatan kasus, kunjungan rumah, telepon, jaringan lembaga",["Mendampingi anak, lansia, atau keluarga yang bermasalah","Menghubungkan mereka dengan bantuan yang ada","Mencatat perkembangan tiap kasus"],"Kamu peduli dan kuat mendengar cerita berat."],
+ ["Pendamping masyarakat atau staf LSM","Motor, modul pelatihan, rapat warga, laporan program",["Tinggal atau sering berkunjung ke desa dampingan","Mengadakan pertemuan dan pelatihan warga","Menulis laporan untuk pemberi dana"],"Kamu luwes dan betah di lapangan."],
+ ["Staf CSR perusahaan","Proposal, anggaran, rapat dengan warga dan pemerintah",["Merancang program sosial perusahaan","Berkoordinasi dengan warga sekitar","Memantau dan melaporkan hasilnya"],"Kamu bisa menjembatani banyak pihak."],
+ ["Analis kebijakan sosial","Data penduduk, dokumen kebijakan, laporan",["Mempelajari masalah seperti kemiskinan atau pendidikan","Menilai program yang sudah berjalan","Menulis saran perbaikan"],"Kamu suka membaca dan berpikir kritis."]]
+});
+(K=>{ for(const k in K) KAMPUS[k]=K[k].split(" ").map(c=>{ if(!KP[c]) throw new Error("kampus? "+c); return KP[c]; }); })({
+ keuangan:"ui trisakti atma binus prasmul gunadarma unpad upi unpar telkom ugm uii umy unair ubaya ub um undip unissula usu unimed unsri unhas unud",
+ bisdig:"binus prasmul umn ciputra telkom unpad upi ugm amikom unair unesa ub undip udinus usu mikroskil unsri mdp unhas undiknas",
+ ekonomi:"ui uinj trisakti atma unpad upi unpar ugm uii umy unair ub um undip unnes usu unimed unsri unhas unud",
+ mipa:"ui unj uinj itb unpad upi ugm uny uii unair its unesa ub um undip unnes usu unimed unsri unhas unm unud",
+ nakes2:"ui upnvj esa uhamka unpad unisba unjani ugm unisa umy unair ub umm undip unissula usu sarimutiara unsri unhas unud",
+ sosant:"ui unj uinj unpad upi unpas ugm uny unair unesa ub um undip unnes usu unimed unsri unhas unm unud"
+});
 /* ===== Percabangan kartu =====
    Bagian awal sama untuk semua orang: 24 kartu situasi + 6 kartu pulau (GATE). Dari situ dipilih 2 sampai 3 pulau,
    lalu bagian kedua hanya berisi kartu topik dan keseharian dari pulau itu, ditambah 2 kartu kejutan dari pulau lain.
    Kartu kejutan yang dijawab "Suka" membuka pulaunya. Kartu yang tidak muncul diberi nilai dari jawaban kartu pulaunya (swv). */
-const GATE=[["g_kes","kes","Rumah sakit, obat, dan cara kerja tubuh manusia"],["g_man","man","Urusan orang dan masyarakat: mengajar, membela, memberitakan, memahami orang"],["g_tek","tek","Komputer, aplikasi, dan data"],
+const GATE=[["g_kes","kes","Rumah sakit, obat, merawat pasien, dan cara kerja tubuh manusia"],["g_man","man","Urusan orang dan masyarakat: mengajar, membela, memberitakan, memahami orang"],["g_tek","tek","Komputer, aplikasi, data, dan hitungan"],
  ["g_tnk","tnk","Mesin, bangunan, listrik, pabrik, atau kebun: kerja yang hasilnya bisa dipegang"],["g_bis","bis","Uang, jualan, melayani pelanggan, dan cara usaha bisa untung"],["g_kre","kre","Desain, gambar, tulisan, dan karya yang dinikmati orang"]];
 const GATE_W=.6;
 GATE.forEach(([id,isl,tx])=>{ const w={}; M.filter(m=>m.isl===isl).forEach(m=>w[m.id]=GATE_W); TOPIC.push([id,tx,w]); });
@@ -1886,7 +2057,7 @@ const incarT=id=>{ const i=S.incar.indexOf(id); if(i>=0) S.incar.splice(i,1); el
 const drawIncar=()=>ipick($("#incar"),()=>S.incar,incarT,"Belum tahu mau jurusan apa");
 drawIncar(); ipickBind($("#incar"),drawIncar,incarT,()=>S.incar);
 const optR=l=>l.map(m=>`<option value="${m.id}" ${S.real===m.id?"selected":""}>${esc(m.n)}</option>`).join("");
-$("#real").innerHTML=`<option value="">Tidak ikut menguji / belum kuliah</option><optgroup label="22 kelompok jurusan">${optR(M)}</optgroup><optgroup label="Di luar 22 jurusan">${optR(LAIN)}</optgroup>`;
+$("#real").innerHTML=`<option value="">Tidak ikut menguji / belum kuliah</option><optgroup label="28 kelompok jurusan">${optR(M)}</optgroup><optgroup label="Di luar 28 jurusan">${optR(LAIN)}</optgroup>`;
 const IND=["Kesehatan","Bank dan keuangan","Telekomunikasi","Teknologi dan aplikasi","Pendidikan","Pemerintahan","Pabrik dan manufaktur","Toko dan jualan","Media dan kreatif","Konstruksi dan properti","Pertanian dan pangan","Hotel dan wisata","Tambang dan energi","Transportasi dan logistik","Lainnya"];
 function drawPem(){ const box=$("#realPemBox"), ok=!!(S.real&&PEM[S.real]); box.hidden=!ok; if(!ok){ if(S.realPem){ S.realPem=""; } $("#realPem").innerHTML=""; return; }
   if(S.realPem&&S.realPem!=="-"&&!PEM[S.real].some(p=>p[0]===S.realPem)) S.realPem="";
@@ -2216,7 +2387,7 @@ $("#shareBox").hidden=true;
 const newSid=()=>"JJ-"+Array.from(crypto.getRandomValues(new Uint8Array(8)),b=>b.toString(16).padStart(2,"0")).join("").toUpperCase();
 function payload(){ SWREF=S.sw; const sc=scoreAll(S), cf=confidence(S);
   const {ava,pts,done,todo,at,seen,uji,sent,share,runId,resultAt,...ans}=S;
-  return {app:"jelajah-jurusan",ver:"2026-11-14-bercabang",sid:S.sid,nama:String(S.name||"").slice(0,20),t:new Date(S.resultAt||Date.now()).toISOString(),ans,rank:sc.map(x=>[x.id,x.pc]),conf:cf.pc,unread:unread(S,sc),
+  return {app:"jelajah-jurusan",ver:"2026-11-14-28jurusan",sid:S.sid,nama:String(S.name||"").slice(0,20),t:new Date(S.resultAt||Date.now()).toISOString(),ans,rank:sc.map(x=>[x.id,x.pc]),conf:cf.pc,unread:unread(S,sc),
     uji:{kuliah:S.real||"",peminatan:S.realPem&&S.realPem!=="-"?S.realPem:"",industri:S.realInd||"",kerja:S.realJob||[],betah:S.realHappy||"",catatan:S.realNote||""},
     stab:(()=>{ if(unread(S,sc)) return null; const x=stability(S); return {level:x.level,top1:+x.top1.toFixed(2),in3:+x.in3.toFixed(2),top3:+x.top3.toFixed(2),gap:+x.gap.toFixed(3)}; })(),
     out:(()=>{ const o=outside(S); return {level:o.level,bonus:o.bonus,top:o.L.slice(0,3).map(x=>[x.id,x.pc])}; })(),
@@ -2472,7 +2643,7 @@ const PJOBS={kedokteran:["Dokter umum","Dokter gigi","Dokter spesialis"],keperaw
  biomedis:["Insinyur alat medis","Peneliti","Pengawas mutu alat medis"],industri:["Perencana produksi","Pengawas mutu","Pengelola proyek"],sipil:["Insinyur sipil","Kontraktor","Pengawas bangunan"],
  manajemen:["Manajer pemasaran","Staf SDM","Wirausaha"],akuntansi:["Akuntan","Auditor","Konsultan pajak"],dkv:["Desainer grafis","Ilustrator","Animator"],elektro:["Insinyur listrik","Insinyur telekomunikasi","Ahli robotika"],
  arsitektur:["Arsitek","Desainer interior","Perencana kota"],agro:["Penyuluh pertanian","Pengusaha agribisnis","Pengendali mutu pangan"],sospol:["Diplomat","ASN","Analis kebijakan"],
- sastra:["Penerjemah","Penulis konten","Editor"],wisata:["Manajer hotel","Koki","Perencana perjalanan"]};
+ sastra:["Penerjemah","Penulis konten","Editor"],wisata:["Manajer hotel","Koki","Perencana perjalanan"],keuangan:["Analis kredit","Perencana keuangan","Analis investasi"],bisdig:["Pemilik usaha","Pemasar digital","Pengelola toko online"],ekonomi:["Analis ekonomi","Peneliti","Analis kebijakan"],mipa:["Analis data","Aktuaris","Peneliti"],nakes2:["Bidan","Fisioterapis","Analis laboratorium"],sosant:["Peneliti sosial","Pekerja sosial","Pendamping masyarakat"]};
 const JULUK={RI:"Montir yang Kepo",RA:"Perajin yang Nyeni",RS:"Teknisi yang Suka Nolong",RE:"Mandor Lapangan",RC:"Teknisi yang Teliti",
  IR:"Peneliti Lapangan",IA:"Ilmuwan yang Nyeni",IS:"Peneliti yang Peduli",IE:"Pemikir yang Berani Maju",IC:"Analis yang Teliti",
  AR:"Kreator Tangan Dingin",AI:"Kreator yang Kepo",AS:"Seniman yang Hangat",AE:"Kreator yang Berani Tampil",AC:"Desainer yang Rapi",
@@ -2485,7 +2656,7 @@ const pasBuat=ds=>{ const a=ds.map(d=>PADJK[d]); return a.length>1&&a.every(x=>x
 const PADJK={R:"suka utak-atik",I:"suka cari tahu",A:"kreatif",S:"peduli sama orang",E:"suka memimpin",C:"teliti"};
 const PADJ={R:"suka utak-atik",I:"penasaran",A:"kreatif",S:"peduli",E:"suka memimpin",C:"rapi"};
 const PSTAB={Kuat:"Kuat","Cukup kuat":"Lumayan kuat","Masih goyah":"Masih bisa berubah"};
-const PSHORT={kedokteran:"Kedokteran",kesmas:"Kesmas, Gizi & K3",ilkom:"Ilmu Komunikasi",pendidikan:"Pendidikan",informatika:"Informatika",sidata:"Sistem Informasi & Sains Data",sipil:"Teknik Sipil & Pertambangan",manajemen:"Manajemen & Bisnis",dkv:"DKV",elektro:"Elektro, Mesin & Telkom",arsitektur:"Arsitektur & Kota",agro:"Pertanian & Pangan",sospol:"HI, Politik & Adm. Publik",sastra:"Bahasa & Sastra",wisata:"Pariwisata & Perhotelan"};
+const PSHORT={kedokteran:"Kedokteran",kesmas:"Kesmas, Gizi & K3",ilkom:"Ilmu Komunikasi",pendidikan:"Pendidikan",informatika:"Informatika",sidata:"Sistem Informasi & Sains Data",sipil:"Teknik Sipil & Pertambangan",manajemen:"Manajemen & Bisnis",dkv:"DKV",elektro:"Elektro, Mesin & Telkom",arsitektur:"Arsitektur & Kota",agro:"Pertanian & Pangan",sospol:"HI, Politik & Adm. Publik",sastra:"Bahasa & Sastra",wisata:"Pariwisata & Perhotelan",bisdig:"Bisnis Digital",ekonomi:"Ilmu Ekonomi",mipa:"Matematika & Sains",nakes2:"Kebidanan & Fisioterapi",sosant:"Sosiologi"};
 const pShort=id=>PSHORT[id]||byId(id).n;
 function pAlat(g,sh,OL){
   const rr=(x,y,w,h,r)=>{ r=Math.min(r,w/2,h/2); g.beginPath(); g.moveTo(x+r,y); g.arcTo(x+w,y,x+w,y+h,r); g.arcTo(x+w,y+h,x,y+h,r); g.arcTo(x,y+h,x,y,r); g.arcTo(x,y,x+w,y,r); g.closePath(); };
@@ -2615,7 +2786,7 @@ async function drawPoster(P,noAva){
 
   /* kaki */
   const ajak=P.unread?"Mau coba juga? Main di ":"Kamu tipe yang mana? Main di "; g.fillStyle=TH.ink; const z=fit(ajak+P.site,IW,32,800,D,20); g.fillText(ajak,X,H-56); const aw=g.measureText(ajak).width; g.fillStyle=TH.dark?TH.pop:"#c2452a"; F(800,z,D); g.fillText(P.site,X+aw,H-56);
-  g.fillStyle=TH.sub; F(600,21,B); g.fillText("Saran dari jawaban hari ini, bukan keputusan. Dari 22 kelompok jurusan, bukan semua jurusan.",X,H-22);
+  g.fillStyle=TH.sub; F(600,21,B); g.fillText("Saran dari jawaban hari ini, bukan keputusan. Dari 28 kelompok jurusan, bukan semua jurusan.",X,H-22);
   return cv;
 }
 /* ===== Lembar hasil lengkap: 1800 x 1200, mendatar, untuk disimpan atau ditunjukkan ke orang tua dan guru ===== */
@@ -2706,7 +2877,7 @@ async function drawLembar(P,noAva){
     g.fillStyle="#fff"; F(800,38,D); g.fillText("Intinya",X+104,y+61); g.fillStyle="rgba(255,255,255,.4)"; g.fillRect(X+262,y+18,3,h-36);
     g.fillStyle=SUN; fit(P.inti.h,IW-290-28,32,800,D,22); g.fillText(P.inti.h,X+288,y+44);
     g.fillStyle="#fff"; fit(P.inti.s,IW-290-28,22,600,B,14); g.fillText(P.inti.s,X+288,y+78); }
-  g.fillStyle="#3f5b74"; F(600,19,B); g.fillText("Saran dari jawaban hari ini, bukan keputusan. Dihitung dari 22 kelompok jurusan, bukan semua jurusan.",X,H-14);
+  g.fillStyle="#3f5b74"; F(600,19,B); g.fillText("Saran dari jawaban hari ini, bukan keputusan. Dihitung dari 28 kelompok jurusan, bukan semua jurusan.",X,H-14);
   return cv;
 }
 async function makeLembar(){
@@ -2758,24 +2929,24 @@ function renderRes(){
     const v=main<=3?"Tepat":(main<=5||(other&&other<=3))?"Mendekati":"Meleset";
     const pf=S.real&&!isL(S.real)&&PEM[S.real]?pemFit(S.real,u,S.weak,S.strong,S):null, pemR=pf&&S.realPem&&S.realPem!=="-"?pf.findIndex(p=>p.n===S.realPem)+1:0;
     return {jobs,rr,bestJ,pivot,useJob,v,pem:pf?pf[0].n:"",pemR,pemN:pf?pf.length:0}; })();
-  if(UJI){ const row=(lb,id,r,k)=>`<div class="fact f-${r<=3?"ok":r<=5?"mid":"no"}"><span class="fi" aria-hidden="true">${r}</span><p><b>${lb}:</b> ${esc(byId(id).n)}<br><span class="small">Urutan ${r} dari ${rn(id)}${isL(id)?" · bidang di luar 22 (nilai kasar)":""}${k?" · "+k:""}</span></p></div>`;
+  if(UJI){ const row=(lb,id,r,k)=>`<div class="fact f-${r<=3?"ok":r<=5?"mid":"no"}"><span class="fi" aria-hidden="true">${r}</span><p><b>${lb}:</b> ${esc(byId(id).n)}<br><span class="small">Urutan ${r} dari ${rn(id)}${isL(id)?" · bidang di luar 28 (nilai kasar)":""}${k?" · "+k:""}</span></p></div>`;
     $("#ujiCard").innerHTML=`<h3>Hasil uji ketepatan</h3>
      <p class="factbig" style="font-size:19px">${UJI.v==="Tepat"?"🎯 Tepat":UJI.v==="Mendekati"?"🙂 Mendekati":"🤔 Meleset"}. <span style="font-family:var(--font-body);font-size:15px;font-weight:400">${UJI.v==="Tepat"?"Bidang patokanmu masuk 3 teratas.":UJI.v==="Mendekati"?"Bidang patokanmu tidak di 3 teratas, tapi dekat, atau bidangmu yang lain masuk 3 teratas.":"Bidangmu tidak muncul di urutan atas. Itu informasi berharga untuk memperbaiki alat ini."}</span></p>
      ${S.real?row("Kuliah dulu",S.real,UJI.rr,UJI.useJob?"":"patokan"):""}
      ${UJI.jobs.map((j,i)=>row(i?"Kerja juga":"Kerja sekarang",j[0],j[1],UJI.useJob&&i===0?"patokan":"")).join("")}
-     <p class="note">${UJI.useJob?"Alat ini mengukur minat, jadi patokannya <b>bidang kerja utamamu sekarang</b>. Jurusan kuliah dan bidang kerja lainnya jadi pembanding.":S.realHappy==="tidak"&&UJI.jobs.length?"Kamu bilang kurang betah di kerjaan sekarang, jadi wajar kalau alat ini tidak menaruhnya di atas. Patokannya <b>jurusan kuliahmu</b>.":"Patokannya <b>jurusan kuliahmu</b>."}${UJI.pivot?" Kamu pindah arah setelah lulus. Kalau kerjaanmu naik di atas jurusan kuliahmu, artinya alat ini menangkap arah yang akhirnya kamu pilih.":""}${(S.real&&isL(S.real))||(S.realJob||[]).some(isL)?" Ada bidangmu yang di luar 22 jurusan. Alat ini "+(OUT.level==="aman"?"belum memberi tanda":"sudah memberi tanda")+" bahwa minatmu mungkin di luar daftar.":""}</p>
+     <p class="note">${UJI.useJob?"Alat ini mengukur minat, jadi patokannya <b>bidang kerja utamamu sekarang</b>. Jurusan kuliah dan bidang kerja lainnya jadi pembanding.":S.realHappy==="tidak"&&UJI.jobs.length?"Kamu bilang kurang betah di kerjaan sekarang, jadi wajar kalau alat ini tidak menaruhnya di atas. Patokannya <b>jurusan kuliahmu</b>.":"Patokannya <b>jurusan kuliahmu</b>."}${UJI.pivot?" Kamu pindah arah setelah lulus. Kalau kerjaanmu naik di atas jurusan kuliahmu, artinya alat ini menangkap arah yang akhirnya kamu pilih.":""}${(S.real&&isL(S.real))||(S.realJob||[]).some(isL)?" Ada bidangmu yang di luar 28 jurusan. Alat ini "+(OUT.level==="aman"?"belum memberi tanda":"sudah memberi tanda")+" bahwa minatmu mungkin di luar daftar.":""}</p>
      ${S.realInd?`<p class="small"><b>Industri tempat kerja:</b> ${esc(S.realInd)} (catatan saja, tidak ikut dihitung)</p>`:""}
      ${UJI.pem?(S.realPem&&S.realPem!=="-"?`<div class="fact f-${UJI.pemR===1?"ok":UJI.pemR===2?"mid":"no"}"><span class="fi" aria-hidden="true">${UJI.pemR}</span><p><b>Peminatan:</b> dulu ambil ${esc(S.realPem)}<br><span class="small">${UJI.pemR===1?"Sama dengan peminatan yang paling disarankan alat ini.":`Alat ini paling menyarankan ${esc(UJI.pem)}. Peminatanmu di urutan ${UJI.pemR} dari ${UJI.pemN}.`}</span></p></div>`:`<p class="small"><b>Peminatan yang disarankan di jurusan kuliahmu:</b> ${esc(UJI.pem)}. Cocok dengan yang dulu kamu ambil atau yang sebenarnya kamu mau?</p>`):""}
      <p class="small muted">Tolong kirim ringkasan di halaman terakhir ke orang yang memberimu alat ini.</p>`; }
-  const LV={kuat:["🧭","Bisa jadi jurusanmu justru di luar 22 ini","Bidang di bawah punya kecocokan yang lebih tinggi dari jurusan teratas di daftar kami. Kenali bidang itu dulu sebelum memutuskan.","#fde4e1"],
-   mungkin:["🔭","Ada bidang di luar 22 ini yang hampir sama cocoknya","Nilainya dekat dengan jurusan teratasmu. Layak dibandingkan sebelum memilih.","#fff1c2"],
-   aman:["✅","22 jurusan di alat ini cukup menangkap minatmu","Bidang di bawah hanya sebagai pembanding, nilainya lebih rendah dari jurusan teratasmu.","#d8f1e8"]}[OUT.level];
+  const LV={kuat:["🧭","Bisa jadi jurusanmu justru di luar 28 ini","Bidang di bawah punya kecocokan yang lebih tinggi dari jurusan teratas di daftar kami. Kenali bidang itu dulu sebelum memutuskan.","#fde4e1"],
+   mungkin:["🔭","Ada bidang di luar 28 ini yang hampir sama cocoknya","Nilainya dekat dengan jurusan teratasmu. Layak dibandingkan sebelum memilih.","#fff1c2"],
+   aman:["✅","28 jurusan di alat ini cukup menangkap minatmu","Bidang di bawah hanya sebagai pembanding, nilainya lebih rendah dari jurusan teratasmu.","#d8f1e8"]}[OUT.level];
   $("#outBox").innerHTML=`<div class="verd" style="background:${LV[3]}"><span style="font-size:26px" aria-hidden="true">${LV[0]}</span><b>${LV[1]}</b><p class="small">${LV[2]}</p></div>`
    +(top[0].pc<55?`<p class="note"><b>Belum ada jurusan di 22 ini yang menonjol.</b> Itu bisa berarti minatmu belum terbentuk, atau pertanyaan alat ini belum menyentuh bidang yang kamu suka. Isi kotak masukan di bawah supaya alat ini bisa diperbaiki.</p>`:"")
-   +(OUT.bonus?"":`<p class="note">Kamu melewati kartu bonus, jadi bidang di luar 22 baru dinilai dari gaya umummu. Main lagi tanpa melewatinya untuk hasil yang lebih tepat.</p>`)
+   +(OUT.bonus?"":`<p class="note">Kamu melewati kartu bonus, jadi bidang di luar 28 baru dinilai dari gaya umummu. Main lagi tanpa melewatinya untuk hasil yang lebih tepat.</p>`)
    +OUT.L.slice(0,3).map(x=>{ const m=LAIN.find(l=>l.id===x.id); return `<div class="xitem"><div class="xh"><span>${esc(m.n)}</span><span>${x.pc}%</span></div><div class="tr"><i style="width:${x.pc}%"></i></div><p class="small">${esc(m.one)}</p><p class="small"><b>Sehari-hari kerjanya:</b> ${esc(HARIL[m.id])}</p>${x.tested?"":`<p class="tiny muted">Belum ditanya lewat kartu bonus, hanya dari gaya umummu.</p>`}<p class="small muted"><b>Contoh jurusan:</b> ${esc(m.prodi)}</p></div>`; }).join("")
    +`<details class="mini"><summary>Lihat semua ${LAIN.length} bidang lain</summary><div class="bars">${OUT.L.map(x=>`<div class="bar"><span class="nm">${esc(byId(x.id).n)}</span><span class="v">${x.pc}%</span><div class="tr"><i style="width:${x.pc}%;background:#6b7c8c;opacity:.7"></i></div></div>`).join("")}</div></details>`
-   +`<p class="note"><b>Perlu tahu:</b> alat ini baru memuat 22 kelompok jurusan ditambah ${LAIN.length} bidang di halaman ini, belum semua jurusan di Indonesia. Dari kartu bonus, hanya ${BONUS_K} bidang yang gaya umumnya paling dekat denganmu yang ditanyakan. Bidang di sini juga tidak ikut adu pilihan dan misi, jadi nilainya lebih kasar. Anggap sebagai petunjuk arah, lalu cari jurusan yang sesungguhnya di <a href="https://pddikti.kemdiktisaintek.go.id" target="_blank" rel="noopener">PDDikti</a>.</p>`;
+   +`<p class="note"><b>Perlu tahu:</b> alat ini baru memuat 28 kelompok jurusan ditambah ${LAIN.length} bidang di halaman ini, belum semua jurusan di Indonesia. Dari kartu bonus, hanya ${BONUS_K} bidang yang gaya umumnya paling dekat denganmu yang ditanyakan. Bidang di sini juga tidak ikut adu pilihan dan misi, jadi nilainya lebih kasar. Anggap sebagai petunjuk arah, lalu cari jurusan yang sesungguhnya di <a href="https://pddikti.kemdiktisaintek.go.id" target="_blank" rel="noopener">PDDikti</a>.</p>`;
   const drawFit=()=>{ $("#fitChips").innerHTML=[["pas","Pas","🎯"],["agak","Agak meleset","🙂"],["meleset","Meleset","🤔"]].map(o=>`<button type="button" class="chip" data-f="${o[0]}" aria-pressed="${S.fit===o[0]}"><span class="em" aria-hidden="true">${o[2]}</span><span>${o[1]}</span></button>`).join(""); };
   drawFit(); $("#fitNote").value=S.fitNote||"";
   fitDraw=drawFit;
@@ -2798,7 +2969,7 @@ function renderRes(){
     let ex=`<div class="kampus"><div class="kp"><span>Rasa saat mencoba misinya</span><small class="n">${fl}</small></div><div class="kp"><span>Kenal isi kuliahnya</span><small class="n">${kn.length?kt+" dari "+kn.length+" hal sudah tahu":"Belum dicek"}</small></div></div>`;
     if(kn.length&&kt<kn.length) ex+=`<p class="small">Ada hal tentang kuliahnya yang baru kamu tahu tadi. Bayanganmu soal jurusan ini belum lengkap, jadi cari tahu lebih dulu.</p>`;
     if(sf.use.length||sf.prep.length) ex+=`<p class="small muted"><b>Catatan tambahan:</b> ${sf.use.length?"kelebihanmu yang kepakai: "+sf.use.map(x=>esc(x[1]).toLowerCase()).join(", ")+". ":""}${sf.prep.length?"Enak dilatih sebelum masuk: "+sf.prep.map(w=>esc(w[1]).toLowerCase()).join(", ")+".":""}</p>`;
-    return `<div class="val"><p style="font-weight:800;font-size:17px">${esc(m.n)} <span class="muted small" style="font-weight:700">· urutan ${rank} dari 22</span></p><div class="two"><span>Minat</span><div class="tr"><i style="width:${pc}%;background:${ISL[m.isl].c}"></i></div><span class="v">${pc}%</span></div><p class="note">${v}</p>${ex}</div>`; }).join("")
+    return `<div class="val"><p style="font-weight:800;font-size:17px">${esc(m.n)} <span class="muted small" style="font-weight:700">· urutan ${rank} dari 28</span></p><div class="two"><span>Minat</span><div class="tr"><i style="width:${pc}%;background:${ISL[m.isl].c}"></i></div><span class="v">${pc}%</span></div><p class="note">${v}</p>${ex}</div>`; }).join("")
     +(S.incar.length&&!S.incar.some(id=>top.some(t=>t.id===id))?`<p class="say">Jurusan paling nyambung dari permainanmu ternyata berbeda dari incaranmu. Itu bukan vonis. Anggap sebagai undangan untuk membandingkan keduanya dengan jujur.</p>`:"");
   // radar
   let ri=0; const drawR=()=>{ radar($("#radar"),u,byId(top[ri].id));
@@ -2840,13 +3011,13 @@ function renderRes(){
   const sel=$("#other"); sel.innerHTML=`<option value="">Pilih jurusan…</option>`+M.filter(m=>!show3.some(t=>t.id===m.id)).map(m=>`<option value="${m.id}">${esc(m.n)}</option>`).join("");
   sel.onchange=()=>{ closeSec(); const x=sc.find(s=>s.id===sel.value); $("#otherBox").innerHTML=x?majorCard(byId(x.id),x.pc,true):""; };
   $("#otherBox").innerHTML="";
-  const txt=[`Hasil Jelajah Jurusan${S.name?" ("+S.name+")":""}`,`Tipe: ${DIM[od[0]].n} + ${DIM[od[1]].n}`,"3 jurusan paling nyambung (dari 22 kelompok jurusan, bukan semua jurusan):",...top.map((x,i)=>`${i+1}. ${byId(x.id).n} (${x.pc}%)`),...(S.incar.length?["Jurusan incaran: "+S.incar.map(id=>{ const r=sc.findIndex(x=>x.id===id); return `${byId(id).n} (minat ${sc[r].pc}%, urutan ${r+1} dari 22)`; }).join("; ")]:[]),...(UJI?[`UJI KETEPATAN: ${UJI.v}`,...(S.real?[`- Kuliah dulu: ${byId(S.real).n}, urutan ${UJI.rr} dari ${rn(S.real)}`,...(UJI.pem?[`- Peminatan yang disarankan: ${UJI.pem}`+(UJI.pemR?` (dulu ambil: ${S.realPem}, urutan ${UJI.pemR} dari ${UJI.pemN})`:"")]:[])]:[]),...(S.realInd?[`- Industri tempat kerja: ${S.realInd} (tidak dihitung)`]:[]),...UJI.jobs.map((j,i)=>`- Kerja ${i?"juga":"sekarang"}: ${byId(j[0]).n}, urutan ${j[1]} dari ${rn(j[0])}`),...(S.realNote?[`- Kerjaan: ${S.realNote}`]:[]),...(S.realHappy?[`- Betah: ${({ya:"ya",biasa:"biasa saja",tidak:"kurang"})[S.realHappy]}`]:[]),`- Patokan: ${UJI.useJob?"bidang kerja utama sekarang":"jurusan kuliah"}`]:[]),`Bidang di luar 22 jurusan: ${({kuat:"ada tanda kuat",mungkin:"mungkin",aman:"tidak ada tanda"})[OUT.level]} (${OUT.L.slice(0,3).map(x=>byId(x.id).n+" "+x.pc+"%").join("; ")})${OUT.bonus?"":", kartu bonus dilewati"}`,...(S.fit?[`Hasil terasa: ${({pas:"pas",agak:"agak meleset",meleset:"meleset"})[S.fit]}${S.fitNote?", bidang yang kurang: "+S.fitNote:""}`]:[]),`Kemantapan pilihan: ${cf.pc}%`,...(S.sid?[`Kode hasil: ${S.sid}`]:[]),"Ini saran untuk dipertimbangkan, bukan keputusan."].join("\n");
+  const txt=[`Hasil Jelajah Jurusan${S.name?" ("+S.name+")":""}`,`Tipe: ${DIM[od[0]].n} + ${DIM[od[1]].n}`,"3 jurusan paling nyambung (dari 28 kelompok jurusan, bukan semua jurusan):",...top.map((x,i)=>`${i+1}. ${byId(x.id).n} (${x.pc}%)`),...(S.incar.length?["Jurusan incaran: "+S.incar.map(id=>{ const r=sc.findIndex(x=>x.id===id); return `${byId(id).n} (minat ${sc[r].pc}%, urutan ${r+1} dari 28)`; }).join("; ")]:[]),...(UJI?[`UJI KETEPATAN: ${UJI.v}`,...(S.real?[`- Kuliah dulu: ${byId(S.real).n}, urutan ${UJI.rr} dari ${rn(S.real)}`,...(UJI.pem?[`- Peminatan yang disarankan: ${UJI.pem}`+(UJI.pemR?` (dulu ambil: ${S.realPem}, urutan ${UJI.pemR} dari ${UJI.pemN})`:"")]:[])]:[]),...(S.realInd?[`- Industri tempat kerja: ${S.realInd} (tidak dihitung)`]:[]),...UJI.jobs.map((j,i)=>`- Kerja ${i?"juga":"sekarang"}: ${byId(j[0]).n}, urutan ${j[1]} dari ${rn(j[0])}`),...(S.realNote?[`- Kerjaan: ${S.realNote}`]:[]),...(S.realHappy?[`- Betah: ${({ya:"ya",biasa:"biasa saja",tidak:"kurang"})[S.realHappy]}`]:[]),`- Patokan: ${UJI.useJob?"bidang kerja utama sekarang":"jurusan kuliah"}`]:[]),`Bidang di luar 28 jurusan: ${({kuat:"ada tanda kuat",mungkin:"mungkin",aman:"tidak ada tanda"})[OUT.level]} (${OUT.L.slice(0,3).map(x=>byId(x.id).n+" "+x.pc+"%").join("; ")})${OUT.bonus?"":", kartu bonus dilewati"}`,...(S.fit?[`Hasil terasa: ${({pas:"pas",agak:"agak meleset",meleset:"meleset"})[S.fit]}${S.fitNote?", bidang yang kurang: "+S.fitNote:""}`]:[]),`Kemantapan pilihan: ${cf.pc}%`,...(S.sid?[`Kode hasil: ${S.sid}`]:[]),"Ini saran untuk dipertimbangkan, bukan keputusan."].join("\n");
   // halaman hasil
   const kids=[...$("#res").children].filter(e=>e.id!=="resNav"), order=["kartu","kartu","kartu","cek","minat","semua","luar","mantap","diri","jur","jur","jur","banding","poster","akhir","akhir","akhir","akhir","akhir"];
   if(kids.length!==order.length) console.error("susunan halaman hasil berubah",kids.length);
   kids.forEach((k,i)=>k.dataset.pg=order[i]);
   PG=[["poster","Poster hasil"],["kartu","Kartu penjelajah"]]; if(S.incar.length) PG.push(["cek","Cek jurusan incaran"]);
-  if(!UNREAD) PG.push(["minat","Bentuk minat dan asal nilai"],["semua","Peringkat 22 jurusan"],["luar","Di luar 22 jurusan"]);
+  if(!UNREAD) PG.push(["minat","Bentuk minat dan asal nilai"],["semua","Peringkat 28 jurusan"],["luar","Di luar 28 jurusan"]);
   PG.push(["mantap","Kemantapan pilihan"],["diri","Kelebihan dan kebiasaan"]);
   if(!UNREAD){ show3.forEach((x,i)=>PG.push(["jur",byId(x.id).n,i,x.id])); PG.push(["banding","Bandingkan dua jurusan"]); }
   PG.push(["akhir","Lembar hasil, sumber, riwayat"]);
@@ -2855,13 +3026,13 @@ function renderRes(){
     const m1=byId(top[0].id), sama=m=>DK.filter(d=>m.p[d]&&u[d]>=.5).sort((a,b)=>Math.min(u[b],m.p[b])-Math.min(u[a],m.p[a])).slice(0,2);
     const sd1=sama(m1), d1=(S.duel||{})[m1.id], duelOk=!!(d1&&d1.n&&d1.w/d1.n>=.5), dW=d1?Math.min(d1.n,Math.round(d1.w)):0;
     /* gaya C (poster): label + keping fakta */
-    const whyC=[sd1.length?{l:"Sifat yang sama",c:sd1.map(d=>DIM[d].n),ok:true}:{l:"Peringkat",c:["1 dari 22"]},
+    const whyC=[sd1.length?{l:"Sifat yang sama",c:sd1.map(d=>DIM[d].n),ok:true}:{l:"Peringkat",c:["1 dari 28"]},
       duelOk?{l:"Menang adu pilihan",c:[`${dW} dari ${d1.n}`]}:gp>=1?{l:"Unggul dari nomor 2",c:[`${gp} poin`]}:{l:"Selisih dengan nomor 2",c:["tipis"]}];
     /* gaya B (lembar): kalimat pendek pakai "kamu" */
-    const whyB=[sd1.length>1?`Kamu ${PADJK[sd1[0]]} dan ${PADJK[sd1[1]]}. Jurusan ini butuh dua-duanya.`:sd1.length?`Kamu ${PADJK[sd1[0]]}, dan jurusan ini butuh itu.`:"Nilainya paling tinggi dari 22 jurusan.",
+    const whyB=[sd1.length>1?`Kamu ${PADJK[sd1[0]]} dan ${PADJK[sd1[1]]}. Jurusan ini butuh dua-duanya.`:sd1.length?`Kamu ${PADJK[sd1[0]]}, dan jurusan ini butuh itu.`:"Nilainya paling tinggi dari 28 jurusan.",
       gp>=1?`Nilainya ${gp} poin di atas nomor 2.`:"Nilainya beda tipis dengan nomor 2."];
     const incarL=UNREAD?[]:S.incar.map(id=>{ const r=sc.findIndex(x=>x.id===id)+1, pc=sc[r-1].pc;
-      return {n:byId(id).n,s:pShort(id),r,pc,top:r<=3,v:r<=3?"Masuk 3 besar":`Urutan ${r} dari 22`,lv:r<=3?2:r<=8?1:0}; });
+      return {n:byId(id).n,s:pShort(id),r,pc,top:r<=3,v:r<=3?"Masuk 3 besar":`Urutan ${r} dari 28`,lv:r<=3?2:r<=8?1:0}; });
     const sn=top.map(x=>pShort(x.id));
     /* "Intinya": penilaian baru, bukan mengulang daftar jurusan */
     const inti=(()=>{ if(UNREAD) return {h:"Belum ada yang menonjol",s:"Jawabannya masih rata. Coba satu kegiatan yang belum pernah dilakukan, lalu main lagi minggu depan."};
@@ -2877,7 +3048,7 @@ function renderRes(){
       desc:UNREAD?"Jawabannya masih hampir sama semua, jadi belum kelihatan condong ke mana.":`${DIM[od[0]].d.charAt(0).toUpperCase()+DIM[od[0]].d.slice(1)}. Juga ${DIM[od[1]].d}.`,u,m:m1,unread:UNREAD,
       top:top.map(x=>{ const m=byId(x.id), sd=sama(m); return {n:m.n,s:pShort(x.id),pc:x.pc,c:ISL[m.isl].c,isl:m.isl,why:sd.length?"Pas buat yang "+pasBuat(sd.slice(0,1)):"Nilainya nggak jauh dari nomor 1"}; }),why:whyC,whyB,gp,inti,
       juluk:UNREAD?"Penjelajah Bebas":JULUK[od[0]+od[1]], ciri:UNREAD?[]:[CIRI[od[0]][0],CIRI[od[0]][1],CIRI[od[1]][0]],
-      pas:sd1.length?"Pas buat yang "+pasBuat(sd1):"Nilainya paling tinggi dari 22 jurusan",
+      pas:sd1.length?"Pas buat yang "+pasBuat(sd1):"Nilainya paling tinggi dari 28 jurusan",
       jadi:(()=>{ const out=[], seen=new Set(); [[0,0],[1,0],[2,0],[0,1],[1,1],[0,2]].forEach(([k,j])=>{ const id=top[k]&&top[k].id, t=id&&PJOBS[id]&&PJOBS[id][j]; if(t&&!seen.has(t)){ seen.add(t); out.push({t,c:ISL[byId(id).isl].c}); } }); return out; })(),
       jauh:pShort(sc[sc.length-1].id), jauhC:ISL[byId(sc[sc.length-1].id).isl].c,conf:cf.pc,stab:stLv?({kuat:"Kuat",cukup:"Cukup kuat",goyah:"Masih goyah"})[stLv]:"",
       one:m1.one,jobs:PJOBS[m1.id]||[],islName:ISL[m1.isl].n,
@@ -2895,7 +3066,7 @@ function renderRes(){
   $("#cmpA").innerHTML=opt(dA); $("#cmpB").innerHTML=opt(dB);
   const cmpInfo=id=>{ const m=byId(id), r=sc.findIndex(x=>x.id===id), st=STAT[id]&&STAT[id][0], ef=extraFit(id,S), f=S.feel[id], sg=S.sang[id];
     const gaya=STYLE.map((x,i)=>MSTYLE[id][i]==="x"?null:x[MSTYLE[id][i]==="a"?2:3]).filter(Boolean).join(", ")||"Campuran";
-    return [["Nilai minatmu",`<b>${sc[r].pc}%</b><br>urutan ${r+1} dari 22`],["Rasa saat mencoba misi",f==null?"Belum dicoba":f>=.75?"Seru dan tahan rintangannya":f>=.45?"Lumayan":"Kurang betah"],["Sanggup sisi beratnya",sg==null?"Belum ditanya":sg===1?"Sanggup":sg===.5?"Masih mikir":"Tidak sanggup"],
+    return [["Nilai minatmu",`<b>${sc[r].pc}%</b><br>urutan ${r+1} dari 28`],["Rasa saat mencoba misi",f==null?"Belum dicoba":f>=.75?"Seru dan tahan rintangannya":f>=.45?"Lumayan":"Kurang betah"],["Sanggup sisi beratnya",sg==null?"Belum ditanya":sg===1?"Sanggup":sg===.5?"Masih mikir":"Tidak sanggup"],
       ["Pelajaran utamanya",MSUBJ[id].map(x=>SUBJ.find(y=>y[0]===x)[1]).join(", ")],["Yang biasanya didapat",MVAL[id].map(x=>VALS.find(y=>y[0]===x)[1].toLowerCase()).join(", ")],["Gaya kerjanya",gaya.toLowerCase()],
       ["Sisi berat utama",BERAT[id][0]],["Hal yang tidak bisa kamu toleransi",ef.hit.length?ef.hit.map(x=>DB.find(d=>d[0]===x)[1].toLowerCase()).join(", "):"Tidak ada yang kena"],
       ["Pekerjaan dan AI",["","Sedikit berubah","Sebagian berubah","Banyak berubah"][m.ai[0]]],["Sekolah tambahan",EXTRA[id]||"Tidak wajib setelah lulus"],
@@ -2945,7 +3116,7 @@ $("#reset").addEventListener("click",e=>{
     function send(ev,extra){
       var key=ev+(extra&&extra.b!=null?":"+extra.b:"");
       if(sent[key])return; sent[key]=1;
-      var body={app:"jelajah-jurusan",v:vid,e:ev,ver:"2026-11-14-bercabang",r:(document.referrer||"").slice(0,140)};
+      var body={app:"jelajah-jurusan",v:vid,e:ev,ver:"2026-11-14-28jurusan",r:(document.referrer||"").slice(0,140)};
       if(extra)for(var k in extra)body[k]=extra[k];
       saveLog();
       try{ fetch("/api/hit",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body),keepalive:true}).catch(function(){}); }catch(e){}

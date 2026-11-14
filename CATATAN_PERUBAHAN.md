@@ -1,3 +1,24 @@
+# Catatan Perubahan — 14 Nov 2026 (28 jurusan)
+
+## 6 jurusan baru (22 → 28)
+- **Pulau Bisnis jadi 6:** baru `keuangan` (Keuangan & Perbankan), `bisdig` (Bisnis Digital & Kewirausahaan), `ekonomi` (Ilmu Ekonomi & Ekonomi Syariah). `akuntansi` berganti nama jadi "Akuntansi & Perpajakan".
+- **Naik dari daftar "di luar":** `ekonomi` (Bisnis), `mipa` (Matematika, Statistika & Sains, pulau Teknologi), `nakes2` (Kebidanan, Fisioterapi & Analis Kesehatan, pulau Kesehatan), `sosant` (Sosiologi & Kesejahteraan Sosial, pulau Sumber Daya Manusia). Kode bidang dan kartunya (`x4`, `x8`, `x10`, `x12`) tetap, sekarang jadi kartu topik biasa.
+- Daftar "di luar" tinggal 6 bidang: transportasi, kebumian, kedokteran hewan, agama dan filsafat, seni pertunjukan, olahraga.
+- Tiap jurusan baru punya isi lengkap: misi, isi kuliah, 5 contoh pekerjaan dengan kesehariannya, 4 peminatan, sisi berat, kampus contoh, kartu topik dan kartu keseharian. Semua blok ada di `index.html` bagian "Jurusan tambahan (14 Nov 2026)".
+- **Isi jurusan baru disusun dari pengetahuan umum, belum dicek ke sumber resmi** (daftar kampus, jalur profesi, sertifikat). Belum ada data daya tampung untuk jurusan baru.
+- Kartu baru: `t23` (bank, saham, pinjaman), `t24` (toko online, merek sendiri), dan 6 kartu keseharian `k_...`. Beberapa kartu lama dapat bobot tambahan untuk jurusan baru (`t6`, `t7`, `t14`, `t13`, `t4`).
+- Semua tulisan "22 jurusan" di aplikasi jadi 28.
+
+## Keadilan (dihitung ulang untuk 28 jurusan)
+- `node alat/uji-alur.js`: top1 3,1–5,0% (ideal 3,57%), top3 9,3–14,6% (ideal 10,7%).
+- Pemain ideal: 28 dari 28 jadi nomor 1, juga saat 1 kartu utama salah geser dan saat kartu pulaunya dijawab "Bukan aku" atau "Biasa aja".
+- Jumlah kartu: pemain ideal 49–67, pemain acak 48–81 (tengah 62).
+- Diuji di browser tanpa layar: untuk tiap 28 jurusan, semua halaman hasil dan kotak dibuka, poster dan lembar digambar, tanpa error dan tanpa teks terpotong.
+
+## Data
+- `ver` jadi `2026-11-14-28jurusan`. Peringkat sekarang berisi 28 baris dan penyeimbangnya baru; pisahkan dari versi sebelumnya.
+- README masih menyebut 22 jurusan di banyak tempat dan belum diperbarui.
+
 # Catatan Perubahan — 14 Nov 2026 (kartu bercabang)
 
 ## Alur kartu baru
