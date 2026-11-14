@@ -18,6 +18,10 @@ Repo ini salinan publik dari aplikasi yang jalan di `https://jelajah-jurusan.ver
 
 Tanpa langkah 1-3, halaman tetap jalan untuk pemain, hanya hasil tidak terkirim ke mana-mana.
 
+## Deploy otomatis
+
+Repo ini tersambung ke project Vercel `satu-lapak/jelajah-jurusan`. Setiap push ke `main` langsung jadi deployment produksi (`https://jelajah-jurusan.vercel.app`); branch lain dan pull request dapat preview URL sendiri. Nggak ada langkah deploy manual.
+
 ## Perubahan versi
 
 ## Perubahan 13 November 2026: dari 16 jadi 22 kelompok jurusan
