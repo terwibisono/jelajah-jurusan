@@ -1,7 +1,7 @@
 # Rencana: animasi perjalanan, pemilih 3 jurusan, dan perapian warna
 
 Tanggal: 14 November 2026
-Status: **menunggu persetujuan**. Belum ada yang di-commit selain file rencana ini.
+Status: **dikerjakan** di branch ini, belum digabung ke `main`. Keputusan yang diambil: animasi A sampai I semua; tombol "Buka kotak" dihapus; Teknik oranye kecokelatan dengan teks putih; teks abu-abu `#4b6277` (bukan `#50687d`). Rinciannya di `CATATAN_PERUBAHAN.md`.
 Branch kerja: `animasi-pemilih-warna` (lanjutan dari `singkat-alur`).
 
 Tiga pekerjaan ini hanya menyentuh tampilan di `index.html`. Pertanyaan, hitungan nilai, penyeimbang, dan data yang dikirim ke Google Sheets tidak berubah.

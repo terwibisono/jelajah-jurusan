@@ -1,3 +1,31 @@
+# Catatan Perubahan — 14 Nov 2026 (animasi, pemilih jurusan, warna)
+
+Hanya tampilan di `index.html`. Pertanyaan, hitungan nilai, penyeimbang, dan isi kiriman hasil tidak berubah. Rencananya ada di `RENCANA_ANIMASI_UI.md`.
+
+## Animasi (A sampai I di rencana, semuanya dikerjakan)
+- Babak kartu: kapal berlayar di atas ombak sebagai penunjuk progres (`sail`; bagian 1 = 45% jalur, bagian 2 sampai 94%, kartu bonus sisanya; tidak mundur kecuali kartu dibatalkan), percikan 6 emoji saat menjawab (`burst`), kartu baru memantul, sorakan tiap 10 kartu (`cheer`, tidak muncul bersamaan dengan pesan "Bagian 2" atau "kartu keseharian").
+- Kepala layar: poin membesar dan karakter melompat tiap dapat poin (`kick`), titik babak aktif berdenyut.
+- Semua layar dan halaman hasil naik-muncul saat berganti, termasuk tiap langkah misi, adu pilihan, dan keseharian. Tombol adu pilihan, misi, dan kotak hasil mengecil sedikit saat ditekan.
+- Konfeti 70 keping saat permainan selesai (`finishGame`), tidak saat membuka hasil lama.
+- "Kurangi gerakan": semua animasi mati, percikan dan konfeti tidak dibuat, kapal tetap tampil dan diam. Semua hiasan `aria-hidden`.
+
+## Hasil: pemilih jurusan
+- Satu halaman "Kenalan dengan jurusanmu" dengan kotak pemilih (`#jpick`, `drawJpick`, `updJpick`, `pickJur`): nomor, nama pendek, persen minat, "x/y dibuka". Incaran di luar 3 besar jadi kotak bertanda ★ "incaranmu" di baris kedua.
+- Halaman hasil jadi 10 (11 kalau ada incaran). Tombol "Buka kotak", tautan "Lewati kotak", dan layar jeda antar jurusan dihapus. Tombol bawah selalu "Lanjut".
+- Versi pencatat kunjungan jadi `2026-11-14-pemilih`, karena jumlah "babak" di tab kunjungan berubah dan tidak bisa dibandingkan dengan sebelumnya. `ver` kiriman hasil tetap `2026-11-14-ringkas`.
+
+## Warna
+- Warna pulau dipertua supaya teks putih di atasnya lolos 4,5 : 1 (semuanya sekarang 4,6 sampai 4,7): Kesehatan `#c54c42`, Teknologi `#2876c7`, Teknik `#a36817`, Bisnis `#1a8463`, Kreatif `#c74189`. Sumber Daya Manusia tetap. Berlaku juga di poster dan lembar hasil.
+- Teknik memakai pilihan oranye kecokelatan dengan teks putih. Kalau mau oranye terang dengan teks biru tua, itu perubahan terpisah.
+- Teks abu-abu jadi `#4b6277`, sedikit lebih tua dari usulan `#50687d`, karena usulan itu baru 4,2 di sudut latar yang lebih gelap (`--sea-deep`). Sekarang 4,6 di sana dan 5,4 di latar laut biasa.
+
+## Uji
+- `node alat/uji-alur.js`: keluaran sama persis dengan sebelum perubahan.
+- Main penuh lewat tombol di layar 390×844: dua pemain acak dengan animasi menyala (satu dengan jurusan incaran) dan satu dengan "kurangi gerakan". Tanpa error, tanpa layar melebar; dengan "kurangi gerakan" tidak ada animasi yang berjalan.
+- Tiap 28 jurusan dipaksa jadi nomor 1: semua halaman dibuka, semua kotak di semua jurusan pemilih dibuka, poster dan lembar hasil tergambar, hitungan "x/y dibuka" benar. Tanpa masalah.
+- Tiga tombol kartu tetap terlihat tanpa menggulir di 320×568 dan 360×640.
+- Belum diuji: kelancaran animasi di HP sungguhan dan tampilan warna di layar aslinya.
+
 # Catatan Perubahan — 14 Nov 2026 (alur diringkas)
 
 Babak setelah kartu turun dari sekitar 58 langkah menjadi sekitar 25 layar (37 ketukan pada uji otomatis). Babak di kepala layar sekarang 5, bukan 7.
