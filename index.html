@@ -499,23 +499,41 @@ summary{min-height:48px}
 @media (max-height:620px){ #b1 .card>p.small{display:none} .deck{height:clamp(150px,30vh,200px)} }
 
 /* ===== Animasi perjalanan (semua mati kalau HP disetel "kurangi gerakan") ===== */
-.voy{position:relative;height:46px;border-radius:14px;overflow:hidden;background:linear-gradient(#d9f2f4 0 46%,#a9dbe2 46%)}
-.voy .wv{position:absolute;left:0;right:-48px;bottom:0;height:22px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='22'%3E%3Cpath d='M0 8q12-8 24 0t24 0V22H0z' fill='%2389cbd6'/%3E%3C/svg%3E") repeat-x;animation:wave 2.6s linear infinite}
-.voy .wv.w2{height:14px;opacity:.9;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='22'%3E%3Cpath d='M0 8q12-8 24 0t24 0V22H0z' fill='%236fb9c6'/%3E%3C/svg%3E");animation-duration:1.7s;z-index:2}
-@keyframes wave{to{transform:translateX(-48px)}}
-.voy .isl,.voy .ship{position:absolute;font-size:25px;line-height:1}
-.voy .isl{right:8px;bottom:9px}
-.voy .ship{--p:0;bottom:7px;left:calc(6px + (100% - 78px) * var(--p));transition:left .5s cubic-bezier(.3,1.3,.5,1);z-index:1}
-.voy .ship span{display:block;animation:bob 1.8s ease-in-out infinite}
-@keyframes bob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-3px) rotate(4deg)}}
+/* Strip pelayaran: kapal berisi karaktermu menuju pulau misteri. Semua gambar SVG, tanpa emoji. */
+.voy{position:relative;height:68px;margin-top:2px}
+.voy .vw{position:absolute;inset:0;border-radius:16px;overflow:hidden;background:linear-gradient(#e9f7f7 0,#d3eef0 44%,#9fd4dc 44%,#86c8d2 100%)}
+.voy .sunb{position:absolute;left:46%;top:6px;width:18px;height:18px;border-radius:50%;background:#ffe08a;box-shadow:0 0 0 5px rgba(255,224,138,.35)}
+.voy .cl{position:absolute;top:9px;height:9px;border-radius:9px;background:#fff;opacity:.9;animation:drift 26s linear infinite}
+.voy .cl::before{content:"";position:absolute;left:5px;top:-5px;width:11px;height:11px;border-radius:50%;background:#fff}
+.voy .cl.c1{width:30px;left:18%}.voy .cl.c2{width:22px;left:66%;top:5px;animation-duration:34s;opacity:.75}
+@keyframes drift{from{transform:translateX(0)}to{transform:translateX(-120px)}}
+.voy .wv{position:absolute;left:0;right:-60px;bottom:0;height:26px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='26'%3E%3Cpath d='M0 9q15-9 30 0t30 0V26H0z' fill='%2378bfca'/%3E%3C/svg%3E") repeat-x;animation:wave 3.2s linear infinite}
+.voy .wv.w2{height:15px;z-index:3;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='26'%3E%3Cpath d='M0 9q15-9 30 0t30 0V26H0z' fill='%235eb0be'/%3E%3Cpath d='M4 8q11-6 22 0' stroke='%23fff' stroke-width='2' fill='none' opacity='.55' stroke-linecap='round'/%3E%3C/svg%3E");animation-duration:2.1s}
+@keyframes wave{to{transform:translateX(-60px)}}
+.voy .route{position:absolute;left:34px;right:70px;top:41px;height:0;border-top:2px dashed rgba(20,48,74,.28);z-index:1}
+.voy .route i{position:absolute;left:0;top:-2px;height:2px;width:calc(var(--p,0)*100%);background:var(--ink);border-radius:2px;transition:width .5s}
+.voy .dest{position:absolute;right:2px;bottom:4px;width:78px;height:52px;z-index:2}
+.voy .ship{--p:0;position:absolute;bottom:3px;width:64px;height:56px;left:calc(2px + (100% - 140px) * var(--p));transition:left .55s cubic-bezier(.3,1.3,.5,1);z-index:2}
+.voy .ship svg{width:100%;height:100%;overflow:visible;animation:bob 2s ease-in-out infinite;transform-origin:50% 80%}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-3px) rotate(3deg)}}
+.voy .ship.got svg{animation:got .45s ease-out,bob 2s ease-in-out .45s infinite}
+@keyframes got{30%{transform:translateY(-7px) scale(1.08) rotate(-6deg)}70%{transform:translateY(1px) scale(.97)}}
+.voy .ship .flag{transform-origin:40px 6px;transform:scale(0);transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.voy .ship.mile .flag{transform:scale(1)}
+.voy .ship .wake{animation:wake 1.2s linear infinite}
+@keyframes wake{from{stroke-dashoffset:0}to{stroke-dashoffset:-16}}
+.vsay{position:absolute;bottom:calc(100% - 14px);z-index:5;background:var(--ink);color:#fff;font-weight:800;font-size:13.5px;line-height:1.25;border-radius:12px;padding:6px 11px;white-space:nowrap;box-shadow:0 3px 0 rgba(0,0,0,.2);pointer-events:none;animation:say 2.2s ease both}
+.vsay::after{content:"";position:absolute;bottom:-6px;left:var(--tl,18px);border:6px solid transparent;border-top-color:var(--ink);border-bottom:0}
+@keyframes say{0%{transform:translateY(8px) scale(.6);opacity:0}10%{transform:translateY(0) scale(1.06);opacity:1}18%,82%{transform:none;opacity:1}100%{transform:translateY(-6px);opacity:0}}
+/* lapisan partikel: melayang di atas semua, tidak menghalangi ketukan */
+.fxl{position:fixed;inset:0;z-index:85;pointer-events:none;overflow:hidden}
+.fxl>*{position:absolute;left:0;top:0;will-change:transform,opacity}
+.fxl .rip{border-radius:50%;border:3px solid var(--c);width:60px;height:60px;margin:-30px 0 0 -30px}
 .deckw{position:relative}
-.fx{position:absolute;inset:0;pointer-events:none;z-index:3}
-.burst span{position:absolute;left:50%;top:50%;font-size:27px;line-height:1;opacity:0;animation:fly .9s ease-out forwards}
-@keyframes fly{0%{transform:translate(-50%,-50%) scale(.4);opacity:1}70%{opacity:1}100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1.25);opacity:0}}
 .sw.in{animation:cardin .36s cubic-bezier(.3,1.5,.5,1)}
 @keyframes cardin{from{transform:translateY(34px) scale(.92);opacity:.5}to{transform:none;opacity:1}}
-.cheer{position:absolute;top:-16px;left:50%;transform:translateX(-50%);max-width:100%;background:var(--ink);color:#fff;border-radius:99px;padding:6px 14px;font-weight:800;font-size:14.5px;line-height:1.3;white-space:nowrap;box-shadow:0 3px 0 rgba(0,0,0,.25);animation:cheer 1.8s ease both}
-@keyframes cheer{0%{transform:translate(-50%,10px) scale(.7);opacity:0}12%{transform:translate(-50%,0) scale(1.08);opacity:1}20%,80%{transform:translate(-50%,0) scale(1);opacity:1}100%{transform:translate(-50%,-8px) scale(1);opacity:0}}
+.pts{position:relative}
+.plus{position:absolute;right:6px;top:2px;font-family:var(--font-display);font-weight:800;font-size:15px;color:var(--ink);background:#fff;border-radius:99px;padding:0 7px;box-shadow:0 2px 0 var(--line);pointer-events:none}
 .pts.bump{animation:bump .4s ease-out}
 @keyframes bump{40%{transform:scale(1.28)}}
 .hud .ava.hop{animation:hop .45s ease-out}
@@ -527,9 +545,7 @@ summary{min-height:48px}
 .dopt{transition:transform .08s,box-shadow .08s}
 .dopt:active{transform:translateY(3px) scale(.985)}
 .tile:active{transform:translateY(3px) scale(.985)}
-.confetti{position:fixed;inset:0;z-index:90;pointer-events:none;overflow:hidden}
-.confetti i{position:absolute;top:-24px;display:block;border-radius:2px;animation:fall var(--d) linear var(--dl) forwards}
-@keyframes fall{to{transform:translate(var(--dx),108vh) rotate(var(--r))}}
+
 
 /* ===== Pemilih jurusan di hasil: kotak berdampingan, ketuk untuk pindah ===== */
 .jpick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 10px}
@@ -546,7 +562,7 @@ summary{min-height:48px}
 .jpb[aria-pressed=true] small{color:#fff}
 .jpb:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 @media (max-width:400px){.jpick{gap:10px 8px}.jpb b{font-size:14px}.jpb{padding:9px 3px 8px}}
-@media (max-height:620px){.voy{height:38px}.voy .isl,.voy .ship{font-size:21px}}
+@media (max-height:700px){.voy{height:56px}.voy .ship{width:54px;height:47px}.voy .dest{width:64px;height:43px}.voy .route{top:33px}}
 </style>
 </head>
 <body>
@@ -609,8 +625,8 @@ summary{min-height:48px}
     <p class="small muted" id="swHint">Geser kanan kalau suka, kiri kalau tidak. Jawab cepat pakai perasaan, tidak usah mikir bisa atau tidak.</p>
     <p class="badge" id="bonusBadge" hidden style="align-self:flex-start">Kartu bonus · menyesuaikan jawabanmu</p>
     <p class="badge" id="dayBadge" hidden style="align-self:flex-start;background:#8a5cd0">Kartu keseharian · begini rasanya tiap hari</p>
-    <div class="voy" id="voy" aria-hidden="true"><i class="wv"></i><span class="isl">🏝️</span><span class="ship" id="ship"><span>⛵</span></span><i class="wv w2"></i></div>
-    <div class="deckw"><div class="deck" id="deck"></div><div class="fx" id="fx" aria-hidden="true"></div></div>
+    <div class="voy" id="voy" aria-hidden="true"><div class="vw"><span class="sunb"></span><i class="cl c1"></i><i class="cl c2"></i><i class="wv"></i><div class="route"><i id="route"></i></div><svg class="dest" viewBox="0 0 80 54"><ellipse cx="42" cy="44" rx="36" ry="9" fill="#f5e3b0"/><ellipse cx="42" cy="40" rx="27" ry="8" fill="#8fc79b"/><ellipse cx="34" cy="38" rx="9" ry="3" fill="#fff" opacity=".3"/><path d="M50 39q-3-13 1-25" stroke="#8a6532" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M51 14q-11-6-19 2q10-3 19-2zm0 0q11-7 19 1q-10-3-19-1zm0 0q-4 9-12 13q5-9 12-13zm0 0q9 4 11 13q-6-9-11-13z" fill="#3f9a5e"/><path d="M27 40V17" stroke="#14304a" stroke-width="2" stroke-linecap="round"/><path d="M27 17h15l-4 5 4 5H27z" fill="#ffc93c" stroke="#14304a" stroke-width="1.5" stroke-linejoin="round"/><text x="33" y="25.5" font-family="Baloo 2,Trebuchet MS,sans-serif" font-weight="800" font-size="9" fill="#14304a" text-anchor="middle">?</text></svg><div class="ship" id="ship"><svg viewBox="0 0 70 60"><path class="wake" d="M4 52h12M0 46h10M8 57h9" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="6 4" opacity=".9"/><g id="shipAva" transform="translate(13 15) scale(.62)"></g><path d="M41 44V6" stroke="#14304a" stroke-width="2.6" stroke-linecap="round"/><path d="M43.5 9q17 14 3 33h-3z" fill="#fff" stroke="#14304a" stroke-width="2" stroke-linejoin="round"/><path d="M44 21q6 1 11 0M44 31q5 1 9 0" stroke="#ef6a4c" stroke-width="2.4" fill="none" stroke-linecap="round"/><g class="flag"><path d="M41 6h20l-5 6 5 6H41z" fill="#ffc93c" stroke="#14304a" stroke-width="1.6" stroke-linejoin="round"/><text id="shipN" x="50" y="15.3" font-family="Baloo 2,Trebuchet MS,sans-serif" font-weight="800" font-size="9" fill="#14304a" text-anchor="middle">10</text></g><path d="M10 42h54l-9 13H19z" fill="#14304a" stroke="#14304a" stroke-width="2" stroke-linejoin="round"/><path d="M13 46.5h48" stroke="#ffc93c" stroke-width="2.6"/><circle cx="24" cy="50.5" r="1.8" fill="#fff"/><circle cx="31" cy="50.5" r="1.8" fill="#fff"/></svg></div><i class="wv w2"></i></div></div>
+    <div class="deckw"><div class="deck" id="deck"></div></div>
     <div class="swbtn">
       <button class="btn no" type="button" data-sw="0">Bukan aku</button>
       <button class="btn mid" type="button" data-sw="0.5" id="swMid">Biasa aja</button>
@@ -854,6 +870,7 @@ summary{min-height:48px}
 
 </div>
 <button class="more" id="more" type="button" hidden>Masih ada di bawah ↓</button>
+<div class="fxl" id="fxl" aria-hidden="true"></div>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="shT">
   <div class="shbox" id="shBox">
@@ -2057,6 +2074,7 @@ $("#shMore").addEventListener("click",()=>$("#shBody").scrollBy({top:Math.round(
 /* navigasi */
 const STG={b1:1,peta:1,b2:2,b3:3,b4k:4,bf:5};
 function show(id){
+  if(id!==curScr){ $("#toast").hidden=true; clearTimeout(toastT); }
   document.querySelectorAll(".screen").forEach(s=>s.hidden=s.id!==id); curScr=id; if(STG[id]) save();
   const st=STG[id]; $("#hud").hidden=!st;
   if(st){ $("#stages").innerHTML=[1,2,3,4,5].map(i=>`<i class="${i<st?"done":i===st?"on":""}"></i>`).join(""); $("#stages").setAttribute("aria-label",`Babak ${st} dari 5`); $("#hudName").textContent=S.name||"Penjelajah"; $("#hudAva").innerHTML=avaSvg(S.ava); $("#pts").textContent=S.pts+" poin"; }
@@ -2065,16 +2083,42 @@ function show(id){
 /* animasi kecil: pasang ulang kelas supaya animasinya main lagi */
 const noMotion=()=>matchMedia("(prefers-reduced-motion: reduce)").matches;
 function kick(el,c){ if(!el||noMotion()) return; el.classList.remove(c); void el.getBoundingClientRect(); el.classList.add(c); }
-function addPts(n){ S.pts+=n; $("#pts").textContent=S.pts+" poin"; kick($("#pts"),"bump"); kick($("#hudAva"),"hop"); }
-/* percikan emoji dari tengah kartu, sorakan tiap 10 kartu, konfeti saat hasil pertama kali terbuka */
-function burst(v){ if(noMotion()) return; const set=v===1?["💛","⭐","😍"]:v===.5?["🤔","💭"]:["💨","👋"], g=document.createElement("div"); g.className="burst";
-  for(let i=0;i<6;i++){ const e=document.createElement("span"), a=i/6*Math.PI*2+Math.random()*.7, r=70+Math.random()*55; e.textContent=set[i%set.length]; e.style.setProperty("--dx",Math.round(Math.cos(a)*r)+"px"); e.style.setProperty("--dy",Math.round(Math.sin(a)*r*.8-24)+"px"); e.style.animationDelay=i*25+"ms"; g.appendChild(e); }
-  const fx=$("#fx"); fx.querySelectorAll(".burst").forEach(x=>x.remove()); fx.appendChild(g); setTimeout(()=>g.remove(),1100); }
-const CHEER=["Kapalmu melaju!","Angin lagi bagus!","Pulau makin dekat!","Layar terkembang!","Terus berlayar!","Ombaknya bersahabat!"];
-function cheer(n){ const fx=$("#fx"); fx.querySelectorAll(".cheer").forEach(x=>x.remove()); const c=document.createElement("div"); c.className="cheer"; c.textContent=`${n} kartu! ${CHEER[(Math.round(n/10)-1)%CHEER.length]}`; fx.appendChild(c); setTimeout(()=>c.remove(),1900); }
-function confetti(){ if(noMotion()) return; const box=document.createElement("div"); box.className="confetti"; box.setAttribute("aria-hidden","true"); const col=["#ffc93c","#ef6a4c",...Object.values(ISL).map(i=>i.c)];
-  for(let i=0;i<70;i++){ const e=document.createElement("i"), w=7+Math.random()*7; e.style.cssText=`left:${(Math.random()*100).toFixed(1)}%;width:${w.toFixed(0)}px;height:${(w*(1+Math.random())).toFixed(0)}px;background:${col[i%col.length]};--d:${(1.9+Math.random()*1.3).toFixed(2)}s;--dl:${(Math.random()*.9).toFixed(2)}s;--dx:${Math.round(Math.random()*160-80)}px;--r:${Math.round(Math.random()*900-450)}deg`; if(i%5===0) e.style.borderRadius="50%"; box.appendChild(e); }
-  document.body.appendChild(box); setTimeout(()=>box.remove(),3400); }
+function addPts(n){ S.pts+=n; $("#pts").textContent=S.pts+" poin"; kick($("#pts"),"bump"); kick($("#hudAva"),"hop"); plusPts(n); }
+/* angka +poin naik dari lencana poin */
+function plusPts(n){ const p=$("#pts"); if(noMotion()||!p.offsetParent) return; p.querySelectorAll(".plus").forEach(x=>x.remove()); const e=document.createElement("span"); e.className="plus"; e.textContent="+"+n; p.appendChild(e);
+  e.animate([{transform:"translateY(0) scale(.6)",opacity:0},{transform:"translateY(-14px) scale(1.1)",opacity:1,offset:.25},{transform:"translateY(-30px) scale(1)",opacity:0}],{duration:900,easing:"ease-out"}).onfinish=()=>e.remove(); }
+/* ===== Partikel: bentuk SVG sendiri (bulat, kotak, kilau, pita), bukan emoji ===== */
+const SHP=[(c,z)=>`<svg width="${z}" height="${z}" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4.2" fill="${c}"/></svg>`,
+  (c,z)=>`<svg width="${z}" height="${z}" viewBox="0 0 10 10"><rect x="1.5" y="1.5" width="7" height="7" rx="2" fill="${c}"/></svg>`,
+  (c,z)=>`<svg width="${z*1.3}" height="${z*1.3}" viewBox="0 0 10 10"><path d="M5 0q1 4 5 5q-4 1-5 5q-1-4-5-5q4-1 5-5z" fill="${c}"/></svg>`,
+  (c,z)=>`<svg width="${z*1.8}" height="${z*.9}" viewBox="0 0 20 10"><path d="M1 6q3-5 6 0t6 0t6 0" stroke="${c}" stroke-width="2.6" fill="none" stroke-linecap="round"/></svg>`];
+const DROP=(c,z)=>`<svg width="${z}" height="${z*1.3}" viewBox="0 0 10 13"><path d="M5 0q5 6 5 8.5a5 5 0 0 1-10 0q0-2.5 5-8.5z" fill="${c}"/></svg>`;
+function piece(html){ const e=document.createElement("i"); e.innerHTML=html; $("#fxl").appendChild(e); return e; }
+const rnd=(a,b)=>a+Math.random()*(b-a);
+const cardIsl=id=>{ const k=isGate(id)?(GATE.find(g=>g[0]===id)||[])[1]:HOME[id]; return k&&ISL[k]?ISL[k].c:null; };
+/* Suka: kepingan berwarna pulau kartunya meletup dari kartu lalu terbang ke kapal (warna baru terlihat setelah menjawab, jadi tidak mengarahkan jawaban).
+   Biasa aja: riak lembut. Bukan aku: kartu dibuang ke laut, cipratan air. */
+function burst(v,id){ if(noMotion()) return; const cd=$("#topc"); if(!cd) return; const r=cd.getBoundingClientRect(), cx=r.left+r.width/2, cy=r.top+r.height/2;
+  if(v===1){ const ic=cardIsl(id), col=ic?[ic,ic,"#ffc93c",ic]:["#ffc93c","#ef6a4c","#ffc93c","#14304a"], sh=$("#ship").getBoundingClientRect(), tx=sh.left+sh.width*.42, ty=sh.top+sh.height*.55; let first=true;
+    for(let i=0;i<16;i++){ const a=-Math.PI/2+rnd(-1.6,1.6), d=rnd(60,130), mx=cx+r.width*.25+Math.cos(a)*d, my=cy+Math.sin(a)*d*.8, e=piece(SHP[i%4](col[i%4],rnd(12,18))), rt=rnd(-200,200);
+      const an=e.animate([{transform:`translate(${cx+r.width*.2}px,${cy}px) scale(.3) rotate(0)`,opacity:0},{transform:`translate(${mx}px,${my}px) scale(1.15) rotate(${rt/2}deg)`,opacity:1,offset:.32,easing:"cubic-bezier(.5,0,.75,0)"},{transform:`translate(${tx+rnd(-6,6)}px,${ty+rnd(-4,4)}px) scale(.35) rotate(${rt}deg)`,opacity:.9}],{duration:rnd(760,980),delay:i*22,easing:"cubic-bezier(.2,.8,.3,1)",fill:"forwards"});
+      an.onfinish=()=>{ e.remove(); if(first){ first=false; kick($("#ship"),"got"); } }; } }
+  else if(v===.5){ for(let i=0;i<2;i++){ const e=document.createElement("i"); e.className="rip"; e.style.setProperty("--c",i?"#cfdfe6":"#9fb3c3"); $("#fxl").appendChild(e);
+      e.animate([{transform:`translate(${cx}px,${cy}px) scale(.3)`,opacity:.9},{transform:`translate(${cx}px,${cy-20}px) scale(${2.6+i})`,opacity:0}],{duration:700,delay:i*120,easing:"ease-out",fill:"forwards"}).onfinish=()=>e.remove(); } }
+  else { const ox=r.left+r.width*.3, oy=r.top+r.height*.55;
+    for(let i=0;i<11;i++){ const e=piece(DROP(i%3?"#5eb0be":"#86c8d2",rnd(11,16))), dx=rnd(-110,70), up=rnd(50,120), rt=dx*.3;
+      e.animate([{transform:`translate(${ox}px,${oy}px) scale(.4) rotate(${rt}deg)`,opacity:0},{transform:`translate(${ox+dx*.5}px,${oy-up}px) scale(1) rotate(${rt}deg)`,opacity:1,offset:.4,easing:"cubic-bezier(.4,0,1,1)"},{transform:`translate(${ox+dx}px,${oy+rnd(30,80)}px) scale(.8) rotate(${rt*2}deg)`,opacity:0}],{duration:rnd(650,850),delay:i*18,easing:"cubic-bezier(0,.6,.4,1)",fill:"forwards"}).onfinish=()=>e.remove(); } } }
+/* tiap 10 kartu: bendera di tiang kapal menunjukkan angkanya, dan karaktermu bicara */
+const CHEER=["Kapal kita melaju!","Angin lagi bagus nih!","Pulaunya makin dekat!","Layar terkembang penuh!","Terus, jangan berhenti!","Ombaknya bersahabat!"];
+let mileT=0;
+function cheer(n){ const sh=$("#ship"), v=$("#voy"); $("#shipN").textContent=n; sh.classList.add("mile"); v.querySelectorAll(".vsay").forEach(x=>x.remove());
+  const b=document.createElement("div"); b.className="vsay"; b.textContent=`${n} kartu! ${CHEER[(Math.round(n/10)-1)%CHEER.length]}`; v.appendChild(b);
+  const W=v.clientWidth, sx=sh.offsetLeft, bw=b.offsetWidth, L=Math.max(0,Math.min(W-bw,sx+8)); b.style.left=L+"px"; b.style.setProperty("--tl",Math.max(10,Math.min(bw-22,sx+30-L))+"px");
+  clearTimeout(mileT); mileT=setTimeout(()=>{ sh.classList.remove("mile"); b.remove(); },2300); }
+/* konfeti: dua meriam dari sudut bawah, kepingan melambung lalu jatuh */
+function confetti(){ if(noMotion()) return; const W=innerWidth, H=innerHeight, col=["#ffc93c","#ef6a4c",...Object.values(ISL).map(i=>i.c)];
+  for(let i=0;i<84;i++){ const left=i%2===0, x0=left?-10:W+10, y0=H*.82, dx=(left?1:-1)*rnd(W*.15,W*.75), peak=rnd(H*.35,H*.8), e=piece(SHP[i%4](col[i%col.length],rnd(10,16))), rt=rnd(-720,720);
+    e.animate([{transform:`translate(${x0}px,${y0}px) rotate(0)`,opacity:1},{transform:`translate(${x0+dx}px,${y0-peak}px) rotate(${rt/3}deg)`,offset:.3,easing:"cubic-bezier(.45,0,.9,.6)"},{transform:`translate(${x0+dx*1.25+rnd(-40,40)}px,${H+40}px) rotate(${rt}deg)`,opacity:1}],{duration:rnd(2300,3300),delay:rnd(0,260),easing:"cubic-bezier(.15,.75,.35,1)",fill:"forwards"}).onfinish=()=>e.remove(); } }
 
 /* intro */
 drawMap($("#introMap"));
@@ -2186,7 +2230,7 @@ const part2N=()=>{ const b0=DECK.findIndex(x=>x[2]); return (b0<0?DECK.length:b0
 let voyCi=-1, voyP=0;
 function sail(){ const A=STAGE_A.length, b0=DECK.findIndex(x=>x[2]); let p;
   if(ci<A) p=.45*ci/A; else if(b0>=0&&ci>=b0) p=.94+.06*(ci-b0)/Math.max(1,DECK.length-b0); else p=.45+.49*Math.min(1,(ci-A)/Math.max(1,part2N()));
-  if(ci>voyCi) p=Math.max(p,voyP); voyCi=ci; voyP=p=Math.max(0,Math.min(1,p)); $("#ship").style.setProperty("--p",p.toFixed(3)); }
+  if(ci>voyCi) p=Math.max(p,voyP); voyCi=ci; voyP=p=Math.max(0,Math.min(1,p)); $("#ship").style.setProperty("--p",p.toFixed(3)); $("#route").style.setProperty("--p",p.toFixed(3)); const g=$("#shipAva"); if(g.dataset.a!==String(S.ava)){ g.innerHTML=avaSvg(S.ava); g.dataset.a=S.ava; } }
 function startSwipe(){ ci=0; voyCi=-1; voyP=0; syncBonus(); drawDeck(); }
 function drawDeck(){
   const d=$("#deck"); d.innerHTML="";
@@ -2204,7 +2248,7 @@ function drawDeck(){
 }
 function answer(v){
   if(ci>=DECK.length) return;
-  S.sw[DECK[ci][0]]=v; S.times.push(Date.now()-t0); addPts(10); burst(v);
+  S.sw[DECK[ci][0]]=v; S.times.push(Date.now()-t0); const cid=DECK[ci][0]; addPts(10); burst(v,cid);
   const c=$("#topc"); if(c){ c.classList.remove("in"); c.style.transition="transform .22s,opacity .22s"; c.style.transform=`translate(${v===1?420:v===0?-420:0}px,${v===.5?-260:30}px) rotate(${v===1?18:v===0?-18:0}deg)`; c.style.opacity="0"; }
   ci++; syncBonus(); { const day=ci<DECK.length&&DECK[ci][0].startsWith("k_")&&!DECK[ci-1][0].startsWith("k_"); if(ci%10===0&&ci<DECK.length&&ci!==STAGE_A.length&&!day) cheer(ci); } sail(); if(ci===STAGE_A.length) toast("Bagian 2: kartu berikutnya dipilih dari jawabanmu tadi, jadi tiap orang dapat kartu yang berbeda."); if(ci<DECK.length&&DECK[ci][0].startsWith("k_")&&!DECK[ci-1][0].startsWith("k_")) toast("Sekarang kartu keseharian: kegiatan yang benar-benar dikerjakan tiap hari. Jawab jujur, mau atau tidak.");
   if(ci===BASEN&&!S.bonusIds){ S.bonusIds=bonusCards(dims(S.sw)); syncBonus(); } save();

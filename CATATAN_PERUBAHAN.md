@@ -9,6 +9,17 @@ Hanya tampilan di `index.html`. Pertanyaan, hitungan nilai, penyeimbang, dan isi
 - Konfeti 70 keping saat permainan selesai (`finishGame`), tidak saat membuka hasil lama.
 - "Kurangi gerakan": semua animasi mati, percikan dan konfeti tidak dibuat, kapal tetap tampil dan diam. Semua hiasan `aria-hidden`.
 
+### Revisi: tanpa emoji
+Semua animasi emoji diganti gambar SVG yang mengikuti gaya peta pulau:
+- **Strip pelayaran:** langit, matahari, awan, dua lapis ombak, garis rute putus-putus yang terisi sesuai jarak tempuh. Kapal membawa **karakter pilihan pemain**. Tujuannya pulau misteri berbendera "?" (tidak berwarna, supaya tidak membocorkan hasil).
+- **Suka:** 16 kepingan (bulat, kotak, kilau, pita) meletup dari kartu lalu terbang masuk ke kapal; kapal melonjak saat kepingan pertama tiba. Warna kepingan = warna pulau kartu itu, baru terlihat setelah menjawab. Kartu gaya umum memakai kuning dan oranye.
+- **Biasa aja / Kadang:** dua riak abu-abu melebar dari tengah kartu.
+- **Bukan aku:** cipratan tetesan air, seperti kartu dibuang ke laut.
+- **Tiap 10 kartu:** bendera di tiang kapal naik membawa angkanya, dan karaktermu bicara lewat balon kata.
+- **Poin:** label "+10" naik dari lencana poin.
+- **Konfeti:** dua meriam dari sudut bawah, kepingan melambung lalu jatuh, warna pulau.
+- Pesan singkat (toast) dari layar sebelumnya ditutup saat pindah layar.
+
 ## Hasil: pemilih jurusan
 - Satu halaman "Kenalan dengan jurusanmu" dengan kotak pemilih (`#jpick`, `drawJpick`, `updJpick`, `pickJur`): nomor, nama pendek, persen minat, "x/y dibuka". Incaran di luar 3 besar jadi kotak bertanda ★ "incaranmu" di baris kedua.
 - Halaman hasil jadi 10 (11 kalau ada incaran). Tombol "Buka kotak", tautan "Lewati kotak", dan layar jeda antar jurusan dihapus. Tombol bawah selalu "Lanjut".
