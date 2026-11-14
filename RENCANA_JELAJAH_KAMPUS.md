@@ -2,7 +2,7 @@
 
 *Lanjutan Jelajah Jurusan: jalani jurusanmu dari daftar kuliah sampai hari pertama kerja.*
 
-Tanggal: 14 November 2026 (revisi 2, menggantikan rencana "Sehari Kuliah, Sehari Kerja")
+Tanggal: 14 November 2026 (revisi 3: ditambah kerangka dan dasar penelitian)
 Status: **menunggu persetujuan**. Mockup 4 layar sudah ada (Psikologi, semester 3), belum ada kode di aplikasi.
 Branch kerja: `sehari-kuliah-kerja`.
 Nama kerja: **Jelajah Kampus**. Bisa diganti.
@@ -15,6 +15,74 @@ Nama kerja: **Jelajah Kampus**. Bisa diganti.
 2. Hampir semua aksinya **geser kartu**: tiap pilihan menggerakkan 4 meteran, dan tidak ada pilihan yang benar, hanya tarik-ulur.
 3. Tiap jurusan punya **satu mini-game khas** yang membuat pemain merasakan jenis berpikir di jurusan itu.
 4. Di akhir ada **ending** sesuai jalan yang dipilih, **kartu momen** untuk dikoleksi, dan **rapor betah** per tahap kuliah.
+
+---
+
+## 0. Kerangka dan dasar penelitian
+
+Game ini punya tiga lapis. Tiap fitur harus bisa ditunjuk masuk lapis mana dan berdasar riset apa. Fitur yang tidak masuk lapis mana pun tidak dibuat.
+
+```
+   ┌─────────────── DAMPAK ───────────────┐
+   │ Lebih paham isi kuliah · lebih yakin │   ← diukur sebelum dan sesudah main
+   │ dan berani mencari tahu · tahu       │
+   │ langkah berikutnya                   │
+   └──────────────────▲───────────────────┘
+   ┌─────────────── MAIN ─────────────────┐
+   │ Bebas memilih · terasa mampu ·       │   ← supaya mau main sampai habis
+   │ terhubung dengan tokoh dan teman     │      dan main lagi
+   └──────────────────▲───────────────────┘
+   ┌─────────────── ISI ──────────────────┐
+   │ Kuliah apa adanya, enak dan beratnya,│   ← supaya yang dirasakan benar
+   │ dari kurikulum resmi dan mahasiswa   │
+   └──────────────────────────────────────┘
+```
+
+### Masalah yang dijawab
+
+- Angka "87% mahasiswa Indonesia merasa salah jurusan" (Indonesia Career Center Network, 2017) sering dikutip media. Laporan aslinya belum kami temukan, jadi angka ini tidak dipakai di dalam game.
+- Penelitian di satu prodi Teknik Informatika: hampir 50% mahasiswanya merasa tidak cocok, dan banyak yang putus asa dengan kuliahnya.
+- 44,7% mahasiswa mengalami *academic culture shock* terhadap tuntutan kuliah, terutama di aspek akademik, sosial, dan psikologis (dikutip dalam tugas akhir UMN).
+- Yang paling sering kurang: gambaran nyata isi kuliah sebelum mendaftar. Itu yang dikejar game ini.
+
+### Dasar penelitian dan fitur yang lahir darinya
+
+| Dasar | Temuan intinya | Jadi fitur apa di game |
+|---|---|---|
+| **Pratinjau realistis** (*realistic job preview*; Premack & Wanous 1985, Phillips 1998, Earnest dkk. 2011) | Informasi yang jujur, sisi enak **dan** beratnya, membuat peran lebih jelas dan menurunkan harapan yang berlebihan. Isinya harus berdasar pemetaan pekerjaan yang teliti. | **Aturan sisi berat:** tiap bab minimal 2 kartu tentang bagian kuliah yang memang berat (revisi, hafalan, praktikum gagal). Semua kartu kuliah diambil dari kurikulum resmi dan dicek mahasiswa. |
+| **Lima bahan penting intervensi karier** (Brown & Ryan Krane 2000; direplikasi sebagian oleh Whiston dkk. 2017) | Yang terbukti membantu: latihan tertulis, umpan balik pribadi, informasi dunia kerja, contoh dari yang lebih berpengalaman, dan dukungan orang sekitar. Tiga bahan atau lebih jauh lebih efektif. | Kelimanya dipakai: **Catatan perjalanan** (refleksi satu ketukan per bab), **rapor pribadi**, kartu **"Ternyata"** dan bab kerja, **"Kata kakak tingkat"** dari wawancara mahasiswa sungguhan, dan **"Ajak ngobrol"** untuk orang tua atau guru BK. |
+| **Teori Kognitif Sosial Karier dan meta-analisis eksplorasi karier** (Lent dkk.; Kleine dkk. 2021) | Rasa mampu mencari tahu berhubungan kuat dengan perilaku eksplorasi (r = 0,52). Pengaruhnya lewat **tujuan eksplorasi** yang konkret (r = 0,42). | **Misi dunia nyata** di akhir tiap bab: satu langkah kecil yang bisa dilakukan minggu ini, misalnya membuka silabus prodi atau bertanya ke satu mahasiswa. Pemain bisa mencentangnya saat kembali. |
+| **Kesulitan memilih karier** (Gati, CDDQ; sudah dipakai di Jelajah Jurusan) | Orang ragu karena kurang siap, kurang informasi, atau informasinya bertentangan. Penanganannya berbeda untuk tiap jenis. | **Rapor menyebut jenis ragunya:** misalnya "masih kurang informasi soal kerjanya" atau "suka kuliahnya, tapi bertentangan dengan keinginan orang tua", lalu memberi langkah yang cocok untuk jenis itu. |
+| **Teori Penentuan Diri dalam game** (Ryan, Rigby & Przybylski 2006) | Rasa bebas memilih, rasa mampu, dan rasa terhubung masing-masing memprediksi rasa senang dan keinginan main lagi. Kontrol yang intuitif ikut menentukan rasa mampu. | **Bebas:** benang cerita, pilih peminatan, pilih jurusan lain. **Mampu:** mini-game yang bisa dikuasai dalam 2–3 kali main, kartu yang responsif. **Terhubung:** tokoh yang ingat pilihanmu, membandingkan hasil dengan teman. |
+| **Meta-analisis serious game** (Wouters dkk. 2013) | Game lebih efektif untuk belajar dan mengingat, tapi tidak otomatis lebih memotivasi. Efeknya lebih besar kalau dipadu cara lain, dimainkan beberapa sesi, dan berkelompok. | **Bab tersimpan** untuk beberapa sesi, **mode kelas** untuk guru BK (main bersama lalu diskusi dengan lembar pertanyaan), dan ajakan diskusi di rapor. |
+| **Culture shock tahun pertama** | Kaget paling besar di aspek akademik. | **Bab 1 fokus adaptasi akademik:** SKS dan KRS, belajar mandiri, dosen yang berbeda dari guru, tugas tanpa diingatkan. |
+| **Children's Code, standar 13** (ICO Inggris) | Jangan pakai trik desain untuk mendorong anak memberi data yang tidak perlu. Dorong kebiasaan yang menyehatkan, sediakan jeda dan simpan. | Tanpa hitungan hari beruntun, tanpa notifikasi, data seminimal mungkin dan tanpa nama, jeda dan simpan di tiap bab. |
+
+### Fitur tambahan dari riset (belum ada di mockup)
+
+| Fitur | Bentuk | Di mana | Batas tulisan |
+|---|---|---|---|
+| **Catatan perjalanan** | Satu ketukan: "Yang paling bikin aku ragu di bab ini…" dengan 4 pilihan, plus "lainnya" | Akhir tiap bab, setelah "Betah di sini?" | 4 pilihan, masing-masing ≤ 6 kata |
+| **Kata kakak tingkat** | Satu kalimat tips dari mahasiswa sungguhan, diberi label "dari wawancara, nama disamarkan" | Satu per bab | ≤ 20 kata |
+| **Misi dunia nyata** | Satu langkah kecil minggu ini, bisa dicentang | Akhir tiap bab dan rapor | ≤ 12 kata |
+| **Ajak ngobrol** | 3 pertanyaan pembuka untuk orang tua atau guru BK, plus tombol bagikan | Rapor | 3 × ≤ 15 kata |
+| **Jenis ragumu** | Satu kalimat: jenis ragu dan langkah yang cocok | Rapor | ≤ 25 kata |
+| **Mode kelas** | Kode kelas sederhana, ringkasan kelas tanpa nama, lembar diskusi untuk guru | Halaman guru terpisah | Tahap 2, bukan tahap 1 |
+
+### Cara membuktikan game ini membantu
+
+1. **Sebelum dan sesudah main**, tiga pertanyaan geser 1–5:
+   - "Seberapa paham kamu isi kuliah jurusan ini?"
+   - "Seberapa yakin kamu dengan pilihan jurusanmu?"
+   - "Seberapa tahu kamu langkah berikutnya?"
+   Dua pertanyaan pertama mengikuti hasil pratinjau realistis (peran lebih jelas) dan rasa mampu memutuskan karier. Yang ketiga mengikuti tujuan eksplorasi.
+2. **Betah per bab** dan **jenis ragu**: dibandingkan antar-jurusan.
+3. **Misi dunia nyata yang dicentang** saat pemain kembali, sebagai tanda awal eksplorasi sungguhan.
+4. **Isi dicek mahasiswa:** tiap jurusan minimal 2 mahasiswa aktif menilai "memang begini" atau "tidak begini" per bab.
+
+**Harapan yang wajar:** dalam meta-analisis, peserta intervensi karier rata-rata hanya sekitar sepertiga simpangan baku di atas yang tidak ikut. Artinya membantu, tapi tidak menyulap. Game ini **bukan tes psikologi dan bukan pengganti guru BK atau psikolog**, dan itu ditulis jelas di game.
+
+**Uji dengan anak SMA** butuh izin sekolah dan orang tua. Datanya tanpa nama, dan tidak ada pertanyaan tentang kesehatan mental.
 
 ---
 
@@ -97,7 +165,12 @@ Bab-bab tampil sebagai jalur kapal antar-pulau kecil, melanjutkan tema Jelajah J
 | 5. Semester 8 | Skripsi: revisi, dosen pembimbing, sidang | Mini-game versi lebih sulit |
 | 6. Hari pertama kerja | Pilih satu dari 3 pekerjaan sesuai peminatan, lalu satu hari kerja | Keseharian dari data `KERJA` |
 
-Di akhir tiap bab: satu ketukan **"Betah di sini?"** dengan 3 wajah karakter (senang, biasa, cemberut). Ini satu-satunya "pertanyaan" di game, dan inilah data utamanya.
+Di akhir tiap bab, urutannya selalu sama dan singkat (sekitar 20 detik):
+1. **"Betah di sini?"** dengan 3 wajah karakter: senang, biasa, cemberut. Ini data utamanya.
+2. **Catatan perjalanan:** satu ketukan "yang paling bikin aku ragu".
+3. **Kata kakak tingkat:** satu kalimat.
+4. **Misi dunia nyata:** satu langkah kecil minggu ini.
+5. **Berlanjut ke bab berikutnya:** benang cerita yang terbawa.
 
 ---
 
@@ -155,6 +228,9 @@ Pengguna utamanya anak sekolah, jadi "nagih" yang dipakai hanya yang sehat:
 - Kartu **ending** beserta 3 momen yang paling menentukan.
 - Hasil **mini-game** ("Seru?") dibandingkan dengan nilainya.
 - **Bandingkan dua jurusan** berdampingan kalau sudah main dua.
+- **Jenis ragumu** dan langkah yang cocok, dari catatan perjalanan tiap bab.
+- **Ajak ngobrol:** 3 pertanyaan pembuka untuk orang tua atau guru BK.
+- **Daftar misi dunia nyata** yang bisa dicentang.
 - Kembali ke Jelajah Jurusan: kotak jurusan itu mendapat catatan "Sudah dijalani: betah di kuliah, ragu di kerja".
 - **Nilai minat 28 jurusan tidak berubah.**
 
@@ -188,10 +264,9 @@ Pengguna utamanya anak sekolah, jadi "nagih" yang dipakai hanya yang sehat:
 | 2 | Kedokteran, Informatika, Hukum, Manajemen | Jurusan dengan peminat terbanyak |
 | 3 | 22 jurusan sisanya | Mini-game sebagian dipakai bersama antar-jurusan yang mirip |
 
-Uji tahap 1 dengan **paling sedikit 5 anak SMA dan 2 mahasiswa** dari tiap jurusan. Ukurannya:
-- berapa yang main sampai ending tanpa disuruh,
-- berapa yang mencoba jurusan kedua,
-- apakah mahasiswanya bilang "iya, memang begini".
+Uji tahap 1 dilakukan dua putaran:
+- **Uji seru:** 5 sampai 10 anak SMA dan 2 mahasiswa per jurusan. Ukurannya: berapa yang main sampai ending tanpa disuruh, berapa yang mencoba jurusan kedua, dan apakah mahasiswanya bilang "iya, memang begini".
+- **Uji dampak:** satu kelas (sekitar 30 anak) dengan izin sekolah dan orang tua. Ukurannya tiga pertanyaan sebelum dan sesudah main (lihat bagian 0).
 
 ---
 
@@ -226,3 +301,23 @@ Uji tahap 1 dengan **paling sedikit 5 anak SMA dan 2 mahasiswa** dari tiap jurus
 2. **Tahap 1:** setuju mulai dengan 2 jurusan (Teknik Biomedis dan Psikologi) saja?
 3. **Meteran "Hati":** setuju ada meteran perasaan? Kalau habis, adegannya tenang dan mengajak bicara ke orang terdekat, bukan hukuman.
 4. **Data:** setuju tahap 1 simpan di HP dulu, pengiriman ke Google Sheets menyusul?
+5. **Kata kakak tingkat:** bisa bantu mencarikan 2 mahasiswa Psikologi dan 2 mahasiswa Teknik Biomedis untuk wawancara singkat dan mengecek isi? Tanpa mereka, bagian ini dikosongkan, karena tidak boleh dikarang.
+6. **Uji dampak:** ada sekolah yang bisa diajak, misalnya sekolah iparmu?
+
+---
+
+## Sumber
+
+- Premack, S. L., & Wanous, J. P. (1985). A meta-analysis of realistic job preview experiments. *Journal of Applied Psychology, 70*, 706–719.
+- Phillips, J. M. (1998). Effects of realistic job previews on multiple organizational outcomes: A meta-analysis. *Academy of Management Journal, 41*(6), 673–690.
+- Earnest, D. R., Allen, D. G., & Landis, R. S. (2011). Mechanisms linking realistic job previews with turnover: A meta-analytic path analysis. *Personnel Psychology, 64*, 865–897.
+- Brown, S. D., & Ryan Krane, N. E. (2000). Four (or five) sessions and a cloud of dust: Old assumptions and new observations about career counseling. Dalam *Handbook of Counseling Psychology* (edisi ke-3). Wiley.
+- Whiston, S. C., Li, Y., Mitts, N. G., & Wright, L. (2017). Effectiveness of career choice interventions: A meta-analytic replication and extension. *Journal of Vocational Behavior, 100*, 175–184.
+- Kleine, A.-K., Schmitt, A., & Wisse, B. (2021). Students' career exploration: A meta-analysis. *Journal of Vocational Behavior*.
+- Gati, I., Krausz, M., & Osipow, S. H. (1996). A taxonomy of difficulties in career decision making. *Journal of Counseling Psychology, 43*(4), 510–526.
+- Ryan, R. M., Rigby, C. S., & Przybylski, A. (2006). The motivational pull of video games: A self-determination theory approach. *Motivation and Emotion, 30*, 347–363.
+- Wouters, P., van Nimwegen, C., van Oostendorp, H., & van der Spek, E. D. (2013). A meta-analysis of the cognitive and motivational effects of serious games. *Journal of Educational Psychology, 105*(2), 249–265.
+- Information Commissioner's Office (UK). *Age appropriate design: a code of practice for online services*, standar 13 "Nudge techniques".
+- Arifin, I. Pengaruh salah pilih jurusan terhadap rasa putus asa mahasiswa Teknik Informatika. *Nathiqiyyah*.
+- Tugas akhir Universitas Multimedia Nusantara, perancangan board game simulasi adaptasi perkuliahan (mengutip Rahmadani & Mukti, 2020, soal *academic culture shock*).
+- Pembanding game sejenis: *Get a Life* (K20 Center, University of Oklahoma).
