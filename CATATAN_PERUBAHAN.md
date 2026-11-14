@@ -1,3 +1,23 @@
+# Catatan Perubahan — 14 Nov 2026 (kartu bercabang)
+
+## Alur kartu baru
+- **Bagian 1, sama untuk semua (30 kartu):** 24 kartu situasi + 6 **kartu pulau** baru (`GATE`: `g_kes`, `g_man`, `g_tek`, `g_tnk`, `g_bis`, `g_kre`), diselipkan tiap 4 kartu. Judulnya "Dunia ini menarik buatmu?".
+- **Pemilihan pulau (`pickIsl`):** nilai pulau = 0,5 × jawaban kartu pulau + kecocokan gaya jurusan terbaiknya. Diambil 2 pulau teratas; pulau ketiga ikut kalau kartunya dijawab "Suka" atau nilainya mepet (selisih ≤ 0,05).
+- **Bagian 2, khusus tiap orang (`deckFor`):** kartu topik (bobot ≥ 0,5) dan kartu keseharian dari jurusan di pulau terpilih, ditambah **2 kartu kejutan** dari pulau lain. Kartu kejutan yang dijawab "Suka" membuka kartu pulau itu.
+- **Kartu yang tidak muncul** tidak dianggap netral begitu saja: nilainya ditaksir dari kartu pulaunya (`swv`: Bukan aku 0,25; Biasa aja 0,5; Suka 0,75).
+- Dek disusun ulang dari jawaban setiap kali berubah, jadi "Batalkan kartu terakhir" dan "Lanjutkan" tetap aman melewati batas bagian.
+- Penghitung: "Bagian 1 · kartu x dari 30", lalu "Bagian 2, khusus buatmu · kartu x dari n".
+
+## Keadilan (dihitung ulang)
+- `OFF` dan `GN` dihitung ulang dengan `alat/seimbangkan.js`, yang sekarang memainkan pemain acak lewat dek bercabang.
+- `node alat/uji-alur.js` (20.000 pemain acak, alur lengkap): top1 3,7–5,9% (sebelumnya 3,6–5,9%), top3 10,8–17,2% (sebelumnya 11,5–16,6%).
+- Pemain ideal tiap jurusan: 22 dari 22 jadi nomor 1, juga saat 1 kartu utama salah geser, saat kartu pulaunya sendiri dijawab "Bukan aku", dan saat dijawab "Biasa aja".
+- Jumlah kartu: pemain ideal 45–58, pemain acak 45–69 (tengah 56). Sebelumnya semua orang 68.
+
+## Data
+- `ver` jadi `2026-11-14-bercabang`. Jawaban tiap orang sekarang memuat kartu yang berbeda-beda (kartu yang tidak muncul tidak ada di `ans`), dan nilainya memakai penyeimbang baru. Pisahkan dari versi sebelumnya saat menganalisis.
+- Hasil lama di arsip browser tetap terbuka, tetapi persentasenya bisa bergeser sedikit karena penyeimbang baru.
+
 # Catatan Perubahan — 14 Nov 2026 (kartu bentuk minat dipertajam)
 
 ## 1. 24 kartu bentuk minat jadi situasi nyata

@@ -1357,7 +1357,7 @@ const DINASQ = [["asn","Mau jadi pegawai negeri dengan ikatan dinas","🏛️"],
 const byId = id => M.find(m => m.id === id) || LAIN.find(m => m.id === id);
 function dims(sw){ const u={}; DK.forEach(d=>{ const c=CARDS.filter(x=>x[1]===d); u[d]=c.reduce((a,x)=>a+(sw[x[0]]??0.5),0)/c.length; }); return u; }
 function dimFit(m,u){ let a=0,b=0; for(const d in m.p){ a+=m.p[d]*u[d]; b+=m.p[d]; } return a/b; }
-function topicFit(id,sw){ let a=0,b=0; TOPIC.forEach(t=>{ const w=t[2][id]; if(w){ a+=w*(sw[t[0]]??.5); b+=w; } }); return b?a/b:.5; }
+function topicFit(id,sw){ let a=0,b=0; TOPIC.forEach(t=>{ const w=t[2][id]; if(w){ a+=w*swv(sw,t[0]); b+=w; } }); return b?a/b:.5; }
 let SWREF={};
 // Penyetaraan: jurusan dengan sedikit kartu punya nilai yang lebih mudah melonjak. Sebaran tiap jurusan disamakan supaya adil.
 const SD={}; let SDREF=0;
@@ -1365,9 +1365,9 @@ function initSD(){ const v=1/6; const arr=M.map(m=>{ let sp=0,q=0; for(const d i
     let sw=0,t=0; TOPIC.forEach(x=>{ if(x[2][m.id]) sw+=x[2][m.id]; }); TOPIC.forEach(x=>{ if(x[2][m.id]) t+=Math.pow(x[2][m.id]/sw,2)*v; });
     return SD[m.id]=Math.sqrt(.25*q+.25*t); }).sort((a,b)=>a-b); SDREF=arr[Math.floor(arr.length/2)]; }
 /* Penyeimbang: angka kecil per jurusan supaya pada pemain acak tiap jurusan punya peluang yang sama jadi nomor 1. Dicari lewat simulasi (lihat README, "Uji keadilan"). Ubah isi kartu atau profil jurusan = hitung ulang. */
-const OFF={kedokteran:-.0011,keperawatan:-.0178,farmasi:-.0082,kesmas:.0004,psikologi:.0001,hukum:.0034,ilkom:.0075,pendidikan:.0004,informatika:.0001,sidata:-.0016,biomedis:-.0029,industri:.012,sipil:.0022,manajemen:.0023,akuntansi:-.0162,dkv:.008,elektro:.0004,arsitektur:.002,agro:.0022,sospol:.0021,sastra:.0078,wisata:-.0032};
+const OFF={kedokteran:-0.009,keperawatan:-0.001,farmasi:0.0019,kesmas:0.0061,psikologi:0.0002,hukum:0.0002,ilkom:-0.0072,pendidikan:0.005,informatika:-0.0062,sidata:-0.0027,biomedis:0.0066,industri:0.0081,sipil:0.005,manajemen:-0.0091,akuntansi:-0.009,dkv:-0.0063,elektro:0.0078,arsitektur:0.004,agro:0.0131,sospol:-0.0017,sastra:-0.0068,wisata:0.001};
 /* Pengatur sebaran per jurusan (dibatasi 0,75 sampai 1,35), dicari bersama OFF supaya peluang masuk 3 teratas juga rata */
-const GN={kedokteran:1.077,keperawatan:1.112,farmasi:1.056,kesmas:1.015,psikologi:.97,hukum:.964,ilkom:.931,pendidikan:.983,informatika:1.005,sidata:1.081,biomedis:1.058,industri:.985,sipil:.993,manajemen:1.005,akuntansi:1.093,dkv:.92,elektro:1.018,arsitektur:.943,agro:.948,sospol:.983,sastra:.926,wisata:.982};
+const GN={kedokteran:1.189,keperawatan:1.024,farmasi:1.014,kesmas:0.997,psikologi:0.981,hukum:1.028,ilkom:1.051,pendidikan:0.999,informatika:1.035,sidata:1.062,biomedis:1.047,industri:1.003,sipil:1.03,manajemen:1.065,akuntansi:1.003,dkv:0.92,elektro:1.005,arsitektur:0.891,agro:0.893,sospol:1.04,sastra:0.953,wisata:0.874};
 function base(m,u){ if(!SDREF) initSD(); const raw=.5*dimFit(m,u)+.5*topicFit(m.id,SWREF); return Math.max(0,Math.min(1,.5+(raw-.5)/SD[m.id]*SDREF*(GN[m.id]||1)+(OFF[m.id]||0))); }
 /* ===== Bidang di luar 22 jurusan =====
    Alat ini hanya memuat 22 kelompok jurusan. Bagian ini mengecek apakah minat pemain mungkin lebih dekat ke bidang lain.
@@ -1598,6 +1598,34 @@ TOPIC.push(
  ["t22","Mengurus tamu, perjalanan, masakan, atau acara supaya orang senang",{wisata:1,manajemen:.3}]
 );
 [["t5","sospol",.5],["t9","sastra",.3],["t1","elektro",.4],["t8","elektro",.5],["t8","arsitektur",.3],["t7","wisata",.3],["t11","agro",.3]].forEach(([t,id,w])=>{ TOPIC.find(x=>x[0]===t)[2][id]=w; });
+/* ===== Percabangan kartu =====
+   Bagian awal sama untuk semua orang: 24 kartu situasi + 6 kartu pulau (GATE). Dari situ dipilih 2 sampai 3 pulau,
+   lalu bagian kedua hanya berisi kartu topik dan keseharian dari pulau itu, ditambah 2 kartu kejutan dari pulau lain.
+   Kartu kejutan yang dijawab "Suka" membuka pulaunya. Kartu yang tidak muncul diberi nilai dari jawaban kartu pulaunya (swv). */
+const GATE=[["g_kes","kes","Rumah sakit, obat, dan cara kerja tubuh manusia"],["g_man","man","Urusan orang dan masyarakat: mengajar, membela, memberitakan, memahami orang"],["g_tek","tek","Komputer, aplikasi, dan data"],
+ ["g_tnk","tnk","Mesin, bangunan, listrik, pabrik, atau kebun: kerja yang hasilnya bisa dipegang"],["g_bis","bis","Uang, jualan, melayani pelanggan, dan cara usaha bisa untung"],["g_kre","kre","Desain, gambar, tulisan, dan karya yang dinikmati orang"]];
+const GATE_W=.6;
+GATE.forEach(([id,isl,tx])=>{ const w={}; M.filter(m=>m.isl===isl).forEach(m=>w[m.id]=GATE_W); TOPIC.push([id,tx,w]); });
+const GATEOF=Object.fromEntries(GATE.map(g=>[g[1],g[0]])), MISL=Object.fromEntries(M.map(m=>[m.id,m.isl]));
+const isGate=id=>id.startsWith("g_"), isDay=id=>id.startsWith("k_");
+/* pulau asal tiap kartu topik = pulau jurusan dengan bobot terbesar */
+const HOME={}; TOPIC.forEach(t=>{ const e=Object.entries(t[2]).filter(x=>MISL[x[0]]).sort((a,b)=>b[1]-a[1])[0]; if(e) HOME[t[0]]=MISL[e[0]]; });
+/* nilai kartu: jawaban kalau ada; kalau kartunya tidak muncul, ditaksir dari kartu pulaunya (Bukan aku .25, Biasa aja .5, Suka .75) */
+function swv(sw,id){ const v=sw[id]; if(v!=null) return v; const g=sw[GATEOF[HOME[id]]]; return g==null?.5:.25+.5*g; }
+const STAGE_A=(()=>{ const o=[]; CARDS.forEach((c,i)=>{ o.push(c[0]); if(i%4===3) o.push(GATE[(i-3)/4][0]); }); return o; })();
+const PICK_G=.5, PICK_NEAR=.05;
+function pickIsl(sw){ const u=dims(sw);
+  const sc=GATE.map(g=>({k:g[1],g:sw[g[0]]??.5,d:Math.max(...M.filter(m=>m.isl===g[1]).map(m=>dimFit(m,u)))})).map(x=>({...x,s:PICK_G*x.g+x.d})).sort((a,b)=>b.s-a.s);
+  const n=sc[2].g===1||sc[2].s>=sc[1].s-PICK_NEAR?3:2; return {on:sc.slice(0,n).map(x=>x.k), off:sc.slice(n).map(x=>x.k), u}; }
+function deckFor(sw){ const out=[...STAGE_A]; if(STAGE_A.some(id=>sw[id]==null)) return out;
+  const p=pickIsl(sw), tc=I=>TOPIC.filter(t=>!isGate(t[0])&&!isDay(t[0])&&Object.keys(t[2]).some(id=>t[2][id]>=.5&&I.includes(MISL[id]))).map(t=>t[0]), kc=I=>M.filter(m=>I.includes(m.isl)).map(m=>"k_"+m.id);
+  const bt=tc(p.on); out.push(...bt);
+  const kej=[]; p.off.slice(0,2).forEach(k=>{ const ms=M.filter(m=>m.isl===k).sort((a,b)=>dimFit(b,p.u)-dimFit(a,p.u));
+    for(const m of ms){ const t=TOPIC.find(t=>t[2][m.id]===1&&!isGate(t[0])&&!isDay(t[0])&&!out.includes(t[0])); if(t){ kej.push({id:t[0],k}); out.push(t[0]); break; } } });
+  if(out.some(id=>sw[id]==null)) return out;
+  const open=kej.filter(x=>sw[x.id]===1).map(x=>x.k);
+  tc(open).forEach(id=>{ if(!out.includes(id)) out.push(id); });
+  out.push(...kc(p.on),...kc(open)); return out; }
 Object.assign(MDIM,{elektro:"IRC",arsitektur:"SAI",agro:"RIE",sospol:"ISE",sastra:"AIS",wisata:"SCE"});
 Object.assign(RINT,{
  elektro:"Alat yang kamu pasang tetap tidak menyala. Kamu harus mengecek sambungan satu per satu dari awal.",
@@ -1708,7 +1736,7 @@ function scoreAll(S){
     return {id:m.id, s, pc:Math.min(95,Math.round(s*100))}; }).sort((a,b)=>b.s-a.s);
 }
 function consistency(S){
-  const t=S.times||[], vals=[...CARDS,...TOPIC].map(c=>S.sw[c[0]]);
+  const t=S.times||[], vals=[...CARDS,...TOPIC].map(c=>S.sw[c[0]]).filter(v=>v!=null);
   let diff=0; DK.forEach(d=>{ const k=d.toLowerCase(); diff+=Math.abs((S.sw[k+"1"]??.5)-(S.sw[k+"2"]??.5)); });
   const cons=1-diff/DK.length;
   const flat=vals.every(v=>v===vals[0]);
@@ -1736,18 +1764,18 @@ function parts(S,m){
   if(S.sang&&S.sang[m.id]!=null) out.push(["Sanggup sisi beratnya",S.sang[m.id]]);
   return {list:out, hit:ef.hit};
 }
-function unread(S,sc){ const v=[...CARDS,...TOPIC].map(c=>S.sw[c[0]]??.5); return v.every(x=>x===v[0]) || (sc[0].s-sc[sc.length-1].s)<.08; }
+function unread(S,sc){ const v=[...CARDS,...TOPIC].map(c=>S.sw[c[0]]).filter(x=>x!=null); return !v.length||v.every(x=>x===v[0]) || (sc[0].s-sc[sc.length-1].s)<.08; }
 /* Uji tahan goyang: 20% kartu digeser satu langkah secara acak, 300 kali. Mengukur seberapa sering jurusan nomor 1 bertahan. Acaknya berbenih dari jawaban, jadi hasilnya sama tiap kali dibuka. */
 function stability(S,n){ n=n||300; let seed=7; Object.keys(S.sw||{}).sort().forEach(k=>{ seed=(Math.imul(seed,31)+k.charCodeAt(k.length-1)*7+Math.round((S.sw[k]??.5)*2)*13+k.length)>>>0; });
   const rnd=()=>{ seed=seed+0x6D2B79F5|0; let t=Math.imul(seed^seed>>>15,1|seed); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; };
-  const sc=scoreAll(S), t1=sc[0].id, t3=sc.slice(0,3).map(x=>x.id), keys=[...CARDS,...TOPIC].map(c=>c[0]);
+  const sc=scoreAll(S), t1=sc[0].id, t3=sc.slice(0,3).map(x=>x.id), keys=[...CARDS,...TOPIC].map(c=>c[0]).filter(k=>S.sw[k]!=null);
   let same=0, ov=0, in3=0;
   for(let i=0;i<n;i++){ const sw={...S.sw}; keys.forEach(k=>{ if(rnd()<.2){ const v=sw[k]??.5; sw[k]=v===.5?(rnd()<.5?0:1):.5; } });
     const r=scoreAll({...S,sw}).slice(0,3).map(x=>x.id); if(r[0]===t1) same++; if(r.includes(t1)) in3++; ov+=r.filter(x=>t3.includes(x)).length; }
   SWREF=S.sw; const top1=same/n, i3=in3/n;
   return {top1, in3:i3, top3:ov/(3*n), gap:sc[0].s-sc[1].s, level:top1>=STAB_T[0]&&i3>=.9?"kuat":i3>=STAB_T[1]?"cukup":"goyah"}; }
 const STAB_T=[.7,.75];
-if (typeof module!=="undefined") module.exports={evid,HOBI,TONTON,DINAS,MDINAS,KERJA,HARIL,stability,parts,unread,MDIM,extraFit,BERAT,MSTYLE,MDB,MVAL,MSUBJ,TOPIC,pemFit,selfFit,PEM,NEED,PLUS,WEAK,STRONG,M,CARDS,DK,dims,scoreAll,consistency,confidence,KAMPUS,STAT,CITY,byId};
+if (typeof module!=="undefined") module.exports={deckFor,pickIsl,STAGE_A,GATE,swv,evid,HOBI,TONTON,DINAS,MDINAS,KERJA,HARIL,stability,parts,unread,MDIM,extraFit,BERAT,MSTYLE,MDB,MVAL,MSUBJ,TOPIC,pemFit,selfFit,PEM,NEED,PLUS,WEAK,STRONG,M,CARDS,DK,dims,scoreAll,consistency,confidence,KAMPUS,STAT,CITY,byId};
 
 /* ===================== TAMPILAN ===================== */
 /* Alamat penerima hasil (opsional). Isi dengan alamat web app Google Apps Script atau servermu sendiri, lihat README bagian "Mengumpulkan hasil". Kosong = fitur kirim mati dan tidak ada data yang keluar dari perangkat. */
@@ -1924,10 +1952,10 @@ $("#go").addEventListener("click",()=>{ const keep={name:S.name,ava:S.ava,incar:
   inArchive=false; archiveReturn=null; S=Object.assign(fresh(),keep,{runId:newRunId()}); save(); startSwipe(); show("b1"); });
 
 /* babak 1 */
-const DECK=[]; (function(){ let t=0; CARDS.forEach((c,i)=>{ DECK.push([c[0],c[2]]); if(i%2===1&&t<TOPIC.length){ DECK.push([TOPIC[t][0],TOPIC[t][1]]); t++; } }); while(t<TOPIC.length){ DECK.push([TOPIC[t][0],TOPIC[t][1]]); t++; } })();
-const BASEN=DECK.length;
+/* Dek disusun ulang dari jawaban setiap kali berubah (deckFor): bagian awal sama, bagian kedua mengikuti pulau yang terpilih. */
+const DECK=[]; let BASEN=0;
 /* Kartu bonus dipilih setelah kartu biasa selesai: hanya bidang yang gaya umumnya paling dekat dengan jawabanmu. */
-function syncBonus(){ DECK.length=BASEN; (S.bonusIds||[]).forEach(id=>{ const t=TLAIN.find(x=>x[0]===id); if(t) DECK.push([t[0],t[1],true]); }); }
+function syncBonus(){ DECK.length=0; deckFor(S.sw).forEach(id=>{ const c=CARDS.find(x=>x[0]===id); DECK.push([id,c?c[2]:TOPIC.find(x=>x[0]===id)[1]]); }); BASEN=DECK.length; (S.bonusIds||[]).forEach(id=>{ const t=TLAIN.find(x=>x[0]===id); if(t) DECK.push([t[0],t[1],true]); }); }
 let ci=0, t0=0;
 function startSwipe(){ ci=0; syncBonus(); drawDeck(); }
 function drawDeck(){
@@ -1935,19 +1963,20 @@ function drawDeck(){
   if(ci+1<DECK.length) d.insertAdjacentHTML("beforeend",`<div class="sw back"><div class="t">${esc(DECK[ci+1][1])}</div></div>`);
   /* Kartu bentuk minat berupa situasi ("Teman sering curhat ke kamu"), jadi pertanyaan dan tombolnya ikut menyesuaikan */
   const sit=ci<DECK.length&&/^[riasec]\d$/.test(DECK[ci][0]);
-  $("#swQ").textContent=sit?"Ini kamu banget?":"Kegiatan ini seru buatmu?";
+  const gt=ci<DECK.length&&isGate(DECK[ci][0]);
+  $("#swQ").textContent=sit?"Ini kamu banget?":gt?"Dunia ini menarik buatmu?":"Kegiatan ini seru buatmu?";
   $("#swHint").textContent=sit?"Geser kanan kalau ini kamu banget, kiri kalau bukan. Jawab sesuai yang biasanya terjadi, bukan yang kamu harap.":"Geser kanan kalau suka, kiri kalau tidak. Jawab cepat pakai perasaan, tidak usah mikir bisa atau tidak.";
   $("#swMid").textContent=sit?"Kadang":"Biasa aja"; $("#swYes").textContent=sit?"Aku banget":"Suka";
   if(ci<DECK.length){ d.insertAdjacentHTML("beforeend",`<div class="sw" id="topc"><span class="stamp n">BUKAN AKU</span><span class="stamp y">${sit?"AKU BANGET":"SUKA"}</span><div class="t">${esc(DECK[ci][1])}</div></div>`); bindDrag($("#topc")); }
   const bn=ci<DECK.length&&DECK[ci][2], b0=DECK.findIndex(x=>x[2]);
   $("#bonusBadge").hidden=!bn; $("#skipBonus").hidden=!bn; $("#dayBadge").hidden=!(ci<DECK.length&&DECK[ci][0].startsWith("k_"));
-  $("#undoSw").disabled=ci===0; $("#swCount").textContent=bn?`Kartu bonus ${ci-b0+1} dari ${DECK.length-b0}`:`Kartu ${Math.min(ci+1,DECK.length)} dari ${b0<0?DECK.length:b0}`; t0=Date.now();
+  $("#undoSw").disabled=ci===0; $("#swCount").textContent=bn?`Kartu bonus ${ci-b0+1} dari ${DECK.length-b0}`:ci<STAGE_A.length?`Bagian 1 · kartu ${ci+1} dari ${STAGE_A.length}`:`Bagian 2, khusus buatmu · kartu ${ci-STAGE_A.length+1} dari ${(b0<0?DECK.length:b0)-STAGE_A.length+(DECK.some(d=>isDay(d[0]))?0:M.filter(m=>pickIsl(S.sw).on.includes(m.isl)).length)}`; t0=Date.now();
 }
 function answer(v){
   if(ci>=DECK.length) return;
   S.sw[DECK[ci][0]]=v; S.times.push(Date.now()-t0); addPts(10);
   const c=$("#topc"); if(c){ c.style.transition="transform .22s,opacity .22s"; c.style.transform=`translate(${v===1?420:v===0?-420:0}px,${v===.5?-260:30}px) rotate(${v===1?18:v===0?-18:0}deg)`; c.style.opacity="0"; }
-  ci++; if(ci===Math.round(BASEN/2)) toast("Setengah jalan. Lanjut, jawab pakai perasaan saja."); if(ci<DECK.length&&DECK[ci][0].startsWith("k_")&&!DECK[ci-1][0].startsWith("k_")) toast("Sekarang kartu keseharian: kegiatan yang benar-benar dikerjakan tiap hari. Jawab jujur, mau atau tidak.");
+  ci++; syncBonus(); if(ci===STAGE_A.length) toast("Bagian 2: kartu berikutnya dipilih dari jawabanmu tadi, jadi tiap orang dapat kartu yang berbeda."); if(ci<DECK.length&&DECK[ci][0].startsWith("k_")&&!DECK[ci-1][0].startsWith("k_")) toast("Sekarang kartu keseharian: kegiatan yang benar-benar dikerjakan tiap hari. Jawab jujur, mau atau tidak.");
   if(ci===BASEN&&!S.bonusIds){ S.bonusIds=bonusCards(dims(S.sw)); syncBonus(); } save();
   setTimeout(()=>{ if(ci>=DECK.length){ openMap(); } else drawDeck(); },200);
 }
@@ -1958,7 +1987,7 @@ function bindDrag(el){
   const end=()=>{ if(!on) return; on=false; if(dx>80) answer(1); else if(dx<-80) answer(0); else { el.style.transition="transform .2s"; el.style.transform=""; el.querySelectorAll(".stamp").forEach(s=>s.style.opacity=0); } };
   el.addEventListener("pointerup",end); el.addEventListener("pointercancel",end);
 }
-$("#undoSw").addEventListener("click",()=>{ if(ci<=0) return; ci--; delete S.sw[DECK[ci][0]]; if(ci<BASEN&&S.bonusIds){ TLAIN.forEach(t=>delete S.sw[t[0]]); S.bonusIds=null; syncBonus(); } S.times.pop(); S.pts=Math.max(0,S.pts-10); $("#pts").textContent=S.pts+" poin"; save(); drawDeck(); });
+$("#undoSw").addEventListener("click",()=>{ if(ci<=0) return; ci--; delete S.sw[DECK[ci][0]]; if(S.bonusIds&&!DECK[ci][2]){ TLAIN.forEach(t=>delete S.sw[t[0]]); S.bonusIds=null; } syncBonus(); S.times.pop(); S.pts=Math.max(0,S.pts-10); $("#pts").textContent=S.pts+" poin"; save(); drawDeck(); });
 document.querySelectorAll("[data-sw]").forEach(b=>b.addEventListener("click",()=>answer(+b.dataset.sw)));
 $("#skipBonus").addEventListener("click",()=>{ ci=DECK.length; save(); openMap(); });
 document.addEventListener("keydown",e=>{ if($("#b1").hidden) return; if(e.key==="ArrowRight") answer(1); else if(e.key==="ArrowLeft") answer(0); else if(e.key==="ArrowUp") answer(.5); });
@@ -2187,7 +2216,7 @@ $("#shareBox").hidden=true;
 const newSid=()=>"JJ-"+Array.from(crypto.getRandomValues(new Uint8Array(8)),b=>b.toString(16).padStart(2,"0")).join("").toUpperCase();
 function payload(){ SWREF=S.sw; const sc=scoreAll(S), cf=confidence(S);
   const {ava,pts,done,todo,at,seen,uji,sent,share,runId,resultAt,...ans}=S;
-  return {app:"jelajah-jurusan",ver:"2026-11-14-kartu-tajam",sid:S.sid,nama:String(S.name||"").slice(0,20),t:new Date(S.resultAt||Date.now()).toISOString(),ans,rank:sc.map(x=>[x.id,x.pc]),conf:cf.pc,unread:unread(S,sc),
+  return {app:"jelajah-jurusan",ver:"2026-11-14-bercabang",sid:S.sid,nama:String(S.name||"").slice(0,20),t:new Date(S.resultAt||Date.now()).toISOString(),ans,rank:sc.map(x=>[x.id,x.pc]),conf:cf.pc,unread:unread(S,sc),
     uji:{kuliah:S.real||"",peminatan:S.realPem&&S.realPem!=="-"?S.realPem:"",industri:S.realInd||"",kerja:S.realJob||[],betah:S.realHappy||"",catatan:S.realNote||""},
     stab:(()=>{ if(unread(S,sc)) return null; const x=stability(S); return {level:x.level,top1:+x.top1.toFixed(2),in3:+x.in3.toFixed(2),top3:+x.top3.toFixed(2),gap:+x.gap.toFixed(3)}; })(),
     out:(()=>{ const o=outside(S); return {level:o.level,bonus:o.bonus,top:o.L.slice(0,3).map(x=>[x.id,x.pc])}; })(),
@@ -2916,7 +2945,7 @@ $("#reset").addEventListener("click",e=>{
     function send(ev,extra){
       var key=ev+(extra&&extra.b!=null?":"+extra.b:"");
       if(sent[key])return; sent[key]=1;
-      var body={app:"jelajah-jurusan",v:vid,e:ev,ver:"2026-11-14-kartu-tajam",r:(document.referrer||"").slice(0,140)};
+      var body={app:"jelajah-jurusan",v:vid,e:ev,ver:"2026-11-14-bercabang",r:(document.referrer||"").slice(0,140)};
       if(extra)for(var k in extra)body[k]=extra[k];
       saveLog();
       try{ fetch("/api/hit",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body),keepalive:true}).catch(function(){}); }catch(e){}
