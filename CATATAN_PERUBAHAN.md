@@ -1,3 +1,17 @@
+# Catatan Perubahan — 14 Nov 2026 (kartu bentuk minat dipertajam)
+
+## 1. 24 kartu bentuk minat jadi situasi nyata
+- Teks semua kartu `CARDS` (r1–r4, i1–i4, a1–a4, s1–s4, e1–e4, c1–c4) diganti dari kegiatan umum ("Jadi ketua atau koordinator acara") menjadi situasi spesifik ("Grup tugas diam semua, kamu yang mulai bagi tugas"), supaya tidak semua orang menjawab "suka".
+- Kode kartu dan tipenya tidak berubah, jadi rumus nilai dan penyeimbang (`OFF`, `GN`) tetap. `alat/uji-alur.js`: top1 3,6–5,9%, top3 11,5–16,6% (sama dengan sebelumnya).
+
+## 2. Pertanyaan dan tombol menyesuaikan jenis kartu
+- Kartu bentuk minat (situasi): judul **"Ini kamu banget?"**, tombol **Bukan aku / Kadang / Aku banget**, cap geser "AKU BANGET".
+- Kartu topik dan keseharian: tetap "Kegiatan ini seru buatmu?" dengan **Bukan aku / Biasa aja / Suka**.
+- Nilai jawaban tetap 0 / 0,5 / 1.
+
+## 3. Label versi data
+- `ver` di kiriman hasil dan pelacakan kunjungan jadi `2026-11-14-kartu-tajam`, supaya jawaban kartu lama dan baru bisa dipisah di Google Sheets (kode kartu sama, artinya beda).
+
 # Catatan Perubahan — 14 Nov 2026 (dasbor: nama + label versi)
 
 ## 1. Nama peserta muncul di dasbor

@@ -568,15 +568,15 @@ summary{min-height:48px}
 <section class="screen" id="b1" hidden>
   <div class="card">
     <p class="tiny muted" style="font-weight:800;letter-spacing:.08em">BABAK 1 · GESER KARTU</p>
-    <h2>Kegiatan ini seru buatmu?</h2>
-    <p class="small muted">Geser kanan kalau suka, kiri kalau tidak. Jawab cepat pakai perasaan, tidak usah mikir bisa atau tidak.</p>
+    <h2 id="swQ">Kegiatan ini seru buatmu?</h2>
+    <p class="small muted" id="swHint">Geser kanan kalau suka, kiri kalau tidak. Jawab cepat pakai perasaan, tidak usah mikir bisa atau tidak.</p>
     <p class="badge" id="bonusBadge" hidden style="align-self:flex-start">Kartu bonus · menyesuaikan jawabanmu</p>
     <p class="badge" id="dayBadge" hidden style="align-self:flex-start;background:#8a5cd0">Kartu keseharian · begini rasanya tiap hari</p>
     <div class="deck" id="deck"></div>
     <div class="swbtn">
       <button class="btn no" type="button" data-sw="0">Bukan aku</button>
-      <button class="btn mid" type="button" data-sw="0.5">Biasa aja</button>
-      <button class="btn yes" type="button" data-sw="1">Suka</button>
+      <button class="btn mid" type="button" data-sw="0.5" id="swMid">Biasa aja</button>
+      <button class="btn yes" type="button" data-sw="1" id="swYes">Suka</button>
     </div>
     <p class="small muted" id="swCount" style="text-align:center"></p>
     <button class="link" type="button" id="undoSw">Batalkan kartu terakhir</button>
@@ -845,30 +845,30 @@ const ISL = {
 };
 // Kartu: [id, dimensi, teks]. Dua kartu pertama tiap dimensi adalah pasangan cek konsistensi.
 const CARDS = [
- ["r1","R","Membongkar barang rusak buat cari tahu kenapa mati"],
- ["i1","I","Mencari tahu \"kok bisa begitu?\" sampai ketemu jawabannya"],
- ["a1","A","Menggambar, mendesain, atau mengedit foto dan video"],
- ["s1","S","Dengerin teman curhat sampai dia lega"],
- ["e1","E","Jadi ketua atau koordinator acara"],
- ["c1","C","Mencatat pengeluaran atau data dengan rapi"],
- ["r3","R","Kerja di lapangan atau bengkel, bukan duduk seharian"],
- ["i3","I","Nonton video sains atau penjelasan cara kerja sesuatu"],
- ["a3","A","Menulis cerita, lirik, atau caption yang ngena"],
- ["s3","S","Mengajari teman sampai dia paham"],
- ["e3","E","Meyakinkan orang lain supaya setuju sama idemu"],
- ["c3","C","Mengecek ulang pekerjaan sampai tidak ada yang salah"],
- ["r2","R","Memperbaiki atau merakit sesuatu pakai tangan sendiri"],
- ["i2","I","Betah mengulik satu pertanyaan sulit berjam-jam"],
- ["a2","A","Bikin sesuatu yang enak dilihat: poster, feed, dekorasi"],
- ["s2","S","Menemani orang yang lagi sedih atau sakit"],
- ["e2","E","Mengatur orang-orang supaya rencana berjalan"],
- ["c2","C","Menyusun daftar, jadwal, atau tabel biar teratur"],
- ["r4","R","Mengoperasikan alat atau mesin yang canggih"],
- ["i4","I","Mengerjakan soal hitungan yang menantang"],
- ["a4","A","Punya ide-ide yang beda dari orang lain"],
- ["s4","S","Ikut kegiatan sosial atau jadi relawan"],
- ["e4","E","Jualan atau mulai usaha kecil-kecilan"],
- ["c4","C","Mengikuti langkah-langkah yang jelas dari awal sampai akhir"]
+ ["r1","R","Kipas angin mati, kamu bongkar dulu sebelum dibawa ke tukang servis"],
+ ["i1","I","Lihat iklan \"diskon 70%\", langsung curiga dan ngecek harga aslinya"],
+ ["a1","A","Foto biasa nggak langsung diposting, diedit dulu sampai warnanya pas"],
+ ["s1","S","Teman sering curhat ke kamu, padahal kamu nggak minta"],
+ ["e1","E","Grup tugas diam semua, kamu yang mulai bagi tugas"],
+ ["c1","C","Uang jajan atau gajimu kamu catat masuk-keluarnya"],
+ ["r3","R","Lebih betah praktik di bengkel atau lab daripada dengerin teori di kelas"],
+ ["i3","I","Lagi scroll, malah berhenti lama di video \"gimana cara kerja…\""],
+ ["a3","A","Nulis caption atau ucapan ulang tahun bisa lama karena mau kata-katanya pas"],
+ ["s3","S","Teman belum paham materi, kamu jelasin pakai cara sendiri sampai dia ngerti"],
+ ["e3","E","Teman ragu ikut lomba, kamu bisa bikin dia akhirnya mau"],
+ ["c3","C","Nemu salah ketik di pengumuman, kamu gatal pengin membetulkan"],
+ ["r2","R","Beli rak atau lemari rakitan, kamu yang pasang sampai berdiri"],
+ ["i2","I","Satu soal susah bisa kamu pikirin sampai kebawa mandi"],
+ ["a2","A","Ada acara kelas atau kantor, kamu yang kepikiran tema dan dekorasinya"],
+ ["s2","S","Lihat teman diam sendirian di pojok, kamu samperin dan ajak ngobrol"],
+ ["e2","E","Rencana jalan bareng nggak jadi-jadi, akhirnya kamu yang nentuin tanggal dan tempatnya"],
+ ["c2","C","File di HP atau laptop kamu kelompokkan ke folder yang rapi"],
+ ["r4","R","Senang pakai perkakas: obeng, bor, solder, atau mesin jahit"],
+ ["i4","I","Soal matematika yang susah terasa kayak main teka-teki"],
+ ["a4","A","Dapat tugas bebas, kamu pilih cara yang belum dipakai orang lain"],
+ ["s4","S","Ada penggalangan dana atau kerja bakti, kamu ikut turun tangan"],
+ ["e4","E","Lihat barang yang lagi ramai, langsung kepikiran jualan dan ngitung untungnya"],
+ ["c4","C","Lebih tenang kalau ada aturan dan langkah yang jelas daripada disuruh bebas"]
 ];
 // Kartu topik: minat langsung ke bidangnya. [id, teks, {jurusan: bobot}]
 const TOPIC = [
@@ -1933,7 +1933,12 @@ function startSwipe(){ ci=0; syncBonus(); drawDeck(); }
 function drawDeck(){
   const d=$("#deck"); d.innerHTML="";
   if(ci+1<DECK.length) d.insertAdjacentHTML("beforeend",`<div class="sw back"><div class="t">${esc(DECK[ci+1][1])}</div></div>`);
-  if(ci<DECK.length){ d.insertAdjacentHTML("beforeend",`<div class="sw" id="topc"><span class="stamp n">BUKAN AKU</span><span class="stamp y">SUKA</span><div class="t">${esc(DECK[ci][1])}</div></div>`); bindDrag($("#topc")); }
+  /* Kartu bentuk minat berupa situasi ("Teman sering curhat ke kamu"), jadi pertanyaan dan tombolnya ikut menyesuaikan */
+  const sit=ci<DECK.length&&/^[riasec]\d$/.test(DECK[ci][0]);
+  $("#swQ").textContent=sit?"Ini kamu banget?":"Kegiatan ini seru buatmu?";
+  $("#swHint").textContent=sit?"Geser kanan kalau ini kamu banget, kiri kalau bukan. Jawab sesuai yang biasanya terjadi, bukan yang kamu harap.":"Geser kanan kalau suka, kiri kalau tidak. Jawab cepat pakai perasaan, tidak usah mikir bisa atau tidak.";
+  $("#swMid").textContent=sit?"Kadang":"Biasa aja"; $("#swYes").textContent=sit?"Aku banget":"Suka";
+  if(ci<DECK.length){ d.insertAdjacentHTML("beforeend",`<div class="sw" id="topc"><span class="stamp n">BUKAN AKU</span><span class="stamp y">${sit?"AKU BANGET":"SUKA"}</span><div class="t">${esc(DECK[ci][1])}</div></div>`); bindDrag($("#topc")); }
   const bn=ci<DECK.length&&DECK[ci][2], b0=DECK.findIndex(x=>x[2]);
   $("#bonusBadge").hidden=!bn; $("#skipBonus").hidden=!bn; $("#dayBadge").hidden=!(ci<DECK.length&&DECK[ci][0].startsWith("k_"));
   $("#undoSw").disabled=ci===0; $("#swCount").textContent=bn?`Kartu bonus ${ci-b0+1} dari ${DECK.length-b0}`:`Kartu ${Math.min(ci+1,DECK.length)} dari ${b0<0?DECK.length:b0}`; t0=Date.now();
@@ -2182,7 +2187,7 @@ $("#shareBox").hidden=true;
 const newSid=()=>"JJ-"+Array.from(crypto.getRandomValues(new Uint8Array(8)),b=>b.toString(16).padStart(2,"0")).join("").toUpperCase();
 function payload(){ SWREF=S.sw; const sc=scoreAll(S), cf=confidence(S);
   const {ava,pts,done,todo,at,seen,uji,sent,share,runId,resultAt,...ans}=S;
-  return {app:"jelajah-jurusan",ver:"2026-11-14-autokirim",sid:S.sid,nama:String(S.name||"").slice(0,20),t:new Date(S.resultAt||Date.now()).toISOString(),ans,rank:sc.map(x=>[x.id,x.pc]),conf:cf.pc,unread:unread(S,sc),
+  return {app:"jelajah-jurusan",ver:"2026-11-14-kartu-tajam",sid:S.sid,nama:String(S.name||"").slice(0,20),t:new Date(S.resultAt||Date.now()).toISOString(),ans,rank:sc.map(x=>[x.id,x.pc]),conf:cf.pc,unread:unread(S,sc),
     uji:{kuliah:S.real||"",peminatan:S.realPem&&S.realPem!=="-"?S.realPem:"",industri:S.realInd||"",kerja:S.realJob||[],betah:S.realHappy||"",catatan:S.realNote||""},
     stab:(()=>{ if(unread(S,sc)) return null; const x=stability(S); return {level:x.level,top1:+x.top1.toFixed(2),in3:+x.in3.toFixed(2),top3:+x.top3.toFixed(2),gap:+x.gap.toFixed(3)}; })(),
     out:(()=>{ const o=outside(S); return {level:o.level,bonus:o.bonus,top:o.L.slice(0,3).map(x=>[x.id,x.pc])}; })(),
@@ -2911,7 +2916,7 @@ $("#reset").addEventListener("click",e=>{
     function send(ev,extra){
       var key=ev+(extra&&extra.b!=null?":"+extra.b:"");
       if(sent[key])return; sent[key]=1;
-      var body={app:"jelajah-jurusan",v:vid,e:ev,ver:"2026-11-14-autokirim",r:(document.referrer||"").slice(0,140)};
+      var body={app:"jelajah-jurusan",v:vid,e:ev,ver:"2026-11-14-kartu-tajam",r:(document.referrer||"").slice(0,140)};
       if(extra)for(var k in extra)body[k]=extra[k];
       saveLog();
       try{ fetch("/api/hit",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body),keepalive:true}).catch(function(){}); }catch(e){}
