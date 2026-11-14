@@ -63,7 +63,21 @@ Sisanya dibawa gambar: latar adegan, ekspresi karakter, jam, dan meteran. Tanpa 
 Tidak ada game over. Tiap kejadian hanya membelokkan cerita.
 
 - **Tokoh yang muncul berulang:** teman sekelas, senior, dosen pembimbing, dan kakak tingkat. Wajahnya SVG dengan 3 ekspresi. Hubungan dengan mereka berubah sesuai pilihan dan muncul lagi di bab berikutnya.
-- **Kejadian acak** dari kumpulan bersama (laptop rusak, beasiswa dibuka, dosen pengganti, lomba, kos bocor) supaya tiap main berbeda.
+- **Tidak ada kejadian acak.** Semua kejadian punya sebab yang bisa ditunjuk: pilihanmu sebelumnya, atau meteran yang habis atau penuh. Variasi saat main ulang datang dari pilihan yang berbeda, bukan dari undian.
+
+### Benang cerita: pilihan saling terkait
+
+Tiap bab punya 2 sampai 3 **benang** yang menyambung kartu-kartunya, dan sebagian berlanjut ke bab berikutnya.
+
+- **Di dalam satu bab.** Kartu punya versi yang muncul tergantung pilihan sebelumnya. Contoh di mockup Psikologi semester 3:
+  - tidur lagi jam 06.45 membuat kamu telat kuis Statistik,
+  - pinjam laptop Dimas membuat Dimas menagih balasan di kantin ("temani aku daftar paduan suara"),
+  - ikut paduan suara membuat Kak Raka bertanya "masih sanggup jadi panitia?", dengan energi yang terkuras lebih banyak,
+  - anggota kelompok yang menghilang jam 14.00 adalah Alya, dan jam 22.30 Alya cerita kenapa. Isinya berbeda tergantung kamu tadi meneleponnya atau mengerjakan bagiannya.
+- **Antar-bab.** Di akhir bab muncul daftar **"Berlanjut ke bab berikutnya"**. Contoh: Alya jadi rekan skripsimu di semester 8, konser paduan suara bentrok dengan seminar di semester 5, Kak Raka mengenalkanmu ke tempat magang di semester 7.
+- **Penanda sebab.** Kartu yang muncul karena pilihan sebelumnya diberi label kecil berikon rantai, misalnya "Karena tadi pinjam laptop Dimas". Pemain jadi sadar pilihannya berakibat.
+- **Tokoh ingat.** Hubungan dengan tiap tokoh tersimpan sepanjang perjalanan dan menentukan siapa yang muncul membantu atau menjauh di bab akhir.
+- **Batasnya:** satu kartu paling banyak punya 3 versi, dan satu benang paling panjang 3 bab. Dengan begitu isinya tetap bisa dicek dan diuji, tidak meledak jadi ratusan cabang.
 - **Bisa diketuk:** kartu juga bisa dijawab dengan dua tombol, untuk yang tidak suka menggeser.
 
 ---
@@ -149,7 +163,9 @@ Pengguna utamanya anak sekolah, jadi "nagih" yang dipakai hanya yang sehat:
 | Mini-game | 1, dengan 2 tingkat |
 | Ending | sekitar 6 |
 | Kartu momen | 12 |
-| Kejadian acak (dipakai semua jurusan) | sekitar 30 |
+| Versi kartu karena pilihan sebelumnya | sekitar 15 |
+| Benang cerita antar-bab | 4 sampai 6 |
+| Kejadian meteran habis atau penuh (dipakai semua jurusan) | 8 |
 
 - **Sumber kuliah:** daftar mata kuliah resmi minimal dua kampus per jurusan. Hanya mata kuliah yang muncul di keduanya yang dipakai.
 - **Sumber kerja:** data `KERJA` yang sudah ada, dicocokkan dengan daftar tugas O*NET.
@@ -177,7 +193,7 @@ Uji tahap 1 dengan **paling sedikit 5 anak SMA dan 2 mahasiswa** dari tiap jurus
 ## 9. Teknis
 
 - **File terpisah `kampus.html`** di situs yang sama, jadi bisa membaca hasil Jelajah Jurusan dari penyimpanan HP. `index.html` tidak makin berat.
-- **Isi per jurusan** di `kampus/<id>.json` dan kejadian bersama di `kampus/umum.json`, diunduh saat dipakai.
+- **Isi per jurusan** di `kampus/<id>.json` dan kejadian meteran bersama di `kampus/umum.json`, diunduh saat dipakai.
 - Satu mesin untuk semua jurusan. Menambah jurusan cukup dengan menambah file JSON; mini-game baru butuh kode.
 - **Masuk dari:** tombol "Jalani jurusan ini" di halaman "Kenalan dengan jurusanmu", dan dari halaman awal untuk yang sudah punya incaran.
 - **Data ke Google Sheets:** tab baru `kampus` berisi betah per bab, ending, peminatan, rasa mini-game, dan laporan "tidak sesuai". Butuh perubahan Apps Script dan deploy ulang dari kamu. Usulan: tahap 1 menyimpan di HP dulu, dan pengiriman menyusul setelah gamenya terbukti.
@@ -191,10 +207,11 @@ Uji tahap 1 dengan **paling sedikit 5 anak SMA dan 2 mahasiswa** dari tiap jurus
 1. Dua jurusan dimainkan penuh lewat tombol di 360×640 dan 390×844, semua bab, tanpa error.
 2. Simulasi 5.000 pemain acak per jurusan: semua ending bisa dicapai, dan tidak ada ending yang lebih dari 40% atau kurang dari 3%.
 3. Tiap meteran pernah habis dan pernah penuh di simulasi, dan kejadiannya muncul.
-4. Lanjut dari bab tersimpan setelah halaman ditutup.
-5. Dengan "kurangi gerakan", tidak ada animasi.
-6. `node alat/uji-alur.js` di Jelajah Jurusan tetap sama.
-7. Tangkapan layar tiap bab dan mini-game dikirim ke kamu.
+4. Tiap versi kartu dan tiap benang antar-bab tercapai di simulasi, supaya tidak ada cerita yang tidak pernah terlihat.
+5. Lanjut dari bab tersimpan setelah halaman ditutup.
+6. Dengan "kurangi gerakan", tidak ada animasi.
+7. `node alat/uji-alur.js` di Jelajah Jurusan tetap sama.
+8. Tangkapan layar tiap bab dan mini-game dikirim ke kamu.
 
 ---
 
