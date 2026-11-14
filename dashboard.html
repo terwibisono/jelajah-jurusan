@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Dasbor Jelajah Jurusan</title>
+<style>
+:root{
+  --bg:#0a1622; --bg2:#0f2233; --card:#12283a; --line:#1e3b52; --txt:#e8f1f7; --mut:#8fabbf;
+  --sun:#ffc857; --bis:#2fbf8f; --air:#3aa7e0; --laut:#5a7de0;
+}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1200px 600px at 10% -10%,#123047 0%,var(--bg) 60%);color:var(--txt);
+  font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:14px 14px 40px}
+h1{font-size:19px;margin:4px 0 2px;letter-spacing:.2px}
+.sub{color:var(--mut);font-size:12px;margin-bottom:14px}
+.wrap{max-width:760px;margin:0 auto}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.card{background:linear-gradient(180deg,var(--card),var(--bg2));border:1px solid var(--line);border-radius:14px;padding:12px 13px}
+.k{font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.6px}
+.v{font-size:24px;font-weight:800;margin-top:4px;font-variant-numeric:tabular-nums}
+.v small{font-size:12px;color:var(--mut);font-weight:600}
+.sec{margin-top:16px}
+.sec h2{font-size:13px;text-transform:uppercase;letter-spacing:.8px;color:var(--mut);margin:0 0 9px}
+.row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}
+.bar{height:9px;border-radius:6px;background:#0b1c2a;overflow:hidden;margin-bottom:11px}
+.bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--air),var(--bis))}
+.bar.s2 i{background:linear-gradient(90deg,var(--laut),var(--air))}
+.bar.s3 i{background:linear-gradient(90deg,var(--sun),#ff9f43)}
+.spark{display:flex;align-items:flex-end;gap:6px;height:92px;padding-top:6px}
+.spark .d{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:3px;min-width:0}
+.spark .b1{width:100%;max-width:40px;margin:0 auto;background:linear-gradient(180deg,#3aa7e0,#2f7bb8);border-radius:4px 4px 0 0}
+.spark .b2{width:100%;max-width:40px;margin:0 auto;background:linear-gradient(180deg,#ffc857,#e8912f);border-radius:4px 4px 0 0}
+.spark .lb{font-size:9px;color:var(--mut);white-space:nowrap}
+.leg{display:flex;gap:14px;font-size:11px;color:var(--mut);margin-top:6px}
+.leg i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th,td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--line)}
+th{color:var(--mut);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+td.n{font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:2px 7px;border-radius:999px;background:#143149;color:var(--air);font-size:11px;font-weight:700}
+.keybox{max-width:420px;margin:60px auto;text-align:center}
+input,button{font:inherit}
+input{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:#0b1c2a;color:var(--txt);margin:10px 0}
+button{width:100%;padding:12px;border-radius:10px;border:0;background:var(--sun);color:#231a05;font-weight:800}
+.err{color:#ff8f8f;font-size:12px;margin-top:8px;min-height:16px}
+.hint{color:var(--mut);font-size:11px;margin-top:18px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="lock" class="keybox" hidden>
+    <h1>Dasbor Jelajah Jurusan</h1>
+    <div class="sub">Masukkan kunci akses.</div>
+    <input id="k" type="password" placeholder="kunci akses" autocomplete="current-password">
+    <button id="go">Buka dasbor</button>
+    <div class="err" id="err"></div>
+  </div>
+
+  <div id="main" hidden>
+    <h1>Jelajah Jurusan — Dasbor</h1>
+    <div class="sub" id="stamp">memuat…</div>
+
+    <div class="grid">
+      <div class="card"><div class="k">Pengunjung unik</div><div class="v" id="c1">–</div></div>
+      <div class="card"><div class="k">Buka halaman</div><div class="v" id="c2">–</div></div>
+      <div class="card"><div class="k">Hasil sejak dipasang</div><div class="v" id="c3">–</div></div>
+      <div class="card"><div class="k">Konversi</div><div class="v" id="c4">–</div></div>
+    </div>
+
+    <div class="sec"><h2>Funnel</h2><div class="card" id="funnel"></div><div class="hint" id="funnelnote" style="margin-top:2px"></div></div>
+    <div class="sec"><h2>Per hari (WIB)</h2><div class="card">
+      <div class="spark" id="spark"></div>
+      <div class="leg"><span><i style="background:#3aa7e0"></i>Buka</span><span><i style="background:#ffc857"></i>Hasil terkirim</span></div>
+    </div></div>
+    <div class="sec"><h2>Jurusan nomor 1</h2><div class="card" id="top1"></div></div>
+    <div class="sec"><h2>Hasil terbaru</h2><div class="card" style="padding:6px 10px">
+      <table><thead><tr><th>Waktu</th><th>Nama</th><th>Top 1</th><th>Kode</th><th>Mantap</th></tr></thead><tbody id="tb"></tbody></table>
+    </div></div>
+    <div class="sec hint">Nama diambil dari jawaban peserta (nama panggilan). Diukur sejak pelacakan dipasang. Satu baris = satu hasil yang benar-benar terkirim. Angka "pengunjung unik" memakai id acak per perangkat, bukan identitas orang.</div>
+  </div>
+</div>
+<script>
+const $ = (s) => document.querySelector(s);
+const KEYNAME = 'jj-dash-key';
+const WIB = 7 * 3600 * 1000;
+const fmt = (v) => new Date(v).toLocaleString('id-ID', { timeZone: 'Asia/Jakarta', day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+const nf = (n) => new Intl.NumberFormat('id-ID').format(n || 0);
+
+function key() {
+  const u = new URL(location.href).searchParams.get('k');
+  if (u) { try { localStorage.setItem(KEYNAME, u); } catch (e) {} return u; }
+  try { return localStorage.getItem(KEYNAME) || ''; } catch (e) { return ''; }
+}
+
+async function load() {
+  const k = key();
+  if (!k) return lock();
+  try {
+    const r = await fetch('/api/stats?k=' + encodeURIComponent(k), { cache: 'no-store' });
+    if (r.status === 403 || r.status === 401) { try { localStorage.removeItem(KEYNAME); } catch (e) {} return lock('Kunci salah.'); }
+    const d = await r.json();
+    if (!d.ok) throw new Error(d.error || 'gagal');
+    render(d);
+  } catch (e) {
+    $('#stamp').textContent = 'Gagal memuat: ' + e.message;
+  }
+}
+
+function lock(msg) {
+  $('#main').hidden = true;
+  $('#lock').hidden = false;
+  $('#err').textContent = msg || '';
+  $('#go').onclick = () => {
+    const v = $('#k').value.trim();
+    if (!v) return;
+    try { localStorage.setItem(KEYNAME, v); } catch (e) {}
+    $('#lock').hidden = true; $('#main').hidden = false; load();
+  };
+  $('#k').addEventListener('keydown', (e) => { if (e.key === 'Enter') $('#go').click(); });
+}
+
+function render(d) {
+  $('#lock').hidden = true; $('#main').hidden = false;
+  $('#stamp').textContent = 'Diperbarui ' + fmt(d.ts) + ' WIB · auto-refresh 60 detik · total hasil semua waktu: ' + nf(d.total.hasilTotal);
+  $('#c1').textContent = nf(d.total.visitors);
+  $('#c2').textContent = nf(d.total.buka);
+  $('#c3').textContent = nf(d.total.hasil);
+  $('#c4').innerHTML = nf(d.total.konversi) + '<small>%</small>';
+
+  $('#funnel').innerHTML = d.funnel.map((f, i) =>
+    `<div class="row"><span>${f.label}</span><b>${nf(f.n)} · ${f.pct}%</b></div>
+     <div class="bar ${i === 0 ? '' : i < 3 ? 's2' : 's3'}"><i style="width:${Math.max(2, f.pct)}%"></i></div>`
+  ).join('');
+
+  const max = Math.max(1, ...d.daily.map((x) => Math.max(x.buka, x.hasil)));
+  $('#spark').innerHTML = d.daily.slice(-14).map((x) => `
+    <div class="d" title="${x.d}: ${x.buka} buka, ${x.hasil} hasil">
+      <div class="b2" style="height:${Math.round((x.hasil / max) * 62)}px"></div>
+      <div class="b1" style="height:${Math.round((x.buka / max) * 62)}px"></div>
+      <div class="lb">${x.d.slice(8)}/${x.d.slice(5, 7)}</div>
+    </div>`).join('') || '<div class="lb">belum ada data</div>';
+
+  const t1m = Math.max(1, ...d.top1.map((x) => x.n));
+  $('#top1').innerHTML = d.top1.length ? d.top1.map((x) => `
+    <div class="row"><span>${x.name}</span><b>${x.n}</b></div>
+    <div class="bar s3"><i style="width:${Math.round((x.n / t1m) * 100)}%"></i></div>`).join('') : '<div class="row"><span>belum ada</span></div>';
+
+  const gap = d.funnel.length > 1 ? (d.funnel[d.funnel.length - 2].n - d.funnel[d.funnel.length - 1].n) : 0;
+  $('#funnelnote').textContent = gap > 0
+    ? `Selisih ${nf(gap)}: sudah sampai halaman hasil tapi belum ada barisnya di Sheets — berasal dari pembukaan versi lama (sebelum kirim otomatis) atau kiriman yang gagal.`
+    : '';
+
+  const esc = (s) => String(s || '').replace(/[<>&"]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c]));
+  $('#tb').innerHTML = d.recent.map((r) => `
+    <tr><td class="n">${fmt(r.t)}</td><td>${esc(r.nama) || '–'}</td><td>${r.top1 || '–'}</td><td><span class="pill">${r.kode || '–'}</span></td><td class="n">${r.conf}%</td></tr>`
+  ).join('') || '<tr><td colspan="5">belum ada hasil</td></tr>';
+}
+
+load();
+setInterval(() => { if (!$('#main').hidden) load(); }, 60000);
+</script>
+</body>
+</html>
