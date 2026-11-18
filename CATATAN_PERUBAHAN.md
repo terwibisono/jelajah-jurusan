@@ -13,7 +13,8 @@ Tampilan dan alur cerita Jelajah Jurusan disamakan dengan Jelajah Kampus (Babak 
 
 ## Alur cerita
 - Babak di dalam permainan sekarang disebut **Bab** (Jurusan sendiri adalah Babak I dari trilogi). Bab 1 Geser kartu, Bab 2 Adu pilihan, Bab 3 Coba misi, Bab 4 Kenali dirimu, Bab 5 Ruang BK.
-- Halaman awal: "Kolom jurusan masih kosong." Tiap bab dibuka satu kalimat narasi dengan tempatnya (mading saat istirahat, kantin pulang sekolah, ruang BK, dan seterusnya).
+- Halaman awal dipendekkan: logo, "Kolom jurusan masih kosong.", satu kalimat, lalu langsung isian nama, karakter, dan jurusan incaran dalam satu panel. Daftar bab, peta, dan catatan panjang dihapus dari halaman awal; catatan 28 jurusan jadi satu baris kecil di bawah tombol mulai.
+- Tiap bab dibuka satu kalimat narasi dengan tempatnya (mading saat istirahat, kantin pulang sekolah, ruang BK, dan seterusnya).
 
 ## Paspor Jelajah dan sambungan ke Kampus
 - Kartu Paspor di halaman hasil "Kartu dan Paspor" dan di tombol bilah atas: nama, kode, cap tiga babak, 3 jurusan teratas.
