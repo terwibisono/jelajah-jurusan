@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#dff1f2">
-<title>Jelajah Jurusan</title>
+<meta name="theme-color" content="#172a2e">
+<title>Jelajah Jurusan · Babak I</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 /* Layout: satu kolom ramah HP, dunia laut dan pulau. Tiap rumpun jurusan punya warna pulau sendiri. Satu tema (terang) dengan sengaja. */
 :root{
@@ -565,9 +565,242 @@ summary{min-height:48px}
 .jpb:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 @media (max-width:400px){.jpick{gap:10px 8px}.jpb b{font-size:14px}.jpb{padding:9px 3px 8px}}
 @media (max-height:700px){.voy{height:56px}.voy .ship{width:54px;height:47px}.voy .dest{width:64px;height:43px}.voy .route{top:33px}}
+
+/* =====================================================================
+   ROMBAK KOTA PAGI (18 Nov 2026)
+   Jelajah Jurusan disamakan dengan Jelajah Kampus: bilah atas gelap, adegan pixel,
+   panel krem, label monospace, tombol dengan bayangan keras. Babak I memakai warna toska (pagi).
+   Blok ini sengaja ditaruh paling akhir supaya menimpa gaya lama tanpa membongkarnya.
+   ===================================================================== */
+:root{
+  --sea:#f4ebdc; --sea-deep:#eadfcb; --card:#fffaf1; --ink:#192d2c; --muted:#506461; --line:#ded4c4;
+  --sun:#1f6b62; --accent:#ad4e32; --rust:#ad4e32; --toska:#2fb3a6; --toska-d:#1f6b62; --toska-dd:#123f3a;
+  --paper:#fbf4e8; --paper2:#f3e9d8; --bar:#172a2e;
+  --font-display:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-body:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Space Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --r:8px;
+}
+body{background:var(--sea);background-image:none;color:var(--ink)}
+.wrap{padding-top:12px;gap:14px}
+h1,h2,h3{font-family:var(--font-display);letter-spacing:-.025em;font-weight:800}
+h1{font-size:clamp(30px,8.4vw,40px);line-height:1.08}
+h2{font-size:25px;line-height:1.15}
+h3{font-size:19px}
+a{color:var(--toska-d)}
+.link{color:var(--toska-d)}
+.muted{color:var(--muted)}
+
+/* bilah atas, sama dengan Jelajah Kampus */
+.jbar{background:var(--bar);color:#fff7e6;border-bottom:3px solid var(--toska);position:relative;z-index:10}
+.jbar .in{max-width:620px;margin:0 auto;padding:0 16px;min-height:60px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.jbar .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.075em;font-size:15px;color:inherit;text-decoration:none;white-space:nowrap}
+.jbar .mark{width:31px;height:31px;display:grid;place-items:center;background:#7fd8cc;color:#14302c;font-size:19px;line-height:1;box-shadow:3px 3px 0 #2b6b63;flex:none}
+.jbar .brand em{font-style:normal;color:#7fd8cc;margin-left:6px}
+.jbar .pas{font:inherit;font-size:13.5px;font-weight:700;background:#203c3d;border:1px solid #57706c;border-radius:6px;color:#fff7e6;padding:6px 10px;cursor:pointer;display:flex;align-items:center;gap:7px;white-space:nowrap}
+.jbar .pas i{width:12px;height:14px;border:2px solid #7fd8cc;border-radius:2px;display:block;position:relative}
+.jbar .pas i::after{content:"";position:absolute;left:2px;right:2px;top:4px;height:2px;background:#7fd8cc}
+@media (max-width:370px){.jbar .brand{font-size:13px;letter-spacing:.05em}.jbar .pas{padding:6px 8px}.jbar .pas span{display:none}}
+
+/* adegan pixel di atas tiap layar */
+.scene{position:relative;border-radius:8px;overflow:hidden;border:2px solid var(--bar);box-shadow:0 3px 0 #cdbfa8;background:#9fd6cf;aspect-ratio:160/56}
+.scene canvas{display:block;width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges}
+.scene .loc{position:absolute;left:10px;bottom:10px;display:inline-flex;align-items:center;gap:8px;background:rgba(23,42,46,.92);color:#fff7e6;font-size:12.5px;font-weight:600;line-height:1.2;padding:6px 10px;border-radius:4px;max-width:calc(100% - 20px)}
+.scene .loc::before{content:"";width:8px;height:8px;background:#7fd8cc;transform:rotate(45deg);flex:none}
+body.sc-res .scene,body.sc-intro .scene{aspect-ratio:160/62}
+
+/* narasi pendek tiap bab */
+.nar{background:var(--paper2);border-left:3px solid var(--rust);border-radius:4px;padding:10px 14px;font-size:15px;line-height:1.5;color:#2a3d3b}
+.nar b{font-weight:700}
+
+/* panel */
+.card,.char,.stab,.archive-area{border-radius:var(--r)}
+.card{background:var(--card);border:1px solid var(--line);box-shadow:0 3px 0 #e2d6c2;padding:20px 18px}
+.screen{gap:14px}
+.screen>h2{margin:10px 2px -2px}
+
+/* label kecil monospace (pengganti "BABAK n · ...") */
+.kick,.card>p.tiny.muted[style*="letter-spacing"],#kStep,.char .lbl{font-family:var(--mono)!important;font-weight:700!important;font-size:11.5px!important;letter-spacing:.08em!important;text-transform:uppercase;color:var(--rust)!important}
+.badge{font-family:var(--mono);font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;background:var(--bar);color:#fff7e6;border-radius:4px;padding:5px 9px}
+.badge::before{background:var(--toska);border-radius:0;width:7px;height:7px}
+
+/* tombol */
+.btn{font-family:var(--font-display);font-weight:800;letter-spacing:-.01em;border-radius:6px;background:var(--bar);color:#fff7e6;box-shadow:0 4px 0 #0b1618}
+.btn:active{box-shadow:0 1px 0 #0b1618}
+.btn.sun{background:var(--toska-d);color:#fff;box-shadow:0 4px 0 var(--toska-dd)}
+.btn.sun:active{box-shadow:0 1px 0 var(--toska-dd)}
+.btn.ghost{background:var(--paper);color:var(--ink);border:1.5px solid var(--line);box-shadow:0 3px 0 var(--line)}
+.btn.sm{border-radius:6px}
+.btn:focus-visible,.chip:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible,.pick:focus-visible,.tile:focus-visible,.shx:focus-visible,.jpb:focus-visible{outline:3px solid var(--rust);outline-offset:2px}
+input[type=text],select,textarea{background:#fffdf8;border:1.5px solid var(--line);border-radius:6px}
+details{border:1.5px solid var(--line);border-radius:6px;background:var(--paper)}
+summary{font-weight:800;letter-spacing:-.01em}
+.note{background:var(--paper2);border-radius:6px}
+.say,.factbig,.plead,.share{background:#fff3d9;border:1.5px dashed #c99a45;border-radius:6px}
+.hintp{background:var(--paper);border:1.5px solid var(--line);border-radius:4px;font-family:var(--mono);font-size:12px!important;font-weight:700;letter-spacing:.03em;color:#3e5552}
+.hintp b{background:var(--bar);border-radius:3px}
+.foot{font-family:var(--mono);font-size:11.5px;letter-spacing:.03em}
+
+/* HUD dan navigasi bawah */
+.hud{background:rgba(244,235,220,.95);border-bottom:1.5px solid var(--line)}
+.stages i{border-radius:0;height:8px;background:var(--line)}
+.stages i.on{background:var(--rust)} .stages i.done{background:var(--toska-d)}
+.pts{font-family:var(--mono);font-weight:700;font-size:13px;background:var(--bar);color:#fff7e6;border-radius:4px;padding:3px 9px}
+.rnav{background:rgba(244,235,220,.97);border-top:1.5px solid var(--line)}
+.pdots i,.pdots button{border-radius:0}
+.pdots i.on,.pdots button.on{background:var(--rust)} .pdots i.done,.pdots button.done{background:var(--toska-d)}
+.jump select{border-radius:6px;background:var(--paper)}
+.pbar,.bar .tr,.two .tr,.parts .tr,.mjprog .tr{border-radius:0;background:#ebe1cf}
+.pbar i,.bar .tr i,.two .tr i,.parts .tr i,.mjprog .tr i{border-radius:0}
+.pbar i{background:var(--toska-d)}
+.more,.navmore{border-radius:4px!important;font-family:var(--mono)!important;font-size:12.5px!important;letter-spacing:.03em;background:var(--bar)!important;color:#fff7e6!important}
+.toast{border-radius:6px;background:var(--bar)}
+
+/* karakter */
+.pick{border-radius:6px;border:2px solid var(--line);background:var(--paper)}
+.pick[aria-pressed=true]{border-color:var(--toska-d);background:#e3f3ef;box-shadow:0 3px 0 var(--toska-d)}
+
+/* kartu geser */
+.sw{border-radius:10px;border:2.5px solid var(--ink);box-shadow:5px 5px 0 var(--ink);background:var(--paper)}
+.sw.back{border-color:#cdbfa8;box-shadow:5px 5px 0 #cdbfa8;background:#f1e7d6}
+.sw .t{font-weight:800;letter-spacing:-.02em}
+.sw .stamp{font-family:var(--mono);font-size:15px;border-radius:4px;letter-spacing:.04em;text-transform:uppercase}
+.btn.no,.no{background:var(--paper);color:#9c3a32;border:2px solid #c9867c;box-shadow:0 4px 0 #c9867c}
+.btn.mid,.mid{background:var(--paper);color:var(--muted);border:2px solid var(--line);box-shadow:0 4px 0 var(--line)}
+.yes{background:var(--toska-d);color:#fff;box-shadow:0 4px 0 var(--toska-dd)}
+
+/* pilihan: gaya Kampus, kotak huruf A/B/C */
+.chip{border-radius:6px;border:1.5px solid var(--line);background:var(--paper)}
+.chip[aria-pressed=true]{background:var(--bar);border-color:var(--bar);color:#fff7e6}
+.chips.big{counter-reset:opt}
+.chips.big .chip,.chips.big .chip:nth-child(n){--t:var(--paper);--c:var(--line);background:var(--paper);border:1.5px solid var(--line);border-radius:6px;box-shadow:0 2px 0 var(--line);counter-increment:opt;color:var(--ink)}
+.chips.big .chip:active{box-shadow:0 0 0 var(--line)}
+.chips.big .chip[aria-pressed=true]{background:#e3f3ef;border-color:var(--toska-d);color:var(--ink);box-shadow:0 3px 0 var(--toska-d)}
+.chips.big .chip[aria-pressed=true]::after{background:var(--toska-d);color:#fff;border-radius:3px}
+.chips.big .em{font-size:0!important;width:30px;height:30px;flex:none;display:grid;place-items:center;background:#e3ece6;border:1px solid #c7d6cd;border-radius:4px}
+.chips.big .em::before{content:counter(opt,upper-alpha);font-family:var(--mono);font-weight:700;font-size:13px;color:var(--ink)}
+.chips.big .chip[aria-pressed=true] .em{background:var(--toska-d);border-color:var(--toska-d)}
+.chips.big .chip[aria-pressed=true] .em::before{color:#fff}
+.chips.big.three .em{width:26px;height:26px}
+.pick2 .chip,.pick2 .chip:nth-of-type(2){background:var(--paper);border:2px solid var(--ink);border-radius:8px;box-shadow:4px 4px 0 var(--ink)}
+.pick2 .chip[aria-pressed=true]{background:var(--bar);color:#fff7e6}
+.oo{background:var(--paper);border:1.5px solid var(--line);border-radius:6px}
+.oo[aria-pressed=true]{border-color:var(--toska-d);background:#e3f3ef}
+.dopt{background:var(--paper);border:2.5px solid var(--ink);border-radius:8px;box-shadow:4px 4px 0 var(--ink)}
+.dopt:active{box-shadow:1px 1px 0 var(--ink)}
+.vs{font-family:var(--mono);background:var(--rust);border-radius:3px}
+.story{border-left:3px solid var(--rust)}
+.isb{border-radius:6px}
+.isb .n{border-radius:3px;background:var(--rust);color:#fff}
+.ipk .sel .chip{background:var(--bar);border-color:var(--bar)}
+
+/* peta kota */
+.map{border-radius:6px;background:#bfe6df;border:2px solid var(--bar);image-rendering:pixelated}
+.map text{font-family:var(--font-display);font-weight:800;fill:var(--ink)}
+
+/* intro */
+.logo-px{display:block;width:min(260px,72%);height:auto;image-rendering:pixelated;margin:2px 0 -2px}
+.tagl{font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--toska-d)}
+.babs{display:grid;gap:8px;counter-reset:bab}
+.babs div{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:center;background:var(--paper);border:1.5px solid var(--line);border-radius:6px;padding:10px 12px}
+.babs span{width:34px;height:34px;display:grid;place-items:center;background:#e3ece6;border:1px solid #c7d6cd;border-radius:4px;font-family:var(--mono);font-weight:700;font-size:13px}
+.babs b{display:block;font-weight:800;letter-spacing:-.01em;line-height:1.25}
+.babs small{display:block;font-size:13px;color:var(--muted);line-height:1.35}
+.babs div.x{background:transparent;border-style:dashed}
+
+/* hasil */
+.char{background:var(--bar);border-bottom:4px solid var(--toska);box-shadow:0 3px 0 #cdbfa8}
+.char .lbl{color:#e8aa85!important}
+.char .ava{border-radius:6px;background:#fff7e6}
+.top3 div{border-radius:4px;background:rgba(255,247,230,.08);border:1px solid rgba(255,247,230,.14)}
+.mjhero{background:var(--bar);border-radius:8px;box-shadow:0 4px 0 var(--c)}
+.ring b{background:#10201f}
+.ring{background:conic-gradient(#7fd8cc calc(var(--p)*1%),rgba(255,255,255,.16) 0)}
+.tile{border-radius:8px;background:var(--paper);border:1.5px solid var(--line);box-shadow:0 3px 0 var(--c)}
+.tile .ic,.shhd .ic{border-radius:4px;background:#e3ece6;border:1px solid #c7d6cd;font-family:var(--mono);font-size:14px!important;font-weight:700;color:var(--ink)}
+.tile.seen{background:var(--card)}
+.tile:not(.seen)::after{border-radius:3px;font-family:var(--mono);font-size:11px;letter-spacing:.03em;background:var(--bar);color:#fff7e6}
+.tile.seen::after{border-radius:3px}
+.shbox{border-radius:10px 10px 0 0;background:var(--card)}
+.shhd{background:var(--paper2)}
+.shx{border-radius:4px;background:var(--paper)}
+.shft{background:var(--card)}
+.jpb{border-radius:8px;background:var(--paper);border-width:2px}
+.jpb .jpn{border-radius:4px;font-family:var(--mono);font-size:14px}
+.jpb .jpi{border-radius:3px;background:var(--rust);color:#fff}
+.verd{border-radius:6px}
+.verd>span:empty{display:none}
+.stg div,.xitem,.kp,.cmp .c,.sub,.archive-item{border-radius:6px;background:var(--paper2)}
+.fact{border-radius:6px}
+.fact .fi,.heavy>div>b{border-radius:4px}
+.heavy>div{border-radius:6px}
+.tag{border-radius:4px;background:var(--paper2)}
+.tl div{border-radius:6px;background:var(--paper2);border-top-color:var(--toska-d)}
+.gauge{border-radius:0;background:linear-gradient(90deg,#f0c2b4,#f6dfa6,#b8e2d6)}
+.gauge i{border-radius:2px}
+.poster{background:var(--bar);border-radius:8px}
+.poster img{border-radius:4px}
+.pill{border-radius:3px;font-family:var(--mono);font-weight:700;letter-spacing:.03em}
+.legend i{border-radius:0}
+
+/* Paspor Jelajah */
+.paspor{background:var(--card);border:2px solid var(--bar);border-radius:8px;overflow:hidden;box-shadow:0 4px 0 #cdbfa8}
+.paspor .ph{background:var(--bar);color:#fff7e6;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.paspor .ph b{font-family:var(--mono);font-size:12px;letter-spacing:.1em}
+.paspor .ph span{font-family:var(--mono);font-size:12px;color:#7fd8cc}
+.paspor .pb{padding:14px;display:flex;flex-direction:column;gap:12px}
+.paspor .who2{display:flex;gap:12px;align-items:center}
+.paspor .who2 svg{width:52px;height:52px;background:var(--paper2);border-radius:4px;padding:4px;flex:none}
+.paspor .who2 b{display:block;font-size:18px;font-weight:800;letter-spacing:-.01em}
+.paspor .who2 small{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.paspor .cap3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.paspor .cap3 div{border:1.5px dashed var(--line);border-radius:6px;padding:8px 6px;text-align:center;display:flex;flex-direction:column;gap:2px;min-height:70px;justify-content:center}
+.paspor .cap3 div b{font-family:var(--mono);font-size:11px;letter-spacing:.06em}
+.paspor .cap3 div small{font-size:12px;line-height:1.25;color:var(--muted)}
+.paspor .cap3 .done{border:2px solid var(--toska-d);color:var(--toska-d);transform:rotate(-2deg);background:#e9f6f2}
+.paspor .cap3 .done small{color:var(--toska-d);font-weight:700}
+.paspor .lst{display:grid;gap:6px}
+.paspor .lst div{display:flex;justify-content:space-between;gap:8px;background:var(--paper2);border-radius:4px;padding:7px 10px;font-weight:700;font-size:14px}
+.paspor .lst div span:last-child{font-family:var(--mono);font-size:13px}
+.kampus-go{display:flex;flex-direction:column;gap:10px;border-top:1.5px dashed var(--line);padding-top:12px}
+.kampus-go .opt{display:grid;grid-template-columns:30px 1fr 18px;gap:10px;align-items:center;background:var(--paper);border:1.5px solid var(--line);border-radius:6px;padding:10px 12px;color:var(--ink);text-decoration:none;font-weight:800}
+.kampus-go .opt span:first-child{width:30px;height:30px;display:grid;place-items:center;background:#f6e3d8;border:1px solid #e3c2ae;border-radius:4px;font-family:var(--mono);font-size:12px;color:var(--rust)}
+.kampus-go .opt small{display:block;font-weight:500;font-size:12.5px;color:var(--muted)}
+.kampus-go .opt::after{content:"\2192";color:var(--rust);font-weight:800}
+.psheet{position:fixed;inset:0;z-index:30;background:rgba(23,42,46,.6);display:flex;align-items:flex-end;justify-content:center}
+.psheet>div{width:100%;max-width:620px;max-height:92dvh;overflow:auto;background:var(--sea);border-radius:10px 10px 0 0;padding:16px;display:flex;flex-direction:column;gap:12px;animation:up .25s ease-out}
+.psheet .ptop{display:flex;justify-content:space-between;align-items:center}
+.psheet .ptop b{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--rust)}
+
+/* strip perjalanan kota (pengganti strip pelayaran) */
+.voy .vw{border-radius:6px;border:2px solid var(--bar);background:linear-gradient(#8fd1c8 0,#bfeee6 52%,#e9dcc2 52%,#e9dcc2 100%)}
+.voy .sunb{border-radius:0;background:#ffe7a0;box-shadow:none;width:14px;height:14px;top:7px}
+.voy .cl,.voy .cl::before{border-radius:0;background:#f6fbf9}
+.voy .wv{height:20px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='20' shape-rendering='crispEdges'%3E%3Crect width='60' height='20' fill='%23585f5a'/%3E%3Crect y='9' width='14' height='2' fill='%23f3e3b3'/%3E%3Crect x='30' y='9' width='14' height='2' fill='%23f3e3b3'/%3E%3C/svg%3E") repeat-x;animation:none}
+.voy .wv.w2{height:6px;background:repeat-x url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='6' shape-rendering='crispEdges'%3E%3Crect width='16' height='6' fill='%233f5a4f'/%3E%3Crect x='2' width='4' height='3' fill='%23567a66'/%3E%3C/svg%3E");animation:none}
+.voy .skyl{position:absolute;left:0;right:0;bottom:20px;height:30px;background:repeat-x bottom url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='30' shape-rendering='crispEdges'%3E%3Cg fill='%237fb7b0'%3E%3Crect x='0' y='12' width='14' height='18'/%3E%3Crect x='16' y='4' width='12' height='26'/%3E%3Crect x='30' y='16' width='16' height='14'/%3E%3Crect x='48' y='8' width='10' height='22'/%3E%3Crect x='60' y='14' width='18' height='16'/%3E%3Crect x='80' y='6' width='14' height='24'/%3E%3C/g%3E%3Cg fill='%23d6f2ec'%3E%3Crect x='19' y='8' width='2' height='2'/%3E%3Crect x='23' y='12' width='2' height='2'/%3E%3Crect x='51' y='12' width='2' height='2'/%3E%3Crect x='83' y='10' width='2' height='2'/%3E%3Crect x='88' y='16' width='2' height='2'/%3E%3C/g%3E%3C/svg%3E");opacity:.9}
+.voy .route{border-top:2px dashed rgba(25,45,44,.35)}
+.voy .route i{background:var(--toska-d);border-radius:0}
+.voy .ship svg{animation:jalan .5s steps(2) infinite;transform-origin:50% 100%}
+@keyframes jalan{50%{transform:translateY(-1px)}}
+.voy .ship.got svg{animation:got .45s ease-out,jalan .5s steps(2) .45s infinite}
+.vsay{border-radius:4px;background:var(--bar);font-family:var(--font-display);font-weight:700}
+.vsay::after{border-top-color:var(--bar)}
+@media (prefers-reduced-motion:reduce){.voy .ship svg{animation:none}}
+.kampus-go .opt.cocok{border-color:var(--toska-d);box-shadow:0 3px 0 var(--toska-d)}
+.kampus-go .opt.cocok span:first-child{background:#e3f3ef;border-color:#9fd3c8;color:var(--toska-d)}
+.fact.c1,.fact.c2,.fact.c3,.fact.c4,.fact.c5{background:var(--paper2)}
+/* layar permainan: adegan jadi strip pendek supaya isi tidak terdorong ke bawah */
+body.sc-b1 .scene{display:none}
+body.sc-b2 .scene,body.sc-b3 .scene,body.sc-b4k .scene,body.sc-bf .scene,body.sc-b4 .scene,body.sc-b5 .scene{aspect-ratio:auto;height:78px}
+body.sc-b2 .scene canvas,body.sc-b3 .scene canvas,body.sc-b4k .scene canvas,body.sc-bf .scene canvas,body.sc-b4 .scene canvas,body.sc-b5 .scene canvas{object-fit:cover;object-position:50% 62%}
+body.sc-b2 .scene .loc,body.sc-b3 .scene .loc,body.sc-b4k .scene .loc,body.sc-bf .scene .loc,body.sc-b4 .scene .loc,body.sc-b5 .scene .loc{bottom:8px;left:8px;font-size:12px;padding:4px 8px}
+.nar{font-size:14.5px;padding:9px 12px}
+@media (max-height:800px){#b1 .nar{display:none}.jbar .in{min-height:52px}}
 </style>
 </head>
 <body>
+<header class="jbar"><div class="in"><a class="brand" href="./" aria-label="Jelajah Jurusan, halaman awal"><span class="mark" aria-hidden="true">✦</span>JELAJAH<em>JURUSAN</em></a><button type="button" class="pas" id="pasBtn"><i aria-hidden="true"></i><span>Paspor Jelajah</span></button></div></header>
 <div class="wrap">
 
 <div class="hud" id="hud" hidden>
@@ -575,6 +808,8 @@ summary{min-height:48px}
   <div class="stages" id="stages" role="img" aria-label="Babak"></div>
   <div class="pts" id="pts" aria-label="Poin">0</div>
 </div>
+
+<div class="scene" id="scene" aria-hidden="true"><canvas id="sceneCv" width="160" height="56"></canvas><span class="loc" id="sceneLoc">SMA Senja · Kelas 12</span></div>
 
 <!-- INTRO -->
 <section class="screen" id="intro">
@@ -591,15 +826,23 @@ summary{min-height:48px}
     </div>
   </div>
   <div class="card">
-    <p class="badge" style="align-self:flex-start">7 babak · sekitar 15 menit</p>
-    <h1>Jelajah Jurusan</h1>
-    <p>Bingung mau kuliah apa? Yuk berlayar ke 6 pulau jurusan dan cari yang paling nyambung denganmu.</p>
-    <div class="how"><div style="--t:#fff1c2"><span aria-hidden="true">🃏</span><b>Geser kartu</b><small>Suka atau bukan aku</small></div><div style="--t:#dcebfb"><span aria-hidden="true">⚔️</span><b>Coba misi</b><small>Rasakan sehari di jurusannya</small></div><div style="--t:#d8f1e8"><span aria-hidden="true">🗺️</span><b>Dapat peta</b><small>3 jurusan paling nyambung</small></div></div>
-    <svg class="map" id="introMap" viewBox="0 0 340 220" role="img" aria-label="Peta enam pulau jurusan"></svg>
+    <img class="logo-px" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARIAAAA0CAYAAABGtbe8AAAD6ElEQVR42u2dMW4VMRCG/RAHQIISBYmCBpAoqajQOwDiFKHlLJwC0ZMT0ESKBDQUSERUiCchlIIuFHl+hZPV2jP27Nj7fQ0EsbE9Xnt+r8fjTajM0Z0nl5Lnzv982Wie905snzWt7Nlre3LrXdtuUnv10t5bAQBAye1WnuLH709Zzz249/zGf899vjVp/UrrNdU+a2rZs9f2SOuttVssN44PqTLx2t5YDooEAPwoknRG+/f3l+r3aJ9vhdd6zSnEXuq9dD/UtlscD1olZ9V/0nJQJADgT5GM5vl6p5ZCnPLcS+3e9GK39PlR7YYiAQB/igTG/pZQa82P3cYCRQIAKJLI7vw7vWkQGTzqNzDshiIBABRJHbbfftKbil2HqOjuHj1c9e4NdkORAACKRMfF2Wd6U7Emj4ruNNOzjroLgd1QJACAIlHy7mNgt6aConv5YlW7EKPbzSq/D4oEAFAkrfKXxDVsb5nbpLsOB0X39s0qz96MZjfpeOD0LwCgSAKRg4vuOkjjIkbZhRjNbtbjAUUCACiSwNmay5rxN6VxEb0qQeyGIgEAFAkEj7sOwriI3ndvsBuKBAC8KBKrm7wC+UiC512HkEYIF8ZFzO1CaG9gXKvdrMdD6SlmFAkA1P9G0usNcmvNR6JVkl9fvb76S/xT6alz/7/2Bsa12s1qPJyiSABgcUXS+772WvORSO9fad3fU7sQXt6z3uxmNh6Eu04oEgAgjiR0ko+k1ulhrx6+1S5Eq1PXo9tNPB6Ep5hRJACwvCLxkqejVT4Sbftq1atWfUInp7CnPHSru4xHPb2e+61F+16hSACgniKR5lPwsvb0eldrK3tIPbN1xKPU08V2pe+Ztr2j2y1w1gYAulckMRLuJHMm1Xpa72djvK/BpR7VKuJxStGVKl9tP6Tt7dVuKBIAWI8iiZFw2/3PJ8o1XqsZHnSeWRrxuHt0v4qSKFW+WqWrjXj2YjcUCQCsKI5kHwl3cRxuVCZB6EFSD5E7w0tveR89v4k0o9fB3sKIx+2zp6rToXPKt/b7lb7XvdvNajxIy0GRAIBekVy7SW5CmYQJD1L61Tx3hk/X0l7ymyytVB5/eH9ll/3aO7sdib1LIx5jv+0yyw0zZ0Cav1+D2c1qPEjLQZEAQL1vJHPK5DBjafMiZM7w6Vo6OMlvsvRuU6ld0naI81zs+y2u+YPwzIf1+9W73azHg7QcFAkA1D/9O+U5DjPWcZ28CLMz/ITHCgvnN1k8E1upXZR5WtL3Qdt+6/drTgH1Yjez8SAsB0UCAGo2VqcRS9eYXk4/XvNsnaLNAdq6/73+fi92s6q/tBwUCQCo+Q+Walv2ZzFt+AAAAABJRU5ErkJggg==" alt="JELAJAH" width="274" height="52">
+    <p class="tagl">Babak I · Jurusan · Kehidupan dalam 3 babak</p>
+    <h1>Kolom jurusan masih kosong.</h1>
+    <p>Senin pagi, wali kelas membagikan formulir rencana setelah lulus. Teman sebangkumu sudah menulis jurusan. Kamu belum. Hari ini kita isi pelan-pelan, sekitar 15 menit.</p>
+    <div class="babs">
+      <div><span>01</span><p><b>Geser kartu</b><small>Kegiatan mana yang bikin kamu berhenti membaca</small></p></div>
+      <div><span>02</span><p><b>Adu pilihan</b><small>Dua bidang, pilih satu untuk seharian</small></p></div>
+      <div><span>03</span><p><b>Coba misi</b><small>Rasakan sehari di jurusannya</small></p></div>
+      <div><span>04</span><p><b>Kenali dirimu</b><small>Pelajaran, nilai kerja, dan batasmu</small></p></div>
+      <div><span>05</span><p><b>Ruang BK</b><small>Tiga jurusan teratas diuji sekali lagi</small></p></div>
+    </div>
+    <svg class="map" id="introMap" viewBox="0 0 340 220" role="img" aria-label="Peta enam kawasan jurusan"></svg>
+    <p class="small muted">Kotamu punya 6 kawasan jurusan. Kawasan yang cocok denganmu akan menyala.</p>
     <p class="note">Tidak ada jawaban benar atau salah. Hasilnya saran untuk dipertimbangkan, bukan keputusan. Yang memutuskan tetap kamu.<br><br><b>Perlu tahu:</b> alat ini baru memuat 28 kelompok jurusan, bukan semua jurusan di Indonesia. Kalau minatmu ternyata di luar itu, hasilnya akan memberi tanda.</p>
   </div>
   <div class="card">
-    <h3>Siapa yang berlayar?</h3>
+    <p class="kick">Isi formulir</p><h3>Kenalan dulu</h3>
     <label class="f" for="nm">Nama panggilan (boleh kosong)<input type="text" id="nm" maxlength="20" autocomplete="off" placeholder="Misalnya: Dinda"></label>
     <div><p class="small" style="font-weight:700;margin-bottom:6px">Pilih karaktermu</p><div class="avas" id="avas"></div></div>
     <div><p class="small" style="font-weight:700;margin-bottom:4px">Jurusan incaranmu</p><p class="tiny muted" style="margin-bottom:10px">Pilih 1 sampai 3 jurusan. Kalau belum tahu, ketuk tombol "Belum tahu" di bawah, itu juga tidak apa-apa. Incaranmu nanti dicek dari beberapa sisi, karena suka saja belum tentu cukup.</p><div class="chips" id="incar"></div></div>
@@ -614,20 +857,21 @@ summary{min-height:48px}
       <div><p class="small" style="font-weight:700;margin-bottom:8px">Betah di kerjaan yang sekarang?</p><div class="chips" id="realHappy"></div></div>
     </div></details>
 
-    <div class="row"><button class="btn sun" id="go" type="button">Mulai berlayar</button><button class="btn ghost" id="resume" type="button" hidden>Lanjutkan permainan</button></div>
+    <div class="row"><button class="btn sun" id="go" type="button">Mulai Bab 1</button><button class="btn ghost" id="resume" type="button" hidden>Lanjutkan permainan</button></div>
   </div>
   <p class="foot" id="foot">Jawabanmu hanya tersimpan di perangkat ini.</p>
 </section>
 
 <!-- BABAK 1 -->
 <section class="screen" id="b1" hidden>
+  <p class="nar">Jam istirahat. Mading sekolah penuh brosur kegiatan. Geser kanan yang bikin kamu berhenti membaca.</p>
   <div class="card">
-    <p class="tiny muted" style="font-weight:800;letter-spacing:.08em">BABAK 1 · GESER KARTU</p>
+    <p class="tiny muted" style="font-weight:800;letter-spacing:.08em">Bab 1 / Geser kartu</p>
     <h2 id="swQ">Kegiatan ini seru buatmu?</h2>
     <p class="small muted" id="swHint">Geser kanan kalau suka, kiri kalau tidak. Jawab cepat pakai perasaan, tidak usah mikir bisa atau tidak.</p>
     <p class="badge" id="bonusBadge" hidden style="align-self:flex-start">Kartu bonus · menyesuaikan jawabanmu</p>
     <p class="badge" id="dayBadge" hidden style="align-self:flex-start;background:#8a5cd0">Kartu keseharian · begini rasanya tiap hari</p>
-    <div class="voy" id="voy" aria-hidden="true"><div class="vw"><span class="sunb"></span><i class="cl c1"></i><i class="cl c2"></i><i class="wv"></i><div class="route"><i id="route"></i></div><svg class="dest" viewBox="0 0 80 54"><ellipse cx="42" cy="44" rx="36" ry="9" fill="#f5e3b0"/><ellipse cx="42" cy="40" rx="27" ry="8" fill="#8fc79b"/><ellipse cx="34" cy="38" rx="9" ry="3" fill="#fff" opacity=".3"/><path d="M50 39q-3-13 1-25" stroke="#8a6532" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M51 14q-11-6-19 2q10-3 19-2zm0 0q11-7 19 1q-10-3-19-1zm0 0q-4 9-12 13q5-9 12-13zm0 0q9 4 11 13q-6-9-11-13z" fill="#3f9a5e"/><path d="M27 40V17" stroke="#14304a" stroke-width="2" stroke-linecap="round"/><path d="M27 17h15l-4 5 4 5H27z" fill="#ffc93c" stroke="#14304a" stroke-width="1.5" stroke-linejoin="round"/><text x="33" y="25.5" font-family="Baloo 2,Trebuchet MS,sans-serif" font-weight="800" font-size="9" fill="#14304a" text-anchor="middle">?</text></svg><div class="ship" id="ship"><svg viewBox="0 0 70 60"><path class="wake" d="M4 52h12M0 46h10M8 57h9" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="6 4" opacity=".9"/><g id="shipAva" transform="translate(13 15) scale(.62)"></g><path d="M41 44V6" stroke="#14304a" stroke-width="2.6" stroke-linecap="round"/><path d="M43.5 9q17 14 3 33h-3z" fill="#fff" stroke="#14304a" stroke-width="2" stroke-linejoin="round"/><path d="M44 21q6 1 11 0M44 31q5 1 9 0" stroke="#ef6a4c" stroke-width="2.4" fill="none" stroke-linecap="round"/><g class="flag"><path d="M41 6h20l-5 6 5 6H41z" fill="#ffc93c" stroke="#14304a" stroke-width="1.6" stroke-linejoin="round"/><text id="shipN" x="50" y="15.3" font-family="Baloo 2,Trebuchet MS,sans-serif" font-weight="800" font-size="9" fill="#14304a" text-anchor="middle">10</text></g><path d="M10 42h54l-9 13H19z" fill="#14304a" stroke="#14304a" stroke-width="2" stroke-linejoin="round"/><path d="M13 46.5h48" stroke="#ffc93c" stroke-width="2.6"/><circle cx="24" cy="50.5" r="1.8" fill="#fff"/><circle cx="31" cy="50.5" r="1.8" fill="#fff"/></svg></div><i class="wv w2"></i></div></div>
+    <div class="voy" id="voy" aria-hidden="true"><div class="vw"><span class="sunb"></span><i class="cl c1"></i><i class="cl c2"></i><i class="skyl"></i><i class="wv"></i><div class="route"><i id="route"></i></div><svg class="dest" viewBox="0 0 80 54" shape-rendering="crispEdges"><rect x="18" y="12" width="44" height="34" fill="#2f6f78"/><rect x="14" y="8" width="52" height="6" fill="#ad4e32"/><rect x="34" y="30" width="12" height="16" fill="#192d2c"/><g fill="#ffd27a"><rect x="22" y="18" width="5" height="5"/><rect x="53" y="18" width="5" height="5"/><rect x="22" y="28" width="5" height="5"/><rect x="53" y="28" width="5" height="5"/></g><rect x="31" y="15" width="18" height="11" fill="#fff7e6"/><text x="40" y="24" font-family="Space Mono,monospace" font-weight="700" font-size="9" fill="#192d2c" text-anchor="middle">?</text></svg><div class="ship" id="ship"><svg viewBox="0 0 70 60" shape-rendering="crispEdges"><path class="wake" d="M2 50h6M0 45h5" stroke="#d6d2c6" stroke-width="3" stroke-dasharray="4 4"/><rect x="8" y="24" width="56" height="24" fill="#2fb3a6"/><rect x="8" y="22" width="56" height="4" fill="#1f6b62"/><rect x="8" y="40" width="56" height="3" fill="#fff7e6"/><rect x="12" y="28" width="22" height="11" fill="#d6f2ec"/><rect x="38" y="28" width="10" height="11" fill="#d6f2ec"/><rect x="52" y="28" width="9" height="11" fill="#d6f2ec"/><g id="shipAva" transform="translate(13 19) scale(.5)"></g><rect x="14" y="46" width="10" height="10" fill="#192d2c"/><rect x="17" y="49" width="4" height="4" fill="#9aa3b5"/><rect x="48" y="46" width="10" height="10" fill="#192d2c"/><rect x="51" y="49" width="4" height="4" fill="#9aa3b5"/><rect x="62" y="38" width="3" height="4" fill="#ffd27a"/><g class="flag"><rect x="30" y="6" width="22" height="13" fill="#ffd27a" stroke="#192d2c" stroke-width="1.5"/><text id="shipN" x="41" y="16" font-family="Space Mono,monospace" font-weight="700" font-size="9" fill="#192d2c" text-anchor="middle">10</text></g></svg></div><i class="wv w2"></i></div></div>
     <div class="deckw"><div class="deck" id="deck"></div></div>
     <div class="swbtn">
       <button class="btn no" type="button" data-sw="0">Bukan aku</button>
@@ -642,20 +886,22 @@ summary{min-height:48px}
 
 <!-- PETA -->
 <section class="screen" id="peta" hidden>
+  <p class="nar">Dari atap sekolah, kota terlihat jelas. Kawasan yang cocok dengan minatmu mulai menyala.</p>
   <div class="card">
-    <p class="tiny muted" style="font-weight:800;letter-spacing:.08em">PETA TERBUKA</p>
-    <h2>Pulau yang mulai menyala</h2>
-    <svg class="map" id="map1" viewBox="0 0 340 220" role="img" aria-label="Peta pulau sesuai minatmu"></svg>
+    <p class="tiny muted" style="font-weight:800;letter-spacing:.08em">Bab 1 / Kota menyala</p>
+    <h2>Kawasan yang mulai menyala</h2>
+    <svg class="map" id="map1" viewBox="0 0 340 220" role="img" aria-label="Peta kawasan sesuai minatmu"></svg>
     <div class="say" id="say1"></div>
-    <p class="small muted">Ini baru arah awal. Babak-babak berikutnya akan mempertajamnya.</p>
-    <button class="btn sun" type="button" id="toB2">Lanjut ke Babak 2</button>
+    <p class="small muted">Ini baru arah awal. Bab-bab berikutnya akan mempertajamnya.</p>
+    <button class="btn sun" type="button" id="toB2">Lanjut ke Bab 2</button>
   </div>
 </section>
 
 <!-- BABAK 2 -->
 <section class="screen" id="b2" hidden>
+  <p class="nar">Pulang sekolah, temanmu iseng bertanya: kalau harus memilih satu untuk seharian penuh, kamu pilih yang mana?</p>
   <div class="card">
-    <p class="tiny muted" style="font-weight:800;letter-spacing:.08em">BABAK 2 · ADU PILIHAN</p>
+    <p class="tiny muted" style="font-weight:800;letter-spacing:.08em">Bab 2 / Adu pilihan</p>
     <h2>Kalau harus pilih satu seharian penuh</h2>
     <p class="small muted" id="duelCount"></p>
     <div class="duel" id="duel"></div>
@@ -666,13 +912,15 @@ summary{min-height:48px}
 
 <!-- BABAK 3 -->
 <section class="screen" id="b3" hidden>
+  <p class="nar">Akhir pekan. Kamu ikut program sehari mencoba di tempat kerja sungguhan. Tiap misi ada tiga langkah.</p>
   <div class="card" id="misiCard"></div>
 </section>
 
 <!-- BABAK 4: KENALI DIRIMU -->
 <section class="screen" id="b4k" hidden>
+  <p class="nar">Malam di kamar. Sebelum tidur, kamu menulis tentang dirimu: pelajaran favorit, yang kamu cari dari kerja, dan yang tidak bisa kamu terima.</p>
   <div class="card">
-    <p class="tiny muted" style="font-weight:800;letter-spacing:.08em" id="kStep">BABAK 4 · KENALI DIRIMU</p>
+    <p class="tiny muted" style="font-weight:800;letter-spacing:.08em" id="kStep">Bab 4 / Kenali dirimu</p>
     <div class="pbar"><i id="kBar"></i></div>
     <h2 id="kT"></h2>
     <p class="small muted" id="kD"></p>
@@ -684,13 +932,15 @@ summary{min-height:48px}
 
 <!-- BABAK 5: FINAL -->
 <section class="screen" id="bf" hidden>
+  <p class="nar">Senin pagi, guru BK menaruh tiga brosur jurusan di meja. “Bayangkan dulu sehari-harinya,” katanya.</p>
   <div class="card" id="finCard"></div>
 </section>
 
 <!-- BABAK 4 -->
 <section class="screen" id="b4" hidden>
+  <p class="nar">Masih di ruang BK. Sebelum kamu pulang, guru BK bertanya seberapa yakin kamu sekarang.</p>
   <div class="card">
-    <p class="tiny muted" style="font-weight:800;letter-spacing:.08em">TAMBAHAN · CEK KEYAKINAN</p>
+    <p class="tiny muted" style="font-weight:800;letter-spacing:.08em">Tambahan / Cek keyakinan</p>
     <h2>Seberapa mantap pilihanmu?</h2>
     <p class="small muted">Jujur saja, tidak ada yang menilai.</p>
     <div id="cek" class="paged"></div>
@@ -701,16 +951,17 @@ summary{min-height:48px}
 
 <!-- BABAK 5 -->
 <section class="screen" id="b5" hidden>
+  <p class="nar">Malam di rumah. Keluarga ikut bertanya: kuliah di kota mana, biayanya berapa, dan berapa lama.</p>
   <div class="card">
-    <p class="tiny muted" style="font-weight:800;letter-spacing:.08em">TAMBAHAN · RENCANA KULIAH</p>
+    <p class="tiny muted" style="font-weight:800;letter-spacing:.08em">Tambahan / Rencana kuliah</p>
     <h2>Rencana kuliahmu</h2>
     <div id="pref" class="paged" style="display:flex;flex-direction:column;gap:16px">
-    <div class="q"><p class="qt">Mau kuliah di kota mana?</p><p class="hintp">☑️ Boleh pilih lebih dari satu</p><div class="chips big" id="kota" data-multi></div></div>
-    <div class="q" data-auto><p class="qt">Jenis kampus</p><p class="hintp">👆 Pilih satu</p><div class="chips big one" id="tipe"></div></div>
-    <div class="q" data-auto><p class="qt">Soal biaya kuliah</p><p class="hintp">👆 Pilih satu</p><div class="chips big one" id="biaya"></div></div>
-    <div class="q" data-auto><p class="qt">Sanggup kuliah berapa lama sampai bisa kerja?</p><p class="hintp">👆 Pilih satu</p><div class="chips big one" id="lama"></div><p class="tiny muted">Jalur D3 sekitar 3 tahun dan lebih banyak praktik. S1 dan D4 sekitar 4 tahun. Beberapa profesi butuh sekolah tambahan setelahnya.</p></div>
-    <div class="q"><p class="qt">Soal sekolah kedinasan</p><p class="small muted">Sekolah milik pemerintah seperti STAN, IPDN, atau STIS. Biaya umumnya ditanggung negara dan lulusannya jadi pegawai negeri, tapi hidupnya berasrama dan penempatannya ditentukan negara. Mana yang sesuai denganmu?</p><p class="hintp">☑️ Boleh pilih lebih dari satu</p><div class="chips big one" id="dinas" data-multi></div></div>
-    <div class="q" data-auto><p class="qt">Perlu info beasiswa?</p><p class="hintp">👆 Pilih satu</p><div class="chips big" id="bea"></div></div>
+    <div class="q"><p class="qt">Mau kuliah di kota mana?</p><p class="hintp">Boleh pilih lebih dari satu</p><div class="chips big" id="kota" data-multi></div></div>
+    <div class="q" data-auto><p class="qt">Jenis kampus</p><p class="hintp">Pilih satu</p><div class="chips big one" id="tipe"></div></div>
+    <div class="q" data-auto><p class="qt">Soal biaya kuliah</p><p class="hintp">Pilih satu</p><div class="chips big one" id="biaya"></div></div>
+    <div class="q" data-auto><p class="qt">Sanggup kuliah berapa lama sampai bisa kerja?</p><p class="hintp">Pilih satu</p><div class="chips big one" id="lama"></div><p class="tiny muted">Jalur D3 sekitar 3 tahun dan lebih banyak praktik. S1 dan D4 sekitar 4 tahun. Beberapa profesi butuh sekolah tambahan setelahnya.</p></div>
+    <div class="q"><p class="qt">Soal sekolah kedinasan</p><p class="small muted">Sekolah milik pemerintah seperti STAN, IPDN, atau STIS. Biaya umumnya ditanggung negara dan lulusannya jadi pegawai negeri, tapi hidupnya berasrama dan penempatannya ditentukan negara. Mana yang sesuai denganmu?</p><p class="hintp">Boleh pilih lebih dari satu</p><div class="chips big one" id="dinas" data-multi></div></div>
+    <div class="q" data-auto><p class="qt">Perlu info beasiswa?</p><p class="hintp">Pilih satu</p><div class="chips big" id="bea"></div></div>
     </div>
     <button class="btn sun" type="button" id="toRes">Buka hasilku</button>
   </div>
@@ -732,15 +983,17 @@ summary{min-height:48px}
 
   <div class="card" id="mapCard">
     <h3>Peta minatmu</h3>
-    <p class="small muted">Pulau yang paling terang dan berbendera adalah arah minatmu yang paling kuat.</p>
-    <svg class="map" id="resMap" viewBox="0 0 340 220" role="img" aria-label="Peta pulau sesuai minatmu"></svg>
+    <p class="small muted">Kawasan yang paling banyak lampunya menyala dan berbendera adalah arah minatmu yang paling kuat.</p>
+    <svg class="map" id="resMap" viewBox="0 0 340 220" role="img" aria-label="Peta kawasan sesuai minatmu"></svg>
     <div class="bars" id="islBars"></div>
   </div>
+
+  <div class="card" id="pasCard"></div>
 
   <div class="card" id="valCard">
     <h3>Cek jurusan incaranmu</h3>
     <p class="small muted">Suka saja belum tentu cukup, jadi incaranmu dicek dari tiga sisi.</p>
-    <div class="how"><div style="--t:#fde4e1"><span aria-hidden="true">❤️</span><b>Minat</b><small>Gabungan semua jawabanmu</small></div><div style="--t:#fff1c2"><span aria-hidden="true">🎮</span><b>Rasa</b><small>Saat mencoba misinya</small></div><div style="--t:#dcebfb"><span aria-hidden="true">🔎</span><b>Kenal</b><small>Tahu isi kuliahnya</small></div></div>
+    <div class="how"><div style="--t:#fde4e1"><span aria-hidden="true"></span><b>Minat</b><small>Gabungan semua jawabanmu</small></div><div style="--t:#fff1c2"><span aria-hidden="true"></span><b>Rasa</b><small>Saat mencoba misinya</small></div><div style="--t:#dcebfb"><span aria-hidden="true"></span><b>Kenal</b><small>Tahu isi kuliahnya</small></div></div>
     <div id="valBox"></div>
   </div>
 
@@ -807,7 +1060,7 @@ summary{min-height:48px}
 
   <div class="card" id="posterCard">
     <h3 id="posterH">Poster hasilmu</h3>
-    <p class="small muted" id="posterDesc">Kartu penjelajahmu dalam satu gambar, siap dibagikan ke story, status, atau grup. Isinya julukan, ciri-ciri, bentuk minat, peta pulau, 3 jurusan teratas, dan contoh pekerjaan. Kelebihan, kebiasaan, dan jawabanmu yang lain tidak ikut.</p>
+    <p class="small muted" id="posterDesc">Kartu penjelajahmu dalam satu gambar, siap dibagikan ke story, status, atau grup. Isinya julukan, ciri-ciri, bentuk minat, peta kawasan, 3 jurusan teratas, dan contoh pekerjaan. Kelebihan, kebiasaan, dan jawabanmu yang lain tidak ikut.</p>
     <p class="lbl" style="color:var(--ink)">Pilih gaya poster</p>
     <div class="chips" id="posterGaya" role="group" aria-label="Gaya poster"></div>
     <div class="poster"><img id="posterImg" alt=""><p class="small" id="posterWait">Menyiapkan poster…</p></div>
@@ -834,7 +1087,7 @@ summary{min-height:48px}
     <h3>Dari mana semua ini?</h3>
     <details><summary>Cara hitung dan sumber data</summary><div><ul class="small">
       <li><b>Pertanyaan minat</b> mengikuti teori minat karier John Holland yang dipakai konselor di banyak negara, dengan acuan O*NET Interest Profiler.</li>
-      <li><b>Nilai minat</b> digabung dari kartu, adu pilihan, misi, pelajaran yang kamu nikmati, yang kamu cari dari pekerjaan, gaya kerja, hal yang tidak bisa kamu toleransi, dan jawabanmu di babak final. Pelajaran yang nilainya bagus hanya jadi catatan.</li>
+      <li><b>Nilai minat</b> digabung dari kartu, adu pilihan, misi, pelajaran yang kamu nikmati, yang kamu cari dari pekerjaan, gaya kerja, hal yang tidak bisa kamu toleransi, dan jawabanmu di bab final. Pelajaran yang nilainya bagus hanya jadi catatan.</li>
       <li><b>Cek jurusan incaran</b> melihat minat, rasa saat mencoba misi, dan seberapa kenal kamu dengan isi kuliahnya, karena suka pada suatu bidang belum tentu berarti cocok menjalaninya.</li>
       <li><b>Saran peminatan</b> dicocokkan dari minat, kelebihan, dan kebiasaan yang kamu pilih. Kelebihan dan kebiasaan tidak mengubah nilai minat jurusan mana pun. Keduanya hanya dipakai untuk saran persiapan dan urutan peminatan.</li>
       <li><b>Cek keyakinan</b> mengikuti riset Itamar Gati tentang kesulitan memilih karier dan konsep kesiapan karier dari Mark Savickas.</li>
@@ -894,12 +1147,12 @@ const DIM = {
 };
 const DK = ["R","I","A","S","E","C"];
 const ISL = {
-  kes:{n:"Pulau Kesehatan", c:"#c54c42", x:66, y:58},
-  tek:{n:"Pulau Teknologi", c:"#2876c7", x:172, y:44},
-  tnk:{n:"Pulau Teknik", c:"#a36817", x:276, y:62},
-  man:{n:"Pulau Sumber Daya Manusia", c:"#8a5cd0", x:74, y:158},
-  bis:{n:"Pulau Bisnis", c:"#1a8463", x:178, y:168},
-  kre:{n:"Pulau Kreatif", c:"#c74189", x:278, y:156}
+  kes:{n:"Kawasan Kesehatan", c:"#c54c42", x:66, y:58},
+  tek:{n:"Kawasan Teknologi", c:"#2876c7", x:172, y:44},
+  tnk:{n:"Kawasan Teknik", c:"#a36817", x:276, y:62},
+  man:{n:"Kawasan Sumber Daya Manusia", c:"#8a5cd0", x:74, y:158},
+  bis:{n:"Kawasan Bisnis", c:"#1a8463", x:178, y:168},
+  kre:{n:"Kawasan Kreatif", c:"#c74189", x:278, y:156}
 };
 // Kartu: [id, dimensi, teks]. Dua kartu pertama tiap dimensi adalah pasangan cek konsistensi.
 const CARDS = [
@@ -2035,15 +2288,18 @@ function avaSvg(i){ const [bg,ink]=AV[i%4]; const hat=[`<path d="M8 15 Q20 2 32 
   return `<circle cx="20" cy="22" r="15" fill="${bg}"/>${hat}<circle cx="14.5" cy="21" r="2.2" fill="${ink}"/><circle cx="25.5" cy="21" r="2.2" fill="${ink}"/><path d="M14 27 Q20 32 26 27" stroke="${ink}" stroke-width="2.2" fill="none" stroke-linecap="round"/>`; }
 
 function drawMap(el, power){
-  let h=`<g opacity=".5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"><path d="M20 110q10-6 20 0t20 0"/><path d="M130 105q10-6 20 0t20 0"/><path d="M230 112q10-6 20 0t20 0"/><path d="M120 205q10-6 20 0t20 0"/></g>`;
+  let h=`<g shape-rendering="crispEdges"><rect width="340" height="220" fill="#bfe6df"/><rect y="0" width="340" height="40" fill="#a9ddd4"/><rect y="104" width="340" height="12" fill="#d8c7a3"/><rect x="164" y="0" width="12" height="220" fill="#d8c7a3"/>`;
+  for(let x=4;x<340;x+=16) h+=`<rect x="${x}" y="109" width="8" height="2" fill="#f4ead2"/>`;
+  for(let y=4;y<220;y+=16) h+=`<rect x="169" y="${y}" width="2" height="8" fill="#f4ead2"/>`;
+  h+=`</g>`;
   const ord=power?Object.keys(ISL).sort((a,b)=>power[b]-power[a]):[];
-  for(const k in ISL){ const I=ISL[k], p=power?power[k]:1, lit=!power||ord.indexOf(k)<2, lab=I.n.replace("Pulau ",""), lfs=lab.length>12?10:16;
-    const op=power?(.28+.72*Math.max(0,Math.min(1,(p-.3)/.6))):1, sc=power?(.82+.3*p):1;
-    h+=`<g transform="translate(${I.x} ${I.y}) scale(${sc.toFixed(2)})" opacity="${op.toFixed(2)}">
-      <ellipse cx="0" cy="7" rx="44" ry="24" fill="#f5e3b0"/><ellipse cx="0" cy="2" rx="38" ry="20" fill="${I.c}"/>
-      <ellipse cx="-10" cy="-4" rx="12" ry="6" fill="#fff" opacity=".25"/>
-      ${lit&&power?`<path d="M0 -12v-22" stroke="#14304a" stroke-width="2.5"/><path d="M0 -34l16 6-16 6z" fill="#ffc93c" stroke="#14304a" stroke-width="1.5"/>`:""}
-    </g><text x="${I.x}" y="${I.y+42}" font-size="${lfs}">${lab}</text>`; }
+  for(const k in ISL){ const I=ISL[k], p=power?power[k]:1, lit=!power||ord.indexOf(k)<2, lab=I.n.replace("Kawasan ",""), lfs=lab.length>12?10:15;
+    const on=power?Math.max(0,Math.min(1,(p-.3)/.6)):.6, op=power?(.45+.55*on):1;
+    let b=`<rect x="-46" y="14" width="92" height="8" fill="#9c8a6a"/>`;
+    [[-40,-14,22,30],[-15,-26,30,42],[18,-8,22,24]].forEach(([x,y,w,hh],j)=>{ b+=`<rect x="${x}" y="${y}" width="${w}" height="${hh}" fill="${I.c}"/><rect x="${x}" y="${y}" width="${w}" height="3" fill="#192d2c" opacity=".35"/>`;
+      let n=0; for(let yy=y+6;yy<y+hh-4;yy+=7) for(let xx=x+4;xx<x+w-4;xx+=7){ n++; const lt=((n*37+j*11+k.charCodeAt(0))%100)/100<on; b+=`<rect x="${xx}" y="${yy}" width="4" height="4" fill="${lt?"#ffd27a":"#1f3533"}"/>`; } });
+    if(lit&&power) b+=`<rect x="-1" y="-48" width="3" height="24" fill="#192d2c"/><rect x="2" y="-48" width="14" height="5" fill="#ad4e32"/><rect x="2" y="-43" width="14" height="5" fill="#fff7e6"/>`;
+    h+=`<g transform="translate(${I.x} ${I.y-6})" opacity="${op.toFixed(2)}" shape-rendering="crispEdges">${b}</g><text x="${I.x}" y="${I.y+38}" font-size="${lfs}">${lab}</text>`; }
   el.innerHTML=h;
 }
 function islPower(u){ const p={}; for(const k in ISL) p[k]=Math.max(...M.filter(m=>m.isl===k).map(m=>base(m,u))); return p; }
@@ -2077,9 +2333,9 @@ $("#shMore").addEventListener("click",()=>$("#shBody").scrollBy({top:Math.round(
 const STG={b1:1,peta:1,b2:2,b3:3,b4k:4,bf:5};
 function show(id){
   if(id!==curScr){ $("#toast").hidden=true; clearTimeout(toastT); }
-  document.querySelectorAll(".screen").forEach(s=>s.hidden=s.id!==id); curScr=id; if(STG[id]) save();
+  document.querySelectorAll(".screen").forEach(s=>s.hidden=s.id!==id); curScr=id; if(typeof setScene==="function") setScene(id); if(STG[id]) save();
   const st=STG[id]; $("#hud").hidden=!st;
-  if(st){ $("#stages").innerHTML=[1,2,3,4,5].map(i=>`<i class="${i<st?"done":i===st?"on":""}"></i>`).join(""); $("#stages").setAttribute("aria-label",`Babak ${st} dari 5`); $("#hudName").textContent=S.name||"Penjelajah"; $("#hudAva").innerHTML=avaSvg(S.ava); $("#pts").textContent=S.pts+" poin"; }
+  if(st){ $("#stages").innerHTML=[1,2,3,4,5].map(i=>`<i class="${i<st?"done":i===st?"on":""}"></i>`).join(""); $("#stages").setAttribute("aria-label",`Bab ${st} dari 5`); $("#hudName").textContent=S.name||"Penjelajah"; $("#hudAva").innerHTML=avaSvg(S.ava); $("#pts").textContent=S.pts+" poin"; }
   window.scrollTo(0,0);
 }
 /* animasi kecil: pasang ulang kelas supaya animasinya main lagi */
@@ -2111,7 +2367,7 @@ function burst(v,id){ if(noMotion()) return; const cd=$("#topc"); if(!cd) return
     for(let i=0;i<11;i++){ const e=piece(DROP(i%3?"#5eb0be":"#86c8d2",rnd(11,16))), dx=rnd(-110,70), up=rnd(50,120), rt=dx*.3;
       e.animate([{transform:`translate(${ox}px,${oy}px) scale(.4) rotate(${rt}deg)`,opacity:0},{transform:`translate(${ox+dx*.5}px,${oy-up}px) scale(1) rotate(${rt}deg)`,opacity:1,offset:.4,easing:"cubic-bezier(.4,0,1,1)"},{transform:`translate(${ox+dx}px,${oy+rnd(30,80)}px) scale(.8) rotate(${rt*2}deg)`,opacity:0}],{duration:rnd(650,850),delay:i*18,easing:"cubic-bezier(0,.6,.4,1)",fill:"forwards"}).onfinish=()=>e.remove(); } } }
 /* tiap 10 kartu: bendera di tiang kapal menunjukkan angkanya, dan karaktermu bicara */
-const CHEER=["Kapal kita melaju!","Angin lagi bagus nih!","Pulaunya makin dekat!","Layar terkembang penuh!","Terus, jangan berhenti!","Ombaknya bersahabat!"];
+const CHEER=["Angkotnya melaju!","Jalanan lagi lancar!","Kotanya makin dekat!","Lampu hijau terus!","Terus, jangan berhenti!","Hampir sampai!"];
 let mileT=0;
 function cheer(n){ const sh=$("#ship"), v=$("#voy"); $("#shipN").textContent=n; sh.classList.add("mile"); v.querySelectorAll(".vsay").forEach(x=>x.remove());
   const b=document.createElement("div"); b.className="vsay"; b.textContent=`${n} kartu! ${CHEER[(Math.round(n/10)-1)%CHEER.length]}`; v.appendChild(b);
@@ -2136,10 +2392,10 @@ function ipick(el,get,toggle,none,pool,max){
   const cnt=k=>sel.filter(id=>byId(id).isl===k).length;
   el.innerHTML=`<div class="ipkh"><span class="cnt${full?" full":""}">${sel.length} dari ${max} dipilih</span><span class="small muted">${full?"Sudah penuh. Ketuk nama untuk menghapus.":sel.length?"Masih bisa tambah "+(max-sel.length)+" lagi. Ketuk nama untuk menghapus.":"Belum ada yang dipilih."}</span></div>
    ${sel.length?`<div class="sel">${sel.map((id,i)=>`<button type="button" class="chip" data-v="${id}" aria-label="Hapus ${esc(byId(id).n)}">${none===undefined&&sel.length>1?(i+1)+". ":""}${esc(byId(id).n)}</button>`).join("")}</div>`:""}
-   <p class="step"><b>1</b>Ketuk satu pulau</p>
-   <div class="isls">${Object.entries(IS).filter(([k])=>pool.some(m=>m.isl===k)).map(([k,I])=>`<button type="button" class="isb${!st.open&&!sel.length?" pulse":""}" data-isl="${k}" aria-expanded="${st.open===k}" style="--c:${I.c};--t:${PKT[k]}">${cnt(k)?`<span class="n">${cnt(k)}</span>`:""}${esc(I.n.replace("Pulau ",""))}<small>${pool.filter(m=>m.isl===k).length} ${k==="lain"?"bidang":"jurusan"}</small></button>`).join("")}</div>
-   ${st.open?`<p class="step"><b>2</b>Ketuk jurusannya. Ketuk lagi untuk batal.</p><div class="opts2">${pool.filter(m=>m.isl===st.open).map(m=>`<button type="button" class="chip${full&&!sel.includes(m.id)?" dim":""}" data-v="${m.id}" aria-pressed="${sel.includes(m.id)}">${esc(m.n)}</button>`).join("")}</div>`:`<p class="tiny muted">☝️ Ketuk salah satu pulau untuk melihat jurusan di dalamnya.</p>`}
-   ${none?`<button type="button" class="chip nonebtn" data-none aria-pressed="${!sel.length}">🤔 ${esc(none)}</button>`:""}`;
+   <p class="step"><b>1</b>Ketuk satu kawasan</p>
+   <div class="isls">${Object.entries(IS).filter(([k])=>pool.some(m=>m.isl===k)).map(([k,I])=>`<button type="button" class="isb${!st.open&&!sel.length?" pulse":""}" data-isl="${k}" aria-expanded="${st.open===k}" style="--c:${I.c};--t:${PKT[k]}">${cnt(k)?`<span class="n">${cnt(k)}</span>`:""}${esc(I.n.replace("Kawasan ",""))}<small>${pool.filter(m=>m.isl===k).length} ${k==="lain"?"bidang":"jurusan"}</small></button>`).join("")}</div>
+   ${st.open?`<p class="step"><b>2</b>Ketuk jurusannya. Ketuk lagi untuk batal.</p><div class="opts2">${pool.filter(m=>m.isl===st.open).map(m=>`<button type="button" class="chip${full&&!sel.includes(m.id)?" dim":""}" data-v="${m.id}" aria-pressed="${sel.includes(m.id)}">${esc(m.n)}</button>`).join("")}</div>`:`<p class="tiny muted">Ketuk salah satu kawasan untuk melihat jurusan di dalamnya.</p>`}
+   ${none?`<button type="button" class="chip nonebtn" data-none aria-pressed="${!sel.length}">${esc(none)}</button>`:""}`;
 }
 function ipickBind(el,redraw,toggle,get,max){
   max=max||3;
@@ -2175,14 +2431,14 @@ const isUji=()=>!!(S.real||(S.realJob&&S.realJob.length));
 
 /* Ikon kotak pilihan */
 const ICO={
- subj:{mat:"🔢",fis:"🧲",kim:"🧪",bio:"🧬",tik:"💻",eko:"📈",sos:"🌏",pkn:"⚖️",ind:"📖",ing:"🗣️",seni:"🎨"},
- vals:{gaji:"💰",bantu:"🤝",stabil:"🛡️",bebas:"🕊️",belajar:"📚",karya:"✨",pimpin:"🚀"},
- db:{darah:"🩸",malam:"🌙",jauh:"🧳",duduk:"🖥️",bicara:"🎤",hitung:"🧮",lembur:"⏰",lamaskl:"🎓"},
- strong:{hitung:"🧮",sukabaca:"📖",tekun:"🎯",bicara:"🎤",teliti:"🔍",disiplin:"⏱️",gaul:"🤗",sabar:"🧘",kreatif:"💡",tangan:"🛠️",inggris:"🌐",gambar:"✏️"},
- weak:{baca:"📄",nulis:"✍️",mat:"🔢",fis:"🧲",hafal:"🧠",malu:"🙈",rapi:"🌀",begadang:"📱",tunda:"🐢",urus:"🧼",bosan:"🥱"},
- why:{suka:"❤️",kerja:"💼",ortu:"👪",teman:"👯",gengsi:"😎",belum:"🤔"}
+ subj:{mat:"",fis:"",kim:"",bio:"",tik:"",eko:"",sos:"",pkn:"",ind:"",ing:"",seni:""},
+ vals:{gaji:"",bantu:"",stabil:"",bebas:"",belajar:"",karya:"",pimpin:""},
+ db:{darah:"",malam:"",jauh:"",duduk:"",bicara:"",hitung:"",lembur:"",lamaskl:""},
+ strong:{hitung:"",sukabaca:"",tekun:"",bicara:"",teliti:"",disiplin:"",gaul:"",sabar:"",kreatif:"",tangan:"",inggris:"",gambar:""},
+ weak:{baca:"",nulis:"",mat:"",fis:"",hafal:"",malu:"",rapi:"",begadang:"",tunda:"",urus:"",bosan:""},
+ why:{suka:"",kerja:"",ortu:"",teman:"",gengsi:"",belum:""}
 };
-const em=x=>x?`<span class="em" aria-hidden="true">${x}</span>`:"";
+const em=x=>x?`<span class="em" aria-hidden="true"></span>`:"";
 /* Satu pertanyaan per layar: tiap .q di dalam host tampil bergantian. need=true berarti wajib dijawab. */
 function pager(host,btn,need){
   const st=host._pg||(host._pg={}); st.qs=[...host.children].filter(e=>e.classList.contains("q")); st.i=0; st.btn=btn; st.need=need; st.w={}; btn.hidden=true;
@@ -2235,7 +2491,7 @@ function sail(){ const A=STAGE_A.length, b0=DECK.findIndex(x=>x[2]); let p;
   if(ci>voyCi) p=Math.max(p,voyP); voyCi=ci; voyP=p=Math.max(0,Math.min(1,p)); $("#ship").style.setProperty("--p",p.toFixed(3)); $("#route").style.setProperty("--p",p.toFixed(3)); const g=$("#shipAva"); if(g.dataset.a!==String(S.ava)){ g.innerHTML=avaSvg(S.ava); g.dataset.a=S.ava; } }
 function startSwipe(){ ci=0; voyCi=-1; voyP=0; syncBonus(); drawDeck(); }
 function drawDeck(){
-  const d=$("#deck"); d.innerHTML="";
+  const d=$("#deck"); d.innerHTML=""; { const n=$("#b1 .nar"); if(n) n.hidden=ci>0; }
   if(ci+1<DECK.length) d.insertAdjacentHTML("beforeend",`<div class="sw back"><div class="t">${esc(DECK[ci+1][1])}</div></div>`);
   /* Kartu bentuk minat berupa situasi ("Teman sering curhat ke kamu"), jadi pertanyaan dan tombolnya ikut menyesuaikan */
   const sit=ci<DECK.length&&/^[riasec]\d$/.test(DECK[ci][0]);
@@ -2274,7 +2530,7 @@ function openMap(){
   SWREF=S.sw; const u=dims(S.sw); drawMap($("#map1"),islPower(u));
   const top=[...DK].sort((a,b)=>u[b]-u[a]);
   const flat=u[top[0]]-u[top[5]]<.15;
-  $("#say1").innerHTML=flat?`<b>Minatmu masih merata.</b> Itu wajar. Babak berikutnya akan membantu memilah.`:`Sejauh ini kamu terlihat seperti <b>${DIM[top[0]].n}</b>, yang ${DIM[top[0]].d}. Ada juga sisi <b>${DIM[top[1]].n}</b>.`;
+  $("#say1").innerHTML=flat?`<b>Minatmu masih merata.</b> Itu wajar. Bab berikutnya akan membantu memilah.`:`Sejauh ini kamu terlihat seperti <b>${DIM[top[0]].n}</b>, yang ${DIM[top[0]].d}. Ada juga sisi <b>${DIM[top[1]].n}</b>.`;
   const rk=M.map(m=>({id:m.id,s:base(m,u)})).sort((a,b)=>b.s-a.s).map(x=>x.id);
   cand=[...S.incar,...rk.filter(id=>!S.incar.includes(id))].slice(0,6);
   show("peta");
@@ -2305,7 +2561,7 @@ let mlist=[], mi=0, ms=0;
 function startMisi(){ const inc=S.incar.slice(0,2); mlist=[...inc,...scoreAll(S).filter(x=>cand.includes(x.id)&&!inc.includes(x.id)).map(x=>x.id)].slice(0,2); mi=0; ms=0; drawMisi(); show("b3"); }
 function drawMisi(){
   const m=byId(mlist[mi]), I=ISL[m.isl];
-  let h=`<p class="tiny muted" style="font-weight:800;letter-spacing:.08em">BABAK 3 · MISI ${mi+1} DARI ${mlist.length} · LANGKAH ${ms+1} DARI 3</p>
+  let h=`<p class="tiny muted" style="font-weight:800;letter-spacing:.08em">Bab 3 / Misi ${mi+1} dari ${mlist.length} · langkah ${ms+1} dari 3</p>
    <span class="pill" style="background:${I.c};align-self:flex-start">${esc(I.n)}</span><h2>Sehari di ${esc(m.n)}</h2>`;
   if(ms===0) h+=`<p class="story">${esc(m.mis.s)}</p><p style="font-weight:700">Apa yang kamu lakukan duluan?</p><div class="opts">${m.mis.o.map((o,i)=>`<button type="button" class="oo" data-o="${i}">${esc(o)}</button>`).join("")}</div>`;
   else if(ms===1) h+=`<p class="small muted">Kamu memilih: ${esc(m.mis.o[S.mopt[m.id]]||"")}</p><p class="story"><b>Lalu muncul rintangan.</b> ${esc(RINT[m.id])}</p><p style="font-weight:700">Di titik ini, kamu...</p><div class="opts">${GRIT.map((g,i)=>`<button type="button" class="oo" data-g="${i}">${esc(g[1])}</button>`).join("")}</div>`;
@@ -2338,10 +2594,10 @@ const KDIRI=[
 let KSTEP=KMAIN, kMode="main";
 let kTm=0, kWarn={};
 function kHint(){ const g=$("#kBody .chips"), h=$("#kHint"); if(!g){ h.hidden=true; return; } h.hidden=false;
-  if(g.dataset.style){ h.innerHTML="👆 Pilih satu di tiap baris"; return; }
+  if(g.dataset.style){ h.innerHTML="Pilih satu di tiap baris"; return; }
   const max=+g.dataset.max, n=g.querySelectorAll('[aria-pressed="true"]').length;
-  h.innerHTML=`☑️ ${max?"Pilih paling banyak "+max:"Boleh pilih lebih dari satu"} <b>${n} dipilih</b>`; }
-function drawK(){ ki=Math.max(0,Math.min(ki,KSTEP.length-1)); const k=KSTEP[ki]; $("#kStep").textContent=`${kMode==="diri"?"TAMBAHAN · KELEBIHAN DAN KEBIASAAN":"BABAK 4 · KENALI DIRIMU"} · ${ki+1} DARI ${KSTEP.length}`; $("#kBar").style.width=Math.round((ki+1)/KSTEP.length*100)+"%"; $("#kT").textContent=k[0]; $("#kD").textContent=k[1]; $("#kBody").innerHTML=k[2](); $("#kPrev").disabled=ki===0; kHint(); window.scrollTo(0,0); }
+  h.innerHTML=`${max?"Pilih paling banyak "+max:"Boleh pilih lebih dari satu"} <b>${n} dipilih</b>`; }
+function drawK(){ ki=Math.max(0,Math.min(ki,KSTEP.length-1)); const k=KSTEP[ki]; $("#kStep").textContent=`${kMode==="diri"?"Tambahan / Kelebihan dan kebiasaan":"Bab 4 / Kenali dirimu"} · ${ki+1} DARI ${KSTEP.length}`; $("#kBar").style.width=Math.round((ki+1)/KSTEP.length*100)+"%"; $("#kT").textContent=k[0]; $("#kD").textContent=k[1]; $("#kBody").innerHTML=k[2](); $("#kPrev").disabled=ki===0; kHint(); window.scrollTo(0,0); }
 $("#kBody").addEventListener("click",e=>{ const c=e.target.closest(".chip"); if(!c) return; const g=c.parentElement;
   if(g.dataset.style){ S.style[g.dataset.style]=c.dataset.v; g.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed",x===c)); clearTimeout(kTm); if([...$("#kBody").querySelectorAll("[data-style]")].every(q=>q.querySelector('[aria-pressed="true"]'))) kTm=setTimeout(()=>$("#kNext").click(),450); }
   else { const key=g.dataset.key, max=+g.dataset.max, i=S[key].indexOf(c.dataset.v); if(i>=0) S[key].splice(i,1); else if(!max||S[key].length<max) S[key].push(c.dataset.v); else toast(`Paling banyak ${max}. Lepas satu dulu kalau mau ganti.`); c.setAttribute("aria-pressed",S[key].includes(c.dataset.v)); }
@@ -2359,19 +2615,19 @@ let flist=[], fi=0, fs=0;
 /* Keseharian kerja: untuk 2 jurusan teratas, pemain menilai kegiatan harian sungguhan dari pekerjaannya. Ini membedakan nomor 1 dan 2 lewat isi kerjanya, bukan lewat satu kartu. */
 const dayActs=id=>KERJA[id][0][2].slice(0,3);
 function drawDaily(){ const m=byId(flist[fi]), I=ISL[m.isl], acts=dayActs(m.id), cur=(S.dailyA||{})[m.id]||[];
-  $("#finCard").innerHTML=`<p class="tiny muted" style="font-weight:800;letter-spacing:.08em">BABAK 5 · FINAL · ${fi+1} DARI ${flist.length} · KESEHARIAN</p>
+  $("#finCard").innerHTML=`<p class="tiny muted" style="font-weight:800;letter-spacing:.08em">Bab 5 / Ruang BK · ${fi+1} dari ${flist.length} · keseharian</p>
    <span class="pill" style="background:${I.c};align-self:flex-start">${esc(I.n)}</span>
    <h2>Sehari-hari kalau kerja dari ${esc(m.n)}</h2>
    <p class="small muted">Contoh: ${esc(KERJA[m.id][0][0].replace(/ \(.*\)/,""))}. Ini yang dikerjakan hampir tiap hari. Mau menjalaninya?</p>
-   <p class="hintp">👆 Pilih satu untuk tiap kegiatan</p>
-   ${acts.map((a,i)=>`<div class="sub"><p style="font-weight:700">${esc(a)}</p><div class="chips big three" data-dy="${i}">${[["1","Mau","😀"],["0.5","Biasa","😐"],["0","Ogah","😖"]].map(o=>`<button type="button" class="chip" data-v="${o[0]}" aria-pressed="${cur[i]===+o[0]}">${em(o[2])}<span>${o[1]}</span></button>`).join("")}</div></div>`).join("")}
+   <p class="hintp">Pilih satu untuk tiap kegiatan</p>
+   ${acts.map((a,i)=>`<div class="sub"><p style="font-weight:700">${esc(a)}</p><div class="chips big three" data-dy="${i}">${[["1","Mau",""],["0.5","Biasa",""],["0","Ogah",""]].map(o=>`<button type="button" class="chip" data-v="${o[0]}" aria-pressed="${cur[i]===+o[0]}">${em(o[2])}<span>${o[1]}</span></button>`).join("")}</div></div>`).join("")}
    <div class="row stick"><button class="btn sun" type="button" id="dyNext">Lanjut</button></div>`;
   kick($("#finCard"),"rise"); window.scrollTo(0,0); }
 function startFinal(){ const sc=scoreAll(S); flist=sc.slice(0,3).map(x=>x.id); fi=0; fs=0; S.sang={}; S.pick=null; S.daily={}; S.dailyA={}; drawFinal(); show("bf"); }
 function drawFinal(){
   if(fi<flist.length&&fi<2&&fs===0) return drawDaily();
   if(fi<flist.length){ const m=byId(flist[fi]), I=ISL[m.isl], hit=MDB[m.id].filter(x=>S.db.includes(x));
-    $("#finCard").innerHTML=`<p class="tiny muted" style="font-weight:800;letter-spacing:.08em">BABAK 5 · FINAL · ${fi+1} DARI ${flist.length}</p>
+    $("#finCard").innerHTML=`<p class="tiny muted" style="font-weight:800;letter-spacing:.08em">Bab 5 / Ruang BK · ${fi+1} dari ${flist.length}</p>
      <span class="pill" style="background:${I.c};align-self:flex-start">${esc(I.n)}</span>
      <h2>${esc(m.n)}</h2>
      <p class="small muted">Sisi berat yang jarang diceritakan:</p>
@@ -2380,10 +2636,10 @@ function drawFinal(){
      <p style="font-weight:700">Dengan sisi berat itu, kamu sanggup menjalaninya?</p>
      <div class="row"><button class="btn no sm" type="button" data-s="0">Tidak sanggup</button><button class="btn mid sm" type="button" data-s="0.5">Masih mikir</button><button class="btn yes sm" type="button" data-s="1">Sanggup</button></div>`;
   } else {
-    $("#finCard").innerHTML=`<p class="tiny muted" style="font-weight:800;letter-spacing:.08em">BABAK 5 · FINAL · PILIHAN</p>
+    $("#finCard").innerHTML=`<p class="tiny muted" style="font-weight:800;letter-spacing:.08em">Bab 5 / Ruang BK · pilihan</p>
      <h2>Kalau harus memilih satu hari ini</h2>
      <p class="small muted">Ini bukan keputusan akhir. Hanya untuk melihat ke mana hatimu condong setelah tahu sisi beratnya.</p>
-     <div class="chips big one">${flist.map(id=>`<button type="button" class="chip" data-p="${id}" style="--t:#fff;--c:${ISL[byId(id).isl].c};border:3px solid ${ISL[byId(id).isl].c};font-family:var(--font-display);font-size:19px"><span class="dot" style="background:${ISL[byId(id).isl].c}"></span><span>${esc(byId(id).n)}</span></button>`).join("")}<button type="button" class="chip" data-p="" style="--t:#f4f9fa;--c:var(--line)">🤔 Belum bisa memilih</button></div>`;
+     <div class="chips big one">${flist.map(id=>`<button type="button" class="chip" data-p="${id}" style="--t:#fff;--c:${ISL[byId(id).isl].c};border:3px solid ${ISL[byId(id).isl].c};font-family:var(--font-display);font-size:19px"><span class="dot" style="background:${ISL[byId(id).isl].c}"></span><span>${esc(byId(id).n)}</span></button>`).join("")}<button type="button" class="chip" data-p="" style="--t:#f4f9fa;--c:var(--line)">Belum bisa memilih</button></div>`;
   }
   window.scrollTo(0,0);
 }
@@ -2397,9 +2653,9 @@ $("#finCard").addEventListener("click",e=>{ const sb=e.target.closest("[data-s]"
 /* babak 5: cek keyakinan */
 function drawCek(){
   const top=(S.incar.length?S.incar.slice(0,2):scoreAll(S).slice(0,2).map(x=>x.id)).map(byId);
-  let h=`<div class="q"><p class="qt">Kenapa jurusan-jurusan tadi menarik buatmu?</p><p class="hintp">☑️ Boleh pilih lebih dari satu</p><div class="chips big one" id="rs" data-multi>${REASONS.map(r=>`<button type="button" class="chip" data-r="${r[0]}" aria-pressed="${S.reasons.includes(r[0])}">${em(ICO.why[r[0]])}<span>${esc(r[1])}</span></button>`).join("")}</div></div>`;
-  top.forEach(m=>m.fk.forEach((f,i)=>{ const k=m.id+i; h+=`<div class="q" data-auto><span class="pill" style="background:${ISL[m.isl].c};align-self:flex-start">${esc(m.n)}</span><p class="qt">Kamu sudah tahu hal ini belum?</p><p class="hintp">👆 Pilih satu</p><p class="factbig">${esc(f)}.</p><div class="chips big" data-k="${k}"><button type="button" class="chip" data-v="1" aria-pressed="${S.know[k]===true}">${em("😎")}<span>Sudah tahu</span></button><button type="button" class="chip" data-v="0" aria-pressed="${S.know[k]===false}">${em("😮")}<span>Baru tahu</span></button></div></div>`; }));
-  READY.forEach(r=>{ h+=`<div class="q" data-auto><p class="tiny muted" style="font-weight:800;letter-spacing:.08em">SEBERAPA SIAP?</p><p class="factbig">${esc(r[1])}</p><div class="chips big three" data-q="${r[0]}">${[["0","Belum","🌱"],["0.5","Sedikit","🌿"],["1","Sudah","🌳"]].map(o=>`<button type="button" class="chip" data-v="${o[0]}" aria-pressed="${S.ready[r[0]]===+o[0]}">${em(o[2])}<span>${o[1]}</span></button>`).join("")}</div></div>`; });
+  let h=`<div class="q"><p class="qt">Kenapa jurusan-jurusan tadi menarik buatmu?</p><p class="hintp">Boleh pilih lebih dari satu</p><div class="chips big one" id="rs" data-multi>${REASONS.map(r=>`<button type="button" class="chip" data-r="${r[0]}" aria-pressed="${S.reasons.includes(r[0])}">${em(ICO.why[r[0]])}<span>${esc(r[1])}</span></button>`).join("")}</div></div>`;
+  top.forEach(m=>m.fk.forEach((f,i)=>{ const k=m.id+i; h+=`<div class="q" data-auto><span class="pill" style="background:${ISL[m.isl].c};align-self:flex-start">${esc(m.n)}</span><p class="qt">Kamu sudah tahu hal ini belum?</p><p class="hintp">Pilih satu</p><p class="factbig">${esc(f)}.</p><div class="chips big" data-k="${k}"><button type="button" class="chip" data-v="1" aria-pressed="${S.know[k]===true}">${em("")}<span>Sudah tahu</span></button><button type="button" class="chip" data-v="0" aria-pressed="${S.know[k]===false}">${em("")}<span>Baru tahu</span></button></div></div>`; }));
+  READY.forEach(r=>{ h+=`<div class="q" data-auto><p class="tiny muted" style="font-weight:800;letter-spacing:.08em">SEBERAPA SIAP?</p><p class="factbig">${esc(r[1])}</p><div class="chips big three" data-q="${r[0]}">${[["0","Belum",""],["0.5","Sedikit",""],["1","Sudah",""]].map(o=>`<button type="button" class="chip" data-v="${o[0]}" aria-pressed="${S.ready[r[0]]===+o[0]}">${em(o[2])}<span>${o[1]}</span></button>`).join("")}</div></div>`; });
   $("#cek").innerHTML=h; $("#cek").dataset.need=top.length*2; pager($("#cek"),$("#toB5"),true);
 }
 $("#cek").addEventListener("click",e=>{
@@ -2562,7 +2818,7 @@ function radar(cv,u,m){
   poly(u); g.fillStyle="rgba(239,106,76,.32)"; g.fill(); g.strokeStyle="#ef6a4c"; g.lineWidth=3; g.stroke();
   DK.forEach((d,i)=>{ const [x,y]=pt(i,Math.max(.06,u[d])); g.beginPath(); g.arc(x,y,5,0,7); g.fillStyle="#ef6a4c"; g.fill(); });
   poly(m.p); g.setLineDash([7,6]); g.strokeStyle="#14304a"; g.lineWidth=2.5; g.stroke(); g.setLineDash([]);
-  g.fillStyle="#14304a"; g.font="700 17px 'Baloo 2',sans-serif"; g.textBaseline="middle";
+  g.fillStyle="#14304a"; g.font="700 17px 'DM Sans',sans-serif"; g.textBaseline="middle";
   DK.forEach((d,i)=>{ const [x,y]=pt(i,1.17); g.textAlign=Math.abs(x-cx)<10?"center":x<cx?"right":"left"; g.fillText(DIM[d].n,x,y); });
 }
 /* Warna kotak: [warna pekat, warna muda] */
@@ -2631,26 +2887,26 @@ function majorCard(m,pc,open){
   const done=()=>m.prep.filter((_,i)=>S.todo[m.id+"-"+i]).length;
   /* Tiap kotak: [ikon, judul, keterangan singkat, warna, isi] */
   const T=[
-   ["🎯","Kenapa nyambung",whyT,"bis",whyH],
-   ["📚","Kuliahnya ngapain","Isi kuliah dan pekerjaannya","tek",`<p class="small" style="font-weight:700">Yang dipelajari</p>${tags(m.learn,PAL.tek[1])}<p class="small" style="font-weight:700">Bisa kerja sebagai</p>${tags(m.jobs,PAL.bis[1])}<button type="button" class="btn sm ghost tojob">Lihat keseharian tiap pekerjaan</button><p class="small" style="font-weight:700">Yang sering bikin kaget</p>${num(m.fk,"sun")}`],
-   ["💼","Sehari-hari kerja",`${KERJA[m.id].length} pekerjaan, buka satu per satu`,"tnk",`<div class="say jobhint"><b>Ada ${KERJA[m.id].length} contoh pekerjaan dari jurusan ini.</b> Ketuk tiap pekerjaan untuk melihat alat yang dipakai dan apa yang dikerjakan tiap hari.</div><div class="jobs">${KERJA[m.id].map((j,i)=>`<details class="job"><summary><span class="jn" aria-hidden="true">${i+1}</span><span class="jt">${esc(j[0])}</span><span class="jgo" aria-hidden="true"><span class="o">Lihat</span><span class="c">Tutup</span></span></summary><div class="jb"><p class="small" style="font-weight:700">Alat yang sering dipakai</p><div class="chips">${j[1].split(", ").map(x=>`<span class="tag" style="background:${PAL.tnk[1]}">${esc(x.charAt(0).toUpperCase()+x.slice(1))}</span>`).join("")}</div><p class="small" style="font-weight:700">Sehari-harinya</p>${num(j[2],"sun")}<div class="say"><b>Bakal betah kalau:</b> ${esc(j[3].replace(/^Kamu /,"kamu "))}</div>${i<KERJA[m.id].length-1?`<button type="button" class="btn sm ghost jobnext">Pekerjaan berikutnya: ${esc(KERJA[m.id][i+1][0].replace(/ \(.*\)/,""))}</button>`:""}</div></details>`).join("")}</div><p class="src">Ini gambaran umum dari pekerjaan yang lazim, bukan hasil survei. Tiap tempat kerja berbeda. Cara terbaik memastikannya: ngobrol 15 menit dengan orang yang menjalaninya.</p>`],
-   ["⛰️","Sisi berat",`${BERAT[m.id].length} hal yang jarang diceritakan`,"kes",num(BERAT[m.id])+`<p class="src">Tiap jurusan punya sisi berat. Tahu dari sekarang lebih baik daripada kaget setelah masuk.</p>`],
-   ["💪","Kamu di jurusan ini",sf.use.length?`${sf.use.length} kelebihanmu kepakai`:"Cek tuntutannya","man",me],
-   ["🧭","Peminatan",best.n.replace(/\s*\(.*\)/,""),"kre",pm],
-   ["🚪","Peluang masuk",statT,"tnk",stat],
-   ["🏫","Kampus",kpT,"ink",`<div class="say" style="display:flex;flex-direction:column;gap:10px"><span>Daftar ini bisa disaring sesuai kota, biaya, dan jenis kampus yang kamu mau.</span><button type="button" class="btn sm ghost toPref">Atur kota, biaya, dan jenis kampus</button></div>`+kp]
+   ["","Kenapa nyambung",whyT,"bis",whyH],
+   ["","Kuliahnya ngapain","Isi kuliah dan pekerjaannya","tek",`<p class="small" style="font-weight:700">Yang dipelajari</p>${tags(m.learn,PAL.tek[1])}<p class="small" style="font-weight:700">Bisa kerja sebagai</p>${tags(m.jobs,PAL.bis[1])}<button type="button" class="btn sm ghost tojob">Lihat keseharian tiap pekerjaan</button><p class="small" style="font-weight:700">Yang sering bikin kaget</p>${num(m.fk,"sun")}`],
+   ["","Sehari-hari kerja",`${KERJA[m.id].length} pekerjaan, buka satu per satu`,"tnk",`<div class="say jobhint"><b>Ada ${KERJA[m.id].length} contoh pekerjaan dari jurusan ini.</b> Ketuk tiap pekerjaan untuk melihat alat yang dipakai dan apa yang dikerjakan tiap hari.</div><div class="jobs">${KERJA[m.id].map((j,i)=>`<details class="job"><summary><span class="jn" aria-hidden="true">${i+1}</span><span class="jt">${esc(j[0])}</span><span class="jgo" aria-hidden="true"><span class="o">Lihat</span><span class="c">Tutup</span></span></summary><div class="jb"><p class="small" style="font-weight:700">Alat yang sering dipakai</p><div class="chips">${j[1].split(", ").map(x=>`<span class="tag" style="background:${PAL.tnk[1]}">${esc(x.charAt(0).toUpperCase()+x.slice(1))}</span>`).join("")}</div><p class="small" style="font-weight:700">Sehari-harinya</p>${num(j[2],"sun")}<div class="say"><b>Bakal betah kalau:</b> ${esc(j[3].replace(/^Kamu /,"kamu "))}</div>${i<KERJA[m.id].length-1?`<button type="button" class="btn sm ghost jobnext">Pekerjaan berikutnya: ${esc(KERJA[m.id][i+1][0].replace(/ \(.*\)/,""))}</button>`:""}</div></details>`).join("")}</div><p class="src">Ini gambaran umum dari pekerjaan yang lazim, bukan hasil survei. Tiap tempat kerja berbeda. Cara terbaik memastikannya: ngobrol 15 menit dengan orang yang menjalaninya.</p>`],
+   ["","Sisi berat",`${BERAT[m.id].length} hal yang jarang diceritakan`,"kes",num(BERAT[m.id])+`<p class="src">Tiap jurusan punya sisi berat. Tahu dari sekarang lebih baik daripada kaget setelah masuk.</p>`],
+   ["","Kamu di jurusan ini",sf.use.length?`${sf.use.length} kelebihanmu kepakai`:"Cek tuntutannya","man",me],
+   ["","Peminatan",best.n.replace(/\s*\(.*\)/,""),"kre",pm],
+   ["","Peluang masuk",statT,"tnk",stat],
+   ["","Kampus",kpT,"ink",`<div class="say" style="display:flex;flex-direction:column;gap:10px"><span>Daftar ini bisa disaring sesuai kota, biaya, dan jenis kampus yang kamu mau.</span><button type="button" class="btn sm ghost toPref">Atur kota, biaya, dan jenis kampus</button></div>`+kp]
   ];
-  if(S.bea==="ya") T.push(["🎓","Beasiswa",S.biaya==="minim"?"Mulai dari KIP Kuliah":`${beaList.length} pilihan`,"sun",`${S.biaya==="minim"?`<p class="say"><b>Untuk kondisimu, mulai dari KIP Kuliah.</b> Daftarnya bersamaan dengan pendaftaran kampus negeri, jadi siapkan berkasnya dari sekarang. Ajukan juga golongan biaya terendah di kampus negeri (Rp500 ribu per semester).</p>`:""}${beaList.map(b=>`<div class="kp pm"><span>${esc(b[0])}</span><span>${esc(b[1])}</span></div>`).join("")}<p class="src">Beasiswa besar di Indonesia umumnya berlaku untuk semua jurusan. Urutannya disesuaikan dengan jawabanmu soal biaya dan jenis kampus. Jadwal resmi seleksi masuk 2027 belum diumumkan saat data ini disusun, jadi pantau snpmb.id dan akun resmi tiap beasiswa.</p>`]);
+  if(S.bea==="ya") T.push(["","Beasiswa",S.biaya==="minim"?"Mulai dari KIP Kuliah":`${beaList.length} pilihan`,"sun",`${S.biaya==="minim"?`<p class="say"><b>Untuk kondisimu, mulai dari KIP Kuliah.</b> Daftarnya bersamaan dengan pendaftaran kampus negeri, jadi siapkan berkasnya dari sekarang. Ajukan juga golongan biaya terendah di kampus negeri (Rp500 ribu per semester).</p>`:""}${beaList.map(b=>`<div class="kp pm"><span>${esc(b[0])}</span><span>${esc(b[1])}</span></div>`).join("")}<p class="src">Beasiswa besar di Indonesia umumnya berlaku untuk semua jurusan. Urutannya disesuaikan dengan jawabanmu soal biaya dan jenis kampus. Jadwal resmi seleksi masuk 2027 belum diumumkan saat data ini disusun, jadi pantau snpmb.id dan akun resmi tiap beasiswa.</p>`]);
   T.push(
-   ["🤖","Kerja dan AI",lv,"man",`<p style="font-family:var(--font-display);font-weight:800;font-size:22px;line-height:1.2">${lv}</p><div class="ai" role="img" aria-label="${lv}">${[1,2,3].map(i=>`<i class="${i<=m.ai[0]?"on":""}"></i>`).join("")}</div><p>${esc(m.ai[1])}</p><div class="kp pm"><span>Soal gaji</span><span>Rata-rata gaji pekerja lulusan D4 dan S1 ke atas di Indonesia Rp5,05 juta per bulan (BPS, Agustus 2026).${["informatika","sidata"].includes(m.id)?" Bidang informasi dan komunikasi termasuk yang rata-rata gajinya paling tinggi, Rp5,17 juta (BPS, November 2025).":""} Angka gaji per jurusan yang tepercaya belum ada, jadi tidak kami tampilkan.</span></div><p class="src">Ini perkiraan dari jenis tugasnya, bukan ramalan pasti. Di semua bidang, yang paling terasa berubah adalah pekerjaan pemula yang sifatnya mengulang-ulang.</p>`],
-   ["💡","Tips",`${m.tips.length} tips kalau ambil jurusan ini`,"bis",num(m.tips,"bis")],
-   ["✅","Persiapan",`${done()} dari ${m.prep.length} beres`,"tek",`<p class="small muted">Centang yang sudah kamu kerjakan. Tersimpan di perangkat ini.</p><div class="ck">${m.prep.map((p,i)=>{ const k=m.id+"-"+i; return `<label for="t-${k}"><input type="checkbox" id="t-${k}" data-t="${k}" data-m="${m.id}" ${S.todo[k]?"checked":""}><span>${esc(p)}</span></label>`; }).join("")}</div><p class="small" style="font-weight:700">Jadwal perkiraan</p><div class="tl"><div><b>Jan 2027</b><span>Buat akun pendaftaran kampus negeri</span></div><div><b>Feb</b><span>Jalur rapor</span></div><div><b>Akhir Mar</b><span>Daftar jalur tes</span></div><div><b>Akhir Apr</b><span>Tes</span></div></div><p class="src">Kampus swasta biasanya sudah buka lebih awal.</p><p class="small" style="font-weight:700">Rencana cadangan</p><div class="chips">${m.alt.map(a=>`<span class="tag">${esc(byId(a).n)}</span>`).join("")}</div>`]
+   ["","Kerja dan AI",lv,"man",`<p style="font-family:var(--font-display);font-weight:800;font-size:22px;line-height:1.2">${lv}</p><div class="ai" role="img" aria-label="${lv}">${[1,2,3].map(i=>`<i class="${i<=m.ai[0]?"on":""}"></i>`).join("")}</div><p>${esc(m.ai[1])}</p><div class="kp pm"><span>Soal gaji</span><span>Rata-rata gaji pekerja lulusan D4 dan S1 ke atas di Indonesia Rp5,05 juta per bulan (BPS, Agustus 2026).${["informatika","sidata"].includes(m.id)?" Bidang informasi dan komunikasi termasuk yang rata-rata gajinya paling tinggi, Rp5,17 juta (BPS, November 2025).":""} Angka gaji per jurusan yang tepercaya belum ada, jadi tidak kami tampilkan.</span></div><p class="src">Ini perkiraan dari jenis tugasnya, bukan ramalan pasti. Di semua bidang, yang paling terasa berubah adalah pekerjaan pemula yang sifatnya mengulang-ulang.</p>`],
+   ["","Tips",`${m.tips.length} tips kalau ambil jurusan ini`,"bis",num(m.tips,"bis")],
+   ["","Persiapan",`${done()} dari ${m.prep.length} beres`,"tek",`<p class="small muted">Centang yang sudah kamu kerjakan. Tersimpan di perangkat ini.</p><div class="ck">${m.prep.map((p,i)=>{ const k=m.id+"-"+i; return `<label for="t-${k}"><input type="checkbox" id="t-${k}" data-t="${k}" data-m="${m.id}" ${S.todo[k]?"checked":""}><span>${esc(p)}</span></label>`; }).join("")}</div><p class="small" style="font-weight:700">Jadwal perkiraan</p><div class="tl"><div><b>Jan 2027</b><span>Buat akun pendaftaran kampus negeri</span></div><div><b>Feb</b><span>Jalur rapor</span></div><div><b>Akhir Mar</b><span>Daftar jalur tes</span></div><div><b>Akhir Apr</b><span>Tes</span></div></div><p class="src">Kampus swasta biasanya sudah buka lebih awal.</p><p class="small" style="font-weight:700">Rencana cadangan</p><div class="chips">${m.alt.map(a=>`<span class="tag">${esc(byId(a).n)}</span>`).join("")}</div>`]
   );
   { const want=["asn","asrama","tempat"].filter(x=>(S.dinas||[]).includes(x)), show=want.length||(S.dinas||[]).includes("info");
     if(show){ const ids=MDINAS[m.id]||[], lack=DINASQ.slice(0,3).filter(o=>!want.includes(o[0])).map(o=>o[1][0].toLowerCase()+o[1].slice(1));
       const fitH=want.length===3?fact("ok","<b>Pola hidup kedinasan cocok denganmu.</b> Kamu mau ikatan dinas, siap berasrama, dan siap ditempatkan di mana saja."):want.length?fact("mid",`<b>Sebagian cocok.</b> Yang belum kamu pilih: ${esc(lack.join(", "))}. Tiga hal ini melekat di hampir semua sekolah kedinasan, jadi pikirkan dulu sebelum mendaftar.`):fact("mid","<b>Kamu baru mau lihat-lihat.</b> Sebelum mendaftar, pastikan kamu siap dengan ikatan dinas, hidup berasrama, dan penempatan di mana saja.");
       const list=ids.length?ids.map(k=>{ const d=DINAS[k]; return `<div class="kp pm"><span>${esc(d.n)}</span><span>${esc(d.k)} · ${esc(d.b)}</span>${d.f?`<span>${esc(d.f)}</span>`:""}<span>${esc(d.t)}</span>${d.x?`<span>${esc(d.x)}</span>`:""}</div>`; }).join(""):`<p class="note">Belum ada sekolah kedinasan yang bidangnya sejalur langsung dengan jurusan ini. Kalau tetap ingin jalur kedinasan, lihat jurusan lain di 3 teratasmu.</p>`;
-      T.push(["🏛️","Jalur kedinasan",ids.length?`${ids.length} sekolah yang sejalur`:"Tidak ada yang sejalur","ink",`${fitH}${list}${MKEMEN[m.id]?`<p class="small"><b>Kampus milik kementerian tanpa ikatan dinas:</b> ${esc(MKEMEN[m.id])}. Biasanya berbayar dan lulusannya tidak otomatis jadi pegawai negeri. Info ini belum kami cek ke pengumuman resminya.</p>`:""}
+      T.push(["","Jalur kedinasan",ids.length?`${ids.length} sekolah yang sejalur`:"Tidak ada yang sejalur","ink",`${fitH}${list}${MKEMEN[m.id]?`<p class="small"><b>Kampus milik kementerian tanpa ikatan dinas:</b> ${esc(MKEMEN[m.id])}. Biasanya berbayar dan lulusannya tidak otomatis jadi pegawai negeri. Info ini belum kami cek ke pengumuman resminya.</p>`:""}
        <p class="small" style="font-weight:700">Yang berlaku di semua sekolah kedinasan</p>${num(["Daftar lewat sscasn.bkn.go.id, dan hanya boleh memilih satu sekolah dalam setahun","Tesnya bertahap: tes komputer dari BKN, lalu kesehatan, fisik, psikologi, dan wawancara dari tiap sekolah","Tahun 2026 ada 4.770 kursi di sembilan kementerian dan lembaga. Pendaftaran 18 sampai 30 Agustus, tes komputer 22 September sampai 7 Oktober","Seleksinya terpisah dari jalur kampus negeri, jadi bisa ikut dua-duanya"],"bis")}
        <p class="src">Sumber: pengumuman penerimaan 2026 dari Kementerian PANRB dan BKN lewat pemberitaan. Jadwal, kursi, dan syarat 2027 belum diumumkan dan bisa berubah. Cek pengumuman resmi tiap sekolah sebelum mendaftar.</p>`]); } }
   const seen=i=>S.seen&&S.seen[m.id+"-"+i];
@@ -2661,7 +2917,7 @@ function majorCard(m,pc,open){
    </div>
    ${planH}
    <div class="mjprog"><p class="tiny" style="font-weight:800"><span data-seen>${T.filter((_,i)=>seen(i)).length}</span> dari ${T.length} kotak sudah dibuka</p><div class="tr"><i data-seenbar style="width:${Math.round(T.filter((_,i)=>seen(i)).length/T.length*100)}%"></i></div><p class="tiny muted"><span class="lg lg0"></span> Berwarna: belum dibuka, ketuk untuk baca <span class="lg lg1"></span> Putih bercentang: sudah</p></div>
-   <div class="tiles">${T.map((t,i)=>`<button type="button" class="tile${seen(i)?" seen":""}${T.length%2&&i===0?" wide":""}" data-sec="${i}" data-ic="${t[0]}" style="--c:${PAL[t[3]][0]};--t:${PAL[t[3]][1]}"><span class="ic" aria-hidden="true">${t[0]}</span><b>${esc(t[1])}</b><small>${esc(t[2])}</small></button>`).join("")}</div>
+   <div class="tiles">${T.map((t,i)=>`<button type="button" class="tile${seen(i)?" seen":""}${T.length%2&&i===0?" wide":""}" data-sec="${i}" data-ic="${String(i+1).padStart(2,"0")}" style="--c:${PAL[t[3]][0]};--t:${PAL[t[3]][1]}"><span class="ic" aria-hidden="true">${String(i+1).padStart(2,"0")}</span><b>${esc(t[1])}</b><small>${esc(t[2])}</small></button>`).join("")}</div>
    <div class="say"><b>Coba dulu minggu ini:</b> ${esc(m.coba)}</div>
    <div class="secs" hidden>${T.map((t,i)=>`<div class="sec" data-i="${i}">${t[4]}</div>`).join("")}</div>
   </div>`;
@@ -2730,7 +2986,8 @@ $("#pNext").addEventListener("click",()=>{ if(pgi>=PG.length-1){ backToIntro(); 
 
 /* ===== Poster hasil: satu gambar 1080 x 1920 untuk dibagikan. Tiga gaya: pulau, malam, cerah ===== */
 let POSTER=null;
-const PGAYA=[["pulau","Warna pulauku"],["malam","Laut malam"],["cerah","Laut cerah"]], PGAYA_KEY="jelajah-poster-gaya";
+const LOGO_PX=(()=>{ const im=new Image(); im.src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARIAAAA0CAYAAABGtbe8AAAFGUlEQVR42u2dzUtVQRiHX00kWglG7QxaSiC0EsKgImlTuHLZNpAWbULwDxDKTUSIbVtFW1cZGSWBuIiiaOEiUFxJgoRIC/tY3DvX7ujpnHln5tw55z7Ppm50zsy852N+Z96P6ZHADA1c+KM5bnP3S4/P8aljxlc2sexZ1fEU7Xdou2ntVZXx9goAgCd9sWaKje+rhY47d3r02H8venxs7P659itrfGUTyp5VHY+23752M+2a50OrTFIdr2kHRQIA6SgS+43288e213l8j49Fqv3KU4hV6Xenr0Nou5nnwVfJlXX9tO2gSAAgPUVSt5mv6oRSiFkzd6e8N1Wxm318Xe2GIgGA9BQJ1HstIdQ3P3arFygSAECRGHY2v3E1S4gMrusaGHZDkQAAiiQM4+tbXE0Pr4NRdIND57vae4PdUCQAgCLxY+/jZ66mxzf5ya8zzanyeVd7IVzt1vfkUeMvDx93td1QJACAImkx/1Lw1uh5/WlXRERu3eguL4Sv3d5sNewwkaj3pqz6PigSAECRxKpfYr5hq1a5Tet1uP+0v6FIprsz90Zrt+nVfSdFUpbdtM8D2b8AgCIRIgc7661RxkXUxQuh9tYkareynwcUCQCgSITcmiDeGpF+VTxJVZVgKG+NNp6kbgoaRQIAKBII463RxpNU3Xvj663RxpPUzeuFIgEAf0VS1k5eQj0SSdlbY9DGk+R5IXx3YEzVW2PQxpPE8t5onwfXLGYUCQCEXyOp6g5y0qX1SHyV5ODkcuO6T4aZqYv+f98dGDttt7MLDW/WxkK5dnN+sDOUUy4FvU4oEgCIp0iq7tfu1nok2v1XYl/vLC9EKvdZ1ewmnnEuRZnAawMAxJFIveuRhMoeTnWGj+WFiJV1XXe72XEuKBIAqL8iSaVOR6x6JL7jC9WvUP2RimRhZ83QsfYyrmv2etG1Ft/7CkUCAOEUibaeQirfnqnu1RrLHtqZueyIR+1MZ8Zl32e+46273YRcGwCovCIxkaFLBd+kvjNt6rkxqX+Da2fUrByb/CnyuYRQdK7K1/c62OPV2q2sSNGqVpxDkQBAOEViIkPHm7+XPL/x8t7w7NVbLmZmPqyI5sal4TBKwvRjR2aj3l+GlWdhcla0kaJjJSswFAkA1CCOpBkZujclxyoTUSoUe4YwSiQvN0a7y3vd65toK3q9byoRuyJaUT6MzKjWSiSjRuw1aVcmoe4vo3gOls+IyGGEp9ZuK00loo0UXXOs5drp50HbDooEAPwVyZGd5DKUiWQoFHGsE9JSIjm5MbYXSRKpb9JppbLz4mpjZh2edVobsZWIa8SjURJmrUSL6cfcnXZl0hqfzKrWMPquNpTDq+aaSO/IuvxbHd/Vbua8thJxtZtZWxnzvG9Mf3bu3ov7QlC2gyIBgHBrJHnKpDVTi2edEEuJZL3hbS+SJFLfpKi36d3BvIiIXO6bcvrtusbgum+Nts6FURKttRLR5XyY+8tWJoai4zJrIG8HG8rj97OBdgWx2q7AjFK5frt9DUUK1vPQ2s30Z00bh2L154rneWK1gyIBgPDZv1nKpDVTT0mQOiG5b/gMRSQdrm+S522a+7UoIiIXT9xs/p51/L2YceZ++d9MnqckxDN71F4rKU5/IWXSsl/Bccmg7YXa/287h2sdp5p/bkep55HVvjYOxe7Pg9G4cSbadlAkAOBNT1nZiK7fmKlkPx5RaBXFtwZo7Ouf6vlTsVtZ/de2gyIBAG/+AvSbhE0Iu8UHAAAAAElFTkSuQmCC"; return im; })();
+const PGAYA=[["pulau","Warna kawasanku"],["malam","Kota malam"],["cerah","Kota pagi"]], PGAYA_KEY="jelajah-poster-gaya";
 const posterGaya=()=>{ try{ const v=localStorage.getItem(PGAYA_KEY); if(PGAYA.some(x=>x[0]===v)) return v; }catch(e){} return "pulau"; };
 const PJOBS={kedokteran:["Dokter umum","Dokter gigi","Dokter spesialis"],keperawatan:["Perawat rumah sakit","Perawat puskesmas","Perawat di luar negeri"],farmasi:["Apoteker","Peneliti obat","Pengawas obat"],
  kesmas:["Ahli gizi","Petugas K3","Petugas dinas kesehatan"],psikologi:["Psikolog","Staf SDM","Konselor sekolah"],hukum:["Pengacara","Hakim","Notaris"],ilkom:["Humas","Wartawan","Pembuat konten"],
@@ -2754,8 +3011,8 @@ const PSTAB={Kuat:"Kuat","Cukup kuat":"Lumayan kuat","Masih goyah":"Masih bisa b
 const PSHORT={kedokteran:"Kedokteran",kesmas:"Kesmas, Gizi & K3",ilkom:"Ilmu Komunikasi",pendidikan:"Pendidikan",informatika:"Informatika",sidata:"Sistem Informasi & Sains Data",sipil:"Teknik Sipil & Pertambangan",manajemen:"Manajemen & Bisnis",dkv:"DKV",elektro:"Elektro, Mesin & Telkom",arsitektur:"Arsitektur & Kota",agro:"Pertanian & Pangan",sospol:"HI, Politik & Adm. Publik",sastra:"Bahasa & Sastra",wisata:"Pariwisata & Perhotelan",bisdig:"Bisnis Digital",ekonomi:"Ilmu Ekonomi",mipa:"Matematika & Sains",nakes2:"Kebidanan & Fisioterapi",sosant:"Sosiologi"};
 const pShort=id=>PSHORT[id]||byId(id).n;
 function pAlat(g,sh,OL){
-  const rr=(x,y,w,h,r)=>{ r=Math.min(r,w/2,h/2); g.beginPath(); g.moveTo(x+r,y); g.arcTo(x+w,y,x+w,y+h,r); g.arcTo(x+w,y+h,x,y+h,r); g.arcTo(x,y+h,x,y,r); g.arcTo(x,y,x+w,y,r); g.closePath(); };
-  const stiker=(x,y,w,h,r,fill,off)=>{ off=off==null?9:off; g.fillStyle=sh; rr(x+off,y+off,w,h,r); g.fill(); g.fillStyle=fill; rr(x,y,w,h,r); g.fill(); g.strokeStyle=OL; g.lineWidth=5; g.stroke(); };
+  const rr=(x,y,w,h,r)=>{ r=Math.min(r,12,w/2,h/2); g.beginPath(); g.moveTo(x+r,y); g.arcTo(x+w,y,x+w,y+h,r); g.arcTo(x+w,y+h,x,y+h,r); g.arcTo(x,y+h,x,y,r); g.arcTo(x,y,x+w,y,r); g.closePath(); };
+  const stiker=(x,y,w,h,r,fill,off)=>{ r=Math.min(r,10); off=off==null?9:off; g.fillStyle=sh; rr(x+off,y+off,w,h,r); g.fill(); g.fillStyle=fill; rr(x,y,w,h,r); g.fill(); g.strokeStyle=OL; g.lineWidth=5; g.stroke(); };
   const F=(wt,z,fam)=>{ g.font=`${wt} ${z}px ${fam}`; };
   const fit=(t,mw,size,wt,fam,min)=>{ let z=size; F(wt,z,fam); while(g.measureText(t).width>mw&&z>(min||18)){ z-=1; F(wt,z,fam); } return z; };
   const lines=(t,mw,max)=>{ const out=[]; let l=""; for(const w of String(t).split(" ")){ const s=l?l+" "+w:w; if(g.measureText(s).width>mw&&l){ out.push(l); l=w; } else l=s; } if(l) out.push(l);
@@ -2768,15 +3025,15 @@ function pAlat(g,sh,OL){
 }
 async function pAva(i){ const img=new Image(); await new Promise(r=>{ img.onload=r; img.onerror=r; img.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="400" height="400">${avaSvg(i)}</svg>`); }); return img; }
 async function drawPoster(P,noAva){
-  if(document.fonts&&document.fonts.ready){ try{ await Promise.all([document.fonts.load("800 60px 'Baloo 2'"),document.fonts.load("700 30px 'Nunito Sans'"),document.fonts.ready]); }catch(e){} }
+  if(document.fonts&&document.fonts.ready){ try{ await Promise.all([document.fonts.load("800 60px 'DM Sans'"),document.fonts.load("700 30px 'DM Sans'"),document.fonts.load("700 30px 'Space Mono'"),document.fonts.ready]); }catch(e){} }
   const W=1080,H=1920,cv=document.createElement("canvas"); cv.width=W; cv.height=H; const g=cv.getContext("2d");
-  const D="'Baloo 2','Trebuchet MS',sans-serif", B="'Nunito Sans','Segoe UI',sans-serif", X=64, IW=W-2*X;
-  const INK="#14304a", OL="#0d2236", SUN="#ffc93c", ACC="#ef6a4c", MUT="#4b6277";
+  const D="'DM Sans',system-ui,sans-serif", B="'DM Sans',system-ui,sans-serif", X=64, IW=W-2*X;
+  const INK="#192d2c", OL="#192d2c", SUN="#ffd27a", ACC="#ad4e32", MUT="#506461";
   const hex=c=>[1,3,5].map(i=>parseInt(c.slice(i,i+2),16)), mix=(a,b,t)=>{ const A=hex(a),Bc=hex(b); return "#"+A.map((v,i)=>Math.round(v+(Bc[i]-v)*t).toString(16).padStart(2,"0")).join(""); };
   const main=P.unread?"#2876c7":P.top[0].c;
-  const T=({ pulau:{a:mix(main,INK,.12),b:mix(main,"#0a1626",.72),ink:"#fff",sub:"rgba(255,255,255,.82)",pop:SUN,sh:"rgba(6,16,28,.55)",dark:true},
-             malam:{a:"#223a86",b:"#0b1228",ink:"#fff",sub:"rgba(255,255,255,.8)",pop:SUN,sh:"rgba(0,0,0,.55)",dark:true},
-             cerah:{a:"#eefaf7",b:"#aadde3",ink:INK,sub:"#3f5b74",pop:ACC,sh:INK,dark:false} })[P.theme]||null;
+  const T=({ pulau:{a:mix(main,"#172a2e",.35),b:"#172a2e",ink:"#fff7e6",sub:"rgba(255,247,230,.82)",pop:SUN,sh:"rgba(8,16,18,.6)",dark:true},
+             malam:{a:"#1d2b4f",b:"#0b1228",ink:"#fff7e6",sub:"rgba(255,247,230,.8)",pop:SUN,sh:"rgba(0,0,0,.55)",dark:true},
+             cerah:{a:"#f4ebdc",b:"#cfe9e2",ink:INK,sub:"#506461",pop:ACC,sh:INK,dark:false} })[P.theme]||null;
   const TH=T||{a:mix(main,INK,.12),b:mix(main,"#0a1626",.72),ink:"#fff",sub:"rgba(255,255,255,.82)",pop:SUN,sh:"rgba(6,16,28,.55)",dark:true};
   const {rr,stiker,F,fit,lines,fitLines,put,bintang,centang}=pAlat(g,TH.sh,OL);
   let sd=0; for(const ch of (P.name||"")+P.type) sd=(sd*31+ch.charCodeAt(0))>>>0; const rnd=()=>{ sd=(sd*1664525+1013904223)>>>0; return sd/4294967296; };
@@ -2788,16 +3045,16 @@ async function drawPoster(P,noAva){
   g.save(); g.translate(ax,ay); g.fillStyle=TH.dark?"#fff":SUN; g.globalAlpha=TH.dark?.07:.45; for(let i=0;i<14;i++){ g.rotate(Math.PI/7); g.beginPath(); g.moveTo(0,0); g.lineTo(-58,-760); g.lineTo(58,-760); g.closePath(); g.fill(); } g.restore();
   g.fillStyle=TH.dark?"#fff":INK; g.globalAlpha=TH.dark?.1:.08; for(let r=0;r<9;r++) for(let c=0;c<9;c++){ if(r+c>9) continue; g.beginPath(); g.arc(W-34-c*30,34+r*30,5-(r+c)*.35,0,7); g.fill(); }
   g.globalAlpha=1;
-  [[1650,.10],[1740,.13],[1830,.16]].forEach(([y0,al],k)=>{ g.fillStyle=TH.dark?"#fff":"#1f8fa8"; g.globalAlpha=al*(TH.dark?.6:1); g.beginPath(); g.moveTo(0,H); g.lineTo(0,y0); for(let x=0;x<=W;x+=20) g.lineTo(x,y0+Math.sin(x/95+k*1.7)*16); g.lineTo(W,H); g.closePath(); g.fill(); }); g.globalAlpha=1;
+  [[1640,.10,34],[1730,.14,26],[1820,.2,20]].forEach(([y0,al,bw],k)=>{ g.fillStyle=TH.dark?"#fff":"#1f6b62"; g.globalAlpha=al*(TH.dark?.6:1); for(let x=0;x<W;){ const w=bw*(2+Math.floor(rnd()*3)), hh=40+Math.floor(rnd()*6)*bw*.8; g.fillRect(x,y0+120-hh,w,H); x+=w+8; } }); g.globalAlpha=1;
   const cf=[SUN,ACC,"#7fd3c4","#f59bb4","#9db8f5","#fff"];
   const zona=[[454,116,560,44],[340,424,690,26],[0,130,46,1680],[1034,130,46,1680],[0,130,46,1680],[1034,130,46,1680]];
   for(let i=0;i<30;i++){ const zn=zona[i%zona.length], x=zn[0]+rnd()*zn[2], y=zn[1]+rnd()*zn[3], k=i%4, c=cf[i%cf.length], s=8+rnd()*10; g.save(); g.translate(x,y); g.rotate(rnd()*6); g.globalAlpha=TH.dark?.85:.9; g.fillStyle=c; g.strokeStyle=c; g.lineWidth=5;
-    if(k===0){ bintang(0,0,s+4,0); g.fill(); } else if(k===1){ g.beginPath(); g.arc(0,0,s*.55,0,7); g.fill(); } else if(k===2){ g.beginPath(); g.moveTo(-s,0); g.lineTo(s,0); g.moveTo(0,-s); g.lineTo(0,s); g.stroke(); } else { rr(-s,-s*.4,s*2,s*.8,s*.4); g.fill(); } g.restore(); }
+    g.setTransform(1,0,0,1,x,y); const q=Math.round(s*.8); if(k%2) g.fillRect(-q/2,-q/2,q,q); else { g.fillRect(-q,-q/4,q*2,q/2); g.fillRect(-q/4,-q,q/2,q*2); } g.restore(); }
   g.globalAlpha=1;
 
-  /* kepala: nama aplikasi dan tanggal */
-  g.save(); g.translate(X+26,74); g.fillStyle=TH.pop; g.beginPath(); g.arc(0,0,26,0,7); g.fill(); g.strokeStyle=OL; g.lineWidth=4; g.stroke(); g.rotate(.6); g.fillStyle=OL; g.beginPath(); g.moveTo(0,-18); g.lineTo(7,0); g.lineTo(-7,0); g.closePath(); g.fill(); g.fillStyle="#fff"; g.beginPath(); g.moveTo(0,18); g.lineTo(7,0); g.lineTo(-7,0); g.closePath(); g.fill(); g.stroke(); g.restore();
-  g.fillStyle=TH.ink; F(800,40,D); g.fillText("Jelajah Jurusan",X+66,88);
+  /* kepala: logo pixel dan tanggal */
+  { try{ if(!LOGO_PX.complete) await new Promise(r=>{ LOGO_PX.onload=r; LOGO_PX.onerror=r; }); g.imageSmoothingEnabled=false; g.drawImage(LOGO_PX,X,44,274,52); g.imageSmoothingEnabled=true; }catch(e){} }
+  g.fillStyle=TH.dark?"#7fd8cc":"#1f6b62"; F(700,22,"'Space Mono',monospace"); g.fillText("BABAK I · JURUSAN",X+292,84);
   F(700,24,B); const dw=g.measureText(P.date).width+40; g.fillStyle=TH.dark?"rgba(255,255,255,.16)":"rgba(20,48,74,.1)"; rr(X+IW-dw,52,dw,46,23); g.fill(); g.fillStyle=TH.ink; g.fillText(P.date,X+IW-dw+20,84);
 
   /* karakter, pita nama, tipe */
@@ -2820,7 +3077,7 @@ async function drawPoster(P,noAva){
     [1,.75,.5,.25].forEach((r,k)=>{ g.beginPath(); DK.forEach((_,i)=>{ const [px,py]=pt(i,r); i?g.lineTo(px,py):g.moveTo(px,py); }); g.closePath(); g.fillStyle=k%2?"#fff":"#eef5f8"; g.fill(); g.strokeStyle="#cfdfe6"; g.lineWidth=2; g.stroke(); });
     DK.forEach((_,i)=>{ const [px,py]=pt(i,1); g.beginPath(); g.moveTo(cx,cy); g.lineTo(px,py); g.stroke(); });
     const poly=v=>{ g.beginPath(); DK.forEach((d,i)=>{ const [px,py]=pt(i,Math.max(.06,v[d]||0)); i?g.lineTo(px,py):g.moveTo(px,py); }); g.closePath(); };
-    poly(P.u); g.fillStyle="rgba(239,106,76,.38)"; g.fill(); g.strokeStyle=ACC; g.lineWidth=6; g.stroke();
+    poly(P.u); g.fillStyle="rgba(173,78,50,.32)"; g.fill(); g.strokeStyle=ACC; g.lineWidth=6; g.stroke();
     if(!P.unread){ poly(P.m.p); g.setLineDash([10,9]); g.strokeStyle=INK; g.lineWidth=4; g.stroke(); g.setLineDash([]); }
     const od=DK.slice().sort((a,b)=>(P.u[b]||0)-(P.u[a]||0));
     DK.forEach((d,i)=>{ const [px,py]=pt(i,Math.max(.06,P.u[d]||0)); g.beginPath(); g.arc(px,py,9,0,7); g.fillStyle=ACC; g.fill(); g.strokeStyle="#fff"; g.lineWidth=3; g.stroke(); });
@@ -2833,19 +3090,18 @@ async function drawPoster(P,noAva){
 
   /* kartu peta pulau */
   { const mx=X+rw+22, mw=IW-rw-22; stiker(mx,y,mw,ch,34,"#fff");
-    g.fillStyle=INK; F(700,32,D); g.fillText(P.unread?"Enam pulau":"Pulau tujuan",mx+26,y+50);
-    g.fillStyle="#dff1f2"; rr(mx+16,y+70,mw-32,ch-134,22); g.fill();
-    g.strokeStyle="#bfe3e6"; g.lineWidth=3; [[40,118],[210,214],[90,300]].forEach(([wx,wy])=>{ g.beginPath(); g.moveTo(mx+wx,y+wy); g.quadraticCurveTo(mx+wx+12,y+wy-10,mx+wx+24,y+wy); g.quadraticCurveTo(mx+wx+36,y+wy+10,mx+wx+48,y+wy); g.stroke(); });
+    g.fillStyle=INK; F(700,32,D); g.fillText(P.unread?"Enam kawasan":"Kawasan tujuan",mx+26,y+50);
+    g.fillStyle="#e3f1ec"; rr(mx+16,y+70,mw-32,ch-134,6); g.fill(); g.fillStyle="#d8c7a3"; g.fillRect(mx+16,y+70+(ch-134)/2-6,mw-32,12);
     const pos=k=>[mx+mw/2+(ISL[k].x-172)*1.0, y+140+(ISL[k].y-44)*1.48];
     const urut=[]; if(!P.unread) P.top.forEach((t,i)=>{ let e=urut.find(q=>q.k===t.isl); if(!e){ e={k:t.isl,n:[]}; urut.push(e); } e.n.push(i+1); });
     if(urut.length>1){ g.setLineDash([4,11]); g.strokeStyle=INK; g.lineWidth=5; g.beginPath(); urut.forEach((e,i)=>{ const [px,py]=pos(e.k); i?g.lineTo(px,py):g.moveTo(px,py); }); g.stroke(); g.setLineDash([]); }
     Object.keys(ISL).forEach(k=>{ const [px,py]=pos(k), on=urut.find(e=>e.k===k), c=on?ISL[k].c:"#b9cdd8";
-      g.fillStyle="rgba(255,255,255,.85)"; g.beginPath(); g.ellipse(px,py+6,43,31,0,0,7); g.fill();
-      g.fillStyle=c; g.beginPath(); g.ellipse(px,py,36,25,0,0,7); g.fill(); g.beginPath(); g.ellipse(px+14,py-12,17,13,0,0,7); g.fill();
-      if(on){ g.strokeStyle=OL; g.lineWidth=4; g.beginPath(); g.ellipse(px,py,36,25,0,.25,Math.PI*2-1.1); g.stroke(); }
-      g.fillStyle=on?INK:MUT; const ln=ISL[k].n.replace("Pulau ",""), lns=ln.length<=12?[ln]:(()=>{ const w=ln.split(" "); let bi=1,bd=99; for(let i=1;i<w.length;i++){ const d=Math.abs(w.slice(0,i).join(" ").length-w.slice(i).join(" ").length); if(d<bd){ bd=d; bi=i; } } return [w.slice(0,bi).join(" "),w.slice(bi).join(" ")]; })(); F(on?800:700,lns.length>1?14:19,B); g.textAlign="center"; g.strokeStyle="#dff1f2"; g.lineWidth=lns.length>1?5:7; lns.forEach((t2,i2)=>{ const ty=py+54+i2*18; g.strokeText(t2,px,ty); g.fillText(t2,px,ty); });
+      g.fillStyle="#9c8a6a"; g.fillRect(px-44,py+20,88,8);
+      [[-38,-10,20,30],[-14,-24,28,44],[16,-2,20,22]].forEach(([bx,by,bw,bh],j)=>{ g.fillStyle=c; g.fillRect(px+bx,py+by,bw,bh); if(on){ g.strokeStyle=OL; g.lineWidth=3; g.strokeRect(px+bx,py+by,bw,bh); }
+        for(let wy=py+by+6;wy<py+by+bh-4;wy+=8) for(let wx=px+bx+4;wx<px+bx+bw-4;wx+=8){ g.fillStyle=on?"#ffd27a":"rgba(25,45,44,.35)"; g.fillRect(wx,wy,4,4); } });
+      g.fillStyle=on?INK:MUT; const ln=ISL[k].n.replace("Kawasan ",""), lns=ln.length<=12?[ln]:(()=>{ const w=ln.split(" "); let bi=1,bd=99; for(let i=1;i<w.length;i++){ const d=Math.abs(w.slice(0,i).join(" ").length-w.slice(i).join(" ").length); if(d<bd){ bd=d; bi=i; } } return [w.slice(0,bi).join(" "),w.slice(bi).join(" ")]; })(); F(on?800:700,lns.length>1?14:19,B); g.textAlign="center"; g.strokeStyle="#e3f1ec"; g.lineWidth=lns.length>1?5:7; lns.forEach((t2,i2)=>{ const ty=py+54+i2*18; g.strokeText(t2,px,ty); g.fillText(t2,px,ty); });
       if(on) on.n.forEach((n,j)=>{ const bx=px-(on.n.length-1)*17+j*34, by=py-6; g.fillStyle=SUN; g.beginPath(); g.arc(bx,by,17,0,7); g.fill(); g.strokeStyle=OL; g.lineWidth=3.5; g.stroke(); g.fillStyle=INK; F(800,22,D); g.fillText(String(n),bx,by+8); }); });
-    g.textAlign="center"; g.fillStyle=INK; const cap=P.unread?"Belum mampir ke pulau mana pun":urut.length===1?"Semua di "+ISL[urut[0].k].n:"Mulai dari "+ISL[urut[0].k].n; fit(cap,mw-40,23,700,B,15); g.fillText(cap,mx+mw/2,y+ch-24); g.textAlign="left"; }
+    g.textAlign="center"; g.fillStyle=INK; const cap=P.unread?"Belum mampir ke kawasan mana pun":urut.length===1?"Semua di "+ISL[urut[0].k].n:"Mulai dari "+ISL[urut[0].k].n; fit(cap,mw-40,23,700,B,15); g.fillText(cap,mx+mw/2,y+ch-24); g.textAlign="left"; }
   y+=ch+52;
 
   /* tiga jurusan teratas */
@@ -2886,23 +3142,23 @@ async function drawPoster(P,noAva){
 }
 /* ===== Lembar hasil lengkap: 1800 x 1200, mendatar, untuk disimpan atau ditunjukkan ke orang tua dan guru ===== */
 async function drawLembar(P,noAva){
-  if(document.fonts&&document.fonts.ready){ try{ await Promise.all([document.fonts.load("800 60px 'Baloo 2'"),document.fonts.load("700 30px 'Nunito Sans'"),document.fonts.ready]); }catch(e){} }
+  if(document.fonts&&document.fonts.ready){ try{ await Promise.all([document.fonts.load("800 60px 'DM Sans'"),document.fonts.load("700 30px 'DM Sans'"),document.fonts.load("700 30px 'Space Mono'"),document.fonts.ready]); }catch(e){} }
   const W=1800,H=1200,cv=document.createElement("canvas"); cv.width=W; cv.height=H; const g=cv.getContext("2d");
-  const D="'Baloo 2','Trebuchet MS',sans-serif", B="'Nunito Sans','Segoe UI',sans-serif", X=44, IW=W-2*X;
-  const INK="#14304a", OL="#0d2236", SUN="#ffc93c", ACC="#ef6a4c", MUT="#4b6277", HIJ="#1a8463";
+  const D="'DM Sans',system-ui,sans-serif", B="'DM Sans',system-ui,sans-serif", X=44, IW=W-2*X;
+  const INK="#192d2c", OL="#192d2c", SUN="#ffd27a", ACC="#ad4e32", MUT="#506461", HIJ="#1f6b62";
   const {rr,stiker,F,fit,lines,fitLines,put,bintang,centang}=pAlat(g,"rgba(20,48,74,.9)",OL);
   const hex=c=>[1,3,5].map(i=>parseInt(c.slice(i,i+2),16)), mix=(a,b,t)=>{ const A=hex(a),Bc=hex(b); return "#"+A.map((v,i)=>Math.round(v+(Bc[i]-v)*t).toString(16).padStart(2,"0")).join(""); };
   g.textBaseline="alphabetic"; g.textAlign="left"; g.lineJoin="round"; g.lineCap="round";
-  const gr=g.createLinearGradient(0,0,0,H); gr.addColorStop(0,"#eefaf7"); gr.addColorStop(1,"#bfe3e6"); g.fillStyle=gr; g.fillRect(0,0,W,H);
+  const gr=g.createLinearGradient(0,0,0,H); gr.addColorStop(0,"#f4ebdc"); gr.addColorStop(1,"#e6d9c2"); g.fillStyle=gr; g.fillRect(0,0,W,H);
   g.fillStyle=INK; g.globalAlpha=.07; for(let r=0;r<6;r++) for(let c=0;c<14;c++){ if(r+c>13) continue; g.beginPath(); g.arc(W-30-c*30,30+r*30,5-(r+c)*.3,0,7); g.fill(); } g.globalAlpha=1;
   const kotak=(x,y,w,h,judul,warna,fill)=>{ stiker(x,y,w,h,26,fill||"#fff",6); g.save(); rr(x,y,w,h,26); g.clip(); g.fillStyle=warna; g.fillRect(x,y,w,50); g.restore(); rr(x,y,w,h,26); g.strokeStyle=OL; g.lineWidth=5; g.stroke(); g.fillStyle="#fff"; F(800,27,D); g.fillText(judul,x+22,y+35); };
   const chips=(arr,x,y,mw,fill,ink,maxRow,fs)=>{ let cx=x, cy=y, row=1; F(700,fs||20,B); for(const t of arr){ const w=g.measureText(t).width+28; if(cx+w>x+mw){ if(row>=(maxRow||1)) break; row++; cx=x; cy+=42; } g.fillStyle=fill; rr(cx,cy,w,36,18); g.fill(); g.fillStyle=ink; g.fillText(t,cx+14,cy+25); cx+=w+8; } return cy+36; };
 
-  /* kepala */
-  g.save(); g.translate(X+34,78); g.fillStyle=ACC; g.beginPath(); g.arc(0,0,34,0,7); g.fill(); g.strokeStyle=OL; g.lineWidth=5; g.stroke(); g.rotate(.6); g.fillStyle=OL; g.beginPath(); g.moveTo(0,-23); g.lineTo(9,0); g.lineTo(-9,0); g.closePath(); g.fill(); g.fillStyle="#fff"; g.beginPath(); g.moveTo(0,23); g.lineTo(9,0); g.lineTo(-9,0); g.closePath(); g.fill(); g.stroke(); g.restore();
-  g.fillStyle=INK; F(800,40,D); g.fillText("Jelajah",X+82,70); g.fillText("Jurusan",X+82,108);
-  g.fillStyle=INK; g.fillRect(X+262,40,4,76);
-  F(800,54,D); g.fillText("Lembar hasil lengkap",X+290,82); g.fillStyle=MUT; F(600,25,B); g.fillText("Perkiraan dari jawaban di permainan, bukan keputusan",X+290,116);
+  /* kepala: logo pixel */
+  { try{ if(!LOGO_PX.complete) await new Promise(r=>{ LOGO_PX.onload=r; LOGO_PX.onerror=r; }); g.imageSmoothingEnabled=false; g.drawImage(LOGO_PX,X,42,274,52); g.imageSmoothingEnabled=true; }catch(e){} }
+  g.fillStyle="#1f6b62"; F(700,19,"'Space Mono',monospace"); g.fillText("BABAK I \u00b7 JURUSAN",X+4,120);
+  g.fillStyle=INK; g.fillRect(X+300,40,4,76);
+  F(800,54,D); g.fillText("Lembar hasil lengkap",X+328,82); g.fillStyle=MUT; F(600,25,B); g.fillText("Perkiraan dari jawaban di permainan, bukan keputusan",X+328,116);
   g.textAlign="right"; g.fillStyle=INK; F(700,24,B); g.fillText(P.date,X+IW,74); g.fillStyle="#c2452a"; F(800,26,D); g.fillText(P.site,X+IW,110); g.textAlign="left";
 
   /* baris atas: profil dan jurusan nomor 1 */
@@ -2939,7 +3195,7 @@ async function drawLembar(P,noAva){
     [1,.75,.5,.25].forEach((r,k)=>{ g.beginPath(); DK.forEach((_,i)=>{ const [px,py]=pt(i,r); i?g.lineTo(px,py):g.moveTo(px,py); }); g.closePath(); g.fillStyle=k%2?"#fff":"#eef5f8"; g.fill(); g.strokeStyle="#cfdfe6"; g.lineWidth=2; g.stroke(); });
     DK.forEach((_,i)=>{ const [px,py]=pt(i,1); g.beginPath(); g.moveTo(cx,cy); g.lineTo(px,py); g.stroke(); });
     const poly=v=>{ g.beginPath(); DK.forEach((d,i)=>{ const [px,py]=pt(i,Math.max(.06,v[d]||0)); i?g.lineTo(px,py):g.moveTo(px,py); }); g.closePath(); };
-    poly(P.u); g.fillStyle="rgba(239,106,76,.38)"; g.fill(); g.strokeStyle=ACC; g.lineWidth=5; g.stroke(); poly(P.m.p); g.setLineDash([9,8]); g.strokeStyle=INK; g.lineWidth=3.5; g.stroke(); g.setLineDash([]);
+    poly(P.u); g.fillStyle="rgba(173,78,50,.32)"; g.fill(); g.strokeStyle=ACC; g.lineWidth=5; g.stroke(); poly(P.m.p); g.setLineDash([9,8]); g.strokeStyle=INK; g.lineWidth=3.5; g.stroke(); g.setLineDash([]);
     const od=DK.slice().sort((a,b)=>(P.u[b]||0)-(P.u[a]||0)); DK.forEach((d,i)=>{ const [px,py]=pt(i,Math.max(.06,P.u[d]||0)); g.beginPath(); g.arc(px,py,7,0,7); g.fillStyle=ACC; g.fill(); g.strokeStyle="#fff"; g.lineWidth=2.5; g.stroke(); });
     g.textBaseline="middle"; DK.forEach((d,i)=>{ const [px,py]=pt(i,1.2), kuat=od.indexOf(d)<2; F(kuat?800:700,19,B); g.textAlign=Math.abs(px-cx)<10?"center":px<cx?"right":"left"; if(kuat){ const w=g.measureText(DIM[d].n).width+22, x0=g.textAlign==="center"?px-w/2:g.textAlign==="right"?px-w+11:px-11; g.fillStyle=SUN; rr(x0,py-15,w,30,15); g.fill(); } g.fillStyle=INK; g.fillText(DIM[d].n,px,py+1); });
     g.textBaseline="alphabetic"; g.textAlign="left"; const ly=yb+h-16; g.fillStyle=ACC; rr(c2+22,ly-16,18,18,5); g.fill(); g.fillStyle=INK; F(700,18,B); g.fillText("Aku",c2+48,ly); g.setLineDash([7,6]); g.strokeStyle=INK; g.lineWidth=3.5; g.beginPath(); g.moveTo(c2+100,ly-6); g.lineTo(c2+140,ly-6); g.stroke(); g.setLineDash([]); fit("Khas "+P.top[0].s,cw-176,18,700,B,13); g.fillText("Khas "+P.top[0].s,c2+150,ly);
@@ -3009,7 +3265,7 @@ function renderRes(){
   $("#resAva").innerHTML=avaSvg(S.ava); $("#resName").textContent="Kartu penjelajah"+(S.name?" · "+S.name:"");
   $("#resType").textContent=`${DIM[od[0]].n} + ${DIM[od[1]].n}`;
   $("#resDesc").textContent=`Kamu ${DIM[od[0]].d}, dan juga ${DIM[od[1]].d}.`;
-  const bd=[DIM[od[0]].n,"Penjelajah 6 Pulau"]; if(cf.cons>=.8&&!cf.flat) bd.push("Jujur sama diri sendiri"); if(Object.values(S.grit).some(v=>v===1)) bd.push("Tahan banting"); bd.push(S.pts+" poin");
+  const bd=[DIM[od[0]].n,"Penjelajah 6 Kawasan"]; if(cf.cons>=.8&&!cf.flat) bd.push("Jujur sama diri sendiri"); if(Object.values(S.grit).some(v=>v===1)) bd.push("Tahan banting"); bd.push(S.pts+" poin");
   $("#resBadges").innerHTML=bd.map(b=>`<span class="badge" style="background:rgba(255,255,255,.14)">${esc(b)}</span>`).join("");
   const UNREAD=unread(S,sc); RES_UNREAD=UNREAD;
   { const pw=islPower(u), ks=Object.keys(ISL).sort((a,b)=>pw[b]-pw[a]); drawMap($("#resMap"),pw);
@@ -3026,29 +3282,29 @@ function renderRes(){
     return {jobs,rr,bestJ,pivot,useJob,v,pem:pf?pf[0].n:"",pemR,pemN:pf?pf.length:0}; })();
   if(UJI){ const row=(lb,id,r,k)=>`<div class="fact f-${r<=3?"ok":r<=5?"mid":"no"}"><span class="fi" aria-hidden="true">${r}</span><p><b>${lb}:</b> ${esc(byId(id).n)}<br><span class="small">Urutan ${r} dari ${rn(id)}${isL(id)?" · bidang di luar 28 (nilai kasar)":""}${k?" · "+k:""}</span></p></div>`;
     $("#ujiCard").innerHTML=`<h3>Hasil uji ketepatan</h3>
-     <p class="factbig" style="font-size:19px">${UJI.v==="Tepat"?"🎯 Tepat":UJI.v==="Mendekati"?"🙂 Mendekati":"🤔 Meleset"}. <span style="font-family:var(--font-body);font-size:15px;font-weight:400">${UJI.v==="Tepat"?"Bidang patokanmu masuk 3 teratas.":UJI.v==="Mendekati"?"Bidang patokanmu tidak di 3 teratas, tapi dekat, atau bidangmu yang lain masuk 3 teratas.":"Bidangmu tidak muncul di urutan atas. Itu informasi berharga untuk memperbaiki alat ini."}</span></p>
+     <p class="factbig" style="font-size:19px">${UJI.v==="Tepat"?"Tepat":UJI.v==="Mendekati"?"Mendekati":"Meleset"}. <span style="font-family:var(--font-body);font-size:15px;font-weight:400">${UJI.v==="Tepat"?"Bidang patokanmu masuk 3 teratas.":UJI.v==="Mendekati"?"Bidang patokanmu tidak di 3 teratas, tapi dekat, atau bidangmu yang lain masuk 3 teratas.":"Bidangmu tidak muncul di urutan atas. Itu informasi berharga untuk memperbaiki alat ini."}</span></p>
      ${S.real?row("Kuliah dulu",S.real,UJI.rr,UJI.useJob?"":"patokan"):""}
      ${UJI.jobs.map((j,i)=>row(i?"Kerja juga":"Kerja sekarang",j[0],j[1],UJI.useJob&&i===0?"patokan":"")).join("")}
      <p class="note">${UJI.useJob?"Alat ini mengukur minat, jadi patokannya <b>bidang kerja utamamu sekarang</b>. Jurusan kuliah dan bidang kerja lainnya jadi pembanding.":S.realHappy==="tidak"&&UJI.jobs.length?"Kamu bilang kurang betah di kerjaan sekarang, jadi wajar kalau alat ini tidak menaruhnya di atas. Patokannya <b>jurusan kuliahmu</b>.":"Patokannya <b>jurusan kuliahmu</b>."}${UJI.pivot?" Kamu pindah arah setelah lulus. Kalau kerjaanmu naik di atas jurusan kuliahmu, artinya alat ini menangkap arah yang akhirnya kamu pilih.":""}${(S.real&&isL(S.real))||(S.realJob||[]).some(isL)?" Ada bidangmu yang di luar 28 jurusan. Alat ini "+(OUT.level==="aman"?"belum memberi tanda":"sudah memberi tanda")+" bahwa minatmu mungkin di luar daftar.":""}</p>
      ${S.realInd?`<p class="small"><b>Industri tempat kerja:</b> ${esc(S.realInd)} (catatan saja, tidak ikut dihitung)</p>`:""}
      ${UJI.pem?(S.realPem&&S.realPem!=="-"?`<div class="fact f-${UJI.pemR===1?"ok":UJI.pemR===2?"mid":"no"}"><span class="fi" aria-hidden="true">${UJI.pemR}</span><p><b>Peminatan:</b> dulu ambil ${esc(S.realPem)}<br><span class="small">${UJI.pemR===1?"Sama dengan peminatan yang paling disarankan alat ini.":`Alat ini paling menyarankan ${esc(UJI.pem)}. Peminatanmu di urutan ${UJI.pemR} dari ${UJI.pemN}.`}</span></p></div>`:`<p class="small"><b>Peminatan yang disarankan di jurusan kuliahmu:</b> ${esc(UJI.pem)}. Cocok dengan yang dulu kamu ambil atau yang sebenarnya kamu mau?</p>`):""}
      <p class="small muted">Tolong kirim ringkasan di halaman terakhir ke orang yang memberimu alat ini.</p>`; }
-  const LV={kuat:["🧭","Bisa jadi jurusanmu justru di luar 28 ini","Bidang di bawah punya kecocokan yang lebih tinggi dari jurusan teratas di daftar kami. Kenali bidang itu dulu sebelum memutuskan.","#fde4e1"],
-   mungkin:["🔭","Ada bidang di luar 28 ini yang hampir sama cocoknya","Nilainya dekat dengan jurusan teratasmu. Layak dibandingkan sebelum memilih.","#fff1c2"],
-   aman:["✅","28 jurusan di alat ini cukup menangkap minatmu","Bidang di bawah hanya sebagai pembanding, nilainya lebih rendah dari jurusan teratasmu.","#d8f1e8"]}[OUT.level];
+  const LV={kuat:["","Bisa jadi jurusanmu justru di luar 28 ini","Bidang di bawah punya kecocokan yang lebih tinggi dari jurusan teratas di daftar kami. Kenali bidang itu dulu sebelum memutuskan.","#fde4e1"],
+   mungkin:["","Ada bidang di luar 28 ini yang hampir sama cocoknya","Nilainya dekat dengan jurusan teratasmu. Layak dibandingkan sebelum memilih.","#fff1c2"],
+   aman:["","28 jurusan di alat ini cukup menangkap minatmu","Bidang di bawah hanya sebagai pembanding, nilainya lebih rendah dari jurusan teratasmu.","#d8f1e8"]}[OUT.level];
   $("#outBox").innerHTML=`<div class="verd" style="background:${LV[3]}"><span style="font-size:26px" aria-hidden="true">${LV[0]}</span><b>${LV[1]}</b><p class="small">${LV[2]}</p></div>`
    +(top[0].pc<55?`<p class="note"><b>Belum ada jurusan di 22 ini yang menonjol.</b> Itu bisa berarti minatmu belum terbentuk, atau pertanyaan alat ini belum menyentuh bidang yang kamu suka. Isi kotak masukan di bawah supaya alat ini bisa diperbaiki.</p>`:"")
    +(OUT.bonus?"":`<p class="note">Kamu melewati kartu bonus, jadi bidang di luar 28 baru dinilai dari gaya umummu. Main lagi tanpa melewatinya untuk hasil yang lebih tepat.</p>`)
    +OUT.L.slice(0,3).map(x=>{ const m=LAIN.find(l=>l.id===x.id); return `<div class="xitem"><div class="xh"><span>${esc(m.n)}</span><span>${x.pc}%</span></div><div class="tr"><i style="width:${x.pc}%"></i></div><p class="small">${esc(m.one)}</p><p class="small"><b>Sehari-hari kerjanya:</b> ${esc(HARIL[m.id])}</p>${x.tested?"":`<p class="tiny muted">Belum ditanya lewat kartu bonus, hanya dari gaya umummu.</p>`}<p class="small muted"><b>Contoh jurusan:</b> ${esc(m.prodi)}</p></div>`; }).join("")
    +`<details class="mini"><summary>Lihat semua ${LAIN.length} bidang lain</summary><div class="bars">${OUT.L.map(x=>`<div class="bar"><span class="nm">${esc(byId(x.id).n)}</span><span class="v">${x.pc}%</span><div class="tr"><i style="width:${x.pc}%;background:#6b7c8c;opacity:.7"></i></div></div>`).join("")}</div></details>`
    +`<p class="note"><b>Perlu tahu:</b> alat ini baru memuat 28 kelompok jurusan ditambah ${LAIN.length} bidang di halaman ini, belum semua jurusan di Indonesia. Dari kartu bonus, hanya ${BONUS_K} bidang yang gaya umumnya paling dekat denganmu yang ditanyakan. Bidang di sini juga tidak ikut adu pilihan dan misi, jadi nilainya lebih kasar. Anggap sebagai petunjuk arah, lalu cari jurusan yang sesungguhnya di <a href="https://pddikti.kemdiktisaintek.go.id" target="_blank" rel="noopener">PDDikti</a>.</p>`;
-  const drawFit=()=>{ $("#fitChips").innerHTML=[["pas","Pas","🎯"],["agak","Agak meleset","🙂"],["meleset","Meleset","🤔"]].map(o=>`<button type="button" class="chip" data-f="${o[0]}" aria-pressed="${S.fit===o[0]}"><span class="em" aria-hidden="true">${o[2]}</span><span>${o[1]}</span></button>`).join(""); };
+  const drawFit=()=>{ $("#fitChips").innerHTML=[["pas","Pas",""],["agak","Agak meleset",""],["meleset","Meleset",""]].map(o=>`<button type="button" class="chip" data-f="${o[0]}" aria-pressed="${S.fit===o[0]}"><span class="em" aria-hidden="true"></span><span>${o[1]}</span></button>`).join(""); };
   drawFit(); $("#fitNote").value=S.fitNote||"";
   fitDraw=drawFit;
   $("#top3Lbl").textContent=UNREAD?"Yang bisa kamu lakukan":"3 jurusan yang paling nyambung";
   $("#top3").innerHTML=UNREAD?`<div style="display:block;font-weight:400;line-height:1.55">Coba main lagi saat santai dan jawab lebih tegas: geser kanan hanya untuk yang benar-benar kamu suka. Kalau memang semuanya terasa biasa saja, itu tanda kamu butuh pengalaman nyata dulu. Lihat halaman kemantapan pilihan untuk langkah awalnya.</div>`:top.map((x,i)=>{ const m=byId(x.id); return `<div><b>${i+1}</b><span class="dot" style="background:${ISL[m.isl].c}"></span><span>${esc(m.n)}</span><span class="pc">${x.pc}%</span></div>`; }).join("");
   { const sb=$("#stabBox"); sb.hidden=UNREAD; if(!UNREAD){ const st=stability(S), h=hist().filter(x=>x.ok), prev=h.length>1?h[1]:null, same=prev?prev.top.filter(x=>top.some(t=>t.id===x[0])).length:0, gp=Math.round(st.gap*100), t10=Math.round(st.top1*10), i10=Math.round(st.in3*10);
-    const V={kuat:["💪","Hasil ini kuat","Walau beberapa jawabanmu digeser, jurusan nomor 1 hampir selalu bertahan.","#d8f1e8"],cukup:["👍","Hasil ini cukup kuat","Nomor 1 kadang bertukar tempat, tapi tetap di 3 teratas. Pegang 3 teratasnya, bukan hanya nomor 1.","#fff1c2"],goyah:["🌊","Hasil ini masih goyah","Sedikit perubahan jawaban sudah mengubah urutan. Anggap ini arah kasar, lalu main lagi saat santai.","#fde4e1"]}[st.level];
+    const V={kuat:["","Hasil ini kuat","Walau beberapa jawabanmu digeser, jurusan nomor 1 hampir selalu bertahan.","#d8f1e8"],cukup:["","Hasil ini cukup kuat","Nomor 1 kadang bertukar tempat, tapi tetap di 3 teratas. Pegang 3 teratasnya, bukan hanya nomor 1.","#fff1c2"],goyah:["","Hasil ini masih goyah","Sedikit perubahan jawaban sudah mengubah urutan. Anggap ini arah kasar, lalu main lagi saat santai.","#fde4e1"]}[st.level];
     sb.innerHTML=`<p class="lbl" style="color:var(--ink)">Seberapa kuat hasil ini</p><div class="verd" style="background:${V[3]}"><b><span aria-hidden="true">${V[0]}</span> ${V[1]}</b><p class="small">${V[2]}</p></div>
      <div class="stg"><div><b>${t10} dari 10</b><span>nomor 1 bertahan saat jawaban digeser</span></div><div><b>${i10} dari 10</b><span>nomor 1 tetap di 3 teratas</span></div><div><b>${gp} poin</b><span>jarak ke nomor 2${gp>=6?", jelas":gp>=3?", sedang":", tipis"}</span></div><div><b>${prev?same+" dari 3":"Belum ada"}</b><span>${prev?"sama dengan mainmu sebelumnya":"tes ulang. Main lagi minggu depan"}</span></div></div>
      <details class="mini"><summary>Cara bacanya</summary><div><p class="small">Alat ini mengulang hitungan 300 kali. Tiap kali, kira-kira 1 dari 5 kartumu digeser satu langkah, seolah kamu sedang ragu. Kalau nomor 1 tetap sama, artinya hasilmu tidak bergantung pada satu dua jawaban. Hasil yang kuat belum tentu benar. Cara paling meyakinkan tetap: main lagi minggu depan, lalu coba kegiatan nyatanya.</p></div></details>`; } }
@@ -3069,12 +3325,12 @@ function renderRes(){
   // radar
   let ri=0; const drawR=()=>{ radar($("#radar"),u,byId(top[ri].id));
     const pt=parts(S,byId(top[ri].id)); $("#parts").innerHTML=pt.list.map(p=>`<span>${esc(p[0])}</span><div class="tr"><i style="width:${Math.round(p[1]*100)}%"></i></div><span class="v">${Math.round(p[1]*100)}%</span>`).join("");
-    $("#partsNote").innerHTML=(pt.hit.length?`<b>Pengurang:</b> ada ${pt.hit.length} hal yang tidak bisa kamu toleransi di jurusan ini (${esc(pt.hit.map(x=>DB.find(d=>d[0]===x)[1].toLowerCase()).join(", "))}). `:"")+`Kartu menyumbang paling besar, lalu adu pilihan, misi, dan babak final. Bagian lain menggeser nilai sedikit.`; $("#radTabs").innerHTML=top.map((x,i)=>`<button type="button" class="chip" data-i="${i}" aria-pressed="${i===ri}">${esc(byId(x.id).n)}</button>`).join(""); };
+    $("#partsNote").innerHTML=(pt.hit.length?`<b>Pengurang:</b> ada ${pt.hit.length} hal yang tidak bisa kamu toleransi di jurusan ini (${esc(pt.hit.map(x=>DB.find(d=>d[0]===x)[1].toLowerCase()).join(", "))}). `:"")+`Kartu menyumbang paling besar, lalu adu pilihan, misi, dan bab final. Bagian lain menggeser nilai sedikit.`; $("#radTabs").innerHTML=top.map((x,i)=>`<button type="button" class="chip" data-i="${i}" aria-pressed="${i===ri}">${esc(byId(x.id).n)}</button>`).join(""); };
   $("#radTabs").onclick=e=>{ const c=e.target.closest(".chip"); if(c){ ri=+c.dataset.i; drawR(); } }; drawR();
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(drawR);
   // bars
   $("#bars").innerHTML=sc.map((x,i)=>{ const m=byId(x.id); return `<div class="bar ${i<3?"top":""}"><span class="nm">${esc(m.n)}${S.incar.includes(m.id)?'<span class="tagme">incaranmu</span>':""}</span><span class="v">${x.pc}%</span><div class="tr"><i style="width:${x.pc}%;background:${ISL[m.isl].c};opacity:${i<3?1:.55}"></i></div></div>`; }).join("");
-  $("#islLegend").innerHTML=Object.values(ISL).map(I=>`<span><i style="background:${I.c}"></i>${I.n.replace("Pulau ","")}</span>`).join("");
+  $("#islLegend").innerHTML=Object.values(ISL).map(I=>`<span><i style="background:${I.c}"></i>${I.n.replace("Kawasan ","")}</span>`).join("");
   // keyakinan
   $("#gNeedle").style.left=Math.max(3,Math.min(97,cf.pc))+"%";
   const cfOk=confMeasured(S);
@@ -3111,10 +3367,11 @@ function renderRes(){
   $("#otherBox").innerHTML="";
   const txt=[`Hasil Jelajah Jurusan${S.name?" ("+S.name+")":""}`,`Tipe: ${DIM[od[0]].n} + ${DIM[od[1]].n}`,"3 jurusan paling nyambung (dari 28 kelompok jurusan, bukan semua jurusan):",...top.map((x,i)=>`${i+1}. ${byId(x.id).n} (${x.pc}%)`),...(S.incar.length?["Jurusan incaran: "+S.incar.map(id=>{ const r=sc.findIndex(x=>x.id===id); return `${byId(id).n} (minat ${sc[r].pc}%, urutan ${r+1} dari 28)`; }).join("; ")]:[]),...(UJI?[`UJI KETEPATAN: ${UJI.v}`,...(S.real?[`- Kuliah dulu: ${byId(S.real).n}, urutan ${UJI.rr} dari ${rn(S.real)}`,...(UJI.pem?[`- Peminatan yang disarankan: ${UJI.pem}`+(UJI.pemR?` (dulu ambil: ${S.realPem}, urutan ${UJI.pemR} dari ${UJI.pemN})`:"")]:[])]:[]),...(S.realInd?[`- Industri tempat kerja: ${S.realInd} (tidak dihitung)`]:[]),...UJI.jobs.map((j,i)=>`- Kerja ${i?"juga":"sekarang"}: ${byId(j[0]).n}, urutan ${j[1]} dari ${rn(j[0])}`),...(S.realNote?[`- Kerjaan: ${S.realNote}`]:[]),...(S.realHappy?[`- Betah: ${({ya:"ya",biasa:"biasa saja",tidak:"kurang"})[S.realHappy]}`]:[]),`- Patokan: ${UJI.useJob?"bidang kerja utama sekarang":"jurusan kuliah"}`]:[]),`Bidang di luar 28 jurusan: ${({kuat:"ada tanda kuat",mungkin:"mungkin",aman:"tidak ada tanda"})[OUT.level]} (${OUT.L.slice(0,3).map(x=>byId(x.id).n+" "+x.pc+"%").join("; ")})${OUT.bonus?"":", kartu bonus dilewati"}`,...(S.fit?[`Hasil terasa: ${({pas:"pas",agak:"agak meleset",meleset:"meleset"})[S.fit]}${S.fitNote?", bidang yang kurang: "+S.fitNote:""}`]:[]),`Kemantapan pilihan: ${cf.pc}%`,...(S.sid?[`Kode hasil: ${S.sid}`]:[]),"Ini saran untuk dipertimbangkan, bukan keputusan."].join("\n");
   // halaman hasil
-  const kids=[...$("#res").children].filter(e=>e.id!=="resNav"), order=["kartu","kartu","kartu","cek","minat","semua","luar","mantap","diri","jur","jur","jur","jur","banding","poster","akhir","akhir","akhir","akhir","akhir"];
+  const kids=[...$("#res").children].filter(e=>e.id!=="resNav"), order=["kartu","kartu","kartu","kartu","cek","minat","semua","luar","mantap","diri","jur","jur","jur","jur","banding","poster","akhir","akhir","akhir","akhir","akhir"];
   if(kids.length!==order.length) console.error("susunan halaman hasil berubah",kids.length);
   kids.forEach((k,i)=>k.dataset.pg=order[i]);
-  PG=[["poster","Poster hasil"],["kartu","Kartu penjelajah"]]; if(S.incar.length) PG.push(["cek","Cek jurusan incaran"]);
+  $("#pasCard").innerHTML=`<p class="kick">Babak I selesai</p><h3>Paspor Jelajah</h3>`+pasporHtml();
+  PG=[["poster","Poster hasil"],["kartu","Kartu dan Paspor"]]; if(S.incar.length) PG.push(["cek","Cek jurusan incaran"]);
   if(!UNREAD) PG.push(["minat","Bentuk minat dan asal nilai"],["semua","Peringkat 28 jurusan"],["luar","Di luar 28 jurusan"]);
   PG.push(["mantap","Kemantapan pilihan"],["diri","Kelebihan dan kebiasaan"]);
   if(!UNREAD){ PG.push(["jur","Kenalan dengan jurusanmu"]); PG.push(["banding","Bandingkan dua jurusan"]); }
@@ -3198,6 +3455,126 @@ $("#reset").addEventListener("click",e=>{
   const keep={name:S.name,ava:S.ava}; inArchive=false; archiveReturn=null;
   S=Object.assign(fresh(),keep); save(); syncIntro(); show("intro");
 });
+
+/* ===================== ROMBAK KOTA PAGI: adegan pixel, narasi bab, Paspor ===================== */
+/* Adegan pixel digambar di kanvas 160 x 56 lalu diperbesar tanpa penghalusan, sama seperti Jelajah Kampus. */
+var SCN={intro:["sekolah","SMA Senja · Kelas 12"],b1:["mading","Mading sekolah · Jam istirahat"],peta:["atap","Atap sekolah · Siang"],
+  b2:["kantin","Kantin · Pulang sekolah"],b3:["kerja","Akhir pekan · Sehari mencoba"],b4k:["kamar","Kamarmu · Malam"],
+  bf:["bk","Ruang BK · Senin pagi"],b4:["bk","Ruang BK · Sebelum pulang"],b5:["rumah","Ruang keluarga · Malam"],res:["kota","Formulir rencana · Terisi"]};
+function drawScene(kind){
+  const cv=$("#sceneCv"); if(!cv) return; const g=cv.getContext("2d"), W=160, H=56; g.imageSmoothingEnabled=false;
+  let sd=kind.length*977; const rnd=()=>{ sd=(sd*1664525+1013904223)>>>0; return sd/4294967296; };
+  const R=(x,y,w,h,c)=>{ g.fillStyle=c; g.fillRect(x|0,y|0,w|0,h|0); };
+  const sky=(cols,y0,bh)=>{ cols.forEach((c,i)=>R(0,y0+i*bh,W,bh,c)); for(let i=1;i<cols.length;i++){ const y=y0+i*bh; for(let x=(i%2);x<W;x+=2) R(x,y,1,1,cols[i-1]); } };
+  const pagi=()=>{ sky(["#5fb8b2","#76c6be","#93d5cb","#b3e3d8","#d3efe4","#eef4e3"],0,7); R(20,6,10,10,"#fff1b8"); R(19,8,12,6,"#fff1b8"); R(21,5,8,12,"#fff1b8");
+    [[52,4,14],[96,8,10],[132,5,12]].forEach(([x,y,w])=>{ R(x,y,w,2,"#f4fbf8"); R(x+3,y-1,w-6,1,"#f4fbf8"); }); };
+  const skyline=(base,col,win)=>{ let x=0; while(x<W){ const w=8+(rnd()*10|0), h=8+(rnd()*18|0); R(x,base-h,w,h,col); if(win) for(let yy=base-h+2;yy<base-2;yy+=3) for(let xx=x+2;xx<x+w-2;xx+=3) if(rnd()<.35) R(xx,yy,1,1,win); x+=w+1; } };
+  const trees=(y,c)=>{ for(let x=0;x<W;x+=6+(rnd()*5|0)){ const r=3+(rnd()*2|0); R(x,y-r,r*2,r,c); R(x+1,y-r-1,r*2-2,1,c); } };
+  const kid=(x,y,hair,shirt,hij)=>{ R(x,y,6,6,hij||hair); if(hij) R(x-1,y+4,8,3,hij); R(x,y+6,6,7,shirt); R(x+1,y+13,4,3,"#3a4a6b"); };
+  const wall=(c,c2)=>{ R(0,0,W,H,c); for(let y=0;y<40;y+=4) for(let x=(y/4%2)*3;x<W;x+=6) R(x,y,1,1,c2); };
+  const floor=(y,a,b)=>{ for(let yy=y;yy<H;yy+=4) for(let x=0;x<W;x+=8) R(x+((yy-y)/4%2)*4,yy,4,4,(x/8+(yy-y)/4)%2?a:b); };
+  const win=(x,y,w,h,night)=>{ R(x-1,y-1,w+2,h+2,"#6b5a45"); if(night){ R(x,y,w,h,"#1d2b4f"); R(x+w-7,y+3,4,4,"#f4ecd0"); for(let i=0;i<5;i++) R(x+1+(rnd()*(w-2)|0),y+1+(rnd()*(h-2)|0),1,1,"#cfd8f2"); }
+    else { R(x,y,w,h,"#9fd8cf"); R(x,y+h-4,w,4,"#7fb7b0"); } R(x+(w>>1),y,1,h,"#6b5a45"); };
+  if(kind==="sekolah"||kind==="kota"||kind==="kerja"){
+    pagi(); skyline(42,"#8cc4bd","#d6f2ec"); skyline(44,"#5f9e98","#bfeee6"); trees(46,"#2f5d50");
+    R(0,46,W,10,"#5e7a62"); for(let x=0;x<W;x+=4) R(x,46,2,1,"#6f8d70");
+    if(kind==="sekolah"){
+      R(30,20,100,27,"#efe1c3"); R(28,17,104,4,"#ad4e32"); R(66,10,28,8,"#ad4e32"); R(70,7,20,4,"#ad4e32"); R(74,5,12,3,"#ad4e32");
+      R(77,11,6,6,"#f6efe0"); R(79,12,1,3,"#192d2c"); R(80,14,2,1,"#192d2c");
+      for(let r=0;r<2;r++) for(let x=34;x<126;x+=9){ if(x>70&&x<88) continue; R(x,23+r*10,6,6,"#6fa8a2"); R(x,23+r*10,6,1,"#2f4f4c"); R(x+3,23+r*10,1,6,"#2f4f4c"); }
+      R(73,30,14,17,"#7a4a32"); R(79,30,1,17,"#5a3424"); R(28,46,104,2,"#d8c7a3"); R(70,48,20,8,"#d8c7a3");
+      R(140,8,1,39,"#e6e6e6"); R(141,8,9,3,"#d83a34"); R(141,11,9,3,"#f6f6f6");
+      for(let x=0;x<W;x+=5){ if(x>66&&x<94) continue; R(x,43,1,5,"#3c4a48"); } R(0,43,66,1,"#3c4a48"); R(94,43,66,1,"#3c4a48");
+    } else if(kind==="kerja"){
+      R(38,14,84,33,"#e9e4d6"); R(38,12,84,3,"#2f6f78"); for(let r=0;r<3;r++) for(let x=42;x<118;x+=8) R(x,18+r*8,6,5,r===2&&x>70&&x<88?"#2f6f78":"#9fd8cf");
+      R(62,35,36,12,"#2f6f78"); R(66,38,28,9,"#bfeee6"); R(79,38,1,9,"#2f6f78"); R(56,6,48,6,"#ad4e32"); for(let x=60;x<100;x+=4) R(x,8,2,2,"#fff1d6");
+      kid(26,33,"#2a1d18","#f2f2f2"); kid(130,33,"#2a1d18","#2fb3a6","#2fb3a6");
+    } else {
+      R(0,48,W,8,"#585f5a"); for(let x=2;x<W;x+=12) R(x,51,6,1,"#f3e3b3");
+      for(let x=10;x<W;x+=26){ R(x,22,16,26,["#2f6f78","#ad4e32","#5a6fa8","#2fb3a6","#8a5cd0","#c74189"][(x/26|0)%6]); for(let yy=25;yy<46;yy+=4) for(let xx=x+2;xx<x+14;xx+=4) R(xx,yy,2,2,rnd()<.6?"#ffd27a":"#1f3533"); }
+      kid(70,35,"#2a1d18","#f2f2f2"); kid(80,35,"#2a1d18","#f2f2f2","#2fb3a6");
+    }
+  } else if(kind==="atap"){
+    pagi(); skyline(36,"#8cc4bd","#d6f2ec"); skyline(40,"#5f9e98","#bfeee6"); skyline(44,"#2f6f78","#ffd27a");
+    R(0,44,W,12,"#b9a483"); for(let x=0;x<W;x+=8) R(x+((x/8)%2)*4,48,4,1,"#a08b6a");
+    R(0,40,W,2,"#3c4a48"); for(let x=0;x<W;x+=7) R(x,40,1,8,"#3c4a48");
+    kid(66,30,"#2a1d18","#f2f2f2"); kid(80,30,"#2a1d18","#f2f2f2","#2fb3a6"); R(64,43,24,1,"#2c3a38");
+  } else if(kind==="mading"){
+    wall("#efe4cf","#e4d6bc"); R(0,36,W,4,"#c9b48e"); floor(40,"#c8b48f","#b9a483");
+    R(22,7,96,28,"#6e4a2b"); R(24,9,92,24,"#b5834b"); for(let i=0;i<46;i++) R(25+(rnd()*90|0),10+(rnd()*22|0),1,1,"#a8743f");
+    const pc=["#fff7e6","#f6c26b","#7fd8cc","#e88f7a","#9db8f5","#fff7e6","#c9e7a1"]; let px=27;
+    for(let i=0;i<7;i++){ const w=9+(rnd()*5|0), h=9+(rnd()*8|0), y=11+(rnd()*(21-h)|0); R(px,y,w,h,pc[i]); for(let l=y+2;l<y+h-1;l+=2) R(px+1,l,w-3,1,"#8f8471"); R(px+(w>>1),y-1,1,2,"#d83a34"); px+=w+3; if(px>108) break; }
+    win(128,8,22,20,false); kid(40,38,"#2a1d18","#f2f2f2");
+  } else if(kind==="kantin"){
+    wall("#efe1c3","#e3d2ae"); floor(44,"#c8b48f","#b9a483");
+    for(let x=0;x<W;x+=8) R(x,4,8,7,(x/8)%2?"#2fb3a6":"#fff7e6"); for(let x=0;x<W;x+=8) R(x+2,11,4,2,(x/8)%2?"#2fb3a6":"#fff7e6");
+    R(58,15,44,15,"#2b3a38"); for(let y=18;y<28;y+=3) R(61,y,18+(rnd()*18|0),1,"#e7efe9");
+    R(10,30,140,14,"#ad4e32"); R(10,30,140,2,"#d98b5f"); for(let x=16;x<146;x+=14) R(x,33,8,1,"#8c3c26");
+    [18,40,120].forEach(x=>{ R(x,24,8,6,"#f4f1ea"); R(x+1,23,6,1,"#d8c7a3"); });
+    kid(84,32,"#2a1d18","#f2f2f2"); kid(96,32,"#2a1d18","#f2f2f2","#e88f7a");
+  } else if(kind==="kamar"){
+    wall("#3b3550","#433c5a"); R(0,40,W,16,"#5a4a3a"); for(let x=0;x<W;x+=10) R(x,40,1,16,"#4a3c2e");
+    win(14,8,34,22,true); R(64,6,18,24,"#e88f7a"); R(66,8,14,10,"#2fb3a6"); R(66,20,14,2,"#fff7e6"); R(66,24,10,1,"#fff7e6");
+    R(92,32,60,3,"#8a5a3a"); R(94,35,2,13,"#6e4429"); R(148,35,2,13,"#6e4429");
+    R(108,22,22,10,"#2c3a38"); R(110,24,18,7,"#7fd8cc"); R(104,32,30,1,"#c9c9c9");
+    R(140,20,2,12,"#2c3a38"); R(136,16,10,5,"#ffd27a"); for(let i=0;i<10;i++) R(132+(rnd()*18|0),22+(rnd()*10|0),1,1,"#7a6a52");
+    kid(112,30,"#2a1d18","#2fb3a6");
+  } else if(kind==="bk"){
+    wall("#e7efe9","#dbe7e0"); floor(44,"#c8b48f","#b9a483");
+    R(8,8,40,34,"#8a5a3a"); for(let s=0;s<3;s++){ R(10,10+s*11,36,9,"#6e4429"); let x=11; while(x<44){ const w=2+(rnd()*3|0); R(x,11+s*11+(rnd()*2|0),w,8-(rnd()*2|0),["#2fb3a6","#ad4e32","#f6c26b","#5a6fa8","#fff7e6"][rnd()*5|0]); x+=w+1; } }
+    win(110,6,40,22,false); R(56,36,96,4,"#8a5a3a"); R(58,40,3,10,"#6e4429"); R(148,40,3,10,"#6e4429");
+    [["#2fb3a6",70],["#e88f7a",86],["#f6c26b",102]].forEach(([c,x])=>{ R(x,31,12,5,c); R(x+1,32,8,1,"#fff7e6"); });
+    R(126,30,6,6,"#ad4e32"); R(124,24,10,6,"#3f7a54"); R(127,21,4,3,"#5c9b6c");
+    kid(92,26,"#7a7a7a","#5a6fa8");
+  } else if(kind==="rumah"){
+    wall("#e3d3b5","#d8c6a3"); floor(42,"#9c7a56","#8a6a48");
+    win(116,8,30,20,true); R(14,8,26,18,"#6b5a45"); R(16,10,22,14,"#c9e7a1"); R(19,14,8,8,"#2fb3a6"); R(28,12,7,10,"#e88f7a");
+    R(46,26,60,14,"#5a6fa8"); R(44,22,64,6,"#6b80b8"); R(44,22,4,18,"#4a5c8f"); R(104,22,4,18,"#4a5c8f");
+    kid(58,18,"#2a1d18","#2fb3a6"); kid(72,18,"#7a7a7a","#ad4e32","#c74189"); kid(86,18,"#2a1d18","#f2f2f2");
+    R(56,44,40,3,"#6e4429"); R(70,41,8,3,"#fff7e6");
+  }
+}
+function setScene(id){
+  const s=SCN[id]||SCN.intro; document.body.className=document.body.className.replace(/\bsc-\S+/g,"").trim()+" sc-"+id;
+  const l=$("#sceneLoc"); if(l) l.textContent=s[1]; const cv=$("#sceneCv"); if(cv&&cv.dataset.k!==s[0]){ cv.dataset.k=s[0]; drawScene(s[0]); }
+}
+
+/* Paspor Jelajah: ringkasan Babak I yang dibawa ke Jelajah Kampus lewat tautan (situs berbeda, jadi tidak lewat localStorage). */
+var KAMPUS_URL="https://jelajah-kampus-senja.modestosprey1.chatgpt.site/";
+var KAMPUS_PRODI=[["biomedis","Teknik Biomedis","Sensor, pengukuran, dan prototipe kesehatan","TB"],["psikologi","Psikologi","Perilaku, observasi, dan cara menguji dugaan","PS"],
+  ["sidata","Sistem Informasi","Pengguna, proses bisnis, dan teknologi","SI"],["industri","Teknik Industri","Cara kerja, pengukuran, dan perbaikan sistem","TI"]];
+function kampusLink(prodi,sc){
+  const q=new URLSearchParams({dari:"jurusan",prodi:prodi}); if(S.sid) q.set("paspor",S.sid); if(S.name) q.set("nama",S.name);
+  if(sc&&sc.length) q.set("top",sc.slice(0,3).map(x=>x.id).join(","));
+  return KAMPUS_URL+"?"+q.toString();
+}
+function pasporHtml(){
+  const ok=!!S.done&&!!(S.sw&&Object.keys(S.sw).length); let sc=[]; try{ if(ok){ SWREF=S.sw; sc=scoreAll(S); } }catch(e){ sc=[]; }
+  const nm=esc(S.name||"Penjelajah"), kode=S.sid||(S.runId?S.runId.slice(0,11).toUpperCase():"")||"Belum ada kode";
+  const top=sc.slice(0,3);
+  const rank=id=>sc.findIndex(x=>x.id===id)+1;
+  const fit=KAMPUS_PRODI.filter(p=>{ const r=rank(p[0]); return r>0&&r<=6; });
+  let h=`<div class="paspor"><div class="ph"><b>PASPOR JELAJAH</b><span>${esc(kode)}</span></div><div class="pb">
+   <div class="who2"><svg viewBox="0 0 40 40" aria-hidden="true">${avaSvg(S.ava||0)}</svg><div><b>${nm}</b><small>Kehidupan dalam 3 babak</small></div></div>
+   <div class="cap3"><div class="${ok?"done":""}"><b>I · JURUSAN</b><small>${ok?"Selesai":"Sedang berjalan"}</small></div>
+    <div><b>II · KAMPUS</b><small>${ok?"Siap dijalani":"Terbuka setelah Babak I"}</small></div><div><b>III · HIDUP</b><small>Segera</small></div></div>`;
+  if(ok&&top.length) h+=`<p class="tiny muted" style="font-family:var(--mono);letter-spacing:.06em">3 JURUSAN TERATAS</p><div class="lst">${top.map((x,i)=>`<div><span>${i+1}. ${esc(byId(x.id).n)}</span><span>${x.pc}%</span></div>`).join("")}</div>`;
+  if(ok){
+    h+=`<div class="kampus-go"><p style="font-weight:800;font-size:17px;letter-spacing:-.01em">Lanjut ke Babak II: Jelajah Kampus</p>
+     <p class="small muted">Jalani semester pertama di Universitas Senja. Saat ini ada 4 prodi. ${fit.length?"Yang bertanda ada di 6 teratas hasilmu, tapi kamu tetap bebas memilih yang mana saja.":"Belum ada yang masuk 6 teratas hasilmu. Hasil ini hanya konteks, jadi kamu tetap bebas mencoba."}</p>
+     ${KAMPUS_PRODI.map(p=>{ const r=rank(p[0]); return `<a class="opt${r>0&&r<=6?" cocok":""}" href="${esc(kampusLink(p[0],sc))}" target="_blank" rel="noopener"><span>${p[3]}</span><span>${esc(p[1])}<small>${r>0&&r<=6?`Urutan ${r} di hasilmu · `:""}${esc(p[2])}</small></span></a>`; }).join("")}
+    </div>`;
+  } else h+=`<p class="small muted">Selesaikan kelima bab untuk mengisi Paspor. Paspor ini yang nanti dibawa ke Jelajah Kampus.</p>`;
+  return h+`</div></div>`;
+}
+function openPaspor(){
+  let el=$("#psheet"); if(!el){ el=document.createElement("div"); el.id="psheet"; el.className="psheet"; el.setAttribute("role","dialog"); el.setAttribute("aria-modal","true"); el.setAttribute("aria-label","Paspor Jelajah"); document.body.appendChild(el);
+    el.addEventListener("click",e=>{ if(e.target===el||e.target.closest("[data-pclose]")) el.hidden=true; }); }
+  el.innerHTML=`<div><div class="ptop"><b>BABAK I · JELAJAH JURUSAN</b><button type="button" class="btn ghost sm" data-pclose>Tutup</button></div>${pasporHtml()}</div>`; el.hidden=false;
+}
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"){ const p=$("#psheet"); if(p&&!p.hidden) p.hidden=true; } });
+$("#pasBtn").addEventListener("click",openPaspor);
+setScene(curScr||"intro");
 })();
 </script>
 <script>

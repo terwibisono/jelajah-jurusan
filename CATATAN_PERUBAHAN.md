@@ -1,3 +1,31 @@
+# Catatan Perubahan — 18 Nov 2026 (rombak Kota Pagi, branch `rombak-kota-pagi`)
+
+Tampilan dan alur cerita Jelajah Jurusan disamakan dengan Jelajah Kampus (Babak II). **Pertanyaan, rumus nilai, penyeimbang, kunci penyimpanan, dan isi kiriman ke Google Sheets tidak berubah.** Bagian data di `index.html` identik kecuali nama kawasan ("Pulau Kesehatan" jadi "Kawasan Kesehatan", dan seterusnya). `alat/uji-alur.js` memberi angka yang sama persis dengan versi sebelumnya (top1 2,9–5,0%, top3 9,4–14,2%, 28/28 tahan salah geser).
+
+## Tampilan
+- Bilah atas gelap seperti Kampus: tanda ✦, "JELAJAH JURUSAN", dan tombol **Paspor Jelajah**.
+- Adegan pixel Kota Pagi di atas tiap layar, digambar di kanvas 160 × 56 (`drawScene`): sekolah, mading, atap, kantin, tempat kerja, kamar, ruang BK, ruang keluarga, kota. Di layar permainan adegan jadi strip pendek. Di Bab 1 adegan disembunyikan supaya kartu dan tombol tetap terlihat tanpa menggulir (diukur di 430 × 950 dan 360 × 740).
+- Panel krem, sudut kecil, bayangan keras, label monospace. Huruf DM Sans dan Space Mono (sama dengan Kampus), menggantikan Baloo 2 dan Nunito Sans.
+- Emoji dihapus dari tampilan. Pilihan memakai kotak huruf A/B/C seperti Kampus, kotak jurusan memakai nomor 01–12.
+- Logo pixel JELAJAH di halaman awal, poster, dan lembar hasil.
+- Enam pulau jadi **enam kawasan kota**. Peta digambar ulang sebagai blok gedung; makin kuat minat, makin banyak lampu jendela menyala. Strip kapal di Bab 1 jadi angkot di jalan kota.
+- Poster: tiga gaya jadi "Warna kawasanku", "Kota malam", "Kota pagi" (kunci tersimpan tetap `pulau`, `malam`, `cerah`). Ombak diganti siluet gedung, peta pulau diganti blok gedung.
+
+## Alur cerita
+- Babak di dalam permainan sekarang disebut **Bab** (Jurusan sendiri adalah Babak I dari trilogi). Bab 1 Geser kartu, Bab 2 Adu pilihan, Bab 3 Coba misi, Bab 4 Kenali dirimu, Bab 5 Ruang BK.
+- Halaman awal: "Kolom jurusan masih kosong." Tiap bab dibuka satu kalimat narasi dengan tempatnya (mading saat istirahat, kantin pulang sekolah, ruang BK, dan seterusnya).
+
+## Paspor Jelajah dan sambungan ke Kampus
+- Kartu Paspor di halaman hasil "Kartu dan Paspor" dan di tombol bilah atas: nama, kode, cap tiga babak, 3 jurusan teratas.
+- Tombol ke Jelajah Kampus untuk 4 prodi (Teknik Biomedis, Psikologi, Sistem Informasi, Teknik Industri). Prodi yang ada di 6 teratas hasil diberi tanda, tapi semua tetap bisa dipilih.
+- Data dikirim lewat URL karena situsnya berbeda: `?dari=jurusan&prodi=…&paspor=…&nama=…&top=a,b,c`. Alamat ada di `KAMPUS_URL`. Jelajah Kampus belum membaca parameter ini.
+
+## Belum diuji
+- Perangkat sungguhan (Android Chrome, iPhone Safari), terutama gambar pixel dan unduh poster.
+- Pengiriman hasil ke Google Sheets dari branch ini (kodenya tidak berubah).
+
+---
+
 # Catatan Perubahan — 14 Nov 2026 (animasi, pemilih jurusan, warna)
 
 Hanya tampilan di `index.html`. Pertanyaan, hitungan nilai, penyeimbang, dan isi kiriman hasil tidak berubah. Rencananya ada di `RENCANA_ANIMASI_UI.md`.

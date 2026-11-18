@@ -1,6 +1,14 @@
 # Status terakhir — Jelajah Jurusan
 
-Tanggal: 14 November 2026 (pagi — kirim otomatis sudah live)
+Tanggal: 18 November 2026
+
+## Rombak Kota Pagi (18 Nov 2026, branch `rombak-kota-pagi`, BELUM live)
+- Tampilan dan alur cerita disamakan dengan Jelajah Kampus, ditambah Paspor Jelajah dan tombol ke Kampus. Rinciannya di `CATATAN_PERUBAHAN.md` bagian 18 Nov.
+- Pertanyaan, rumus nilai, dan kiriman hasil tidak berubah; `alat/uji-alur.js` sama persis.
+- Diuji headless: main otomatis dari awal sampai hasil di 430 × 950 dan 360 × 740, konsol bersih, tidak ada layar yang melebar di 320/360/430 px, tiga gaya poster dan lembar hasil ter-render.
+- Live di `main` masih versi 14 Nov sampai branch ini digabung.
+
+## Sebelumnya (14 November 2026, pagi — kirim otomatis sudah live)
 
 ## Kirim otomatis ke Sheets + nama ikut (14 Nov 2026, 13:40 WIB)
 - Centang "Bantu penelitian" **dihapus**. Setiap hasil yang selesai (tombol menuju hasil ditekan) langsung dikirim ke `/api/results`; kalau gagal ada tombol "Kirim ulang" dan percobaan ulang saat online.
